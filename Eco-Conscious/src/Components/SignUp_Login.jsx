@@ -10,73 +10,93 @@ const SignUp_Login = () => {
       flex: 1,
       display: "flex",
       alignItems: "center",
-      justifyContent: "space-around",
+      justifyContent: "center",
     },
     loginBox: {
-      backgroundColor: "#f8f8f8",
-      padding: "200px",
+      backgroundColor: "#ffffff",
+      padding: "60px 80px",
       boxShadow: "2px 0 10px rgba(0, 0, 0, 0.1)",
+      borderRadius: "10px",
+      textAlign: "center", // Center the content
     },
     signupBox: {
       backgroundImage:
-        'url("https://th.bing.com/th/id/OIP.R6RJRL-qjPMgAizSTVRwowHaG2?w=535&h=495&rs=1&pid=ImgDetMain")', // Replace this with your image URL
+        'url("https://th.bing.com/th/id/OIP.R6RJRL-qjPMgAizSTVRwowHaG2?w=535&h=495&rs=1&pid=ImgDetMain")', // Replace with your image URL
       backgroundSize: "cover",
       backgroundPosition: "center",
-      color: "black",
-      flexDirection: "column",
-    },
-    signupContent: {
+      color: "white",
+      borderRadius: "10px",
+      padding: "60px",
       display: "flex",
       flexDirection: "column",
-      textAlign: "center",
-      flex: 1,
+      justifyContent: "center",
+      position: "relative",
     },
-    bottomContent: {
-      marginTop: "auto",
+    overlay: {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
+      borderRadius: "10px",
+    },
+    signupContent: {
+      textAlign: "center",
+      zIndex: 2,
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
     },
     inputGroup: {
-      marginBottom: "10px",
+      marginBottom: "15px",
     },
     label: {
       display: "block",
-      marginBottom: "5px",
-      width: "100%",
+      marginBottom: "10px",
+      fontSize: "14px",
+      color: "#333",
     },
     input: {
-      width: "200%",
-      padding: "12px",
-      borderRadius: "6px",
-      border: "1px solid #ddd",
+      width: "100%",
+      padding: "10px",
+      borderRadius: "0px",
+      border: "none",
+      borderBottom: "1px solid #ccc",
+      fontSize: "16px",
+      backgroundColor: "transparent",
     },
     button: {
-      backgroundColor: "#5cb85c",
+      backgroundColor: "#c49b63",
+      color: "white",
       padding: "15px 30px",
       border: "none",
       cursor: "pointer",
-      fontSize: "20px",
-      marginBottom: "20px",
+      fontSize: "18px",
       borderRadius: "30px",
-    },
-    buttonHover: {
-      backgroundColor: "#4cae4c",
+      marginBottom: "15px",
     },
     heading: {
-      fontSize: "30px",
-      fontWeight: "400",
+      fontSize: "28px",
+      fontWeight: "500",
+      marginBottom: "20px",
+      textAlign: "center", // Center the heading
     },
     paragraph: {
-      fontSize: "20px",
-      fontWeight: "300",
+      fontSize: "16px",
+      fontWeight: "400",
+      marginBottom: "30px",
     },
-    buttonSubmit: {
-      backgroundColor: "#5cb85c",
-      color: "black",
-      padding: "15px 35px",
-      border: "none",
+    buttonSignUp: {
+      backgroundColor: "transparent",
+      color: "white",
+      padding: "15px 30px",
+      border: "2px solid white",
       cursor: "pointer",
-      fontSize: "20px",
-      marginBottom: "20px",
+      fontSize: "18px",
       borderRadius: "30px",
+      marginBottom: "20px",
+      textAlign: "center", // Center the button
     },
   };
 
@@ -84,23 +104,23 @@ const SignUp_Login = () => {
     <div style={styles.container}>
       <div style={{ ...styles.box, ...styles.loginBox }}>
         <div>
-          <h2 style={styles.heading}>Welcome Back :)</h2>
+          <h2 style={styles.heading}>Welcome back:)</h2>
           <form>
             <div style={styles.inputGroup}>
-              <label htmlFor="username" style={styles.label}>
-                Username
+              <label htmlFor="email" style={styles.label}>
+                EMAIL
               </label>
               <input
-                type="text"
-                id="username"
-                name="username"
+                type="email"
+                id="email"
+                name="email"
                 required
                 style={styles.input}
               />
             </div>
             <div style={styles.inputGroup}>
               <label htmlFor="password" style={styles.label}>
-                Password
+                PASSWORD
               </label>
               <input
                 type="password"
@@ -110,24 +130,20 @@ const SignUp_Login = () => {
                 style={styles.input}
               />
             </div>
-            <button type="submit" style={styles.buttonSubmit}>
-              Login
+            <button type="submit" style={styles.button}>
+              SIGN IN
             </button>
           </form>
         </div>
       </div>
       <div style={{ ...styles.box, ...styles.signupBox }}>
+        <div style={styles.overlay}></div>
         <div style={styles.signupContent}>
-          <div style={styles.topContent}>
-            <h1 style={styles.heading}>New Here?</h1>
-            <p style={styles.paragraph}>
-              New to our eco-friendly store? <br></br>Sign up and start making
-              sustainable choices!
-            </p>
-          </div>
-          <div style={styles.bottomContent}>
-            <button style={styles.button}>Sign Up</button>
-          </div>
+          <h1 style={styles.heading}>New here?</h1>
+          <p style={styles.paragraph}>
+            Sign up and discover a great <br /> amount of new opportunities!
+          </p>
+          <button style={styles.buttonSignUp}>SIGN UP</button>
         </div>
       </div>
     </div>
