@@ -39,13 +39,16 @@ const SignUp = () => {
       fontSize: "14px",
     },
     input: {
-      width: "100%",
       padding: "10px",
+      width: "100%", // Default for full-width inputs
       borderRadius: "0px",
       border: "none",
       borderBottom: "1px solid #ccc",
       fontSize: "16px",
       backgroundColor: "transparent",
+    },
+    halfWidthInput: {
+      width: "70%", // Reduced width for half-width inputs
     },
     button: {
       backgroundColor: "#c49b63",

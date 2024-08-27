@@ -1,6 +1,6 @@
 import "./App.css";
 import SignUp_Login from "./Components/SignUp_Login";
-// import Signup from "./signup";
+import SignUp from "./Components/SignUp";
 // import Login from "./Login";
 // import ProfileDetails from "./Components/userprofile";
 import SignUp from "./Components/SignUp";
@@ -10,8 +10,7 @@ function App() {
       {/* <Signup></Signup>
       <Login></Login> */}
       {/* <Signup></Signup> */}
-      <SignUp_Login></SignUp_Login>.
-      {/* <ProfileDetails></ProfileDetails> */}
+      <SignUp_Login></SignUp_Login>.{/* <ProfileDetails></ProfileDetails> */}
       <SignUp></SignUp>
     </>
   );
