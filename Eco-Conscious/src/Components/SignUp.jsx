@@ -2,59 +2,41 @@ import React from "react";
 
 const SignUp = () => {
   const styles = {
-    container: {
-      display: "flex",
+    mainbox: {
+      backgroundColor: "#f5f1eb",
+      width: "100vw",
       height: "100vh",
-    },
-    box: {
-      flex: 1,
       display: "flex",
-      alignItems: "center",
       justifyContent: "center",
+      alignItems: "center",
     },
     loginBox: {
-      backgroundColor: "#ffffff",
-      padding: "60px 80px",
-      boxShadow: "2px 0 10px rgba(0, 0, 0, 0.1)",
-      // borderRadius: "10px",
+      padding: "5px 40px",
+      boxShadow: "5px 0 10px rgba(0, 0, 0, 0.1)",
       textAlign: "center",
+      width: "50%",
+      borderRadius: "20px",
+      backgroundColor: "#ffffff", // Add a background color to make the box visible
     },
-    signupBox: {
-      backgroundImage:
-        'url("https://th.bing.com/th/id/OIP.R6RJRL-qjPMgAizSTVRwowHaG2?w=535&h=495&rs=1&pid=ImgDetMain")', // Replace with your image URL
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-      color: "white",
-      // borderRadius: "10px",
-      padding: "60px",
+    inputGroupContainer: {
       display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      position: "relative",
+      flexWrap: "wrap",
+      gap: "5px",
     },
-    overlay: {
-      position: "absolute",
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      backgroundColor: "rgba(0, 0, 0, 0.5)",
-    },
-    signupContent: {
-      textAlign: "center",
-      zIndex: 2,
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-    },
-    inputGroup: {
+    fullWidthInputGroup: {
+      flexBasis: "100%",
       marginBottom: "15px",
+      textAlign: "left",
+    },
+    halfWidthInputGroup: {
+      flexBasis: "48%",
+      marginBottom: "20px",
+      textAlign: "left",
     },
     label: {
       display: "block",
       marginBottom: "10px",
       fontSize: "14px",
-      color: "#333",
     },
     input: {
       width: "100%",
@@ -68,44 +50,30 @@ const SignUp = () => {
     button: {
       backgroundColor: "#c49b63",
       color: "white",
-      padding: "15px 30px",
+      padding: "15px",
       border: "none",
       cursor: "pointer",
       fontSize: "18px",
       borderRadius: "30px",
-      marginBottom: "15px",
+      marginTop: "30px",
+      width: "25%",
     },
     heading: {
-      fontSize: "35px",
+      fontSize: "28px",
       fontWeight: "500",
-      marginBottom: "20px",
-      // textAlign: "center", // Center the heading
-    },
-    paragraph: {
-      fontSize: "20px",
-      fontWeight: "400",
-      marginBottom: "40px",
-    },
-    buttonSignUp: {
-      backgroundColor: "transparent",
-      color: "white",
-      padding: "15px 30px",
-      border: "2px solid white",
-      cursor: "pointer",
-      fontSize: "18px",
-      borderRadius: "30px",
-      marginBottom: "20px",
-      textAlign: "center", // Center the button
+      marginBottom: "30px",
+      textAlign: "center",
     },
   };
+
   return (
-    <>
-      <div style={{ ...styles.box, ...styles.loginBox }}>
-        <div>
-          <h2 style={styles.heading}>Sign Up</h2>
-          <form>
-            <div style={styles.inputGroup}>
-              <label htmlFor="email" style={styles.label}>
+    <div style={styles.mainbox}>
+      <div style={styles.loginBox}>
+        <h2 style={styles.heading}>Sign Up</h2>
+        <form>
+          <div style={styles.inputGroupContainer}>
+            <div style={styles.halfWidthInputGroup}>
+              <label htmlFor="username" style={styles.label}>
                 USERNAME
               </label>
               <input
@@ -116,8 +84,8 @@ const SignUp = () => {
                 style={styles.input}
               />
             </div>
-            <div style={styles.inputGroup}>
-              <label htmlFor="password" style={styles.label}>
+            <div style={styles.halfWidthInputGroup}>
+              <label htmlFor="fullname" style={styles.label}>
                 FULL NAME
               </label>
               <input
@@ -128,8 +96,8 @@ const SignUp = () => {
                 style={styles.input}
               />
             </div>
-            <div style={styles.inputGroup}>
-              <label htmlFor="password" style={styles.label}>
+            <div style={styles.fullWidthInputGroup}>
+              <label htmlFor="email" style={styles.label}>
                 EMAIL
               </label>
               <input
@@ -140,32 +108,32 @@ const SignUp = () => {
                 style={styles.input}
               />
             </div>
-            <div style={styles.inputGroup}>
+            <div style={styles.halfWidthInputGroup}>
               <label htmlFor="password" style={styles.label}>
                 PASSWORD
               </label>
               <input
-                type="text"
+                type="password"
                 id="password"
                 name="password"
                 required
                 style={styles.input}
               />
             </div>
-            <div style={styles.inputGroup}>
-              <label htmlFor="password" style={styles.label}>
+            <div style={styles.halfWidthInputGroup}>
+              <label htmlFor="confirmPassword" style={styles.label}>
                 CONFIRM PASSWORD
               </label>
               <input
-                type="confirmPassword"
+                type="password"
                 id="confirmPassword"
                 name="confirmPassword"
                 required
                 style={styles.input}
               />
             </div>
-            <div style={styles.inputGroup}>
-              <label htmlFor="password" style={styles.label}>
+            <div style={styles.fullWidthInputGroup}>
+              <label htmlFor="address" style={styles.label}>
                 ADDRESS
               </label>
               <input
@@ -176,8 +144,8 @@ const SignUp = () => {
                 style={styles.input}
               />
             </div>
-            <div style={styles.inputGroup}>
-              <label htmlFor="password" style={styles.label}>
+            <div style={styles.fullWidthInputGroup}>
+              <label htmlFor="phoneNumber" style={styles.label}>
                 PHONE NUMBER
               </label>
               <input
@@ -188,13 +156,13 @@ const SignUp = () => {
                 style={styles.input}
               />
             </div>
-            <button type="submit" style={styles.button}>
-              SIGN IN
-            </button>
-          </form>
-        </div>
+          </div>
+          <button type="submit" style={styles.button}>
+            SIGN UP
+          </button>
+        </form>
       </div>
-    </>
+    </div>
   );
 };
 

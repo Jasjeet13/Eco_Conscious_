@@ -18,7 +18,7 @@ const ProfileDetails = () => {
         // Replace with your actual API endpoint
         const response = await fetch("/api/profile");
         const data = await response.json();
-        
+
         // Update the state with the fetched data
         setProfile({
           username: data.username || "- not added -",
@@ -40,17 +40,16 @@ const ProfileDetails = () => {
   const styles = {
     whole: {
       display: "flex",
-      backgroundColor:"#e2f1f9",
+      // backgroundColor: "#e2f1f9",
       alignItems: "center",
       justifyContent: "center",
       minHeight: "100vh",
-    //   backgroundImage:
-        // 'url("https://img.freepik.com/premium-photo/metal-shopping-cart-grey-background-black-friday-sale-concept-banner_427957-3952.jpg://images.pexels.com/photos/5632396/pexels-photo-5632396.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")' // You can replace this with your background color or image
+      backgroundImage: "",
     },
     container: {
-      width: "800px", // Increased width
+      width: "800px",
       margin: "0 auto",
-      height:"450px",
+      height: "450px",
       padding: "20px",
       backgroundColor: "#ffffff",
       boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)",
@@ -115,13 +114,15 @@ const ProfileDetails = () => {
         </div>
         <div style={styles.detailGroup}>
           <span style={styles.label}>Password</span>
-          <span style={styles.value}>{"*".repeat(profile.password.length)}</span>
+          <span style={styles.value}>
+            {"*".repeat(profile.password.length)}
+          </span>
         </div>
         <div style={styles.detailGroup}>
           <span style={styles.label}>Address</span>
           <span style={styles.value}>{profile.address}</span>
         </div>
-        <button style={styles.button}>EDIT</button>
+        <button style={styles.button}>Edit</button>
       </div>
     </div>
   );

@@ -16,8 +16,7 @@ const SignUp_Login = () => {
       backgroundColor: "#ffffff",
       padding: "60px 80px",
       boxShadow: "2px 0 10px rgba(0, 0, 0, 0.1)",
-      borderRadius: "10px",
-      textAlign: "center", // Center the content
+      textAlign: "center",
     },
     signupBox: {
       backgroundImage:
@@ -25,7 +24,6 @@ const SignUp_Login = () => {
       backgroundSize: "cover",
       backgroundPosition: "center",
       color: "white",
-      borderRadius: "10px",
       padding: "60px",
       display: "flex",
       flexDirection: "column",
@@ -39,7 +37,6 @@ const SignUp_Login = () => {
       right: 0,
       bottom: 0,
       backgroundColor: "rgba(0, 0, 0, 0.5)",
-      borderRadius: "10px",
     },
     signupContent: {
       textAlign: "center",
@@ -49,17 +46,17 @@ const SignUp_Login = () => {
       alignItems: "center",
     },
     inputGroup: {
-      marginBottom: "15px",
+      marginBottom: "30px",
     },
     label: {
       display: "block",
       marginBottom: "10px",
       fontSize: "14px",
-      color: "#333",
+      color: "black",
     },
     input: {
       width: "100%",
-      padding: "10px",
+      padding: "15px",
       borderRadius: "0px",
       border: "none",
       borderBottom: "1px solid #ccc",
@@ -74,18 +71,18 @@ const SignUp_Login = () => {
       cursor: "pointer",
       fontSize: "18px",
       borderRadius: "30px",
-      marginBottom: "15px",
+      marginBottom: "10px",
     },
     heading: {
-      fontSize: "28px",
+      fontSize: "30px",
       fontWeight: "500",
       marginBottom: "20px",
-      textAlign: "center", // Center the heading
+      textAlign: "center",
     },
     paragraph: {
-      fontSize: "16px",
+      fontSize: "20px",
       fontWeight: "400",
-      marginBottom: "30px",
+      marginBottom: "60px",
     },
     buttonSignUp: {
       backgroundColor: "transparent",
@@ -96,7 +93,7 @@ const SignUp_Login = () => {
       fontSize: "18px",
       borderRadius: "30px",
       marginBottom: "20px",
-      textAlign: "center", // Center the button
+      textAlign: "center",
     },
   };
 
@@ -104,7 +101,7 @@ const SignUp_Login = () => {
     <div style={styles.container}>
       <div style={{ ...styles.box, ...styles.loginBox }}>
         <div>
-          <h2 style={styles.heading}>Welcome back:)</h2>
+          <h2 style={styles.heading}>Welcome back :)</h2>
           <form>
             <div style={styles.inputGroup}>
               <label htmlFor="email" style={styles.label}>
@@ -141,7 +138,8 @@ const SignUp_Login = () => {
         <div style={styles.signupContent}>
           <h1 style={styles.heading}>New here?</h1>
           <p style={styles.paragraph}>
-            Sign up and discover a great <br /> amount of new opportunities!
+            Sign up and unlock a range of eco-friendly <br></br>products for a
+            greener shopping experience!
           </p>
           <button style={styles.buttonSignUp}>SIGN UP</button>
         </div>
