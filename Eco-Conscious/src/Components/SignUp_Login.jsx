@@ -16,8 +16,8 @@ const SignUp_Login = () => {
       backgroundColor: "#ffffff",
       padding: "60px 80px",
       boxShadow: "2px 0 10px rgba(0, 0, 0, 0.1)",
-      // borderRadius: "10px",
-      textAlign: "center",
+      borderRadius: "10px",
+      textAlign: "center", // Center the content
     },
     signupBox: {
       backgroundImage:
@@ -25,7 +25,7 @@ const SignUp_Login = () => {
       backgroundSize: "cover",
       backgroundPosition: "center",
       color: "white",
-      // borderRadius: "10px",
+      borderRadius: "10px",
       padding: "60px",
       display: "flex",
       flexDirection: "column",
@@ -39,6 +39,7 @@ const SignUp_Login = () => {
       right: 0,
       bottom: 0,
       backgroundColor: "rgba(0, 0, 0, 0.5)",
+      borderRadius: "10px",
     },
     signupContent: {
       textAlign: "center",
@@ -76,15 +77,15 @@ const SignUp_Login = () => {
       marginBottom: "15px",
     },
     heading: {
-      fontSize: "35px",
+      fontSize: "28px",
       fontWeight: "500",
       marginBottom: "20px",
-      // textAlign: "center", // Center the heading
+      textAlign: "center", // Center the heading
     },
     paragraph: {
-      fontSize: "20px",
+      fontSize: "16px",
       fontWeight: "400",
-      marginBottom: "40px",
+      marginBottom: "30px",
     },
     buttonSignUp: {
       backgroundColor: "transparent",
@@ -140,8 +141,7 @@ const SignUp_Login = () => {
         <div style={styles.signupContent}>
           <h1 style={styles.heading}>New here?</h1>
           <p style={styles.paragraph}>
-            New to our eco-friendly store? <br></br>Sign up and start making
-            sustainable choices!
+            Sign up and discover a great <br /> amount of new opportunities!
           </p>
           <button style={styles.buttonSignUp}>SIGN UP</button>
         </div>
