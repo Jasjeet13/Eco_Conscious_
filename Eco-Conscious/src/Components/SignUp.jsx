@@ -1,6 +1,6 @@
 import React from "react";
 
-const SignUp_Login = () => {
+const SignUp = () => {
   const styles = {
     container: {
       display: "flex",
@@ -98,15 +98,38 @@ const SignUp_Login = () => {
       textAlign: "center", // Center the button
     },
   };
-
   return (
-    <div style={styles.container}>
+    <>
       <div style={{ ...styles.box, ...styles.loginBox }}>
         <div>
-          <h2 style={styles.heading}>Welcome back:)</h2>
+          <h2 style={styles.heading}>Sign Up</h2>
           <form>
             <div style={styles.inputGroup}>
               <label htmlFor="email" style={styles.label}>
+                USERNAME
+              </label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                required
+                style={styles.input}
+              />
+            </div>
+            <div style={styles.inputGroup}>
+              <label htmlFor="password" style={styles.label}>
+                FULL NAME
+              </label>
+              <input
+                type="text"
+                id="fullname"
+                name="fullname"
+                required
+                style={styles.input}
+              />
+            </div>
+            <div style={styles.inputGroup}>
+              <label htmlFor="password" style={styles.label}>
                 EMAIL
               </label>
               <input
@@ -122,9 +145,45 @@ const SignUp_Login = () => {
                 PASSWORD
               </label>
               <input
-                type="password"
+                type="text"
                 id="password"
                 name="password"
+                required
+                style={styles.input}
+              />
+            </div>
+            <div style={styles.inputGroup}>
+              <label htmlFor="password" style={styles.label}>
+                CONFIRM PASSWORD
+              </label>
+              <input
+                type="confirmPassword"
+                id="confirmPassword"
+                name="confirmPassword"
+                required
+                style={styles.input}
+              />
+            </div>
+            <div style={styles.inputGroup}>
+              <label htmlFor="password" style={styles.label}>
+                ADDRESS
+              </label>
+              <input
+                type="text"
+                id="address"
+                name="address"
+                required
+                style={styles.input}
+              />
+            </div>
+            <div style={styles.inputGroup}>
+              <label htmlFor="password" style={styles.label}>
+                PHONE NUMBER
+              </label>
+              <input
+                type="tel"
+                id="phoneNumber"
+                name="phoneNumber"
                 required
                 style={styles.input}
               />
@@ -135,19 +194,8 @@ const SignUp_Login = () => {
           </form>
         </div>
       </div>
-      <div style={{ ...styles.box, ...styles.signupBox }}>
-        <div style={styles.overlay}></div>
-        <div style={styles.signupContent}>
-          <h1 style={styles.heading}>New here?</h1>
-          <p style={styles.paragraph}>
-            New to our eco-friendly store? <br></br>Sign up and start making
-            sustainable choices!
-          </p>
-          <button style={styles.buttonSignUp}>SIGN UP</button>
-        </div>
-      </div>
-    </div>
+    </>
   );
 };
 
-export default SignUp_Login;
+export default SignUp;
