@@ -99,18 +99,6 @@ const SignUp_Login = () => {
               />
             </div>
             <div style={styles.inputGroup}>
-              <label htmlFor="email" style={styles.label}>
-                Email Address
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-                style={styles.input}
-              />
-            </div>
-            <div style={styles.inputGroup}>
               <label htmlFor="password" style={styles.label}>
                 Password
               </label>
@@ -118,18 +106,6 @@ const SignUp_Login = () => {
                 type="password"
                 id="password"
                 name="password"
-                required
-                style={styles.input}
-              />
-            </div>
-            <div style={styles.inputGroup}>
-              <label htmlFor="re-password" style={styles.label}>
-                Re-Password
-              </label>
-              <input
-                type="password"
-                id="re-password"
-                name="re-password"
                 required
                 style={styles.input}
               />
