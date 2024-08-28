@@ -24,12 +24,12 @@ const SignUp = () => {
       gap: "5px",
     },
     fullWidthInputGroup: {
-      flexBasis: "100%",
+      flexBasis: "90%",
       marginBottom: "15px",
       textAlign: "left",
     },
     halfWidthInputGroup: {
-      flexBasis: "48%",
+      flexBasis: "49%",
       marginBottom: "20px",
       textAlign: "left",
     },
@@ -41,6 +41,15 @@ const SignUp = () => {
     input: {
       padding: "10px",
       width: "100%", // Default for full-width inputs
+      borderRadius: "0px",
+      border: "none",
+      borderBottom: "1px solid #ccc",
+      fontSize: "16px",
+      backgroundColor: "transparent",
+    },
+    input2: {
+      padding: "10px",
+      width: "82%", // Default for full-width inputs
       borderRadius: "0px",
       border: "none",
       borderBottom: "1px solid #ccc",
@@ -84,7 +93,7 @@ const SignUp = () => {
                 id="username"
                 name="username"
                 required
-                style={styles.input}
+                style={styles.input2}
               />
             </div>
             <div style={styles.halfWidthInputGroup}>
@@ -96,7 +105,7 @@ const SignUp = () => {
                 id="fullname"
                 name="fullname"
                 required
-                style={styles.input}
+                style={styles.input2}
               />
             </div>
             <div style={styles.fullWidthInputGroup}>
@@ -120,7 +129,7 @@ const SignUp = () => {
                 id="password"
                 name="password"
                 required
-                style={styles.input}
+                style={styles.input2}
               />
             </div>
             <div style={styles.halfWidthInputGroup}>
@@ -132,7 +141,7 @@ const SignUp = () => {
                 id="confirmPassword"
                 name="confirmPassword"
                 required
-                style={styles.input}
+                style={styles.input2}
               />
             </div>
             <div style={styles.fullWidthInputGroup}>

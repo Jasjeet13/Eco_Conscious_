@@ -1,17 +1,16 @@
 import "./App.css";
-import SignUp_Login from "./Components/SignUp_Login";
-import SignUp from "./Components/SignUp";
+// import SignUp_Login from "./Components/SignUp_Login";
 // import Login from "./Login";
-// import ProfileDetails from "./Components/userprofile";
+// import ProfileDetails from "./Components/ProfileDetails";
 import SignUp from "./Components/SignUp";
 function App() {
   return (
     <>
       {/* <Signup></Signup>
       <Login></Login> */}
-      {/* <Signup></Signup> */}
-      <SignUp_Login></SignUp_Login>.{/* <ProfileDetails></ProfileDetails> */}
+      {/* <SignUp_Login></SignUp_Login> */}
       <SignUp></SignUp>
+      {/* <ProfileDetails></ProfileDetails> */}
     </>
   );
 }
