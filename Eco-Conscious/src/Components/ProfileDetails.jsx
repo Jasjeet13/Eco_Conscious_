@@ -10,7 +10,6 @@ const ProfileDetails = () => {
   // State to store the profile details
   const [profile, setProfile] = useState(null);
 
-  // Fetch profile details from the backend when the component mounts
   useEffect(() => {
     const fetchProfile = async () => {
       if (!email) {
@@ -55,14 +54,14 @@ const ProfileDetails = () => {
       height: "450px",
       padding: "20px",
       backgroundColor: "#ffffff",
-      boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)",
-      borderRadius: "10px",
+      boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.1)",
+      borderRadius: "40px",
     },
     headingContainer: {
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      marginBottom: "40px",
+      marginBottom: "10px",
     },
     heading: {
       fontSize: "20px",
@@ -75,36 +74,34 @@ const ProfileDetails = () => {
       opacity: "0.7"
     },
     detailGroup: {
-      marginBottom: "15px",
+      marginBottom: "30px",
       display: "flex",
       justifyContent: "space-between",
-      borderBottom: "1px solid #eee",
+      borderBottom: "1px solid #ddd",
       paddingBottom: "10px",
     },
     label: {
-      fontSize: "16px",
-      fontWeight: "500",
-      color: "#333",
+      fontSize: "18px",
+      color: "#444",
     },
     value: {
-      fontSize: "16px",
-      color: "#666",
+      fontSize: "18px",
+      color: "#777",
     },
     buttonGroup: {
       display: "flex",
-      justifyContent: "space-between",
-      marginTop: "20px",
+      justifyContent: "space-evenly",
     },
     button: {
       width: "calc(50% - 10px)",
       padding: "12px",
       backgroundColor: "#c49b63",
-      color: "black",
+      color: "#333",
       border: "none",
-      borderRadius: "5px",
-      fontSize: "16px",
-      fontWeight: "400px",
+      borderRadius: "30px",
+      fontSize: "18px",
       cursor: "pointer",
+      transition: "background-color 0.3s ease, transform 0.3s ease",
       textAlign: "center",
     },
     deleteButton: {
@@ -118,9 +115,7 @@ const ProfileDetails = () => {
       <div style={styles.container}>
         <div style={styles.headingContainer}>
           <FontAwesomeIcon icon={faUser} style={styles.icon} />
-          <h2 style={styles.heading}>
-            Profile Details
-          </h2>
+          <h2 style={styles.heading}>Profile Details</h2>
         </div>
         <div style={styles.detailGroup}>
           <span style={styles.label}>Username</span>
@@ -149,8 +144,36 @@ const ProfileDetails = () => {
           <span style={styles.value}>{profile.address || 'N/A'}</span>
         </div>
         <div style={styles.buttonGroup}>
-          <button style={styles.button}><b>EDIT</b></button>
-          <button style={{ ...styles.button, ...styles.deleteButton }}><b>DELETE ACCOUNT</b></button>
+          <button
+            style={styles.button}
+            onMouseOver={(e) => {
+              e.currentTarget.style.backgroundColor =
+                styles.buttonHover.backgroundColor;
+              e.currentTarget.style.transform = styles.buttonHover.transform;
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.backgroundColor =
+                styles.button.backgroundColor;
+              e.currentTarget.style.transform = "scale(1)";
+            }}
+          >
+            <b>EDIT</b>
+          </button>
+          <button
+            style={styles.button}
+            onMouseOver={(e) => {
+              e.currentTarget.style.backgroundColor =
+                styles.buttonHover.backgroundColor;
+              e.currentTarget.style.transform = styles.buttonHover.transform;
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.backgroundColor =
+                styles.button.backgroundColor;
+              e.currentTarget.style.transform = "scale(1)";
+            }}
+          >
+            <b>DELETE ACCOUNT</b>
+          </button>
         </div>
       </div>
     </div>
