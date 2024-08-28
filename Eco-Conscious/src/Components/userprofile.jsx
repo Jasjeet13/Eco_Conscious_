@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 const ProfileDetails = () => {
   // State to store the profile details
@@ -40,27 +42,35 @@ const ProfileDetails = () => {
   const styles = {
     whole: {
       display: "flex",
-      backgroundColor:"#e2f1f9",
+      backgroundColor: "#f5f1eb",
       alignItems: "center",
       justifyContent: "center",
       minHeight: "100vh",
-    //   backgroundImage:
-        // 'url("https://img.freepik.com/premium-photo/metal-shopping-cart-grey-background-black-friday-sale-concept-banner_427957-3952.jpg://images.pexels.com/photos/5632396/pexels-photo-5632396.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")' // You can replace this with your background color or image
     },
     container: {
       width: "800px", // Increased width
       margin: "0 auto",
-      height:"450px",
+      height: "auto",
       padding: "20px",
       backgroundColor: "#ffffff",
       boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)",
       borderRadius: "10px",
     },
+    headingContainer: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      marginBottom: "40px",
+    },
     heading: {
       fontSize: "20px",
       fontWeight: "600",
-      marginBottom: "20px",
-      textAlign: "center",
+      marginLeft: "10px", // Adds spacing between the icon and text
+    },
+    icon: {
+      fontSize: "24px",
+      paddingRight: "10px",
+      opacity: "0.7" // Adjust size of the icon
     },
     detailGroup: {
       marginBottom: "15px",
@@ -78,25 +88,39 @@ const ProfileDetails = () => {
       fontSize: "16px",
       color: "#666",
     },
+    buttonGroup: {
+      display: "flex",
+      justifyContent: "space-between",
+      marginTop: "20px",
+    },
     button: {
-      display: "block",
-      width: "200px",
+      width: "calc(50% - 10px)", // Make buttons take up equal space
+      // width:"100px",
       padding: "12px",
-      backgroundColor: "#9dd2ec",
+      backgroundColor: "#c49b63",
       color: "black",
       border: "none",
       borderRadius: "5px",
       fontSize: "16px",
+      fontWeight: "400px",
       cursor: "pointer",
       textAlign: "center",
-      margin: "20px auto 0 auto", // Center the button
     },
+    deleteButton: {
+      backgroundColor: "#c49b63", // Red color for delete button
+      marginLeft: "20px", // Space between buttons
+    }
   };
 
   return (
     <div style={styles.whole}>
       <div style={styles.container}>
-        <h2 style={styles.heading}>Profile Details</h2>
+        <div style={styles.headingContainer}>
+          <FontAwesomeIcon icon={faUser} style={styles.icon} />
+          <h2 style={styles.heading}>
+            Profile Details
+          </h2>
+        </div>
         <div style={styles.detailGroup}>
           <span style={styles.label}>Username</span>
           <span style={styles.value}>{profile.username}</span>
@@ -121,7 +145,10 @@ const ProfileDetails = () => {
           <span style={styles.label}>Address</span>
           <span style={styles.value}>{profile.address}</span>
         </div>
-        <button style={styles.button}>EDIT</button>
+        <div style={styles.buttonGroup}>
+          <button style={styles.button}><b>EDIT</b></button>
+          <button style={{ ...styles.button, ...styles.deleteButton }}><b>DELETE ACCOUNT</b></button>
+        </div>
       </div>
     </div>
   );
