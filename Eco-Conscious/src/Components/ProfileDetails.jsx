@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 const ProfileDetails = () => {
-  // State to store the profile details
   const [profile, setProfile] = useState({
     username: "",
     fullName: "",
@@ -13,15 +12,12 @@ const ProfileDetails = () => {
     mobileNumber: "",
   });
 
-  // Fetch profile details from the backend when the component mounts
   useEffect(() => {
     const fetchProfileDetails = async () => {
       try {
-        // Replace with your actual API endpoint
         const response = await fetch("/api/profile");
         const data = await response.json();
 
-        // Update the state with the fetched data
         setProfile({
           username: data.username || "- not added -",
           fullName: data.fullName || "- not added -",
@@ -32,7 +28,6 @@ const ProfileDetails = () => {
         });
       } catch (error) {
         console.error("Error fetching profile details:", error);
-        // Handle error, possibly set some error state
       }
     };
 
@@ -50,66 +45,63 @@ const ProfileDetails = () => {
     container: {
       width: "800px",
       margin: "0 auto",
-      height: "auto",
-      padding: "20px",
+      padding: "30px",
       backgroundColor: "#ffffff",
-      boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)",
-      borderRadius: "10px",
+      boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.1)",
+      borderRadius: "40px",
     },
     headingContainer: {
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      marginBottom: "40px",
+      marginBottom: "10px",
     },
     heading: {
-      fontSize: "20px",
-      fontWeight: "600",
-      marginLeft: "10px", // Adds spacing between the icon and text
+      fontSize: "30px",
+      marginLeft: "20px",
+      color: "#333",
     },
     icon: {
-      fontSize: "24px",
-      paddingRight: "10px",
-      opacity: "0.7" // Adjust size of the icon
+      fontSize: "32px",
+      color: "#333",
+      opacity: "0.8",
     },
     detailGroup: {
-      marginBottom: "15px",
+      marginBottom: "30px",
       display: "flex",
       justifyContent: "space-between",
-      borderBottom: "1px solid #eee",
+      borderBottom: "1px solid #ddd",
       paddingBottom: "10px",
     },
     label: {
-      fontSize: "16px",
-      fontWeight: "500",
-      color: "#333",
+      fontSize: "18px",
+      color: "#444",
     },
     value: {
-      fontSize: "16px",
-      color: "#666",
+      fontSize: "18px",
+      color: "#777",
     },
     buttonGroup: {
       display: "flex",
-      justifyContent: "space-between",
-      marginTop: "20px",
+      justifyContent: "space-evenly",
     },
     button: {
-      width: "calc(50% - 10px)", // Make buttons take up equal space
-      // width:"100px",
-      padding: "12px",
+      width: "45%",
+      height: "60px",
+      padding: "15px",
       backgroundColor: "#c49b63",
-      color: "black",
+      color: "#333",
       border: "none",
-      borderRadius: "5px",
-      fontSize: "16px",
-      fontWeight: "400px",
+      borderRadius: "30px",
+      fontSize: "18px",
       cursor: "pointer",
+      transition: "background-color 0.3s ease, transform 0.3s ease",
       textAlign: "center",
     },
-    deleteButton: {
-      backgroundColor: "#c49b63", // Red color for delete button
-      marginLeft: "20px", // Space between buttons
-    }
+    buttonHover: {
+      backgroundColor: "#a57d4b",
+      transform: "scale(1.05)",
+    },
   };
 
   return (
@@ -117,9 +109,7 @@ const ProfileDetails = () => {
       <div style={styles.container}>
         <div style={styles.headingContainer}>
           <FontAwesomeIcon icon={faUser} style={styles.icon} />
-          <h2 style={styles.heading}>
-            Profile Details
-          </h2>
+          <h2 style={styles.heading}>Profile Details</h2>
         </div>
         <div style={styles.detailGroup}>
           <span style={styles.label}>Username</span>
@@ -148,8 +138,36 @@ const ProfileDetails = () => {
           <span style={styles.value}>{profile.address}</span>
         </div>
         <div style={styles.buttonGroup}>
-          <button style={styles.button}><b>EDIT</b></button>
-          <button style={{ ...styles.button, ...styles.deleteButton }}><b>DELETE ACCOUNT</b></button>
+          <button
+            style={styles.button}
+            onMouseOver={(e) => {
+              e.currentTarget.style.backgroundColor =
+                styles.buttonHover.backgroundColor;
+              e.currentTarget.style.transform = styles.buttonHover.transform;
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.backgroundColor =
+                styles.button.backgroundColor;
+              e.currentTarget.style.transform = "scale(1)";
+            }}
+          >
+            <b>EDIT</b>
+          </button>
+          <button
+            style={styles.button}
+            onMouseOver={(e) => {
+              e.currentTarget.style.backgroundColor =
+                styles.buttonHover.backgroundColor;
+              e.currentTarget.style.transform = styles.buttonHover.transform;
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.backgroundColor =
+                styles.button.backgroundColor;
+              e.currentTarget.style.transform = "scale(1)";
+            }}
+          >
+            <b>DELETE ACCOUNT</b>
+          </button>
         </div>
       </div>
     </div>
