@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const signupRouter = require('./routes/signup'); 
 const loginRouter = require("./routes/login");
+const profileRouter = require("./routes/profile")
 const errorHandler = require("./Middlewares/errorHandler");
 const cors = require('cors');
 
@@ -29,9 +30,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json()); // Support JSON-encoded bodies
 app.use(express.static('public')); // Serve static files
 
-// Use the signup router
 app.use('/signup', signupRouter);
 app.use('/login', loginRouter);
+app.use('/api/profile', profileRouter);
 
 // Error handling middleware
 app.use(errorHandler);

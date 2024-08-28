@@ -18,7 +18,10 @@ const SignUp = () => {
       });
   
       if (response.ok) {
-        window.location.href = '/home'; // Redirect to home route
+        const responseData = await response.json();
+        const email = responseData.email;
+        console.log('Email received:', email);
+        window.location.href = `/home/${email}`;
       } else {
         // Handle errors here (e.g., display an error message)
         console.error('Signup failed');
