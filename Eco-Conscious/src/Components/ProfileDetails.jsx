@@ -42,27 +42,15 @@ const ProfileDetails = () => {
   const styles = {
     whole: {
       display: "flex",
-<<<<<<< HEAD:Eco-Conscious/src/Components/userprofile.jsx
       backgroundColor: "#f5f1eb",
       alignItems: "center",
       justifyContent: "center",
       minHeight: "100vh",
-=======
-      // backgroundColor: "#e2f1f9",
-      alignItems: "center",
-      justifyContent: "center",
-      minHeight: "100vh",
-      backgroundImage: "",
->>>>>>> 12ec4653b21d8c5d8730b50664df07b0c6d81846:Eco-Conscious/src/Components/ProfileDetails.jsx
     },
     container: {
       width: "800px",
       margin: "0 auto",
-<<<<<<< HEAD:Eco-Conscious/src/Components/userprofile.jsx
       height: "auto",
-=======
-      height: "450px",
->>>>>>> 12ec4653b21d8c5d8730b50664df07b0c6d81846:Eco-Conscious/src/Components/ProfileDetails.jsx
       padding: "20px",
       backgroundColor: "#ffffff",
       boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)",
@@ -159,14 +147,10 @@ const ProfileDetails = () => {
           <span style={styles.label}>Address</span>
           <span style={styles.value}>{profile.address}</span>
         </div>
-<<<<<<< HEAD:Eco-Conscious/src/Components/userprofile.jsx
         <div style={styles.buttonGroup}>
           <button style={styles.button}><b>EDIT</b></button>
           <button style={{ ...styles.button, ...styles.deleteButton }}><b>DELETE ACCOUNT</b></button>
         </div>
-=======
-        <button style={styles.button}>Edit</button>
->>>>>>> 12ec4653b21d8c5d8730b50664df07b0c6d81846:Eco-Conscious/src/Components/ProfileDetails.jsx
       </div>
     </div>
   );
