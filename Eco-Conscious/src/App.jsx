@@ -1,18 +1,20 @@
-import "./App.css";
-import SignUp_Login from "./Components/SignUp_Login";
-import SignUp from "./Components/SignUp";
-// import Login from "./Login";
-// import ProfileDetails from "./Components/userprofile";
-import SignUp from "./Components/SignUp";
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import SignUp from './Components/SignUp';
+import Home from './components/Home';
+import SignUp_Login from './Components/SignUp_Login';
+
 function App() {
   return (
-    <>
-      {/* <Signup></Signup>
-      <Login></Login> */}
-      {/* <Signup></Signup> */}
-      <SignUp_Login></SignUp_Login>.{/* <ProfileDetails></ProfileDetails> */}
-      <SignUp></SignUp>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<SignUp_Login/>} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/home" element={<Home />} />
+
+        {/* Add other routes here */}
+      </Routes>
+    </Router>
   );
 }
 

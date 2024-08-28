@@ -1,6 +1,33 @@
 import React from "react";
 
 const SignUp = () => {
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+  
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData.entries());
+  
+    try {
+      const response = await fetch('http://localhost:3000/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+  
+      if (response.ok) {
+        window.location.href = '/home'; // Redirect to home route
+      } else {
+        // Handle errors here (e.g., display an error message)
+        console.error('Signup failed');
+      }
+    } catch (error) {
+      console.error('Error during signup:', error);
+    }
+  };
+  
   const styles = {
     mainbox: {
       backgroundColor: "#f5f1eb",
@@ -73,7 +100,7 @@ const SignUp = () => {
     <div style={styles.mainbox}>
       <div style={styles.loginBox}>
         <h2 style={styles.heading}>Sign Up</h2>
-        <form>
+        <form  onSubmit={handleSubmit}>
           <div style={styles.inputGroupContainer}>
             <div style={styles.halfWidthInputGroup}>
               <label htmlFor="username" style={styles.label}>

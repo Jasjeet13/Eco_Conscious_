@@ -1,6 +1,34 @@
 import React from "react";
 
 const SignUp_Login = () => {
+  const handleLogin = async (event) => {
+    event.preventDefault();
+  
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+  
+    try {
+      const response = await fetch('http://localhost:3000/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+  
+      if (!response.ok) {
+        const errorText = await response.text(); // Read the response as text
+        throw new Error(`Server responded with: ${errorText}`);
+      }
+  
+      const data = await response.json();
+      console.log('Login successful:', data);
+      window.location.href = '/home';
+    } catch (error) {
+      console.error('Error during login:', error);
+    }
+  };
+
   const styles = {
     container: {
       display: "flex",
@@ -102,7 +130,7 @@ const SignUp_Login = () => {
       <div style={{ ...styles.box, ...styles.loginBox }}>
         <div>
           <h2 style={styles.heading}>Welcome back :)</h2>
-          <form>
+          <form onSubmit={handleLogin}>
             <div style={styles.inputGroup}>
               <label htmlFor="email" style={styles.label}>
                 EMAIL
