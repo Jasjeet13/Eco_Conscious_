@@ -2,11 +2,11 @@ import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const Home = () => {
-  const { email } = useParams(); 
+  const { id } = useParams(); 
   const navigate = useNavigate();
 
   const navigateToProfile = () => {
-    navigate(`/profile/${email}`); // Use navigate instead of window.location.href
+    navigate(`/profile/${id}`); // Use navigate instead of window.location.href
   };
 
   return (

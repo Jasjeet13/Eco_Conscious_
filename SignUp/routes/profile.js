@@ -3,13 +3,13 @@ const router = express.Router();
 const User = require('../models/user');
 
 // Route to get the user profile by email
-router.get('/:email', async (req, res) => {
-  const email = req.params.email;
-  console.log(`Received request for user profile with email: ${email}`);
+router.get('/:id', async (req, res) => {
+  const id = req.params.id;
+  console.log(`Received request for user profile with email: ${id}`);
 
   try {
     // Find the user by email
-    const user = await User.getUserProfileByEmail(email);
+    const user = await User.getUserProfileById(id);
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });

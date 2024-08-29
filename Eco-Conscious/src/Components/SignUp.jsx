@@ -19,9 +19,9 @@ const SignUp = () => {
   
       if (response.ok) {
         const responseData = await response.json();
-        const email = responseData.email;
-        console.log('Email received:', email);
-        window.location.href = `/home/${email}`;
+        const id = responseData.id;
+        console.log('Id received:', id);
+        window.location.href = `/home/${id}`;
       } else {
         // Handle errors here (e.g., display an error message)
         console.error('Signup failed');

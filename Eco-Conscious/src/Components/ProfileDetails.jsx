@@ -4,22 +4,22 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from "react-router-dom";
 
 const ProfileDetails = () => {
-  const { email } = useParams();
-  console.log(`email received in ProfileDetails: ${email}`);
+  const { id } = useParams();
+  console.log(`id received in ProfileDetails: ${id}`);
 
   // State to store the profile details
   const [profile, setProfile] = useState(null);
 
   useEffect(() => {
     const fetchProfile = async () => {
-      if (!email) {
-        console.error('No email provided');
+      if (!id) {
+        console.error('No id provided');
         return;
       }
     
       try {
-        const encodedEmail = encodeURIComponent(email);
-        const response = await fetch(`http://localhost:3000/api/profile/${encodedEmail}`);
+        
+        const response = await fetch(`http://localhost:3000/api/profile/${id}`);
         if (response.ok) {
           const data = await response.json();
           console.log('Fetched profile data:', data);
@@ -34,7 +34,7 @@ const ProfileDetails = () => {
     };    
 
     fetchProfile();
-  }, [email]);
+  }, [id]);
 
   if (!profile) {
     return <div>Loading...</div>;
