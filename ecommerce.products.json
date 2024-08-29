@@ -1,19 +1,19 @@
 [{
   "_id": {
-    "$oid": "66cb1f899768f1493c43ed48"
+    "$oid": "66d00d5c7d5a8882e1b44d72"
   },
   "name": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
   "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
   "price": 109.95,
   "category": "men's clothing",
   "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-  "inStock": true,
-  "environmentalImpactScore": 98,
+  "inStock": false,
+  "environmentalImpactScore": 77,
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "66cb1f899768f1493c43ed49"
+    "$oid": "66d00d5c7d5a8882e1b44d73"
   },
   "name": "Mens Casual Premium Slim Fit T-Shirts ",
   "description": "Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
@@ -21,12 +21,12 @@
   "category": "men's clothing",
   "image": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
   "inStock": true,
-  "environmentalImpactScore": 42,
+  "environmentalImpactScore": 76,
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "66cb1f899768f1493c43ed4a"
+    "$oid": "66d00d5c7d5a8882e1b44d74"
   },
   "name": "Mens Cotton Jacket",
   "description": "great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.",
@@ -34,12 +34,12 @@
   "category": "men's clothing",
   "image": "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
   "inStock": false,
-  "environmentalImpactScore": 47,
+  "environmentalImpactScore": 90,
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "66cb1f899768f1493c43ed4b"
+    "$oid": "66d00d5c7d5a8882e1b44d75"
   },
   "name": "Mens Casual Slim Fit",
   "description": "The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
@@ -47,168 +47,90 @@
   "category": "men's clothing",
   "image": "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg",
   "inStock": true,
-  "environmentalImpactScore": 5,
+  "environmentalImpactScore": 43,
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "66cb1f899768f1493c43ed4c"
+    "$oid": "66d00d5c7d5a8882e1b44d76"
   },
-  "name": "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
-  "description": "From our Legends Collection, the Naga was inspired by the mythical water dragon that protects the ocean's pearl. Wear facing inward to be bestowed with love and abundance, or outward for protection.",
-  "price": 695,
-  "category": "jewelery",
-  "image": "https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg",
+  "name": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
+  "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
+  "price": 109.95,
+  "category": "men's clothing",
+  "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
   "inStock": true,
-  "environmentalImpactScore": 37,
+  "environmentalImpactScore": 46,
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "66cb1f899768f1493c43ed4d"
+    "$oid": "66d00d5c7d5a8882e1b44d77"
   },
-  "name": "Solid Gold Petite Micropave ",
-  "description": "Satisfaction Guaranteed. Return or exchange any order within 30 days.Designed and sold by Hafeez Center in the United States. Satisfaction Guaranteed. Return or exchange any order within 30 days.",
-  "price": 168,
-  "category": "jewelery",
-  "image": "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg",
-  "inStock": true,
-  "environmentalImpactScore": 92,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f899768f1493c43ed4e"
-  },
-  "name": "White Gold Plated Princess",
-  "description": "Classic Created Wedding Engagement Solitaire Diamond Promise Ring for Her. Gifts to spoil your love more for Engagement, Wedding, Anniversary, Valentine's Day...",
-  "price": 9.99,
-  "category": "jewelery",
-  "image": "https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_.jpg",
-  "inStock": true,
-  "environmentalImpactScore": 54,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f899768f1493c43ed4f"
-  },
-  "name": "Pierced Owl Rose Gold Plated Stainless Steel Double",
-  "description": "Rose Gold Plated Double Flared Tunnel Plug Earrings. Made of 316L Stainless Steel",
-  "price": 10.99,
-  "category": "jewelery",
-  "image": "https://fakestoreapi.com/img/51UDEzMJVpL._AC_UL640_QL65_ML3_.jpg",
-  "inStock": true,
-  "environmentalImpactScore": 73,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f899768f1493c43ed50"
-  },
-  "name": "WD 2TB Elements Portable External Hard Drive - USB 3.0 ",
-  "description": "USB 3.0 and USB 2.0 Compatibility Fast data transfers Improve PC Performance High Capacity; Compatibility Formatted NTFS for Windows 10, Windows 8.1, Windows 7; Reformatting may be required for other operating systems; Compatibility may vary depending on user’s hardware configuration and operating system",
-  "price": 64,
-  "category": "electronics",
-  "image": "https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg",
-  "inStock": true,
-  "environmentalImpactScore": 65,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f899768f1493c43ed51"
-  },
-  "name": "SanDisk SSD PLUS 1TB Internal SSD - SATA III 6 Gb/s",
-  "description": "Easy upgrade for faster boot up, shutdown, application load and response (As compared to 5400 RPM SATA 2.5” hard drive; Based on published specifications and internal benchmarking tests using PCMark vantage scores) Boosts burst write performance, making it ideal for typical PC workloads The perfect balance of performance and reliability Read/write speeds of up to 535MB/s/450MB/s (Based on internal testing; Performance may vary depending upon drive capacity, host device, OS and application.)",
-  "price": 109,
-  "category": "electronics",
-  "image": "https://fakestoreapi.com/img/61U7T1koQqL._AC_SX679_.jpg",
-  "inStock": true,
-  "environmentalImpactScore": 54,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f899768f1493c43ed52"
-  },
-  "name": "Silicon Power 256GB SSD 3D NAND A55 SLC Cache Performance Boost SATA III 2.5",
-  "description": "3D NAND flash are applied to deliver high transfer speeds Remarkable transfer speeds that enable faster bootup and improved overall system performance. The advanced SLC Cache Technology allows performance boost and longer lifespan 7mm slim design suitable for Ultrabooks and Ultra-slim notebooks. Supports TRIM command, Garbage Collection technology, RAID, and ECC (Error Checking & Correction) to provide the optimized performance and enhanced reliability.",
-  "price": 109,
-  "category": "electronics",
-  "image": "https://fakestoreapi.com/img/71kWymZ+c+L._AC_SX679_.jpg",
+  "name": "Mens Casual Premium Slim Fit T-Shirts ",
+  "description": "Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
+  "price": 22.3,
+  "category": "men's clothing",
+  "image": "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
   "inStock": false,
-  "environmentalImpactScore": 4,
+  "environmentalImpactScore": 85,
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "66cb1f899768f1493c43ed53"
+    "$oid": "66d00d5c7d5a8882e1b44d78"
   },
-  "name": "WD 4TB Gaming Drive Works with Playstation 4 Portable External Hard Drive",
-  "description": "Expand your PS4 gaming experience, Play anywhere Fast and easy, setup Sleek design with high capacity, 3-year manufacturer's limited warranty",
-  "price": 114,
-  "category": "electronics",
-  "image": "https://fakestoreapi.com/img/61mtL65D4cL._AC_SX679_.jpg",
+  "name": "Mens Cotton Jacket",
+  "description": "great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.",
+  "price": 55.99,
+  "category": "men's clothing",
+  "image": "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
   "inStock": true,
-  "environmentalImpactScore": 96,
+  "environmentalImpactScore": 9,
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "66cb1f899768f1493c43ed54"
+    "$oid": "66d00d5c7d5a8882e1b44d79"
   },
-  "name": "Acer SB220Q bi 21.5 inches Full HD (1920 x 1080) IPS Ultra-Thin",
-  "description": "21. 5 inches Full HD (1920 x 1080) widescreen IPS display And Radeon free Sync technology. No compatibility for VESA Mount Refresh Rate: 75Hz - Using HDMI port Zero-frame design | ultra-thin | 4ms response time | IPS panel Aspect ratio - 16: 9. Color Supported - 16. 7 million colors. Brightness - 250 nit Tilt angle -5 degree to 15 degree. Horizontal viewing angle-178 degree. Vertical viewing angle-178 degree 75 hertz",
-  "price": 599,
-  "category": "electronics",
-  "image": "https://fakestoreapi.com/img/81QpkIctqPL._AC_SX679_.jpg",
-  "inStock": false,
-  "environmentalImpactScore": 99,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f899768f1493c43ed55"
-  },
-  "name": "Samsung 49-Inch CHG90 144Hz Curved Gaming Monitor (LC49HG90DMNXZA) – Super Ultrawide Screen QLED ",
-  "description": "49 INCH SUPER ULTRAWIDE 32:9 CURVED GAMING MONITOR with dual 27 inch screen side by side QUANTUM DOT (QLED) TECHNOLOGY, HDR support and factory calibration provides stunningly realistic and accurate color and contrast 144HZ HIGH REFRESH RATE and 1ms ultra fast response time work to eliminate motion blur, ghosting, and reduce input lag",
-  "price": 999.99,
-  "category": "electronics",
-  "image": "https://fakestoreapi.com/img/81Zt42ioCgL._AC_SX679_.jpg",
+  "name": "Mens Casual Slim Fit",
+  "description": "The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
+  "price": 15.99,
+  "category": "men's clothing",
+  "image": "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg",
   "inStock": true,
-  "environmentalImpactScore": 1,
+  "environmentalImpactScore": 72,
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "66cb1f899768f1493c43ed56"
+    "$oid": "66d00d5c7d5a8882e1b44d86"
   },
   "name": "BIYLACLESEN Women's 3-in-1 Snowboard Jacket Winter Coats",
   "description": "Note:The Jackets is US standard size, Please choose size as your usual wear Material: 100% Polyester; Detachable Liner Fabric: Warm Fleece. Detachable Functional Liner: Skin Friendly, Lightweigt and Warm.Stand Collar Liner jacket, keep you warm in cold weather. Zippered Pockets: 2 Zippered Hand Pockets, 2 Zippered Pockets on Chest (enough to keep cards or keys)and 1 Hidden Pocket Inside.Zippered Hand Pockets and Hidden Pocket keep your things secure. Humanized Design: Adjustable and Detachable Hood and Adjustable cuff to prevent the wind and water,for a comfortable fit. 3 in 1 Detachable Design provide more convenience, you can separate the coat and inner as needed, or wear it together. It is suitable for different season and help you adapt to different climates",
   "price": 56.99,
   "category": "women's clothing",
   "image": "https://fakestoreapi.com/img/51Y5NI-I5jL._AC_UX679_.jpg",
-  "inStock": true,
-  "environmentalImpactScore": 35,
+  "inStock": false,
+  "environmentalImpactScore": 40,
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "66cb1f899768f1493c43ed57"
+    "$oid": "66d00d5c7d5a8882e1b44d87"
   },
   "name": "Lock and Love Women's Removable Hooded Faux Leather Moto Biker Jacket",
   "description": "100% POLYURETHANE(shell) 100% POLYESTER(lining) 75% POLYESTER 25% COTTON (SWEATER), Faux leather material for style and comfort / 2 pockets of front, 2-For-One Hooded denim style faux leather jacket, Button detail on waist / Detail stitching at sides, HAND WASH ONLY / DO NOT BLEACH / LINE DRY / DO NOT IRON",
   "price": 29.95,
   "category": "women's clothing",
   "image": "https://fakestoreapi.com/img/81XH0e8fefL._AC_UY879_.jpg",
-  "inStock": true,
-  "environmentalImpactScore": 43,
+  "inStock": false,
+  "environmentalImpactScore": 96,
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "66cb1f899768f1493c43ed58"
+    "$oid": "66d00d5c7d5a8882e1b44d88"
   },
   "name": "Rain Jacket Women Windbreaker Striped Climbing Raincoats",
   "description": "Lightweight perfet for trip or casual wear---Long sleeve with hooded, adjustable drawstring waist design. Button and zipper front closure raincoat, fully stripes Lined and The Raincoat has 2 side pockets are a good size to hold all kinds of things, it covers the hips, and the hood is generous but doesn't overdo it.Attached Cotton Lined Hood with Adjustable Drawstrings give it a real styled look.",
@@ -216,1057 +138,160 @@
   "category": "women's clothing",
   "image": "https://fakestoreapi.com/img/71HblAHs5xL._AC_UY879_-2.jpg",
   "inStock": true,
-  "environmentalImpactScore": 8,
+  "environmentalImpactScore": 49,
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "66cb1f899768f1493c43ed59"
+    "$oid": "66d00d5c7d5a8882e1b44d89"
   },
   "name": "MBJ Women's Solid Short Sleeve Boat Neck V ",
   "description": "95% RAYON 5% SPANDEX, Made in USA or Imported, Do Not Bleach, Lightweight fabric with great stretch for comfort, Ribbed on sleeves and neckline / Double stitching on bottom hem",
   "price": 9.85,
   "category": "women's clothing",
   "image": "https://fakestoreapi.com/img/71z3kpMAYsL._AC_UY879_.jpg",
-  "inStock": true,
-  "environmentalImpactScore": 45,
+  "inStock": false,
+  "environmentalImpactScore": 88,
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "66cb1f899768f1493c43ed5a"
+    "$oid": "66d00d5c7d5a8882e1b44d8a"
   },
   "name": "Opna Women's Short Sleeve Moisture",
   "description": "100% Polyester, Machine wash, 100% cationic polyester interlock, Machine Wash & Pre Shrunk for a Great Fit, Lightweight, roomy and highly breathable with moisture wicking fabric which helps to keep moisture away, Soft Lightweight Fabric with comfortable V-neck collar and a slimmer fit, delivers a sleek, more feminine silhouette and Added Comfort",
   "price": 7.95,
   "category": "women's clothing",
   "image": "https://fakestoreapi.com/img/51eg55uWmdL._AC_UX679_.jpg",
-  "inStock": true,
-  "environmentalImpactScore": 42,
+  "inStock": false,
+  "environmentalImpactScore": 20,
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "66cb1f899768f1493c43ed5b"
+    "$oid": "66d00d5c7d5a8882e1b44d8b"
   },
   "name": "DANVOUY Womens T Shirt Casual Cotton Short",
   "description": "95%Cotton,5%Spandex, Features: Casual, Short Sleeve, Letter Print,V-Neck,Fashion Tees, The fabric is soft and has some stretch., Occasion: Casual/Office/Beach/School/Home/Street. Season: Spring,Summer,Autumn,Winter.",
   "price": 12.99,
   "category": "women's clothing",
   "image": "https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg",
-  "inStock": true,
-  "environmentalImpactScore": 87,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f899768f1493c43ed5c"
-  },
-  "name": "Oriental Steel Ball",
-  "description": "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-  "price": 758,
-  "category": "Outdoors",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": false,
-  "environmentalImpactScore": 68,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed5d"
-  },
-  "name": "Refined Frozen Tuna",
-  "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-  "price": 228,
-  "category": "Home",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 45,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed5e"
-  },
-  "name": "Intelligent Plastic Computer",
-  "description": "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-  "price": 354,
-  "category": "Tools",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 77,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed5f"
-  },
-  "name": "Sleek Concrete Chair",
-  "description": "The Football Is Good For Training And Recreational Purposes",
-  "price": 140,
-  "category": "Garden",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 67,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed60"
-  },
-  "name": "Bespoke Plastic Table",
-  "description": "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-  "price": 693,
-  "category": "Sports",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": false,
-  "environmentalImpactScore": 16,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed61"
-  },
-  "name": "Refined Fresh Towels",
-  "description": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-  "price": 765,
-  "category": "Shoes",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 32,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed62"
-  },
-  "name": "Handmade Wooden Car",
-  "description": "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-  "price": 998,
-  "category": "Books",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 87,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed63"
-  },
-  "name": "Generic Granite Soap",
-  "description": "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-  "price": 920,
-  "category": "Beauty",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 33,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed64"
-  },
-  "name": "Bespoke Bronze Tuna",
-  "description": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-  "price": 634,
-  "category": "Grocery",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 61,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed65"
-  },
-  "name": "Bespoke Frozen Ball",
-  "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-  "price": 978,
-  "category": "Health",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 62,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed66"
-  },
-  "name": "Refined Rubber Cheese",
-  "description": "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-  "price": 746,
-  "category": "Games",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": false,
-  "environmentalImpactScore": 43,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed67"
-  },
-  "name": "Practical Plastic Chips",
-  "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-  "price": 799,
-  "category": "Home",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 54,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed68"
-  },
-  "name": "Recycled Granite Chips",
-  "description": "The Football Is Good For Training And Recreational Purposes",
-  "price": 893,
-  "category": "Clothing",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": false,
-  "environmentalImpactScore": 60,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed69"
-  },
-  "name": "Unbranded Bronze Shirt",
-  "description": "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-  "price": 630,
-  "category": "Games",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 44,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed6a"
-  },
-  "name": "Luxurious Cotton Salad",
-  "description": "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-  "price": 436,
-  "category": "Books",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": false,
-  "environmentalImpactScore": 18,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed6b"
-  },
-  "name": "Incredible Wooden Towels",
-  "description": "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-  "price": 20,
-  "category": "Clothing",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 88,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed6c"
-  },
-  "name": "Practical Granite Towels",
-  "description": "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-  "price": 932,
-  "category": "Beauty",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 96,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed6d"
-  },
-  "name": "Gorgeous Granite Sausages",
-  "description": "The Football Is Good For Training And Recreational Purposes",
-  "price": 244,
-  "category": "Health",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 76,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed6e"
-  },
-  "name": "Generic Rubber Car",
-  "description": "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-  "price": 796,
-  "category": "Clothing",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": false,
-  "environmentalImpactScore": 63,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed6f"
-  },
-  "name": "Fantastic Metal Ball",
-  "description": "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-  "price": 533,
-  "category": "Outdoors",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 79,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed70"
-  },
-  "name": "Refined Rubber Car",
-  "description": "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-  "price": 863,
-  "category": "Movies",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": false,
-  "environmentalImpactScore": 59,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed71"
-  },
-  "name": "Ergonomic Frozen Sausages",
-  "description": "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-  "price": 785,
-  "category": "Kids",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 49,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed72"
-  },
-  "name": "Modern Cotton Table",
-  "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-  "price": 713,
-  "category": "Toys",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 67,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed73"
-  },
-  "name": "Unbranded Steel Shirt",
-  "description": "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-  "price": 154,
-  "category": "Automotive",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 79,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed74"
-  },
-  "name": "Handmade Cotton Soap",
-  "description": "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-  "price": 671,
-  "category": "Jewelery",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": false,
-  "environmentalImpactScore": 89,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed75"
-  },
-  "name": "Recycled Cotton Pants",
-  "description": "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-  "price": 336,
-  "category": "Music",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": false,
-  "environmentalImpactScore": 40,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed76"
-  },
-  "name": "Sleek Cotton Tuna",
-  "description": "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-  "price": 185,
-  "category": "Automotive",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 22,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed77"
-  },
-  "name": "Handmade Wooden Car",
-  "description": "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-  "price": 863,
-  "category": "Sports",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": false,
-  "environmentalImpactScore": 78,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed78"
-  },
-  "name": "Unbranded Rubber Tuna",
-  "description": "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-  "price": 70,
-  "category": "Movies",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 64,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed79"
-  },
-  "name": "Ergonomic Steel Fish",
-  "description": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-  "price": 15,
-  "category": "Beauty",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 27,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed7a"
-  },
-  "name": "Electronic Frozen Ball",
-  "description": "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-  "price": 954,
-  "category": "Beauty",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 31,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed7b"
-  },
-  "name": "Recycled Frozen Cheese",
-  "description": "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-  "price": 713,
-  "category": "Books",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 21,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed7c"
-  },
-  "name": "Oriental Plastic Bike",
-  "description": "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-  "price": 398,
-  "category": "Toys",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 88,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed7d"
-  },
-  "name": "Handcrafted Bronze Hat",
-  "description": "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-  "price": 954,
-  "category": "Industrial",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 10,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed7e"
-  },
-  "name": "Gorgeous Concrete Bike",
-  "description": "The Football Is Good For Training And Recreational Purposes",
-  "price": 969,
-  "category": "Toys",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 13,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed7f"
-  },
-  "name": "Recycled Rubber Shoes",
-  "description": "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-  "price": 417,
-  "category": "Garden",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": false,
-  "environmentalImpactScore": 98,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed80"
-  },
-  "name": "Gorgeous Bronze Bike",
-  "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-  "price": 701,
-  "category": "Industrial",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 16,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed81"
-  },
-  "name": "Tasty Soft Computer",
-  "description": "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-  "price": 323,
-  "category": "Electronics",
-  "image": "https://loremflickr.com/640/480",
   "inStock": false,
   "environmentalImpactScore": 1,
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed82"
+    "$oid": "66d00d5c7d5a8882e1b44d8c"
   },
-  "name": "Elegant Bronze Chips",
-  "description": "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-  "price": 795,
-  "category": "Games",
-  "image": "https://loremflickr.com/640/480",
+  "name": "BIYLACLESEN Women's 3-in-1 Snowboard Jacket Winter Coats",
+  "description": "Note:The Jackets is US standard size, Please choose size as your usual wear Material: 100% Polyester; Detachable Liner Fabric: Warm Fleece. Detachable Functional Liner: Skin Friendly, Lightweigt and Warm.Stand Collar Liner jacket, keep you warm in cold weather. Zippered Pockets: 2 Zippered Hand Pockets, 2 Zippered Pockets on Chest (enough to keep cards or keys)and 1 Hidden Pocket Inside.Zippered Hand Pockets and Hidden Pocket keep your things secure. Humanized Design: Adjustable and Detachable Hood and Adjustable cuff to prevent the wind and water,for a comfortable fit. 3 in 1 Detachable Design provide more convenience, you can separate the coat and inner as needed, or wear it together. It is suitable for different season and help you adapt to different climates",
+  "price": 56.99,
+  "category": "women's clothing",
+  "image": "https://fakestoreapi.com/img/51Y5NI-I5jL._AC_UX679_.jpg",
   "inStock": true,
-  "environmentalImpactScore": 41,
+  "environmentalImpactScore": 96,
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed83"
+    "$oid": "66d00d5c7d5a8882e1b44d8d"
   },
-  "name": "Awesome Metal Sausages",
-  "description": "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-  "price": 746,
-  "category": "Computers",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": false,
-  "environmentalImpactScore": 63,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed84"
-  },
-  "name": "Electronic Bronze Chair",
-  "description": "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-  "price": 956,
-  "category": "Kids",
-  "image": "https://loremflickr.com/640/480",
+  "name": "Lock and Love Women's Removable Hooded Faux Leather Moto Biker Jacket",
+  "description": "100% POLYURETHANE(shell) 100% POLYESTER(lining) 75% POLYESTER 25% COTTON (SWEATER), Faux leather material for style and comfort / 2 pockets of front, 2-For-One Hooded denim style faux leather jacket, Button detail on waist / Detail stitching at sides, HAND WASH ONLY / DO NOT BLEACH / LINE DRY / DO NOT IRON",
+  "price": 29.95,
+  "category": "women's clothing",
+  "image": "https://fakestoreapi.com/img/81XH0e8fefL._AC_UY879_.jpg",
   "inStock": true,
-  "environmentalImpactScore": 19,
+  "environmentalImpactScore": 21,
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed85"
+    "$oid": "66d00d5c7d5a8882e1b44da6"
   },
-  "name": "Awesome Concrete Table",
-  "description": "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-  "price": 627,
-  "category": "Health",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 4,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed86"
-  },
-  "name": "Rustic Granite Salad",
-  "description": "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-  "price": 388,
-  "category": "Grocery",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 13,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed87"
-  },
-  "name": "Modern Fresh Mouse",
-  "description": "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-  "price": 154,
-  "category": "Books",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 77,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed88"
-  },
-  "name": "Incredible Cotton Chicken",
-  "description": "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-  "price": 165,
-  "category": "Shoes",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 13,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed89"
-  },
-  "name": "Rustic Cotton Soap",
-  "description": "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-  "price": 452,
-  "category": "Electronics",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": false,
-  "environmentalImpactScore": 53,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed8a"
-  },
-  "name": "Licensed Wooden Mouse",
-  "description": "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-  "price": 124,
-  "category": "Kids",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 40,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed8b"
-  },
-  "name": "Refined Concrete Salad",
-  "description": "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-  "price": 135,
-  "category": "Music",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 17,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed8c"
-  },
-  "name": "Incredible Steel Ball",
+  "name": "Handcrafted Steel Keyboard",
   "description": "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-  "price": 284,
-  "category": "Music",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": false,
-  "environmentalImpactScore": 35,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed8d"
-  },
-  "name": "Practical Cotton Table",
-  "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-  "price": 838,
-  "category": "Games",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": false,
-  "environmentalImpactScore": 37,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed8e"
-  },
-  "name": "Gorgeous Concrete Bike",
-  "description": "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-  "price": 553,
-  "category": "Tools",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 44,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed8f"
-  },
-  "name": "Handmade Plastic Salad",
-  "description": "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-  "price": 803,
-  "category": "Home",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": false,
-  "environmentalImpactScore": 64,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed90"
-  },
-  "name": "Refined Concrete Mouse",
-  "description": "The Football Is Good For Training And Recreational Purposes",
-  "price": 647,
-  "category": "Grocery",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 23,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed91"
-  },
-  "name": "Incredible Granite Bacon",
-  "description": "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-  "price": 771,
-  "category": "Electronics",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 7,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed92"
-  },
-  "name": "Fantastic Soft Fish",
-  "description": "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-  "price": 528,
-  "category": "Movies",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 63,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed93"
-  },
-  "name": "Incredible Metal Keyboard",
-  "description": "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-  "price": 120,
-  "category": "Garden",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 41,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed94"
-  },
-  "name": "Recycled Metal Chair",
-  "description": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-  "price": 952,
-  "category": "Industrial",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 74,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed95"
-  },
-  "name": "Practical Rubber Mouse",
-  "description": "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-  "price": 455,
-  "category": "Games",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 34,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed96"
-  },
-  "name": "Elegant Plastic Tuna",
-  "description": "The Football Is Good For Training And Recreational Purposes",
-  "price": 619,
-  "category": "Beauty",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 82,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed97"
-  },
-  "name": "Intelligent Plastic Hat",
-  "description": "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-  "price": 790,
-  "category": "Grocery",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": false,
-  "environmentalImpactScore": 70,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed98"
-  },
-  "name": "Licensed Metal Gloves",
-  "description": "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-  "price": 269,
-  "category": "Games",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 75,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed99"
-  },
-  "name": "Gorgeous Wooden Hat",
-  "description": "The Football Is Good For Training And Recreational Purposes",
-  "price": 140,
-  "category": "Grocery",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 23,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed9a"
-  },
-  "name": "Intelligent Cotton Cheese",
-  "description": "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-  "price": 308,
-  "category": "Electronics",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": false,
-  "environmentalImpactScore": 31,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed9b"
-  },
-  "name": "Electronic Fresh Mouse",
-  "description": "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-  "price": 849,
-  "category": "Shoes",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 59,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed9c"
-  },
-  "name": "Tasty Granite Shirt",
-  "description": "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-  "price": 638,
-  "category": "Beauty",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 29,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed9d"
-  },
-  "name": "Unbranded Fresh Tuna",
-  "description": "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
-  "price": 757,
-  "category": "Home",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 38,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed9e"
-  },
-  "name": "Recycled Plastic Sausages",
-  "description": "The Football Is Good For Training And Recreational Purposes",
-  "price": 157,
+  "price": 749,
   "category": "Beauty",
   "image": "https://loremflickr.com/640/480",
   "inStock": false,
-  "environmentalImpactScore": 38,
+  "environmentalImpactScore": 69,
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "66cb1f8a9768f1493c43ed9f"
+    "$oid": "66d00d5c7d5a8882e1b44dae"
   },
-  "name": "Gorgeous Metal Chips",
-  "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-  "price": 571,
-  "category": "Music",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": false,
-  "environmentalImpactScore": 34,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43eda0"
-  },
-  "name": "Refined Steel Chicken",
-  "description": "The Football Is Good For Training And Recreational Purposes",
-  "price": 231,
-  "category": "Grocery",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": false,
-  "environmentalImpactScore": 10,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43eda1"
-  },
-  "name": "Gorgeous Concrete Sausages",
-  "description": "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
-  "price": 503,
-  "category": "Health",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 48,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43eda2"
-  },
-  "name": "Fantastic Fresh Chair",
-  "description": "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-  "price": 132,
-  "category": "Baby",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 65,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43eda3"
-  },
-  "name": "Licensed Frozen Fish",
+  "name": "Practical Bronze Bike",
   "description": "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-  "price": 531,
-  "category": "Tools",
+  "price": 100,
+  "category": "Beauty",
   "image": "https://loremflickr.com/640/480",
   "inStock": true,
-  "environmentalImpactScore": 15,
+  "environmentalImpactScore": 3,
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "66cb1f8a9768f1493c43eda4"
+    "$oid": "66d00d5c7d5a8882e1b44db1"
   },
-  "name": "Bespoke Soft Chicken",
-  "description": "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
-  "price": 307,
-  "category": "Automotive",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": false,
-  "environmentalImpactScore": 40,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43eda5"
-  },
-  "name": "Gorgeous Wooden Gloves",
+  "name": "Modern Metal Towels",
   "description": "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-  "price": 933,
-  "category": "Clothing",
+  "price": 200,
+  "category": "Beauty",
   "image": "https://loremflickr.com/640/480",
   "inStock": true,
-  "environmentalImpactScore": 67,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43eda6"
-  },
-  "name": "Small Metal Keyboard",
-  "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-  "price": 510,
-  "category": "Jewelery",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": true,
-  "environmentalImpactScore": 87,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43eda7"
-  },
-  "name": "Generic Fresh Ball",
-  "description": "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-  "price": 1,
-  "category": "Outdoors",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": false,
-  "environmentalImpactScore": 22,
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66cb1f8a9768f1493c43eda8"
-  },
-  "name": "Recycled Fresh Keyboard",
-  "description": "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
-  "price": 576,
-  "category": "Health",
-  "image": "https://loremflickr.com/640/480",
-  "inStock": false,
   "environmentalImpactScore": 56,
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "66cb1f8a9768f1493c43eda9"
+    "$oid": "66d00d5c7d5a8882e1b44db3"
   },
-  "name": "Sleek Plastic Hat",
+  "name": "Tasty Cotton Cheese",
+  "description": "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+  "price": 99,
+  "category": "Beauty",
+  "image": "https://loremflickr.com/640/480",
+  "inStock": true,
+  "environmentalImpactScore": 92,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d00d5c7d5a8882e1b44dbd"
+  },
+  "name": "Generic Concrete Chair",
+  "description": "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+  "price": 842,
+  "category": "Beauty",
+  "image": "https://loremflickr.com/640/480",
+  "inStock": false,
+  "environmentalImpactScore": 65,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d00d5c7d5a8882e1b44dc9"
+  },
+  "name": "Modern Granite Soap",
   "description": "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-  "price": 692,
-  "category": "Jewelery",
+  "price": 385,
+  "category": "Shoes",
+  "image": "https://loremflickr.com/640/480",
+  "inStock": true,
+  "environmentalImpactScore": 8,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d00d5c7d5a8882e1b44dca"
+  },
+  "name": "Luxurious Fresh Soap",
+  "description": "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+  "price": 102,
+  "category": "Shoes",
   "image": "https://loremflickr.com/640/480",
   "inStock": false,
   "environmentalImpactScore": 28,
@@ -1274,27 +299,118 @@
 },
 {
   "_id": {
-    "$oid": "66cb1f8a9768f1493c43edaa"
+    "$oid": "66d00d5c7d5a8882e1b44dd1"
   },
-  "name": "Awesome Frozen Cheese",
-  "description": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
-  "price": 958,
-  "category": "Tools",
+  "name": "Incredible Soft Cheese",
+  "description": "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+  "price": 951,
+  "category": "Shoes",
   "image": "https://loremflickr.com/640/480",
-  "inStock": false,
-  "environmentalImpactScore": 77,
+  "inStock": true,
+  "environmentalImpactScore": 85,
   "__v": 0
 },
 {
   "_id": {
-    "$oid": "66cb1f8a9768f1493c43edab"
+    "$oid": "66d00d5c7d5a8882e1b44dd6"
   },
-  "name": "Recycled Bronze Keyboard",
-  "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-  "price": 172,
-  "category": "Automotive",
+  "name": "Awesome Metal Bike",
+  "description": "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+  "price": 196,
+  "category": "Beauty",
   "image": "https://loremflickr.com/640/480",
   "inStock": true,
-  "environmentalImpactScore": 49,
+  "environmentalImpactScore": 81,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d00d5d7d5a8882e1b44dee"
+  },
+  "name": "Modern Frozen Keyboard",
+  "description": "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+  "price": 417,
+  "category": "Shoes",
+  "image": "https://loremflickr.com/640/480",
+  "inStock": true,
+  "environmentalImpactScore": 73,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d00d5d7d5a8882e1b44def"
+  },
+  "name": "Fantastic Bronze Bike",
+  "description": "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+  "price": 456,
+  "category": "Beauty",
+  "image": "https://loremflickr.com/640/480",
+  "inStock": true,
+  "environmentalImpactScore": 43,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d00d5d7d5a8882e1b44df4"
+  },
+  "name": "Awesome Fresh Shoes",
+  "description": "The Football Is Good For Training And Recreational Purposes",
+  "price": 697,
+  "category": "Shoes",
+  "image": "https://loremflickr.com/640/480",
+  "inStock": true,
+  "environmentalImpactScore": 22,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d00d5d7d5a8882e1b44e01"
+  },
+  "name": "Incredible Cotton Gloves",
+  "description": "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+  "price": 364,
+  "category": "Shoes",
+  "image": "https://loremflickr.com/640/480",
+  "inStock": false,
+  "environmentalImpactScore": 97,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d00d5d7d5a8882e1b44e04"
+  },
+  "name": "Electronic Plastic Mouse",
+  "description": "The Football Is Good For Training And Recreational Purposes",
+  "price": 436,
+  "category": "Shoes",
+  "image": "https://loremflickr.com/640/480",
+  "inStock": true,
+  "environmentalImpactScore": 63,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d00d5d7d5a8882e1b44e0d"
+  },
+  "name": "Small Soft Keyboard",
+  "description": "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+  "price": 300,
+  "category": "Beauty",
+  "image": "https://loremflickr.com/640/480",
+  "inStock": true,
+  "environmentalImpactScore": 45,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d00d5d7d5a8882e1b44e15"
+  },
+  "name": "Unbranded Concrete Pants",
+  "description": "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+  "price": 680,
+  "category": "Shoes",
+  "image": "https://loremflickr.com/640/480",
+  "inStock": true,
+  "environmentalImpactScore": 16,
   "__v": 0
 }]

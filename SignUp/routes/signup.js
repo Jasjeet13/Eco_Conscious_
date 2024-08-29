@@ -23,7 +23,7 @@ router.post('/', validateSignup, hashPassword, async (req, res) => {
     await user.save();
 
     // Respond with a success message
-    res.status(200).json({ message: 'Signup successful' });
+    res.status(200).json({ message: 'Signup successful', id: user.id });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Error signing up' });

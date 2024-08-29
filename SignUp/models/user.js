@@ -30,5 +30,14 @@ const userSchema = new mongoose.Schema({
   },
 }, { timestamps: true }); // Adds createdAt and updatedAt timestamps
 
+// Define a static method to get user profile by email
+userSchema.statics.getUserProfileByEmail = async function(email) {
+  return this.findOne({ email: email }).exec();
+};
+
+userSchema.statics.getUserProfileById = async function(id) {
+  return this.findById(id).exec();
+};
+
 // Create and export the User model
 module.exports = mongoose.model('User', userSchema);

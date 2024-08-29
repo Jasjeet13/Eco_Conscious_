@@ -1,38 +1,44 @@
 import React, { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { useParams } from "react-router-dom";
 
 const ProfileDetails = () => {
-  const [profile, setProfile] = useState({
-    username: "",
-    fullName: "",
-    email: "",
-    password: "",
-    address: "",
-    mobileNumber: "",
-  });
+  const { id } = useParams();
+  console.log(`id received in ProfileDetails: ${id}`);
+
+  // State to store the profile details
+  const [profile, setProfile] = useState(null);
 
   useEffect(() => {
-    const fetchProfileDetails = async () => {
-      try {
-        const response = await fetch("/api/profile");
-        const data = await response.json();
-
-        setProfile({
-          username: data.username || "- not added -",
-          fullName: data.fullName || "- not added -",
-          email: data.email || "- not added -",
-          password: data.password || "- not added -",
-          address: data.address || "- not added -",
-          mobileNumber: data.mobileNumber || "- not added -",
-        });
-      } catch (error) {
-        console.error("Error fetching profile details:", error);
+    const fetchProfile = async () => {
+      if (!id) {
+        console.error('No id provided');
+        return;
       }
-    };
+    
+      try {
+        
+        const response = await fetch(`http://localhost:3000/api/profile/${id}`);
+        if (response.ok) {
+          const data = await response.json();
+          console.log('Fetched profile data:', data);
 
-    fetchProfileDetails();
-  }, []);
+          setProfile(data); 
+        } else {
+          console.error('Failed to fetch profile');
+        }
+      } catch (error) {
+        console.error('Error fetching profile:', error);
+      }
+    };    
+
+    fetchProfile();
+  }, [id]);
+
+  if (!profile) {
+    return <div>Loading...</div>;
+  }
 
   const styles = {
     whole: {
@@ -101,8 +107,8 @@ const ProfileDetails = () => {
     buttonHover: {
       backgroundColor: "#a57d4b",
       transform: "scale(1.05)",
-    },
-  };
+  },
+};
 
   return (
     <div style={styles.whole}>
@@ -126,12 +132,6 @@ const ProfileDetails = () => {
         <div style={styles.detailGroup}>
           <span style={styles.label}>Email ID</span>
           <span style={styles.value}>{profile.email}</span>
-        </div>
-        <div style={styles.detailGroup}>
-          <span style={styles.label}>Password</span>
-          <span style={styles.value}>
-            {"*".repeat(profile.password.length)}
-          </span>
         </div>
         <div style={styles.detailGroup}>
           <span style={styles.label}>Address</span>
@@ -170,7 +170,7 @@ const ProfileDetails = () => {
           </button>
         </div>
       </div>
-    </div>
+    </div>
   );
 };
 
