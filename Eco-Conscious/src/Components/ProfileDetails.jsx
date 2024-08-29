@@ -43,16 +43,15 @@ const ProfileDetails = () => {
   const styles = {
     whole: {
       display: "flex",
+      backgroundColor: "#f5f1eb",
       alignItems: "center",
       justifyContent: "center",
       minHeight: "100vh",
-      backgroundImage: "",
     },
     container: {
       width: "800px",
       margin: "0 auto",
-      height: "450px",
-      padding: "20px",
+      padding: "30px",
       backgroundColor: "#ffffff",
       boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.1)",
       borderRadius: "40px",
@@ -64,14 +63,14 @@ const ProfileDetails = () => {
       marginBottom: "10px",
     },
     heading: {
-      fontSize: "20px",
-      fontWeight: "600",
-      marginLeft: "10px",
+      fontSize: "30px",
+      marginLeft: "20px",
+      color: "#333",
     },
     icon: {
-      fontSize: "24px",
-      paddingRight: "10px",
-      opacity: "0.7"
+      fontSize: "32px",
+      color: "#333",
+      opacity: "0.8",
     },
     detailGroup: {
       marginBottom: "30px",
@@ -93,8 +92,9 @@ const ProfileDetails = () => {
       justifyContent: "space-evenly",
     },
     button: {
-      width: "calc(50% - 10px)",
-      padding: "12px",
+      width: "45%",
+      height: "60px",
+      padding: "15px",
       backgroundColor: "#c49b63",
       color: "#333",
       border: "none",
@@ -104,11 +104,11 @@ const ProfileDetails = () => {
       transition: "background-color 0.3s ease, transform 0.3s ease",
       textAlign: "center",
     },
-    deleteButton: {
-      backgroundColor: "#c49b63",
-      marginLeft: "20px",
-    }
-  };
+    buttonHover: {
+      backgroundColor: "#a57d4b",
+      transform: "scale(1.05)",
+  },
+};
 
   return (
     <div style={styles.whole}>
@@ -119,29 +119,23 @@ const ProfileDetails = () => {
         </div>
         <div style={styles.detailGroup}>
           <span style={styles.label}>Username</span>
-          <span style={styles.value}>{profile.username || 'N/A'}</span>
+          <span style={styles.value}>{profile.username}</span>
         </div>
         <div style={styles.detailGroup}>
           <span style={styles.label}>Full Name</span>
-          <span style={styles.value}>{profile.fullName || 'N/A'}</span>
+          <span style={styles.value}>{profile.fullName}</span>
         </div>
         <div style={styles.detailGroup}>
           <span style={styles.label}>Mobile Number</span>
-          <span style={styles.value}>{profile.mobileNumber || 'N/A'}</span>
+          <span style={styles.value}>{profile.mobileNumber}</span>
         </div>
         <div style={styles.detailGroup}>
           <span style={styles.label}>Email ID</span>
-          <span style={styles.value}>{profile.email || 'N/A'}</span>
+          <span style={styles.value}>{profile.email}</span>
         </div>
-        {/* <div style={styles.detailGroup}>
-          <span style={styles.label}>Password</span>
-          <span style={styles.value}>
-            {profile.password ? "*".repeat(profile.password.length) : 'N/A'}
-          </span>
-        </div> */}
         <div style={styles.detailGroup}>
           <span style={styles.label}>Address</span>
-          <span style={styles.value}>{profile.address || 'N/A'}</span>
+          <span style={styles.value}>{profile.address}</span>
         </div>
         <div style={styles.buttonGroup}>
           <button
@@ -176,7 +170,7 @@ const ProfileDetails = () => {
           </button>
         </div>
       </div>
-    </div>
+    </div>
   );
 };
 
