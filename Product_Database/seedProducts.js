@@ -1,51 +1,39 @@
-const mongoose = require('./db');
+const mongoose = require('mongoose');
 const Product = require('./product');
-const axios = require('axios');
 
-// Array of categories you want to filter
-const desiredCategories = ["men's clothing", "women's clothing", "beauty", "shoes"];
+// Connect to MongoDB
+mongoose.connect('mongodb://localhost:27017/ecommerce', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
-// Map of Fake Store API categories to your categories (if needed)
-const categoryMap = {
-  "men's clothing": "Men's Clothing",
-  "women's clothing": "Women's Clothing",
-  "beauty": "Beauty", 
-  "shoes": "Shoes"
-};
-
-const fetchAndSeedProducts = async () => {
+async function trimProducts() {
   try {
-    // Fetch products from the Fake Store API
-    const response = await axios.get('https://fakestoreapi.com/products');
-    const products = response.data;
+    // Define the categories to trim
+    const categories = ["men's clothing", "women's clothing", 'Shoes', 'Beauty'];
 
-    // Clear the existing products in the database
-    await Product.deleteMany({});
-    console.log('Cleared the existing products.');
+    for (const category of categories) {
+      // Find the products in the specified category
+      const products = await Product.find({ category }).exec();
 
-    // Filter and format the products based on the desired categories
-    const filteredProducts = products
-      .filter(product => desiredCategories.includes(product.category))
-      .map(product => ({
-        name: product.title,
-        description: product.description,
-        price: product.price,
-        category: categoryMap[product.category] || product.category,
-        image: product.image,
-        inStock: true, // Assuming all products are in stock
-        environmentalImpactScore: Math.floor(Math.random() * 100) + 1, // Random score between 1 and 100
-      }));
+      if (products.length > 8) {
+        // Calculate the number of excess products
+        const excessProductsCount = products.length - 8;
 
-    // Insert the filtered products into the database
-    await Product.insertMany(filteredProducts);
-    console.log(`Inserted ${filteredProducts.length} products into the database.`);
+        // Sort the products and delete the excess ones
+        const productsToDelete = products.slice(-excessProductsCount);
+        const deleteIds = productsToDelete.map(product => product._id);
 
-    // Close the MongoDB connection
-    mongoose.connection.close();
+        await Product.deleteMany({ _id: { $in: deleteIds } });
+      }
+    }
+
+    console.log('Successfully trimmed products in each category to 8');
   } catch (err) {
-    console.error('Error fetching or seeding products:', err);
+    console.error('Error trimming products:', err);
+  } finally {
     mongoose.connection.close();
   }
-};
+}
 
-fetchAndSeedProducts();
+trimProducts();
