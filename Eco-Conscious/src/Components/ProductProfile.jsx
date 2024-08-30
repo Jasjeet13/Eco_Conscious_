@@ -8,104 +8,114 @@ const ProductProfile = () => {
   const styles = {
     container: {
       display: 'flex',
-      padding: '40px 20px',
-      maxWidth: '1200px',
+      padding: '60px 30px', 
+      maxWidth: '100%',
       margin: '0 auto',
       alignItems: 'flex-start',
     },
     imageGallery: {
       flex: '1',
-      marginRight: '40px',
+      marginRight: '10px',
     },
     productImage: {
-      width: '480px',
-      borderRadius: '8px',
-      height: '500px',
+      width: '600px',
+      borderRadius: '12px',
+      height: '600px',
     },
     details: {
-      padding: '30px',
+      padding: '40px',
       flex: '2',
     },
     title: {
-      fontSize: '24px',
+      fontSize: '32px',
       fontWeight: 'bold',
-      marginBottom: '10px',
+      marginBottom: '15px',
     },
     price: {
-      fontSize: '20px',
+      fontSize: '28px',
       color: '#e63946',
-      marginBottom: '10px',
+      marginBottom: '15px',
     },
     reviews: {
       display: 'flex',
       alignItems: 'center',
-      marginBottom: '20px',
+      marginBottom: '25px',
     },
     stars: {
       color: '#ffcc00',
-      marginRight: '10px',
+      marginRight: '15px',
+      fontSize: '20px',
     },
     reviewsText: {
       color: '#333',
+      fontSize: '18px',
     },
     description: {
-      marginBottom: '20px',
+      marginBottom: '25px',
       color: '#555',
-      lineHeight: '1.6',
+      lineHeight: '1.8',
+      fontSize: '18px',
     },
     stock: {
-      marginBottom: '10px',
+      marginBottom: '15px',
+      fontSize: '18px',
     },
     productType: {
-      marginBottom: '10px',
+      marginBottom: '15px',
+      fontSize: '18px',
     },
     cartOptions: {
       display: 'flex',
       alignItems: 'center',
-      marginBottom: '20px',
+      marginBottom: '25px',
     },
     quantityInput: {
-      width: '50px',
-      padding: '5px',
-      marginRight: '20px',
+      width: '70px',
+      padding: '10px',
+      marginRight: '30px',
+      fontSize: '18px',
     },
     addToCartButton: {
-      padding: '10px 20px',
+      padding: '15px 30px',
       border: '1px solid #000',
       cursor: 'pointer',
       backgroundColor: '#fff',
       color: '#000',
-      marginRight: '20px',
+      marginRight: '30px',
       display: 'flex',
       alignItems: 'center',
+      fontSize: '18px',
     },
     wishlistButton: {
-      padding: '10px 20px',
+      padding: '15px 30px',
       border: '1px solid #000',
       cursor: 'pointer',
       backgroundColor: '#fff',
       color: '#000',
-      marginRight: '20px',
+      marginRight: '30px',
       display: 'flex',
       alignItems: 'center',
+      fontSize: '18px',
     },
     buyNowButton: {
-      padding: '15px 30px',
+      padding: '20px 40px',
       backgroundColor: '#000',
       color: '#fff',
       border: 'none',
       cursor: 'pointer',
-      width: '25%',
-      marginTop: '20px',
+      width: '28%',
+      marginTop: '30px',
       display: 'flex',
       alignItems: 'center',
+      fontSize: '22px',
     },
     icon: {
-      marginRight: '10px',
+      marginRight: '15px',
+      fontSize: '20px',
       transition: 'color 0.3s, transform 0.3s',
     },
     faLayer: {
-      marginRight: '10px',
+      marginRight: '15px',
       display: 'inline-block',
       position: 'relative',
     },
@@ -114,7 +124,7 @@ const ProductProfile = () => {
       top: '50%',
       left: '50%',
       transform: 'translate(-50%, -50%)',
-      fontSize: '0.6em',
+      fontSize: '0.8em',
       color: hoveredIcon === 'buyNow' ? '#fff' : '#000',
     },
   };
@@ -123,7 +133,7 @@ const ProductProfile = () => {
     <div style={styles.container}>
       <div style={styles.imageGallery}>
         <img
-          src="https://via.placeholder.com/500"
+          src="https://via.placeholder.com/600"
           alt="Product"
           style={styles.productImage}
         />
@@ -179,12 +189,9 @@ const ProductProfile = () => {
             ADD TO WISHLIST
           </button>
         </div>
-        {/* </div> */}
         <button style={styles.buyNowButton}>
           BUY IT NOW
         </button>
-      {/* </div> */}
-
       </div>
     </div>
   );
