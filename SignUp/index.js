@@ -1,9 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const signupRouter = require('./routes/signup'); 
+const signupRouter = require("./routes/signup"); 
 const loginRouter = require("./routes/login");
 const profileRouter = require("./routes/profile")
+const productsRouter = require('./routes/products');
 const errorHandler = require("./Middlewares/errorHandler");
 const cors = require('cors');
 
@@ -33,6 +34,7 @@ app.use(express.static('public')); // Serve static files
 app.use('/signup', signupRouter);
 app.use('/login', loginRouter);
 app.use('/api/profile', profileRouter);
+app.use('/api/products', productsRouter);
 
 // Error handling middleware
 app.use(errorHandler);
