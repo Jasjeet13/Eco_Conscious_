@@ -1,39 +1,6 @@
 import React from "react";
 
-const SignUp = () => {
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData.entries());
-
-    try {
-      const response = await fetch("http://localhost:3000/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-<<<<<<< HEAD
-        window.location.href = "/home"; // Redirect to home route
-=======
-        const responseData = await response.json();
-        const id = responseData.id;
-        console.log('Id received:', id);
-        window.location.href = `/home/${id}`;
->>>>>>> 83f67317ec9ddb3a0bc09b2a137f93bfe1856fb7
-      } else {
-        // Handle errors here (e.g., display an error message)
-        console.error("Signup failed");
-      }
-    } catch (error) {
-      console.error("Error during signup:", error);
-    }
-  };
-
+const Edit = () => {
   const styles = {
     mainbox: {
       backgroundColor: "#f5f1eb",
@@ -49,7 +16,7 @@ const SignUp = () => {
       textAlign: "center",
       width: "50%",
       borderRadius: "20px",
-      backgroundColor: "#ffffff", // Add a background color to make the box visible
+      backgroundColor: "#ffffff",
     },
     inputGroupContainer: {
       display: "flex",
@@ -73,7 +40,7 @@ const SignUp = () => {
     },
     input: {
       padding: "10px",
-      width: "100%", // Default for full-width inputs
+      width: "100%",
       borderRadius: "0px",
       border: "none",
       borderBottom: "1px solid #ccc",
@@ -82,15 +49,12 @@ const SignUp = () => {
     },
     input2: {
       padding: "10px",
-      width: "82%", // Default for full-width inputs
+      width: "82%",
       borderRadius: "0px",
       border: "none",
       borderBottom: "1px solid #ccc",
       fontSize: "16px",
       backgroundColor: "transparent",
-    },
-    halfWidthInput: {
-      width: "70%", // Reduced width for half-width inputs
     },
     button: {
       backgroundColor: "#c49b63",
@@ -114,8 +78,8 @@ const SignUp = () => {
   return (
     <div style={styles.mainbox}>
       <div style={styles.loginBox}>
-        <h2 style={styles.heading}>Sign Up</h2>
-        <form onSubmit={handleSubmit}>
+        <h2 style={styles.heading}>Edit Details</h2>
+        <form>
           <div style={styles.inputGroupContainer}>
             <div style={styles.halfWidthInputGroup}>
               <label htmlFor="username" style={styles.label}>
@@ -125,8 +89,7 @@ const SignUp = () => {
                 type="text"
                 id="username"
                 name="username"
-                required
-                style={styles.input2}
+                style={styles.input2} // Adjusted to match the underline length
               />
             </div>
             <div style={styles.halfWidthInputGroup}>
@@ -137,8 +100,7 @@ const SignUp = () => {
                 type="text"
                 id="fullname"
                 name="fullname"
-                required
-                style={styles.input2}
+                style={styles.input2} // Adjusted to match the underline length
               />
             </div>
             <div style={styles.fullWidthInputGroup}>
@@ -149,32 +111,7 @@ const SignUp = () => {
                 type="email"
                 id="email"
                 name="email"
-                required
                 style={styles.input}
-              />
-            </div>
-            <div style={styles.halfWidthInputGroup}>
-              <label htmlFor="password" style={styles.label}>
-                PASSWORD
-              </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                required
-                style={styles.input2}
-              />
-            </div>
-            <div style={styles.halfWidthInputGroup}>
-              <label htmlFor="confirmPassword" style={styles.label}>
-                CONFIRM PASSWORD
-              </label>
-              <input
-                type="password"
-                id="confirmPassword"
-                name="confirmPassword"
-                required
-                style={styles.input2}
               />
             </div>
             <div style={styles.fullWidthInputGroup}>
@@ -185,7 +122,6 @@ const SignUp = () => {
                 type="text"
                 id="address"
                 name="address"
-                required
                 style={styles.input}
               />
             </div>
@@ -197,13 +133,12 @@ const SignUp = () => {
                 type="tel"
                 id="phoneNumber"
                 name="phoneNumber"
-                required
                 style={styles.input}
               />
             </div>
           </div>
           <button type="submit" style={styles.button}>
-            SIGN UP
+            Save
           </button>
         </form>
       </div>
@@ -211,4 +146,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Edit;
