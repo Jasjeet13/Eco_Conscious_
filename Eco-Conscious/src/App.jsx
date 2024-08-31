@@ -9,21 +9,21 @@ import ProductProfile from './Components/ProductProfile';
 import Edit from "./Components/Edit";
 function App() {
   return (
-    // <Router>
-    //   <Routes>
-    //     <Route path="/" element={<SignUp_Login/>} />
-    //     <Route path="/signup" element={<SignUp />} />
-    //     <Route path="/home/:id" element={<Home />} /> 
-    //     <Route path="/profile/:id" element={<ProfileDetails />} />
-    //     <Route path="/products/:category" element={<ProductList />} />
-    //     <Route path="/products/:category/:id" element={<ProductProfile />} />
+    <Router>
+      <Routes>
+        <Route path="/" element={<SignUp_Login/>} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/home/:id" element={<Home />} /> 
+        <Route path="/profile/:id" element={<ProfileDetails />} />
+        <Route path="/products/:category" element={<ProductList />} />
+        <Route path="/products/:category/:id" element={<ProductProfile />} />
 
-    //     {/* Add other routes here */}
-    //   </Routes>
-    // </Router>
-    <div>
-    <Edit />
-  </div>
+        {/* Add other routes here */}
+      </Routes>
+    </Router>
+  //   <div>
+  //   <Edit />
+  // </div>
   );
 }
 
