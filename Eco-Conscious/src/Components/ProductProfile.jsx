@@ -1,32 +1,9 @@
 import React, { useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const ProductProfile = () => {
-  const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [hoveredIcon, setHoveredIcon] = useState(null);
-  const { id } = useParams();
-
-  useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const response = await fetch(`http://localhost:3000/api/products/${id}`);
-        const data = await response.json();
-        setProduct(data);
-      } catch (error) {
-        console.error('Error fetching product:', error);
-      }
-    };
-
-    fetchProduct();
-  }, [id]);
-
-  if (!product) {
-    return <div>Loading...</div>;
-  }
 
   const styles = {
     container: {
@@ -38,26 +15,20 @@ const ProductProfile = () => {
     },
     imageGallery: {
       flex: "1",
+
       marginRight: "10px",
     },
     productImage: {
       width: "600px",
-      borderRadius: "20px",
+      borderRadius: "30px",
       height: "650px",
-      width: '600px',
-      borderRadius: '12px',
-      padding:"5px",
-      objectFit: 'contain',
-      height: '630px',
-      boxShadow: '0 0 10px rgba(0,0,0,0.1)',
     },
     details: {
       padding: "40px",
-      marginLeft: "40px",
       flex: "2",
+      marginLeft: "50px",
     },
     title: {
-      marginTop: "60px",
       fontSize: "30px",
       fontWeight: "bold",
     },
@@ -137,20 +108,9 @@ const ProductProfile = () => {
       width: "30%",
       color: "black",
       marginTop: "30px",
-      marginTop: "20px",
       display: "flex",
       alignItems: "center",
       fontSize: "22px",
-      padding:"20px 40px",
-      backgroundColor: '#000',
-      color: '#fff',
-      border: 'none',
-      cursor: 'pointer',
-      width: '28%',
-      marginTop: '30px',
-      display: 'flex',
-      alignItems: 'center',
-      fontSize: '25px',
     },
     icon: {
       marginRight: "15px",
@@ -176,14 +136,14 @@ const ProductProfile = () => {
     <div style={styles.container}>
       <div style={styles.imageGallery}>
         <img
-          src={product.image || 'https://via.placeholder.com/600'}
-          alt={product.name || 'Product'}
+          src="https://via.placeholder.com/600"
+          alt="Product"
           style={styles.productImage}
         />
       </div>
       <div style={styles.details}>
-        <h1 style={styles.title}>{product.name}</h1>
-        <p style={styles.price}>${product.price}</p>
+        <h1 style={styles.title}>Belted chino trousers polo</h1>
+        <p style={styles.price}>$191.00</p>
         <div style={styles.reviews}>
           <span style={styles.stars}>★★★★★</span>
           <a href="#reviews" style={styles.reviewsText}>
@@ -191,13 +151,11 @@ const ProductProfile = () => {
           </a>
         </div>
         <p style={styles.description}>
-          {product.description}
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </p>
         <p style={styles.stock}>
-          <strong>Availability:</strong> {product.inStock ? 'In stock' : 'Out of stock'}
-        </p>
-        <p style={styles.productType}>
-          <strong>Product Type:</strong> {product.category}
+          <strong>Availability:</strong> In stock (7 items)
         </p>
 
         <div style={styles.cartOptions}>
@@ -244,4 +202,3 @@ const ProductProfile = () => {
 };
 
 export default ProductProfile;
-
