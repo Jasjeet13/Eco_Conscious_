@@ -17,14 +17,10 @@ const SignUp = () => {
       });
 
       if (response.ok) {
-<<<<<<< HEAD
-        window.location.href = "/home"; // Redirect to home route
-=======
         const responseData = await response.json();
         const id = responseData.id;
         console.log('Id received:', id);
         window.location.href = `/home/${id}`;
->>>>>>> 83f67317ec9ddb3a0bc09b2a137f93bfe1856fb7
       } else {
         // Handle errors here (e.g., display an error message)
         console.error("Signup failed");

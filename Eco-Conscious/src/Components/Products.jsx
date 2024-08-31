@@ -27,7 +27,7 @@ const products = [
     id: 3,
     name: "Girls Ankle Length Dungarees",
     brand: "United Colors of Benetton",
-    image: "https://via.placeholder.com/150", 
+    image: "https://via.placeholder.com/150",
     reviews: 152,
     price: 1324,
     originalPrice: 2499,

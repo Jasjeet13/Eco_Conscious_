@@ -41,4 +41,15 @@ const Home = () => {
   );
 };
 
+// Simple button styling
+const buttonStyle = {
+  margin: "5px",
+  padding: "10px 20px",
+  backgroundColor: "#007bff",
+  color: "#fff",
+  border: "none",
+  borderRadius: "5px",
+  cursor: "pointer",
+};
+
 export default Home;
