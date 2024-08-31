@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate, useParams } from 'react-router-dom';
 import Navbar from "./Navbar";
 import Slider from "./Slider";
-import TopPicks from "./TopPicks";
+import TopPicks from "../Components/TopPicks";
 import Categories from "./Categories";
 import MotoSection from "./MotoSection";
 import CustomerTestimonials from "./CustomerTestimonials";

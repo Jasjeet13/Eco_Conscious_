@@ -1,30 +1,31 @@
-import React from "react";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const TopPicks = () => {
   const picks = [
     {
-      imageUrl:
-        "https://image.jimcdn.com/app/cms/image/transf/none/path/sbec91bf8c08a9a72/image/i76dd611f94e491c1/version/1553851215/image.png",
-      title: "Organic Cotton Shirt",
-      description: "Soft and comfortable shirt made from 100% organic cotton.",
+      id: "66d00d5c7d5a8882e1b44d8c",
+      imageUrl: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRgaKUvGBZzATr558R_6TOBC-rM0mNJn42AyrIS3F_hv0U-yx1ki26Iaug1nZFmcfGMntKdnFQsS-wd2yur5voJLswu_LpiYTx4xCVAqp058r_DPRQJplWl",
+      title: "ROYALICA Women Black and White Colour Collared Checked Shirt with Heavy",
+      description: "ROYALICA Women Black and White Colour Collared Checked Shirt with Heavy",
     },
     {
-      imageUrl:
-        "https://th.bing.com/th?id=OIP.O_Gx8LEnPFw0rMxGEha6SgHaHa&w=250&h=250&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2",
-      title: "Recycled Tote Bag",
-      description: "Durable tote bag made from recycled materials.",
+      id: "66d00d5c7d5a8882e1b44d76",
+      imageUrl: "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSguOdkliodaoG68WHrA2gyORC5FxjqmsDeLWJF4Vq7JPvhhTO1-wYi0afZC3A35-OvvyW158pK6IzmXScZBE5YSb0KUa-8YY4uBwcZmyah",
+      title: "CB-COLEBROOK Men's shirt",
+      description: " Men's Casual Button Down Shirts Long Sleeve Linen Shirt Fashion Textured Beach Summer Shirt, Casual Shirt for Men, Men Stylish Shirt\nStyle:Casual, Neckline:Collar, Sleeve Length:Long Sleeve\nReguler Fit",
     },
     {
-      imageUrl:
-        "https://th.bing.com/th/id/OIP.DGnVmp-0aUa5EL9l7Ua1KAHaHa?w=210&h=210&c=7&r=0&o=5&dpr=1.3&pid=1.7",
-      title: "Bamboo Toothbrush",
-      description: "Eco-friendly toothbrush with a bamboo handle.",
+      id: "66d00d5d7d5a8882e1b44def",
+      imageUrl: "https://m.media-amazon.com/images/I/411WDyKUhAL._SX300_SY300_QL70_FMwebp_.jpg",
+      title: "Mars 12 Shades Eyeshadow Palette",
+      description: "MARS 12 Shades Back to Basics Eyeshadow Palette with Free Applicator | Matte | Shimmer |classy | Highlighter | Beginner Friendly & Long Lasting Eye Shadow Palette (14.4 gm) (Shade-02)                             ",
     },
     {
-      imageUrl:
-        "https://th.bing.com/th/id/R.4414333b37828ff48249bd4c022ce89f?rik=KqEsWIJW51lKew&riu=http%3a%2f%2fclipart-library.com%2fimages_k%2fshoe-transparent-background%2fshoe-transparent-background-20.png&ehk=HBsdJ1UE5SZdpmHKraj%2bIqiVbq4QXTj0IWTAcm0pNqg%3d&risl=1&pid=ImgRaw&r=0",
-      title: "Sustainable Shoes",
-      description: "Stylish shoes made from sustainable materials.",
+      id: "66d00d5d7d5a8882e1b44e01",
+      imageUrl: "https://cdn18.nnnow.com/web-images/large/styles/D290FXLMFDF/1689330053752/3.jpg",
+      title: "Men Solid Lace Up Dorit Sneakers",
+      description: "Round toe, Central lacing, Panelled upper with logo, Padded top line, Reinforced heel, unter\nPull-up tabs, Cushioned footed, Textured outsole, Solid pattern   ",
     },
   ];
 
@@ -32,12 +33,14 @@ const TopPicks = () => {
     <div style={styles.container}>
       <h2 style={styles.title}>Top Picks for You</h2>
       <div style={styles.grid}>
-        {picks.map((pick, index) => (
-          <div key={index} style={styles.item}>
+        {picks.map((pick) => (
+          <div key={pick.id} style={styles.item}>
             <img src={pick.imageUrl} alt={pick.title} style={styles.image} />
             <h3 style={styles.itemTitle}>{pick.title}</h3>
             <p style={styles.description}>{pick.description}</p>
-            <button style={styles.button}>View More</button>
+            <Link to={`/products/${pick.category}/${pick.id}`} style={styles.button}>
+              View More
+            </Link>
           </div>
         ))}
       </div>
@@ -77,7 +80,7 @@ const styles = {
   },
   image: {
     width: "100%",
-    height: "auto",
+    height: "400px",
     borderRadius: "8px",
   },
   itemTitle: {
@@ -99,6 +102,7 @@ const styles = {
     borderRadius: "30px",
     cursor: "pointer",
     transition: "background-color 0.3s",
+    textDecoration: "none",
   },
 };
 

@@ -413,17 +413,4 @@
   "inStock": true,
   "environmentalImpactScore": 16,
   "__v": 0
-},
-{
-  "_id": {
-    "$oid": "66d190be8c20a7791a0a1f26"
-  },
-  "name": "Men Solid Lace Up Dorit Sneakers",
-  "description": "Round toe, Central lacing, Panelled upper with logo, Padded top line, Reinforced heel, unter\nPull-up tabs, Cushioned footed, Textured outsole, Solid pattern, Country Of Origin - India",
-  "price": 364,
-  "category": "Shoes",
-  "image": "https://cdn18.nnnow.com/web-images/large/styles/D290FXLMFDF/1689330053752/3.jpg",
-  "inStock": false,
-  "environmentalImpactScore": 97,
-  "__v": 0
 }]
