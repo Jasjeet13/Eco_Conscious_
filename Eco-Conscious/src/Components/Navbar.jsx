@@ -1,20 +1,20 @@
 import React from "react";
+import { useNavigate, useParams } from 'react-router-dom';
 import logo from "../public/logo.png";
+import { FaUser, FaSearch } from "react-icons/fa"; // Importing the user icon and search icon from react-icons
 
 const Navbar = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  const navigateToProfile = () => {
+    navigate(`/profile/${id}`); // Use navigate instead of window.location.href
+  };
+
   const styles = {
-    container: {
-      position: "relative",
-      width: "100%",
-      height: "100vh",
-      overflow: "hidden",
-    },
     navbar: {
       display: "flex",
-      justifyContent: "space-between",
       alignItems: "center",
-      padding: "10px 20px",
-      backgroundColor: "#fff",
       boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.1)",
       position: "absolute",
       top: 0,
@@ -24,123 +24,130 @@ const Navbar = () => {
       boxSizing: "border-box",
     },
     logo: {
-      height: "40px",
+      height: "45px",
+      cursor: "pointer",
+      marginLeft: "100px",
+    },
+    heading: {
+      textAlign: "center",
       cursor: "pointer",
     },
     menuContainer: {
       flex: 2,
-      paddingLeft: "210px",
       display: "flex",
+      alignItems: "center", // Align items vertically centered
       justifyContent: "center",
     },
     menu: {
       display: "flex",
       listStyle: "none",
-      gap: "20px",
-      margin: 0,
-      padding: 0,
+      gap: "40px",
     },
     menuItem: {
-      fontSize: "16px",
+      fontSize: "17px",
       color: "#000",
       cursor: "pointer",
       backgroundColor: "transparent",
       border: "none",
-      padding: "0",
+      padding: 0,
     },
-    login: {
-      flex: 1,
+    searchContainer: {
+      position: "relative",
+      margin: "0 20px", // Add margin for spacing
+    },
+    searchInput: {
+      padding: "10px 0px 10px 10px", // Add padding to accommodate icon
+      fontSize: "16px",
+      border: "1px solid #ccc",
+      borderRadius: "20px",
+      outline: "none",
+      width: "400px",
+    },
+    searchIcon: {
+      position: "absolute",
+      right: "10px",
+      top: "50%",
+      transform: "translateY(-50%)",
+      color: "#aaa",
+    },
+    userProfileButton: {
       display: "flex",
-      justifyContent: "flex-end",
-    },
-    loginButton: {
+      alignItems: "center",
       fontSize: "16px",
-      color: "#000",
+      color: "black",
       cursor: "pointer",
-      backgroundColor: "transparent",
+      backgroundColor: "#ace1af",
       border: "none",
-      padding: "0",
+      padding: "10px 20px",
+      borderRadius: "30px",
+      marginRight: "30px",
+      fontWeight: "800",
+    },
+    userIcon: {
+      marginRight: "5px",
+      marginTop: "2px",
     },
   };
+
   return (
-    <>
-      <div>
-        <nav style={styles.navbar}>
-          <img src={logo} alt="Logo" style={styles.logo} />
-          <div>
-            <h2>Eco-Conscious</h2>
-          </div>
-          <div style={styles.menuContainer}>
-            <ul style={styles.menu}>
-              <li>
-                <button
-                  style={styles.menuItem}
-                  onClick={() => (window.location.href = "/mens-clothing")}
-                >
-                  Men's Clothing
-                </button>
-              </li>
-              <li>
-                <button
-                  style={styles.menuItem}
-                  onClick={() => (window.location.href = "/womens-clothing")}
-                >
-                  Women's Clothing
-                </button>
-              </li>
-              <li>
-                <button
-                  style={styles.menuItem}
-                  onClick={() => (window.location.href = "/baby")}
-                >
-                  Baby
-                </button>
-              </li>
-              <li>
-                <button
-                  style={styles.menuItem}
-                  onClick={() => (window.location.href = "/beauty")}
-                >
-                  Beauty
-                </button>
-              </li>
-              <li>
-                <button
-                  style={styles.menuItem}
-                  onClick={() => (window.location.href = "/kids")}
-                >
-                  Kids
-                </button>
-              </li>
-              <li>
-                <button
-                  style={styles.menuItem}
-                  onClick={() => (window.location.href = "/shoes")}
-                >
-                  Shoes
-                </button>
-              </li>
-              <li>
-                <button
-                  style={styles.menuItem}
-                  onClick={() => (window.location.href = "/jewelery")}
-                >
-                  Jewelery
-                </button>
-              </li>
-            </ul>
-          </div>
-          <div style={styles.login}>
-            <button
-              style={styles.loginButton}
-              onClick={() => (window.location.href = "/login")}
-            >
-              Login
-            </button>
-          </div>
-        </nav>
+    <nav style={styles.navbar}>
+      <img src={logo} alt="Logo" style={styles.logo} />
+      <div style={styles.heading}>
+        <h2>Eco-Conscious</h2>
       </div>
-    </>
+      <div style={styles.menuContainer}>
+        <ul style={styles.menu}>
+          <li>
+            <button
+              style={styles.menuItem}
+              onClick={() => (window.location.href = "/mens-clothing")}
+            >
+              About
+            </button>
+          </li>
+          <li>
+            <button
+              style={styles.menuItem}
+              onClick={() => (window.location.href = "/womens-clothing")}
+            >
+              Shop
+            </button>
+          </li>
+          <li>
+            <button
+              style={styles.menuItem}
+              onClick={() => (window.location.href = "/baby")}
+            >
+              Contact Us
+            </button>
+          </li>
+          <li>
+            <button
+              style={styles.menuItem}
+              onClick={() => (window.location.href = "/beauty")}
+            >
+              Customer Care
+            </button>
+          </li>
+        </ul>
+        <div style={styles.searchContainer}>
+          <input
+            type="text"
+            placeholder="Search..."
+            style={styles.searchInput}
+          />
+          <FaSearch style={styles.searchIcon} />
+        </div>
+      </div>
+      <button
+        style={styles.userProfileButton}
+        onClick={navigateToProfile}
+      >
+        <FaUser style={styles.userIcon} />
+        Profile
+      </button>
+    </nav>
   );
 };
+
 export default Navbar;

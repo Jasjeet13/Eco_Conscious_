@@ -1,12 +1,19 @@
-import React from 'react';
+import React from "react";
 import { useNavigate, useParams } from 'react-router-dom';
+import Navbar from "./Navbar";
+import Slider from "./Slider";
+import TopPicks from "./TopPicks";
+import Categories from "./Categories";
+import MotoSection from "./MotoSection";
+import CustomerTestimonials from "./CustomerTestimonials";
+import Footer from "./Footer";
 
 const Home = () => {
-  const { id } = useParams(); 
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const navigateToProfile = () => {
-    navigate(`/profile/${id}`);
+    navigate(`/profile/${id}`); // Use navigate instead of window.location.href
   };
 
   const navigateToCategory = (category) => {
@@ -15,29 +22,26 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Welcome to the Home Page</h1>
-      <button onClick={navigateToProfile}>Go to Profile</button>
-
-      <div style={{ marginTop: '20px' }}>
-        <h2>Shop by Category</h2>
-        <button onClick={() => navigateToCategory('men\'s clothing')} style={buttonStyle}>Men's Clothing</button>
-        <button onClick={() => navigateToCategory('women\'s clothing')} style={buttonStyle}>Women's Clothing</button>
-        <button onClick={() => navigateToCategory('beauty')} style={buttonStyle}>Beauty</button>
-        <button onClick={() => navigateToCategory('shoes')} style={buttonStyle}>Shoes</button>
-      </div>
+      <Navbar />
+      <Slider />
+      <TopPicks />
+      <Categories />
+      <MotoSection />
+      <CustomerTestimonials />
+      <Footer />
     </div>
   );
 };
 
 // Simple button styling
 const buttonStyle = {
-  margin: '5px',
-  padding: '10px 20px',
-  backgroundColor: '#007bff',
-  color: '#fff',
-  border: 'none',
-  borderRadius: '5px',
-  cursor: 'pointer',
+  margin: "5px",
+  padding: "10px 20px",
+  backgroundColor: "#007bff",
+  color: "#fff",
+  border: "none",
+  borderRadius: "5px",
+  cursor: "pointer",
 };
 
 export default Home;

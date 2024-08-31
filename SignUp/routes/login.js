@@ -23,7 +23,7 @@ router.post('/', validateLogin, async (req, res) => {
       return res.status(400).json({ message: 'Incorrect password' });
     }
 
-    res.status(200).json({ message: 'Login successful' });
+    res.status(200).json({ message: 'Login successful', id: user._id });
   } catch (error) {
     console.error('Error during login:', error);
     res.status(500).json({ message: 'Error logging in' });

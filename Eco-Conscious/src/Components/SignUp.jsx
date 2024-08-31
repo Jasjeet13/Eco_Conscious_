@@ -97,6 +97,7 @@ const SignUp = () => {
       fontSize: "18px",
       borderRadius: "30px",
       marginTop: "30px",
+      marginBottom:"45px",
       width: "25%",
     },
     heading: {

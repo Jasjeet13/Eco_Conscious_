@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 
 const ProfileDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   console.log(`id received in ProfileDetails: ${id}`);
 
   // State to store the profile details
@@ -150,6 +151,7 @@ const ProfileDetails = () => {
                 styles.button.backgroundColor;
               e.currentTarget.style.transform = "scale(1)";
             }}
+            onClick={() => navigate(`/edit/${profile._id}`)}
           >
             <b>EDIT</b>
           </button>
@@ -165,12 +167,13 @@ const ProfileDetails = () => {
                 styles.button.backgroundColor;
               e.currentTarget.style.transform = "scale(1)";
             }}
+            
           >
             <b>DELETE ACCOUNT</b>
           </button>
         </div>
       </div>
-    </div>
+  </div>
   );
 };
 
