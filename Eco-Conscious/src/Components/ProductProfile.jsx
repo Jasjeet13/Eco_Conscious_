@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const ProductProfile = () => {
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const [hoveredIcon, setHoveredIcon] = useState(null);
   const { id } = useParams();
 
   useEffect(() => {
@@ -27,104 +29,144 @@ const ProductProfile = () => {
   const styles = {
     container: {
       display: 'flex',
-      padding: '20px',
-      justifyContent: 'center',
-      alignItems: 'center',
+      padding: '60px 30px', 
+      maxWidth: '100%',
+      margin: '0 auto',
+      alignItems: 'flex-start',
     },
     imageGallery: {
-      marginRight: '20px',
+      flex: '1',
+      marginRight: '10px',
     },
     productImage: {
-      width: '300px',
-      height: 'auto',
+      width: '600px',
+      borderRadius: '12px',
+      padding:"5px",
+      objectFit: 'contain',
+      height: '630px',
+      boxShadow: '0 0 10px rgba(0,0,0,0.1)',
     },
     details: {
-      maxWidth: '500px',
+      padding: '40px',
+      flex: '2',
     },
     title: {
-      fontSize: '24px',
-      margin: '16px 0',
+      fontSize: '32px',
+      fontWeight: 'bold',
+      marginBottom: '15px',
     },
     price: {
-      fontSize: '18px',
-      fontWeight: 'bold',
-      marginBottom: '10px',
+      fontSize: '28px',
+      color: '#e63946',
+      marginBottom: '15px',
     },
     reviews: {
       display: 'flex',
       alignItems: 'center',
-      marginBottom: '20px',
+      marginBottom: '25px',
     },
     stars: {
-      color: '#FFD700',
-      marginRight: '10px',
+      color: '#ffcc00',
+      marginRight: '15px',
+      fontSize: '20px',
     },
     reviewsText: {
-      color: '#555',
-      textDecoration: 'none',
+      color: '#333',
+      fontSize: '18px',
     },
     description: {
-      fontSize: '16px',
-      marginBottom: '20px',
+      marginBottom: '25px',
+      color: '#555',
+      lineHeight: '1.8',
+      fontSize: '18px',
     },
     stock: {
-      marginBottom: '20px',
+      marginBottom: '15px',
+      fontSize: '18px',
     },
     productType: {
-      marginBottom: '20px',
+      marginBottom: '15px',
+      fontSize: '18px',
     },
     cartOptions: {
       display: 'flex',
       alignItems: 'center',
-      marginBottom: '20px',
+      marginBottom: '25px',
     },
     quantityInput: {
-      width: '50px',
-      marginRight: '10px',
+      width: '70px',
+      padding: '10px',
+      marginRight: '30px',
+      fontSize: '18px',
     },
     addToCartButton: {
-      backgroundColor: '#28a745',
-      color: 'white',
-      padding: '10px 20px',
-      marginRight: '10px',
-      border: 'none',
-      borderRadius: '5px',
+      padding: '15px 30px',
+      border: '1px solid #000',
       cursor: 'pointer',
+      backgroundColor: '#fff',
+      color: '#000',
+      marginRight: '30px',
+      display: 'flex',
+      alignItems: 'center',
+      fontSize: '18px',
     },
     wishlistButton: {
-      backgroundColor: '#ffc107',
-      color: 'white',
-      padding: '10px 20px',
-      border: 'none',
-      borderRadius: '5px',
+      padding: '15px 30px',
+      border: '1px solid #000',
       cursor: 'pointer',
+      backgroundColor: '#fff',
+      color: '#000',
+      marginRight: '30px',
+      display: 'flex',
+      alignItems: 'center',
+      fontSize: '18px',
     },
     buyNowButton: {
-      backgroundColor: '#007bff',
-      color: 'white',
-      padding: '10px 20px',
+      padding:"20px 40px",
+      backgroundColor: '#000',
+      color: '#fff',
       border: 'none',
-      borderRadius: '5px',
       cursor: 'pointer',
-      marginTop: '10px',
+      width: '28%',
+      marginTop: '30px',
+      display: 'flex',
+      alignItems: 'center',
+      fontSize: '25px',
+    },
+    icon: {
+      marginRight: '15px',
+      fontSize: '20px',
+      transition: 'color 0.3s, transform 0.3s',
     },
   };
 
   return (
     <div style={styles.container}>
       <div style={styles.imageGallery}>
-        <img src={product.image} alt={product.name} style={styles.productImage} />
+        <img
+          src={product.image || 'https://via.placeholder.com/600'}
+          alt={product.name || 'Product'}
+          style={styles.productImage}
+        />
       </div>
       <div style={styles.details}>
         <h1 style={styles.title}>{product.name}</h1>
         <p style={styles.price}>${product.price}</p>
         <div style={styles.reviews}>
           <span style={styles.stars}>★★★★★</span>
-          <a href="#reviews" style={styles.reviewsText}>3 reviews</a>
+          <a href="#reviews" style={styles.reviewsText}>
+            3 reviews
+          </a>
         </div>
-        <p style={styles.description}>{product.description}</p>
-        <p style={styles.stock}><strong>Availability:</strong> {product.inStock ? 'In stock' : 'Out of stock'}</p>
-        <p style={styles.productType}><strong>Product Type:</strong> {product.category}</p>
+        <p style={styles.description}>
+          {product.description}
+        </p>
+        <p style={styles.stock}>
+          <strong>Availability:</strong> {product.inStock ? 'In stock' : 'Out of stock'}
+        </p>
+        <p style={styles.productType}>
+          <strong>Product Type:</strong> {product.category}
+        </p>
 
         <div style={styles.cartOptions}>
           <input
@@ -134,10 +176,26 @@ const ProductProfile = () => {
             onChange={(e) => setQuantity(e.target.value)}
             style={styles.quantityInput}
           />
-          <button style={styles.addToCartButton}>
+          <button
+            style={styles.addToCartButton}
+            onMouseEnter={() => setHoveredIcon('cart')}
+            onMouseLeave={() => setHoveredIcon(null)}
+          >
+            <i
+              className={hoveredIcon === 'cart' ? 'fas fa-cart-plus' : 'fas fa-shopping-cart'}
+              style={styles.icon}
+            ></i>
             ADD TO CART
           </button>
-          <button style={styles.wishlistButton}>
+          <button
+            style={styles.wishlistButton}
+            onMouseEnter={() => setHoveredIcon('wishlist')}
+            onMouseLeave={() => setHoveredIcon(null)}
+          >
+            <i
+              className={hoveredIcon === 'wishlist' ? 'fas fa-heart' : 'far fa-heart'}
+              style={styles.icon}
+            ></i>
             ADD TO WISHLIST
           </button>
         </div>

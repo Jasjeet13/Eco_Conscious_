@@ -12,7 +12,7 @@ const ProductList = () => {
     beauty: 'Beauty',
     shoes: 'Shoes',
     mens: `men's clothing`,
-    womens: `women's clothing`
+    womens: `women's clothing`,
     // Add other categories as needed
   };
 
@@ -22,7 +22,9 @@ const ProductList = () => {
     axios.get('http://localhost:3000/api/products')
       .then(response => {
         const data = response.data;
-        const filteredProducts = normalizedCategory === 'All' ? data : data.filter(product => product.category === normalizedCategory);
+        const filteredProducts = normalizedCategory === 'All' 
+          ? data 
+          : data.filter(product => product.category === normalizedCategory);
         setProducts(filteredProducts);
         setLoading(false);
       })
@@ -36,47 +38,26 @@ const ProductList = () => {
   if (error) return <p>Error fetching products: {error.message}</p>;
 
   return (
-    <div>
-      <h2>{normalizedCategory.charAt(0).toUpperCase() + normalizedCategory.slice(1)} Products</h2>
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(4, 1fr)',
-        gap: '16px',
-      }}>
+    <div style={styles.app}>
+      <h2 style={styles.title}>
+        {normalizedCategory.charAt(0).toUpperCase() + normalizedCategory.slice(1)} Products
+      </h2>
+      <div style={styles.productGrid}>
         {products.length === 0 ? (
           <p>No products available in this category.</p>
         ) : (
           products.map(product => (
             <Link to={`/products/${category}/${product._id}`} key={product._id} style={{ textDecoration: 'none', color: 'inherit' }}>
-              <div style={{
-                border: '1px solid #ccc',
-                padding: '16px',
-                boxShadow: '0 0 10px rgba(0,0,0,0.1)',
-                borderRadius: '8px',
-                textAlign: 'center',
-              }}>
-                <img src={product.image} alt={product.name} style={{
-                  width: '100%',
-                  height: '150px',
-                  objectFit: 'cover',
-                  borderRadius: '8px',
-                }} />
-                <h3 style={{
-                  fontSize: '18px',
-                  margin: '8px 0',
-                }}>{product.name}</h3>
-                <p style={{
-                  fontSize: '14px',
-                  color: '#555',
-                }}>{product.description}</p>
-                <p style={{
-                  fontSize: '16px',
-                  fontWeight: 'bold',
-                }}>Price: ${product.price}</p>
-                <p style={{
-                  fontSize: '14px',
-                  color: '#777',
-                }}>Category: {product.category}</p>
+              <div style={styles.productCard}>
+                <img src={product.image} alt={product.name} style={styles.productImage} />
+                <h3 style={styles.productBrand}>{product.brand}</h3>
+                <p style={styles.productName}>{product.name}</p>
+                <div style={styles.rating}>{product.rating} ★★★★★ | {product.reviews} reviews</div>
+                <div style={styles.price}>
+                  <span>$ {product.price}</span>
+                  {/* <del style={styles.originalPrice}> $ {product.originalPrice}</del> */}
+                  <span style={styles.discount}>({product.discount}60% OFF)</span>
+                </div>
               </div>
             </Link>
           ))
@@ -84,6 +65,73 @@ const ProductList = () => {
       </div>
     </div>
   );
+};
+
+const styles = {
+  app: {
+    fontFamily: 'Arial, sans-serif',
+    backgroundColor: '#f9f9f9',
+    margin: 0,
+    padding: '20px',
+  },
+  title: {
+    fontSize: '24px',
+    marginBottom: '20px',
+    textAlign: 'center',
+  },
+  productGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(4, 1fr)',
+    gap: '16px',
+    maxWidth: '1450px',
+    margin: '0 auto',
+  },
+  productCard: {
+    backgroundColor: '#fff',
+    border: '1px solid #ddd',
+    borderRadius: '4px',
+    overflow: 'hidden',
+    textAlign: 'center',
+    padding: '30px',
+    height:"290px",
+    transition: 'box-shadow 0.3s ease',
+    boxShadow: '0 0 10px rgba(0,0,0,0.1)',
+    paddingBottom:"40px"
+  },
+  productImage: {
+    width: '100%',
+    height: '200px',
+    objectFit: 'contain',
+    borderRadius: '8px',
+  },
+  productBrand: {
+    fontSize: '16px',
+    margin: '10px 0',
+    color: '#333',
+  },
+  productName: {
+    fontSize: '14px',
+    color: '#777',
+    margin: '5px 0',
+  },
+  rating: {
+    fontSize: '14px',
+    color: '#ff8c00',
+    margin: '5px 0',
+  },
+  price: {
+    fontSize: '16px',
+    color: '#333',
+    margin: '10px 0',
+  },
+  originalPrice: {
+    color: '#999',
+    marginLeft: '10px',
+  },
+  discount: {
+    color: '#ff3b3b',
+    marginLeft: '10px',
+  },
 };
 
 export default ProductList;
