@@ -1,9 +1,9 @@
 import React from "react";
 // import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 // import SignUp from "./Components/SignUp";
-// import Home from "./Components/Home";
+import Home from "./Components/Home";
 import ProductProfile from "./Components/ProductProfile";
-// import Products from "./Components/Products";
+import Products from "./Components/Products";
 // import SignUp_Login from "./Components/SignUp_Login";
 // import ProfileDetails from "./Components/ProfileDetails";
 // import SignUp from "./Components/SignUp";
@@ -25,8 +25,8 @@ function App() {
     // </Router>
     <div>
       {/* <Home /> */}
-      <ProductProfile />
-      {/* <Products /> */}
+      {/* <ProductProfile /> */}
+      <Home />
     </div>
   );
 }
