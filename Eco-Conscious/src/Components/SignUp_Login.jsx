@@ -23,11 +23,20 @@ const SignUp_Login = () => {
   
       const data = await response.json();
       console.log('Login successful:', data);
-      window.location.href = '/home';
+  
+      // Assuming the ID is returned as part of the response, use it to navigate to the /home/id route
+      const userId = data.id; // Adjust based on your response structure
+      window.location.href = `/home/${userId}`;
     } catch (error) {
       console.error('Error during login:', error);
     }
   };
+
+  const handleSignUp = () => {
+    // Redirect to the signup route
+    window.location.href = `/signup`;
+  };
+  
 
   const styles = {
     container: {
@@ -169,7 +178,7 @@ const SignUp_Login = () => {
             Sign up and unlock a range of eco-friendly <br></br>products for a
             greener shopping experience!
           </p>
-          <button style={styles.buttonSignUp}>SIGN UP</button>
+          <button style={styles.buttonSignUp} onClick={handleSignUp}>SIGN UP</button>
         </div>
       </div>
     </div>

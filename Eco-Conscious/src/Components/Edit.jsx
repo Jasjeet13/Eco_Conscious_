@@ -1,6 +1,41 @@
 import React from "react";
+import { useParams,useNavigate } from "react-router-dom";
 
 const Edit = () => {
+
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const updatedDetails = {
+      username: event.target.username.value,
+      fullName: event.target.fullname.value,
+      email: event.target.email.value,
+      address: event.target.address.value,
+      phoneNumber: event.target.phoneNumber.value,
+    };
+
+    try {
+      const response = await fetch(`http://localhost:3000/api/profile/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedDetails),
+      });
+
+      if (response.ok) {
+        navigate(`/profile/${id}`); // Redirect to the profile details page after a successful update
+      } else {
+        console.error('Failed to update profile');
+      }
+    } catch (error) {
+      console.error('Error updating profile:', error);
+    }
+  };
+
   const styles = {
     mainbox: {
       backgroundColor: "#f5f1eb",
@@ -66,6 +101,7 @@ const Edit = () => {
       borderRadius: "30px",
       marginTop: "30px",
       width: "25%",
+      marginBottom:"35px",
     },
     heading: {
       fontSize: "28px",
@@ -89,7 +125,7 @@ const Edit = () => {
                 type="text"
                 id="username"
                 name="username"
-                style={styles.input2} // Adjusted to match the underline length
+                style={styles.input2}  // Adjusted to match the underline length
               />
             </div>
             <div style={styles.halfWidthInputGroup}>
@@ -100,7 +136,7 @@ const Edit = () => {
                 type="text"
                 id="fullname"
                 name="fullname"
-                style={styles.input2} // Adjusted to match the underline length
+                style={styles.input2}  // Adjusted to match the underline length
               />
             </div>
             <div style={styles.fullWidthInputGroup}>
@@ -137,7 +173,7 @@ const Edit = () => {
               />
             </div>
           </div>
-          <button type="submit" style={styles.button}>
+          <button type="submit" style={styles.button} onClick={handleSubmit}>
             Save
           </button>
         </form>
