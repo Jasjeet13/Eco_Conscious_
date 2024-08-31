@@ -1,8 +1,16 @@
 import React from "react";
+import { useNavigate, useParams } from 'react-router-dom';
 import logo from "../public/logo.png";
 import { FaUser, FaSearch } from "react-icons/fa"; // Importing the user icon and search icon from react-icons
 
 const Navbar = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  const navigateToProfile = () => {
+    navigate(`/profile/${id}`); // Use navigate instead of window.location.href
+  };
+
   const styles = {
     navbar: {
       display: "flex",
@@ -133,7 +141,7 @@ const Navbar = () => {
       </div>
       <button
         style={styles.userProfileButton}
-        onClick={() => (window.location.href = "/profile")}
+        onClick={navigateToProfile}
       >
         <FaUser style={styles.userIcon} />
         Profile

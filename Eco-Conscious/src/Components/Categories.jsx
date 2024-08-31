@@ -1,4 +1,6 @@
 import React from "react";
+import { useNavigate, useParams } from 'react-router-dom';
+
 
 const styles = {
   container: {
@@ -68,6 +70,14 @@ const styles = {
 };
 
 const Categories = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  const navigateToCategory = (category) => {
+    navigate(`/products/${category}`);
+  };
+
+
   return (
     <div style={styles.container}>
       <div style={styles.newSection}>
@@ -81,7 +91,7 @@ const Categories = () => {
           <div style={styles.overlay}></div>
           <div style={styles.sectionContent}>
             <h2 style={styles.sectionTitle}>Women's Wear</h2>
-            <button style={styles.sectionButton}>View More</button>
+            <button style={styles.sectionButton} onClick={() => navigateToCategory('women\'s clothing')}>View More</button>
           </div>
         </div>
         <div
@@ -94,7 +104,7 @@ const Categories = () => {
           <div style={styles.overlay}></div>
           <div style={styles.sectionContent}>
             <h2 style={styles.sectionTitle}>Beauty Products</h2>
-            <button style={styles.sectionButton}>View More</button>
+            <button style={styles.sectionButton} onClick={() => navigateToCategory('beauty')}>View More</button>
           </div>
         </div>
         <div
@@ -107,7 +117,7 @@ const Categories = () => {
           <div style={styles.overlay}></div>
           <div style={styles.sectionContent}>
             <h2 style={styles.sectionTitle}>Shoes</h2>
-            <button style={styles.sectionButton}>View More</button>
+            <button style={styles.sectionButton} onClick={() => navigateToCategory('shoes')}>View More</button>
           </div>
         </div>
         <div
@@ -120,7 +130,7 @@ const Categories = () => {
           <div style={styles.overlay}></div>
           <div style={styles.sectionContent}>
             <h2 style={styles.sectionTitle}>Men's Wear</h2>
-            <button style={styles.sectionButton}>View More</button>
+            <button style={styles.sectionButton}  onClick={() => navigateToCategory('men\'s clothing')}>View More</button>
           </div>
         </div>
       </div>
