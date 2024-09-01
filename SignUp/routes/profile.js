@@ -12,7 +12,7 @@ router.get('/:id', async (req, res) => {
     const user = await User.getUserProfileById(id);
 
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: 'User not found',id: user.id });
     }
 
     // Send the user data as JSON

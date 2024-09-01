@@ -40,7 +40,7 @@ const ProductList = () => {
   return (
     <div style={styles.app}>
       <h2 style={styles.title}>
-        {normalizedCategory.charAt(0).toUpperCase() + normalizedCategory.slice(1)} Products
+        {normalizedCategory.charAt(0).toUpperCase() + normalizedCategory.slice(1)}
       </h2>
       <div style={styles.productGrid}>
         {products.length === 0 ? (

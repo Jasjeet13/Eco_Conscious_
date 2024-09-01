@@ -5,6 +5,8 @@ const signupRouter = require("./routes/signup");
 const loginRouter = require("./routes/login");
 const profileRouter = require("./routes/profile")
 const productsRouter = require('./routes/products');
+const editRouter = require("./routes/edit")
+const deleteRouter = require("./routes/delete");
 const errorHandler = require("./Middlewares/errorHandler");
 const cors = require('cors');
 
@@ -35,6 +37,8 @@ app.use('/signup', signupRouter);
 app.use('/login', loginRouter);
 app.use('/api/profile', profileRouter);
 app.use('/api/products', productsRouter);
+app.use('/api/edit',editRouter);
+app.use('/api/delete',deleteRouter);
 
 // Error handling middleware
 app.use(errorHandler);

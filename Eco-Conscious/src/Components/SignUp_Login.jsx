@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 const SignUp_Login = () => {
+  const [error, setError] = useState(""); // State to handle error messages
+
   const handleLogin = async (event) => {
     event.preventDefault();
   
@@ -17,8 +19,8 @@ const SignUp_Login = () => {
       });
   
       if (!response.ok) {
-        const errorText = await response.text(); // Read the response as text
-        throw new Error(`Server responded with: ${errorText}`);
+        const errorData = await response.json(); // Read the response as JSON
+        throw new Error(errorData.message); // Use the message from the response
       }
   
       const data = await response.json();
@@ -29,6 +31,7 @@ const SignUp_Login = () => {
       window.location.href = `/home/${userId}`;
     } catch (error) {
       console.error('Error during login:', error);
+      setError(error.message); // Set error message to state
     }
   };
 
@@ -132,6 +135,10 @@ const SignUp_Login = () => {
       marginBottom: "20px",
       textAlign: "center",
     },
+    error: {
+      color: "red",
+      marginBottom: "10px",
+    },
   };
 
   return (
@@ -139,6 +146,7 @@ const SignUp_Login = () => {
       <div style={{ ...styles.box, ...styles.loginBox }}>
         <div>
           <h2 style={styles.heading}>Welcome back :)</h2>
+          {error && <div style={styles.error}>{error}</div>} {/* Display error message */}
           <form onSubmit={handleLogin}>
             <div style={styles.inputGroup}>
               <label htmlFor="email" style={styles.label}>

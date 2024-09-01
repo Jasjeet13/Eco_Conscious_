@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 const SignUp = () => {
+  const [error, setError] = useState("");
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -22,10 +24,11 @@ const SignUp = () => {
         console.log('Id received:', id);
         window.location.href = `/home/${id}`;
       } else {
-        // Handle errors here (e.g., display an error message)
-        console.error("Signup failed");
+        const responseData = await response.json();
+        setError(responseData.message || "Signup failed");
       }
     } catch (error) {
+      setError("Error during signup");
       console.error("Error during signup:", error);
     }
   };
@@ -112,6 +115,7 @@ const SignUp = () => {
     <div style={styles.mainbox}>
       <div style={styles.loginBox}>
         <h2 style={styles.heading}>Sign Up</h2>
+        {error && <p style={{ color: 'red', textAlign: 'center' }}>{error}</p>}
         <form onSubmit={handleSubmit}>
           <div style={styles.inputGroupContainer}>
             <div style={styles.halfWidthInputGroup}>

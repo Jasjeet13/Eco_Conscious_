@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { useParams,useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const ProfileDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   console.log(`id received in ProfileDetails: ${id}`);
 
-  // State to store the profile details
+  // State to store the profile details and profile id
   const [profile, setProfile] = useState(null);
+  const [profileId, setProfileId] = useState(null);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -19,13 +20,15 @@ const ProfileDetails = () => {
       }
     
       try {
-        
         const response = await fetch(`http://localhost:3000/api/profile/${id}`);
         if (response.ok) {
           const data = await response.json();
           console.log('Fetched profile data:', data);
 
           setProfile(data); 
+          setProfileId(data.id); 
+
+          console.log('Id received:', data.id);
         } else {
           console.error('Failed to fetch profile');
         }
@@ -37,6 +40,24 @@ const ProfileDetails = () => {
     fetchProfile();
   }, [id]);
 
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(`http://localhost:3000/api/delete/${id}`, {
+        method: 'DELETE',
+      });
+  
+      if (response.ok) {
+        console.log('Profile deleted successfully');
+        navigate('/'); 
+      } else {
+        const errorData = await response.json();
+        console.error('Failed to delete profile:', errorData.message || errorData);
+      }
+    } catch (error) {
+      console.error('Error deleting profile:');
+    }
+  };
+  
   if (!profile) {
     return <div>Loading...</div>;
   }
@@ -108,8 +129,8 @@ const ProfileDetails = () => {
     buttonHover: {
       backgroundColor: "#a57d4b",
       transform: "scale(1.05)",
-  },
-};
+    },
+  };
 
   return (
     <div style={styles.whole}>
@@ -151,7 +172,7 @@ const ProfileDetails = () => {
                 styles.button.backgroundColor;
               e.currentTarget.style.transform = "scale(1)";
             }}
-            onClick={() => navigate(`/edit/${profile._id}`)}
+            onClick={() => navigate(`/edit/${id}`)} 
           >
             <b>EDIT</b>
           </button>
@@ -167,13 +188,13 @@ const ProfileDetails = () => {
                 styles.button.backgroundColor;
               e.currentTarget.style.transform = "scale(1)";
             }}
-            
+            onClick={handleDelete}
           >
             <b>DELETE ACCOUNT</b>
           </button>
         </div>
       </div>
-  </div>
+    </div>
   );
 };
 
