@@ -7,7 +7,7 @@ const { body, validationResult } = require('express-validator');
 
 const validateSignup = [
     body('username').notEmpty().withMessage('Username is required'),
-    // body function targets the username fiel and apply rule .notMessage which checks if the input is empty or not
+    // body function targets the username field and apply rule .notMessage which checks if the input is empty or not
     // If the username field is empty it applies the message present in .withMessage
 
 
