@@ -130,14 +130,14 @@ const Navbar = () => {
             </button>
           </li>
         </ul>
-        <div style={styles.searchContainer}>
+        {/* <div style={styles.searchContainer}>
           <input
             type="text"
             placeholder="Search..."
             style={styles.searchInput}
           />
           <FaSearch style={styles.searchIcon} />
-        </div>
+        </div> */}
       </div>
       <button
         style={styles.userProfileButton}

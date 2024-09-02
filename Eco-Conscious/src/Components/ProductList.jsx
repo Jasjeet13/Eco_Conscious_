@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
+import Navbar from './Navbar';
 
 const ProductList = () => {
   const { category } = useParams();
@@ -13,7 +14,6 @@ const ProductList = () => {
     shoes: 'Shoes',
     mens: `men's clothing`,
     womens: `women's clothing`,
-    // Add other categories as needed
   };
 
   const normalizedCategory = categoryMapping[category.toLowerCase()] || category;
@@ -39,6 +39,9 @@ const ProductList = () => {
 
   return (
     <div style={styles.app}>
+      <div>
+        <Navbar></Navbar>
+      </div>
       <h2 style={styles.title}>
         {normalizedCategory.charAt(0).toUpperCase() + normalizedCategory.slice(1)}
       </h2>
@@ -76,6 +79,7 @@ const styles = {
   },
   title: {
     fontSize: '24px',
+    marginTop: '60px',
     marginBottom: '20px',
     textAlign: 'center',
   },

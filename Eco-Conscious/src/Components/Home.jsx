@@ -9,16 +9,6 @@ import CustomerTestimonials from "./CustomerTestimonials";
 import Footer from "./Footer";
 
 const Home = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
-
-  const navigateToProfile = () => {
-    navigate(`/profile/${id}`); // Use navigate instead of window.location.href
-  };
-
-  const navigateToCategory = (category) => {
-    navigate(`/products/${category}`);
-  };
 
   return (
     <div>
@@ -28,7 +18,7 @@ const Home = () => {
       <Categories />
       <MotoSection />
       <CustomerTestimonials />
-      <Footer />
+
     </div>
   );
 };
