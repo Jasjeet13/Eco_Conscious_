@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import logo from "../public/logo.png";
 import { FaUser, FaSearch } from "react-icons/fa"; // Importing the user icon and search icon from react-icons
 
-const Navbar = () => {
+const Navbar2 = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -126,4 +126,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Navbar2;
