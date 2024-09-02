@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { useParams, useNavigate } from "react-router-dom";
+import Footer from "./Footer";
 
 const ProfileDetails = () => {
   const { id } = useParams();
@@ -194,6 +195,7 @@ const ProfileDetails = () => {
           </button>
         </div>
       </div>
+      
     </div>
   );
 };

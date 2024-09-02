@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Slider = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  const navigateToCategory = (category) => {
+    navigate(`/products/${category}`);
+  };
+
   const [activeIndex, setActiveIndex] = useState(0);
 
   const slides = [
@@ -88,7 +96,7 @@ const Slider = () => {
           <div style={styles.textContainer}>
             <h2 style={styles.heading}>{slide.heading}</h2>
             <p style={styles.subheading}>{slide.subheading}</p>
-            <button style={styles.ctaButton}>Shop Now</button>
+            <button style={styles.ctaButton} onClick={() => navigateToCategory('beauty')}>Shop Now</button>
           </div>
         </div>
       ))}

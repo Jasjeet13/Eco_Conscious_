@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import Navbar from './Navbar2';
+import Footer from './Footer';
 
 const ProductProfile = () => {
   const [product, setProduct] = useState(null);
@@ -37,6 +39,7 @@ const ProductProfile = () => {
     imageGallery: {
       flex: '1',
       marginRight: '10px',
+      marginTop: "40px"
     },
     productImage: {
       width: '600px',
@@ -142,6 +145,7 @@ const ProductProfile = () => {
 
   return (
     <div style={styles.container}>
+      <div><Navbar></Navbar> </div>
       <div style={styles.imageGallery}>
         <img
           src={product.image || 'https://via.placeholder.com/600'}
@@ -203,6 +207,7 @@ const ProductProfile = () => {
           BUY IT NOW
         </button>
       </div>
+
     </div>
   );
 };

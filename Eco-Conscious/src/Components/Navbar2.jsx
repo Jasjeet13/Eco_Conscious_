@@ -1,28 +1,21 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import logo from "../public/logo.png";
-import { FaUser, FaSearch } from "react-icons/fa";
-import { FiLogOut } from 'react-icons/fi';
-
+import { FaUser, FaSearch } from "react-icons/fa"; // Importing the user icon and search icon from react-icons
 
 const Navbar = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const navigateToHome = () => {
+   const navigateToHome = () => {
     navigate(`/home/${id}`);
   };
-
   const navigateToProfile = () => {
     navigate(`/profile/${id}`); 
   };
 
   const navigateToCategory = (category) => {
     navigate(`/products/${category}`);
-  };
-
-  const logout = () => {
-    navigate(`/`);
   };
 
   const styles = {
@@ -109,7 +102,6 @@ const Navbar = () => {
         src={logo}
         alt="Logo"
         style={styles.logo}
-        onClick={navigateToHome} 
       />
       <div style={styles.heading}>
         <h2>Eco-Conscious</h2>
@@ -158,14 +150,6 @@ const Navbar = () => {
           <FaSearch style={styles.searchIcon} />
         </div> */}
       </div>
-      <button style={styles.userProfileButton} onClick={navigateToProfile}>
-        <FaUser style={styles.userIcon} />
-        Profile
-      </button>
-      <button style={styles.userProfileButton} onClick={logout}>
-        <FiLogOut style={styles.userIcon}/>
-        Logout
-      </button>
     </nav>
   );
 };

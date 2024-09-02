@@ -5,32 +5,32 @@ const SignUp_Login = () => {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-  
+
     const email = event.target.email.value;
     const password = event.target.password.value;
-  
+
     try {
-      const response = await fetch('http://localhost:3000/login', {
-        method: 'POST',
+      const response = await fetch("http://localhost:3000/login", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
       });
-  
+
       if (!response.ok) {
         const errorData = await response.json(); // Read the response as JSON
         throw new Error(errorData.message); // Use the message from the response
       }
-  
+
       const data = await response.json();
-      console.log('Login successful:', data);
-  
+      console.log("Login successful:", data);
+
       // Assuming the ID is returned as part of the response, use it to navigate to the /home/id route
       const userId = data.id; // Adjust based on your response structure
       window.location.href = `/home/${userId}`;
     } catch (error) {
-      console.error('Error during login:', error);
+      console.error("Error during login:", error);
       setError(error.message); // Set error message to state
     }
   };
@@ -39,7 +39,6 @@ const SignUp_Login = () => {
     // Redirect to the signup route
     window.location.href = `/signup`;
   };
-  
 
   const styles = {
     container: {
@@ -146,7 +145,8 @@ const SignUp_Login = () => {
       <div style={{ ...styles.box, ...styles.loginBox }}>
         <div>
           <h2 style={styles.heading}>Welcome back :)</h2>
-          {error && <div style={styles.error}>{error}</div>} {/* Display error message */}
+          {error && <div style={styles.error}>{error}</div>}{" "}
+          {/* Display error message */}
           <form onSubmit={handleLogin}>
             <div style={styles.inputGroup}>
               <label htmlFor="email" style={styles.label}>
@@ -186,7 +186,9 @@ const SignUp_Login = () => {
             Sign up and unlock a range of eco-friendly <br></br>products for a
             greener shopping experience!
           </p>
-          <button style={styles.buttonSignUp} onClick={handleSignUp}>SIGN UP</button>
+          <button style={styles.buttonSignUp} onClick={handleSignUp}>
+            SIGN UP
+          </button>
         </div>
       </div>
     </div>

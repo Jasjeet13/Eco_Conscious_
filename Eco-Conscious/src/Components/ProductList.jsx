@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
 import Navbar from './Navbar';
+import Navbar2 from "./Navbar2"
 
 const ProductList = () => {
+  
   const { category } = useParams();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -40,7 +42,7 @@ const ProductList = () => {
   return (
     <div style={styles.app}>
       <div>
-        <Navbar></Navbar>
+        <Navbar2></Navbar2>
       </div>
       <h2 style={styles.title}>
         {normalizedCategory.charAt(0).toUpperCase() + normalizedCategory.slice(1)}
