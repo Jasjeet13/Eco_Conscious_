@@ -70,23 +70,6 @@ const Navbar = () => {
       transform: "translateY(-50%)",
       color: "#aaa",
     },
-    userProfileButton: {
-      display: "flex",
-      alignItems: "center",
-      fontSize: "16px",
-      color: "black",
-      cursor: "pointer",
-      backgroundColor: "#ace1af",
-      border: "none",
-      padding: "10px 20px",
-      borderRadius: "30px",
-      marginRight: "30px",
-      fontWeight: "800",
-    },
-    userIcon: {
-      marginRight: "5px",
-      marginTop: "2px",
-    },
   };
 
   return (
@@ -139,10 +122,6 @@ const Navbar = () => {
           <FaSearch style={styles.searchIcon} />
         </div> */}
       </div>
-      <button style={styles.userProfileButton} onClick={navigateToProfile}>
-        <FaUser style={styles.userIcon} />
-        Profile
-      </button>
     </nav>
   );
 };
