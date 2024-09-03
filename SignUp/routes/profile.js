@@ -5,7 +5,7 @@ const User = require("../models/user");
 // Route to get the user profile by email
 router.get("/:id", async (req, res) => {
   const id = req.params.id;
-  console.log(`Received request for user profile with email: ${id}`);
+  console.log(`Received request for user profile with id: ${id}`);
 
   try {
     // Find the user by id

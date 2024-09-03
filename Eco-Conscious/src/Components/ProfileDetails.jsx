@@ -1,13 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { useParams, useNavigate } from "react-router-dom";
-import Footer from "./Footer";
+import React, { useEffect, useState } from "react"; //importing useEffect and UseEffect hook from react library
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; //importing FontAwsomeIcons from the fortawesome/react-fontwaesome library
+import { faUser } from "@fortawesome/free-solid-svg-icons"; //importing feUser
+import { useParams, useNavigate } from "react-router-dom"; //importing useParams and useNavigate from react-router-dom library
+
+/*
+userEffect - handles effect after some chages, used while fetching data or manually updating dom,
+by default it runs on each 
+useState - changes the state of the component, returns two things 1. current state 2. function that updates the state
+
+*/
 
 const ProfileDetails = () => {
-  const { id } = useParams();
+  const { id } = useParams(); //object destructuring by using useParams hook
   const navigate = useNavigate();
-  console.log(`id received in ProfileDetails: ${id}`);
+  console.log(`id received in ProfileDetails: ${id}`); // for debugging purposes
 
   // State to store the profile details and profile id
   const [profile, setProfile] = useState(null);
@@ -16,27 +22,29 @@ const ProfileDetails = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       if (!id) {
-        console.error('No id provided');
-        return;
+        //checks if id is null, undefined, or empty sting
+        console.error("No id provided "); //throw error if get executed
+        return; //out of callback function
       }
-    
+
       try {
-        const response = await fetch(`http://localhost:3000/api/profile/${id}`);
+        const response = await fetch(`http://localhost:3000/api/profile/${id}`); //checks network and return promise
         if (response.ok) {
+          //checks if response is true or false, true if status code is between 200-299
           const data = await response.json();
-          console.log('Fetched profile data:', data);
+          console.log("Fetched profile data:", data);
 
-          setProfile(data); 
-          setProfileId(data.id); 
+          setProfile(data);
+          setProfileId(data.id);
 
-          console.log('Id received:', data.id);
+          console.log("Id received:", data.id);
         } else {
-          console.error('Failed to fetch profile');
+          console.error("Failed to fetch profile");
         }
       } catch (error) {
-        console.error('Error fetching profile:', error);
+        console.error("Error fetching profile:", error);
       }
-    };    
+    };
 
     fetchProfile();
   }, [id]);
@@ -44,21 +52,24 @@ const ProfileDetails = () => {
   const handleDelete = async () => {
     try {
       const response = await fetch(`http://localhost:3000/api/delete/${id}`, {
-        method: 'DELETE',
+        method: "DELETE",
       });
-  
+
       if (response.ok) {
-        console.log('Profile deleted successfully');
-        navigate('/'); 
+        console.log("Profile deleted successfully");
+        navigate("/");
       } else {
         const errorData = await response.json();
-        console.error('Failed to delete profile:', errorData.message || errorData);
+        console.error(
+          "Failed to delete profile:",
+          errorData.message || errorData
+        );
       }
     } catch (error) {
-      console.error('Error deleting profile:');
+      console.error("Error deleting profile:");
     }
   };
-  
+
   if (!profile) {
     return <div>Loading...</div>;
   }
@@ -173,7 +184,7 @@ const ProfileDetails = () => {
                 styles.button.backgroundColor;
               e.currentTarget.style.transform = "scale(1)";
             }}
-            onClick={() => navigate(`/edit/${id}`)} 
+            onClick={() => navigate(`/edit/${id}`)}
           >
             <b>EDIT</b>
           </button>
@@ -195,7 +206,6 @@ const ProfileDetails = () => {
           </button>
         </div>
       </div>
-      
     </div>
   );
 };
