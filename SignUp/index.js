@@ -7,6 +7,9 @@ const profileRouter = require("./routes/profile")
 const productsRouter = require('./routes/products');
 const editRouter = require("./routes/edit")
 const deleteRouter = require("./routes/delete");
+const wishlistRouter = require('./routes/wishlist');
+
+
 const errorHandler = require("./Middlewares/errorHandler");
 const cors = require('cors');
 
@@ -47,7 +50,7 @@ app.use('/api/profile', profileRouter);
 app.use('/api/products', productsRouter);
 app.use('/api/edit',editRouter);
 app.use('/api/delete',deleteRouter);
-
+app.use('/api/wishlist', wishlistRouter);
 // Error handling middleware
 app.use(errorHandler);
 
