@@ -20,6 +20,7 @@ const ProfileDetails = () => {
   const [profileId, setProfileId] = useState(null);
 
   useEffect(() => {
+    //fetchProfile function is defined to fetch the user's profile data from the server
     const fetchProfile = async () => {
       if (!id) {
         //checks if id is null, undefined, or empty sting

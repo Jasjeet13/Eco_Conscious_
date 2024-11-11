@@ -2,14 +2,14 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
 
-// Route to get the user profile by email
+// Route to get the user profile by id
 router.get("/:id", async (req, res) => {
   const id = req.params.id;
-  console.log(`Received request for user profile with id: ${id}`);
+  console.log(`Received request for user profile with id: ${id}`); //for debugging only
 
   try {
-    // Find the user by id
-    const user = await User.getUserProfileById(id);
+    // Find the user by id, this function is defined in the User.js model
+    const user = await User.getUserProfileById(id); //returns json object
 
     if (!user) {
       return res.status(404).json({ message: "User not found", id: user.id });
