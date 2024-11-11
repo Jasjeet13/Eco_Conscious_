@@ -8,6 +8,7 @@ import ProductProfile from "./Components/ProductProfile";
 import ProductList from "./Components/ProductList";
 import Edit from "./Components/Edit";
 import Footer from "./Components/Footer";
+import Wishlist from "./Components/Wishlist";
 
 function App() {
   const location = useLocation();
@@ -31,6 +32,8 @@ function App() {
         <Route path="/products/:category" element={<ProductList />} />
         <Route path="/products/:category/:id" element={<ProductProfile />} />
         <Route path="/edit/:id" element={<Edit />} />
+        <Route path="/wishlist" element={<Wishlist />} />
+
         {/* Add other routes here */}
       </Routes>
       {showFooter && <Footer />}

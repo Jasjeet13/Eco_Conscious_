@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate  } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Navbar from './Navbar2';
 import Footer from './Footer';
@@ -9,6 +9,7 @@ const ProductProfile = () => {
   const [quantity, setQuantity] = useState(1);
   const [hoveredIcon, setHoveredIcon] = useState(null);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -28,6 +29,32 @@ const ProductProfile = () => {
     return <div>Loading...</div>;
   }
 
+  const addToWishlist = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/api/wishlist/add', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          productId: product._id,
+          name: product.name,
+          price: product.price,
+          image: product.image,
+          description:product.description,
+        }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        alert(data.message);
+        navigate('/wishlist');
+      } else {
+        alert('Error adding to wishlist');
+      }
+    } catch (error) {
+      console.error('Error adding to wishlist:', error);
+    }
+  };
   const styles = {
     container: {
       display: 'flex',
@@ -136,6 +163,13 @@ const ProductProfile = () => {
       alignItems: 'center',
       fontSize: '25px',
     },
+    heart: {
+      margin: '0px 20px 0px 0px',  // top right bottom left
+      fontSize: '24px',
+      cursor: 'pointer',
+      color: '#ccc',
+      transition: 'color 0.3s ease',
+    },
     icon: {
       marginRight: '15px',
       fontSize: '20px',
@@ -192,16 +226,20 @@ const ProductProfile = () => {
             ADD TO CART
           </button>
           <button
-            style={styles.wishlistButton}
-            onMouseEnter={() => setHoveredIcon('wishlist')}
-            onMouseLeave={() => setHoveredIcon(null)}
-          >
-            <i
-              className={hoveredIcon === 'wishlist' ? 'fas fa-heart' : 'far fa-heart'}
-              style={styles.icon}
+  style={styles.wishlistButton}
+  onClick={addToWishlist}
+  onMouseEnter={() => setHoveredIcon('wishlist')}
+  onMouseLeave={() => setHoveredIcon(null)}
+>
+<i
+              className="fas fa-heart"
+              style={styles.heart}
+              onMouseEnter={(e) => e.currentTarget.style.color = 'red'}
+              onMouseLeave={(e) => e.currentTarget.style.color = '#ccc'}
             ></i>
-            ADD TO WISHLIST
-          </button>
+      ADD TO WISHLIST
+</button>
+
         </div>
         <button style={styles.buyNowButton}>
           BUY IT NOW
