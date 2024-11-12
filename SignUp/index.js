@@ -7,6 +7,9 @@ const profileRouter = require("./routes/profile")
 const productsRouter = require('./routes/products');
 const editRouter = require("./routes/edit")
 const deleteRouter = require("./routes/delete");
+const wishlistRouter = require('./routes/wishlist');
+
+
 const errorHandler = require("./Middlewares/errorHandler");
 const authenticateToken = require("./Middlewares/tokenAuthentication");
 const cors = require('cors');
