@@ -2,17 +2,15 @@ const express = require("express");
 const router = express.Router();
 const User = require("../models/user");
 
-// Route to get the user profile by email
-router.get("/:id", async (req, res) => {
-  const id = req.params.id;
-  console.log(`Received request for user profile with id: ${id}`);
+router.get("/", async (req, res) => {
+  const userId = req.user.id; // Use the ID from the decoded token
 
   try {
-    // Find the user by id
-    const user = await User.getUserProfileById(id);
+    // Find the user by ID
+    const user = await User.getUserProfileById(userId);
 
     if (!user) {
-      return res.status(404).json({ message: "User not found", id: user.id });
+      return res.status(404).json({ message: "User not found" });
     }
 
     // Send the user data as JSON
@@ -28,5 +26,6 @@ router.get("/:id", async (req, res) => {
     res.status(500).json({ message: "Error fetching profile details" });
   }
 });
+
 
 module.exports = router;
