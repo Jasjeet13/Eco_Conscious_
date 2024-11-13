@@ -1,627 +1,21 @@
-// import React, { useState, useEffect } from 'react';
-// import { useParams, useNavigate } from 'react-router-dom';
-// import '@fortawesome/fontawesome-free/css/all.min.css';
-
-
-// const ProductProfile = () => {
-//   const [product, setProduct] = useState(null);
-//   const [quantity, setQuantity] = useState(1);
-//   const [isInWishlist, setIsInWishlist] = useState(false);
-//   const [hovered, setHovered] = useState(false); // Track hover state
-//   const { id } = useParams();
-//   const navigate = useNavigate();
-
-//   useEffect(() => {
-//     const fetchProduct = async () => {
-//       try {
-//         const response = await fetch(`http://localhost:3000/api/products/${id}`);
-//         const data = await response.json();
-//         setProduct(data);
-
-//         // Check if the product is already in the wishlist
-//         const wishlistResponse = await fetch('http://localhost:3000/api/wishlist');
-//         const wishlistData = await wishlistResponse.json();
-//         setIsInWishlist(wishlistData.some(item => item.productId === data._id));
-//       } catch (error) {
-//         console.error('Error fetching product:', error);
-//       }
-//     };
-
-//     fetchProduct();
-//   }, [id]);
-
-//   const addToWishlist = async () => {
-//     if (isInWishlist) {
-//       alert("This item is already in your wishlist.");
-//       return;
-//     }
-
-//     try {
-//       const response = await fetch('http://localhost:3000/api/wishlist/add', {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({
-//           productId: product._id,
-//           name: product.name,
-//           price: product.price,
-//           image: product.image,
-//           description: product.description,
-//         }),
-//       });
-//       const data = await response.json();
-//       if (response.ok) {
-//         setIsInWishlist(true);
-//         alert(data.message);
-//         navigate('/wishlist');
-//       } else {
-//         alert('Error adding to wishlist');
-//       }
-//     } catch (error) {
-//       console.error('Error adding to wishlist:', error);
-//     }
-//   };
-
-//   if (!product) {
-//     return <div>Loading...</div>;
-//   }
-
-//   const styles = {
-//     container: {
-//       display: 'flex',
-//       padding: '60px 30px',
-//       maxWidth: '100%',
-//       margin: '0 auto',
-//       alignItems: 'flex-start',
-//     },
-//     imageGallery: {
-//       flex: '1',
-//       marginRight: '10px',
-//       marginTop: "40px"
-//     },
-//     productImage: {
-//       width: '600px',
-//       borderRadius: '12px',
-//       padding: "5px",
-//       objectFit: 'contain',
-//       height: '630px',
-//       boxShadow: '0 0 10px rgba(0,0,0,0.1)',
-//     },
-//     details: {
-//       padding: '40px',
-//       flex: '2',
-//     },
-//     title: {
-//       fontSize: '32px',
-//       fontWeight: 'bold',
-//       marginBottom: '15px',
-//     },
-//     price: {
-//       fontSize: '28px',
-//       color: '#e63946',
-//       marginBottom: '15px',
-//     },
-//     reviews: {
-//       display: 'flex',
-//       alignItems: 'center',
-//       marginBottom: '25px',
-//     },
-//     stars: {
-//       color: '#ffcc00',
-//       marginRight: '15px',
-//       fontSize: '20px',
-//     },
-//     reviewsText: {
-//       color: '#333',
-//       fontSize: '18px',
-//     },
-//     description: {
-//       marginBottom: '25px',
-//       color: '#555',
-//       lineHeight: '1.8',
-//       fontSize: '18px',
-//     },
-//     stock: {
-//       marginBottom: '15px',
-//       fontSize: '18px',
-//     },
-//     productType: {
-//       marginBottom: '15px',
-//       fontSize: '18px',
-//     },
-//     cartOptions: {
-//       display: 'flex',
-//       alignItems: 'center',
-//       marginBottom: '25px',
-//     },
-//     quantityInput: {
-//       width: '70px',
-//       padding: '10px',
-//       marginRight: '30px',
-//       fontSize: '18px',
-//     },
-//     addToCartButton: {
-//       padding: '15px 30px',
-//       border: '1px solid #000',
-//       cursor: 'pointer',
-//       backgroundColor: '#fff',
-//       color: '#000',
-//       marginRight: '30px',
-//       display: 'flex',
-//       alignItems: 'center',
-//       fontSize: '18px',
-//     },
-//     wishlistButton: {
-//       padding: '15px 30px',
-//       border: '1px solid #000',
-//       cursor: 'pointer',
-//       backgroundColor: '#fff',
-//       color: '#000',
-//       marginRight: '30px',
-//       display: 'flex',
-//       alignItems: 'center',
-//       fontSize: '18px',
-//     },
-//     buyNowButton: {
-//       padding: "20px 40px",
-//       backgroundColor: '#000',
-//       color: '#fff',
-//       border: 'none',
-//       cursor: 'pointer',
-//       width: '28%',
-//       marginTop: '30px',
-//       display: 'flex',
-//       alignItems: 'center',
-//       fontSize: '25px',
-//     },
-//     heart: {
-//       margin: '0px 20px 0px 0px',
-//       fontSize: '24px',
-//       cursor: 'pointer',
-//       color: isInWishlist ? 'red' : hovered ? 'red' : '#ccc', // Conditional color
-//       transition: 'color 0.3s ease',
-//     },
-//   };
-
-//   return (
-//     <div style={styles.container}>
-//       <div><Navbar /></div>
-//       <div style={styles.imageGallery}>
-//         <img
-//           src={product.image || 'https://via.placeholder.com/600'}
-//           alt={product.name || 'Product'}
-//           style={styles.productImage}
-//         />
-//       </div>
-//       <div style={styles.details}>
-//         <h1 style={styles.title}>{product.name}</h1>
-//         <p style={styles.price}>${product.price}</p>
-//         <div style={styles.reviews}>
-//           <span style={styles.stars}>★★★★★</span>
-//           <a href="#reviews" style={styles.reviewsText}>
-//             3 reviews
-//           </a>
-//         </div>
-//         <p style={styles.description}>{product.description}</p>
-//         <p style={styles.stock}>
-//           <strong>Availability:</strong> {product.inStock ? 'In stock' : 'Out of stock'}
-//         </p>
-//         <p style={styles.productType}>
-//           <strong>Product Type:</strong> {product.category}
-//         </p>
-
-//         <div style={styles.cartOptions}>
-//           <input
-//             type="number"
-//             min="1"
-//             value={quantity}
-//             onChange={(e) => setQuantity(e.target.value)}
-//             style={styles.quantityInput}
-//           />
-//           <button style={styles.addToCartButton}>
-//             <i className="fas fa-shopping-cart" style={styles.icon}></i>
-//             ADD TO CART
-//           </button>
-//           <button
-//             style={styles.wishlistButton}
-//             onClick={addToWishlist}
-//           >
-//             <i
-//               className="fas fa-heart"
-//               style={styles.heart}
-//               onMouseEnter={() => setHovered(true)}
-//               onMouseLeave={() => setHovered(false)}
-//             ></i>
-//             {isInWishlist ? 'IN WISHLIST' : 'ADD TO WISHLIST'}
-//           </button>
-//         </div>
-//         <button style={styles.buyNowButton}>BUY IT NOW</button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default ProductProfile;
-
-
-
-
-
-
-// import React, { useState, useEffect } from 'react';
-// import { useParams, useNavigate  } from 'react-router-dom';
-// import '@fortawesome/fontawesome-free/css/all.min.css';
-// import Navbar from './Navbar2';
-// import Footer from './Footer';
-
-// const ProductProfile = () => {
-//   const [product, setProduct] = useState(null);
-//   const [quantity, setQuantity] = useState(1);
-//   const [isInWishlist, setIsInWishlist] = useState(false);
-//   // const [hoveredIcon, setHoveredIcon] = useState(null);
-//   const [hoveredIcon, setHoveredIcon] = useState(false);
-
-//   const { id } = useParams();
-//   const navigate = useNavigate();
-
-//   useEffect(() => {
-//   //   const fetchProduct = async () => {
-//   //     try {
-//   //       const response = await fetch(http://localhost:3000/api/products/${id});
-//   //       const data = await response.json();
-//   //       setProduct(data);
-//   //     } catch (error) {
-//   //       console.error('Error fetching product:', error);
-//   //     }
-//   //   };
-
-//   //   fetchProduct();
-//   // }, [id]);
-//   const fetchProduct = async () => {
-//     try {
-//       const response = await fetch(http://localhost:3000/api/products/${id});
-//       const data = await response.json();
-//       setProduct(data);
-
-//       // Check if the product is already in the wishlist
-//       const wishlistResponse = await fetch('http://localhost:3000/api/wishlist');
-//       const wishlistData = await wishlistResponse.json();
-//       setIsInWishlist(wishlistData.some(item => item.productId === data._id));
-//     } catch (error) {
-//       console.error('Error fetching product:', error);
-//     }
-//   };
-
-//   fetchProduct();
-// }, [id]);
-
-//   // if (!product) {
-//   //   return <div>Loading...</div>;
-//   // }
-
-//   // const addToWishlist = async () => {
-//   //   try {
-//   //     const response = await fetch('http://localhost:3000/api/wishlist/add', {
-//   //       method: 'POST',
-//   //       headers: {
-//   //         'Content-Type': 'application/json',
-//   //       },
-//   //       body: JSON.stringify({
-//   //         productId: product._id,
-//   //         name: product.name,
-//   //         price: product.price,
-//   //         image: product.image,
-//   //         description:product.description,
-//   //       }),
-//   //     });
-//   //     const data = await response.json();
-//   //     if (response.ok) {
-//   //       alert(data.message);
-//   //       navigate('/wishlist');
-//   //     } else {
-//   //       alert('Error adding to wishlist');
-//   //     }
-//   //   } catch (error) {
-//   //     console.error('Error adding to wishlist:', error);
-//   //   }
-//   // };
-
-
-//   const addToWishlist = async () => {
-//     if (isInWishlist) {
-//       alert("This item is already in your wishlist.");
-//       return;
-//     }
-
-//     try {
-//       const response = await fetch('http://localhost:3000/api/wishlist/add', {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({
-//           productId: product._id,
-//           name: product.name,
-//           price: product.price,
-//           image: product.image,
-//           description: product.description,
-//         }),
-//       });
-//       const data = await response.json();
-//       if (response.ok) {
-//         setIsInWishlist(true);
-//         alert(data.message);
-//         navigate('/wishlist');
-//       } else {
-//         alert('Error adding to wishlist');
-//       }
-//     } catch (error) {
-//       console.error('Error adding to wishlist:', error);
-//     }
-//   };
-
-//   if (!product) {
-//     return <div>Loading...</div>;
-//   }
-
-
-//   const addToCart = async () => {
-//     try {
-//       const response = await fetch('http://localhost:3000/api/cart/add', {
-//         method: 'POST',
-//         headers: {
-//           'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify({
-//           productId: product._id,
-//           name: product.name,
-//           price: product.price,
-//           image: product.image,
-//           description:product.description,
-//         }),
-//       });
-//       const data = await response.json();
-//       if (response.ok) {
-//         alert(data.message);
-//         navigate('/cart');
-//       } else {
-//         alert('Error adding to cart');
-//       }
-//     } catch (error) {
-//       console.error('Error adding to cart:', error);
-//     }
-//   };
-
-//   const styles = {
-//     container: {
-//       display: 'flex',
-//       padding: '60px 30px',
-//       maxWidth: '100%',
-//       margin: '0 auto',
-//       alignItems: 'flex-start',
-//     },
-//     imageGallery: {
-//       flex: '1',
-//       marginRight: '10px',
-//       marginTop: "40px"
-//     },
-//     productImage: {
-//       width: '600px',
-//       borderRadius: '12px',
-//       padding: "5px",
-//       objectFit: 'contain',
-//       height: '630px',
-//       boxShadow: '0 0 10px rgba(0,0,0,0.1)',
-//     },
-//     details: {
-//       padding: '40px',
-//       flex: '2',
-//     },
-//     title: {
-//       fontSize: '32px',
-//       fontWeight: 'bold',
-//       marginBottom: '15px',
-//     },
-//     price: {
-//       fontSize: '28px',
-//       color: '#e63946',
-//       marginBottom: '15px',
-//     },
-//     reviews: {
-//       display: 'flex',
-//       alignItems: 'center',
-//       marginBottom: '25px',
-//     },
-//     stars: {
-//       color: '#ffcc00',
-//       marginRight: '15px',
-//       fontSize: '20px',
-//     },
-//     reviewsText: {
-//       color: '#333',
-//       fontSize: '18px',
-//     },
-//     description: {
-//       marginBottom: '25px',
-//       color: '#555',
-//       lineHeight: '1.8',
-//       fontSize: '18px',
-//     },
-//     stock: {
-//       marginBottom: '15px',
-//       fontSize: '18px',
-//     },
-//     productType: {
-//       marginBottom: '15px',
-//       fontSize: '18px',
-//     },
-//     cartOptions: {
-//       display: 'flex',
-//       alignItems: 'center',
-//       marginBottom: '25px',
-//     },
-//     quantityInput: {
-//       width: '70px',
-//       padding: '10px',
-//       marginRight: '30px',
-//       fontSize: '18px',
-//     },
-//     addToCartButton: {
-//       padding: '15px 30px',
-//       border: '1px solid #000',
-//       cursor: 'pointer',
-//       backgroundColor: '#fff',
-//       color: '#000',
-//       marginRight: '30px',
-//       display: 'flex',
-//       alignItems: 'center',
-//       fontSize: '18px',
-//     },
-//     wishlistButton: {
-//       padding: '15px 30px',
-//       border: '1px solid #000',
-//       cursor: 'pointer',
-//       backgroundColor: '#fff',
-//       color: '#000',
-//       marginRight: '30px',
-//       display: 'flex',
-//       alignItems: 'center',
-//       fontSize: '18px',
-//     },
-//     buyNowButton: {
-//       padding: "20px 40px",
-//       backgroundColor: '#000',
-//       color: '#fff',
-//       border: 'none',
-//       cursor: 'pointer',
-//       width: '28%',
-//       marginTop: '30px',
-//       display: 'flex',
-//       alignItems: 'center',
-//       fontSize: '25px',
-//     },
-//     heart: {
-//       margin: '0px 20px 0px 0px',
-//       fontSize: '24px',
-//       cursor: 'pointer',
-//       color: isInWishlist ? 'red' : hovered ? 'red' : '#ccc', // Conditional color
-//       transition: 'color 0.3s ease',
-//     },
-//   };
-
-//   return (
-//     <div style={styles.container}>
-//       <div><Navbar></Navbar> </div>
-//       <div style={styles.imageGallery}>
-//         <img
-//           src={product.image || 'https://via.placeholder.com/600'}
-//           alt={product.name || 'Product'}
-//           style={styles.productImage}
-//         />
-//       </div>
-//       <div style={styles.details}>
-//         <h1 style={styles.title}>{product.name}</h1>
-//         <p style={styles.price}>${product.price}</p>
-//         <div style={styles.reviews}>
-//           <span style={styles.stars}>★★★★★</span>
-//           <a href="#reviews" style={styles.reviewsText}>
-//             3 reviews
-//           </a>
-//         </div>
-//         <p style={styles.description}>
-//           {product.description}
-//         </p>
-//         <p style={styles.stock}>
-//           <strong>Availability:</strong> {product.inStock ? 'In stock' : 'Out of stock'}
-//         </p>
-//         <p style={styles.productType}>
-//           <strong>Product Type:</strong> {product.category}
-//         </p>
-
-//         <div style={styles.cartOptions}>
-//           <input
-//             type="number"
-//             min="1"
-//             value={quantity}
-//             onChange={(e) => setQuantity(e.target.value)}
-//             style={styles.quantityInput}
-//           />
-//           <button
-//   style={styles.addToCartButton}
-//   onClick={addToCart} // Add this line
-//   onMouseEnter={() => setHoveredIcon('cart')}
-//   onMouseLeave={() => setHoveredIcon(null)}
-// >
-//   <i
-//     className={hoveredIcon === 'cart' ? 'fas fa-cart-plus' : 'fas fa-shopping-cart'}
-//     style={styles.icon}
-//   ></i>
-//   ADD TO CART
-// </button>
-
-//           {/* <button
-//   style={styles.wishlistButton}
-//   onClick={addToWishlist}
-//   onMouseEnter={() => setHoveredIcon('wishlist')}
-//   onMouseLeave={() => setHoveredIcon(null)}
-// >
-// <i
-//               className="fas fa-heart"
-//               style={styles.heart}
-//               onMouseEnter={(e) => e.currentTarget.style.color = 'red'}
-//               onMouseLeave={(e) => e.currentTarget.style.color = '#ccc'}
-//             ></i>
-//       ADD TO WISHLIST
-// </button> */}
-
-
-// <button
-//   style={styles.wishlistButton}
-//   onClick={addToWishlist}
-// >
-//   <i
-//     className="fas fa-heart"
-//     style={styles.heart}
-//     onMouseEnter={() => setHovered(true)}
-//     onMouseLeave={() => setHovered(false)}
-//   ></i>
-//   {isInWishlist ? 'IN WISHLIST' : 'ADD TO WISHLIST'}
-// </button>
-
-
-//         </div>
-//         <button style={styles.buyNowButton}>
-//           BUY IT NOW
-//         </button>
-//       </div>
-
-//     </div>
-//   );
-// };
-
-// export default ProductProfile;
-
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import Navbar from './Navbar2';
+
 import Footer from './Footer';
 
 const ProductProfile = () => {
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const [isInWishlist, setIsInWishlist] = useState(false);
-  const [hoveredIcon, setHoveredIcon] = useState(null);
-  const [loading, setLoading] = useState(true); // For loading state
-  const [error, setError] = useState(null); // For error handling
-  const [isInWishlist, setIsInWishlist] = useState(false);
-  const [hovered, setHovered] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [isInWishlist, setIsInWishlist] = useState(false); // To track if the product is in the wishlist
+  const [hoveredIcon, setHoveredIcon] = useState(null); // For hover effect
   const { id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('token'); // Changed from 'authToken' to 'token'
+    const token = localStorage.getItem('token');
     const fetchProduct = async () => {
       try {
         const response = await fetch(`http://localhost:3000/api/products/${id}`, {
@@ -631,7 +25,11 @@ const ProductProfile = () => {
           },
         });
         const data = await response.json();
-        setProduct(data);
+        if (response.ok) {
+          setProduct(data);
+        } else {
+          setError(data.message || 'Failed to fetch product');
+        }
       } catch (error) {
         setError('Error fetching product');
       } finally {
@@ -642,11 +40,49 @@ const ProductProfile = () => {
     fetchProduct();
   }, [id]);
 
-  if (!product) {
-    return <div>Loading...</div>;
-  }
+  // Check if product is in the wishlist when the component mounts
+  useEffect(() => {
+    const checkWishlist = async () => {
+      const token = localStorage.getItem('token');
+      if (!token) return;
+
+      try {
+        const response = await fetch('http://localhost:3000/api/wishlist', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          // Check if the current product is in the wishlist
+          const itemInWishlist = data.some(item => item.productId === product._id);
+          setIsInWishlist(itemInWishlist);
+        }
+      } catch (error) {
+        console.error('Error checking wishlist:', error);
+      }
+    };
+
+    if (product) {
+      checkWishlist();
+    }
+  }, [product]);
+
+  const handleQuantityChange = (e) => {
+    const value = Math.min(e.target.value, product.inStock);
+    setQuantity(value);
+  };
 
   const addToWishlist = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      alert("You need to be logged in to add items to your wishlist.");
+      return;
+    }
+
     if (isInWishlist) {
       alert("This item is already in your wishlist.");
       return;
@@ -656,6 +92,7 @@ const ProductProfile = () => {
       const response = await fetch('http://localhost:3000/api/wishlist/add', {
         method: 'POST',
         headers: {
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
@@ -668,132 +105,15 @@ const ProductProfile = () => {
       });
       const data = await response.json();
       if (response.ok) {
-        setIsInWishlist(true);
+        setIsInWishlist(true); // Mark as in wishlist
         alert(data.message);
         navigate('/wishlist');
       } else {
-        alert('Error adding to wishlist');
+        alert(data.message || 'Error adding to wishlist');
       }
     } catch (error) {
       console.error('Error adding to wishlist:', error);
     }
-  };
-  const styles = {
-    container: {
-      display: 'flex',
-      padding: '60px 30px',
-      maxWidth: '100%',
-      margin: '0 auto',
-      alignItems: 'flex-start',
-    },
-    imageGallery: {
-      flex: '1',
-      marginRight: '10px',
-      marginTop: "40px"
-    },
-    productImage: {
-      width: '600px',
-      borderRadius: '12px',
-      padding:"5px",
-      objectFit: 'contain',
-      height: '630px',
-      boxShadow: '0 0 10px rgba(0,0,0,0.1)',
-    },
-    details: {
-      padding: '40px',
-      flex: '2',
-    },
-    title: {
-      fontSize: '32px',
-      fontWeight: 'bold',
-      marginBottom: '15px',
-    },
-    price: {
-      fontSize: '28px',
-      color: '#e63946',
-      marginBottom: '15px',
-    },
-    reviews: {
-      display: 'flex',
-      alignItems: 'center',
-      marginBottom: '25px',
-    },
-    stars: {
-      color: '#ffcc00',
-      marginRight: '15px',
-      fontSize: '20px',
-    },
-    reviewsText: {
-      color: '#333',
-      fontSize: '18px',
-    },
-    description: {
-      marginBottom: '25px',
-      color: '#555',
-      lineHeight: '1.8',
-      fontSize: '18px',
-    },
-    stock: {
-      marginBottom: '15px',
-      fontSize: '18px',
-    },
-    productType: {
-      marginBottom: '15px',
-      fontSize: '18px',
-    },
-    cartOptions: {
-      display: 'flex',
-      alignItems: 'center',
-      marginBottom: '25px',
-    },
-    quantityInput: {
-      width: '70px',
-      padding: '10px',
-      marginRight: '30px',
-      fontSize: '18px',
-    },
-    addToCartButton: {
-      padding: '15px 30px',
-      border: '1px solid #000',
-      cursor: 'pointer',
-      backgroundColor: '#fff',
-      color: '#000',
-      marginRight: '30px',
-      display: 'flex',
-      alignItems: 'center',
-      fontSize: '18px',
-    },
-    wishlistButton: {
-      padding: '15px 30px',
-      border: '1px solid #000',
-      cursor: 'pointer',
-      backgroundColor: '#fff',
-      color: '#000',
-      marginRight: '30px',
-      display: 'flex',
-      alignItems: 'center',
-      fontSize: '18px',
-    },
-    buyNowButton: {
-      padding:"20px 40px",
-      backgroundColor: '#000',
-      color: '#fff',
-      border: 'none',
-      cursor: 'pointer',
-      width: '28%',
-      marginTop: '30px',
-      display: 'flex',
-      alignItems: 'center',
-      fontSize: '25px',
-    },
-    heart: {
-      margin: '0px 20px 0px 0px',
-      fontSize: '24px',
-      cursor: 'pointer',
-      color: isInWishlist ? 'red' : hovered ? 'red' : '#ccc', // Conditional color using hovered state
-      transition: 'color 0.3s ease',
-    },
-    // Other styles...
   };
 
   if (loading) {
@@ -805,73 +125,61 @@ const ProductProfile = () => {
   }
 
   return (
-    <div style={styles.container}>
-      <div><Navbar></Navbar> </div>
-      <div style={styles.imageGallery}>
+    <div style={{ display: 'flex', padding: '60px 30px', maxWidth: '100%', margin: '0 auto', alignItems: 'flex-start' }}>
+      <div style={{ flex: '1', marginRight: '10px', marginTop: "40px" }}>
         <img
           src={product.image || 'https://via.placeholder.com/600'}
           alt={product.name || 'Product'}
-          style={styles.productImage}
+          style={{ width: '600px', borderRadius: '12px', padding: "5px", objectFit: 'contain', height: '630px', boxShadow: '0 0 10px rgba(0,0,0,0.1)' }}
         />
       </div>
-      <div style={styles.details}>
-        <h1 style={styles.title}>{product.name}</h1>
-        <p style={styles.price}>${product.price}</p>
-        <div style={styles.reviews}>
-          <span style={styles.stars}>★★★★★</span>
-          <a href="#reviews" style={styles.reviewsText}>
-            3 reviews
-          </a>
+      <div style={{ padding: '40px', flex: '2' }}>
+        <h1 style={{ fontSize: '32px', fontWeight: 'bold', marginBottom: '15px' }}>{product.name}</h1>
+        <p style={{ fontSize: '28px', color: '#e63946', marginBottom: '15px' }}>${product.price}</p>
+        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '25px' }}>
+          <span style={{ color: '#ffcc00', marginRight: '15px', fontSize: '20px' }}>★★★★★</span>
+          <a href="#reviews" style={{ color: '#333', fontSize: '18px' }}>3 reviews</a>
         </div>
-        <p style={styles.description}>
-          {product.description}
-        </p>
-        <p style={styles.stock}>
-          <strong>Availability:</strong> {product.inStock ? 'In stock' : 'Out of stock'}
-        </p>
-        <p style={styles.productType}>
-          <strong>Product Type:</strong> {product.category}
-        </p>
-
-        <div style={styles.cartOptions}>
+        <p style={{ marginBottom: '25px', color: '#555', lineHeight: '1.8', fontSize: '18px' }}>{product.description}</p>
+        <p style={{ marginBottom: '15px', fontSize: '18px' }}><strong>Availability:</strong> {product.inStock ? 'In stock' : 'Out of stock'}</p>
+        <p style={{ marginBottom: '15px', fontSize: '18px' }}><strong>Product Type:</strong> {product.category}</p>
+        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '25px' }}>
           <input
             type="number"
             min="1"
-            max={product.inStock} // Limiting the max quantity to available stock
+            max={product.inStock}
             value={quantity}
             onChange={handleQuantityChange}
-            style={styles.quantityInput}
+            style={{ width: '70px', padding: '10px', marginRight: '30px', fontSize: '18px' }}
           />
           <button
-            style={styles.addToCartButton}
-            onClick={addToCart}
+            style={{ padding: '15px 30px', border: '1px solid #000', cursor: 'pointer', backgroundColor: '#fff', color: '#000', marginRight: '30px', display: 'flex', alignItems: 'center', fontSize: '18px' }}
             onMouseEnter={() => setHoveredIcon('cart')}
             onMouseLeave={() => setHoveredIcon(null)}
           >
-            <i
-              className={hoveredIcon === 'cart' ? 'fas fa-cart-plus' : 'fas fa-shopping-cart'}
-              style={styles.icon}
-            ></i>
+            <i className={hoveredIcon === 'cart' ? 'fas fa-cart-plus' : 'fas fa-shopping-cart'} style={{ marginRight: '15px', fontSize: '20px', transition: 'color 0.3s, transform 0.3s' }}></i>
             ADD TO CART
           </button>
-
           <button
-  style={styles.wishlistButton}
-  onClick={addToWishlist}
-  onMouseEnter={() => setHoveredIcon('wishlist')}
-  onMouseLeave={() => setHoveredIcon(null)}
->
-<i
+            style={{ padding: '15px 30px', border: '1px solid #000', cursor: 'pointer', backgroundColor: '#fff', color: '#000', marginRight: '30px', display: 'flex', alignItems: 'center', fontSize: '18px' }}
+            onClick={addToWishlist}
+          >
+            <i
               className="fas fa-heart"
-              style={styles.heart}
-              onMouseEnter={(e) => e.currentTarget.style.color = 'red'}
-              onMouseLeave={(e) => e.currentTarget.style.color = '#ccc'}
+              style={{
+                margin: '0px 20px 0px 0px',
+                fontSize: '24px',
+                cursor: 'pointer',
+                color: isInWishlist ? '#ff0000' : (hoveredIcon === 'heart' ? '#ff0000' : '#ccc'),
+                transition: 'color 0.3s ease',
+              }}
+              onMouseEnter={() => setHoveredIcon('heart')}
+              onMouseLeave={() => setHoveredIcon(null)}
             ></i>
-      ADD TO WISHLIST
-</button>
-
+            {isInWishlist ? 'IN WISHLIST' : 'ADD TO WISHLIST'}
+          </button>
         </div>
-        <button style={styles.buyNowButton}>
+        <button style={{ padding: "20px 40px", backgroundColor: '#000', color: '#fff', border: 'none', cursor: 'pointer', width: '28%', marginTop: '30px', display: 'flex', alignItems: 'center', fontSize: '25px' }}>
           <i className="fas fa-credit-card" style={{ marginRight: '10px' }}></i>
           Buy Now
         </button>

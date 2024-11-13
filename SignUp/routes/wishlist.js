@@ -1,53 +1,68 @@
-// routes/wishlist.js
 const express = require('express');
 const router = express.Router();
-const Wishlist = require('../models/wishlist');
+const WishlistModel = require('../models/Wishlist'); // Adjust path if needed
+const authenticateToken = require('../Middlewares/tokenAuthentication'); // Adjust path if needed
 
-// Add item to wishlist if not already present
-router.post('/add', async (req, res) => {
+// Get all wishlist items for the logged-in user
+router.get('/', authenticateToken, async (req, res) => {
   try {
-    const { productId, name, price, image, description } = req.body;
-
-    // Check if the item is already in the wishlist
-    const existingItem = await Wishlist.findOne({ productId });
-    if (existingItem) {
-      return res.status(200).json({ message: 'Product already in wishlist' });
-    }
-
-    // If not present, add the new item
-    const newWishlistItem = new Wishlist({ productId, name, price, image, description });
-    await newWishlistItem.save();
-    res.status(201).json({ message: 'Product added to wishlist' });
+    console.log("Fetching wishlist for user ID:", req.user.id); // Debug log for user ID
+    const wishlistItems = await WishlistModel.find({ userId: req.user.id });
+    console.log("Wishlist items fetched:", wishlistItems); // Debug log for items
+    res.json(wishlistItems);
   } catch (error) {
-    console.error('Error adding product to wishlist:', error);
-    res.status(500).json({ message: 'Server error' });
+    console.error('Error fetching wishlist items:', error); // Log error for debugging
+    res.status(500).json({ message: 'Server error while fetching wishlist items' });
   }
 });
 
-// Fetch all wishlist items
-router.get('/', async (req, res) => {
+// Add item to wishlist
+router.post('/add', authenticateToken, async (req, res) => {
+  const { productId, name, price, image, description } = req.body;
   try {
-    const wishlist = await Wishlist.find();
-    res.json(wishlist);
+    const existingItem = await WishlistModel.findOne({ userId: req.user.id, productId });
+    if (existingItem) {
+      return res.status(400).json({ message: 'Item already in wishlist' });
+    }
+
+    const newWishlistItem = new WishlistModel({
+      userId: req.user.id,
+      productId,
+      name,
+      price,
+      image,
+      description,
+    });
+
+    await newWishlistItem.save();
+    res.status(201).json({ message: 'Item added to wishlist' });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error retrieving wishlist' });
+    console.error('Error adding item to wishlist:', error); // Log error for debugging
+    res.status(500).json({ message: 'Server error while adding item to wishlist' });
   }
 });
 
 // Remove item from wishlist
-router.delete('/remove/:id', async (req, res) => {
+router.delete('/remove/:productId', authenticateToken, async (req, res) => {
+  const { productId } = req.params;
+  const userId = req.user.id; // Assuming req.user.id is populated by the JWT middleware
+  console.log('Removing item for userId:', userId, 'and productId:', productId); // Debugging log
+
   try {
-    const { id } = req.params;
-    const result = await Wishlist.findByIdAndDelete(id);
-    if (!result) {
-      return res.status(404).json({ message: 'Item not found' });
+    const deletedItem = await WishlistModel.findOneAndDelete({
+      userId: userId,
+      productId: productId
+    });
+
+    if (!deletedItem) {
+      return res.status(404).json({ message: 'Item not found in wishlist' });
     }
-    res.json({ message: 'Item removed from wishlist' });
+
+    res.status(200).json({ message: 'Item removed from wishlist' });
   } catch (error) {
     console.error('Error removing item from wishlist:', error);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: 'Server error while removing item from wishlist' });
   }
 });
 
-module.exports=router;
+module.exports = router;
