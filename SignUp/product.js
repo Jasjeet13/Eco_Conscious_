@@ -1,15 +1,19 @@
 const mongoose = require('mongoose');
 
+// Define the schema for the product model
 const productSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  description: { type: String, required: true },
-  price: { type: Number, required: true },
-  category: { type: String, required: true },
-  image: { type: String, required: true },
-  inStock: { type: Boolean, required: true },
-  environmentalImpactScore: { type: Number, required: true },
+  name: String,
+  description: String,
+  price: Number,
+  image: String,
+  inStock: Boolean,
+  environmentalImpactScore: Number,
+  category: String, // Added category field
+  userId: { 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: 'User' // Link to the user who created the product
+  },
 });
 
-const Product = mongoose.model('Product', productSchema);
-
-module.exports = Product;
+// Create and export the Product model using the schema
+module.exports = mongoose.model('Product', productSchema);
