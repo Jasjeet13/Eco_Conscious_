@@ -8,28 +8,50 @@ const ProductProfile = () => {
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [hoveredIcon, setHoveredIcon] = useState(null);
+  const [loading, setLoading] = useState(true); // For loading state
+  const [error, setError] = useState(null); // For error handling
+  const [isInWishlist, setIsInWishlist] = useState(false);
+  const [hovered, setHovered] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
+    const token = localStorage.getItem('token'); // Changed from 'authToken' to 'token'
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/api/products/${id}`);
+        const response = await fetch(`http://localhost:3000/api/products/${id}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });
         const data = await response.json();
-        setProduct(data);
+        if (response.ok) {
+          setProduct(data);
+        } else {
+          setError(data.message || 'Failed to fetch product');
+        }
       } catch (error) {
-        console.error('Error fetching product:', error);
+        setError('Error fetching product');
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchProduct();
   }, [id]);
 
-  if (!product) {
-    return <div>Loading...</div>;
-  }
+  const handleQuantityChange = (e) => {
+    const value = Math.min(e.target.value, product.inStock); // Prevent selecting more than available stock
+    setQuantity(value);
+  };
 
   const addToWishlist = async () => {
+    if (isInWishlist) {
+      alert("This item is already in your wishlist.");
+      return;
+    }
+
     try {
       const response = await fetch('http://localhost:3000/api/wishlist/add', {
         method: 'POST',
@@ -41,11 +63,12 @@ const ProductProfile = () => {
           name: product.name,
           price: product.price,
           image: product.image,
-          description:product.description,
+          description: product.description,
         }),
       });
       const data = await response.json();
       if (response.ok) {
+        setIsInWishlist(true);
         alert(data.message);
         navigate('/wishlist');
       } else {
@@ -55,10 +78,15 @@ const ProductProfile = () => {
       console.error('Error adding to wishlist:', error);
     }
   };
+
+  if (!product) {
+    return <div>Loading...</div>;
+  }
+
   const styles = {
     container: {
       display: 'flex',
-      padding: '60px 30px', 
+      padding: '60px 30px',
       maxWidth: '100%',
       margin: '0 auto',
       alignItems: 'flex-start',
@@ -71,7 +99,7 @@ const ProductProfile = () => {
     productImage: {
       width: '600px',
       borderRadius: '12px',
-      padding:"5px",
+      padding: "5px",
       objectFit: 'contain',
       height: '630px',
       boxShadow: '0 0 10px rgba(0,0,0,0.1)',
@@ -152,7 +180,7 @@ const ProductProfile = () => {
       fontSize: '18px',
     },
     buyNowButton: {
-      padding:"20px 40px",
+      padding: "20px 40px",
       backgroundColor: '#000',
       color: '#fff',
       border: 'none',
@@ -177,9 +205,16 @@ const ProductProfile = () => {
     },
   };
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
   return (
     <div style={styles.container}>
-      <div><Navbar></Navbar> </div>
       <div style={styles.imageGallery}>
         <img
           src={product.image || 'https://via.placeholder.com/600'}
@@ -210,8 +245,9 @@ const ProductProfile = () => {
           <input
             type="number"
             min="1"
+            max={product.inStock} // Limiting the max quantity to available stock
             value={quantity}
-            onChange={(e) => setQuantity(e.target.value)}
+            onChange={handleQuantityChange}
             style={styles.quantityInput}
           />
           <button
@@ -226,26 +262,20 @@ const ProductProfile = () => {
             ADD TO CART
           </button>
           <button
-  style={styles.wishlistButton}
-  onClick={addToWishlist}
-  onMouseEnter={() => setHoveredIcon('wishlist')}
-  onMouseLeave={() => setHoveredIcon(null)}
->
-<i
-              className="fas fa-heart"
-              style={styles.heart}
-              onMouseEnter={(e) => e.currentTarget.style.color = 'red'}
-              onMouseLeave={(e) => e.currentTarget.style.color = '#ccc'}
-            ></i>
-      ADD TO WISHLIST
-</button>
-
+            style={styles.wishlistButton}
+            onClick={addToWishlist}
+            onMouseEnter={() => setHovered(true)} // Set hovered to true on mouse enter
+            onMouseLeave={() => setHovered(false)} // Set hovered to false on mouse leave
+          >
+            <i className="fas fa-heart" style={styles.heart}></i>
+            {isInWishlist ? 'IN WISHLIST' : 'ADD TO WISHLIST'}
+            </button>
         </div>
         <button style={styles.buyNowButton}>
-          BUY IT NOW
+          <i className="fas fa-credit-card" style={{ marginRight: '10px' }}></i>
+          Buy Now
         </button>
       </div>
-
     </div>
   );
 };
