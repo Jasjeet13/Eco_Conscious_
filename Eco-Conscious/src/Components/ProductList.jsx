@@ -21,7 +21,12 @@ const ProductList = () => {
   const normalizedCategory = categoryMapping[category.toLowerCase()] || category;
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/products')
+    const token = localStorage.getItem('token');
+    axios.get('http://localhost:3000/api/products' , {
+      headers: {
+        Authorization: `Bearer ${token}` // Set Authorization header with the token
+      }
+    })
       .then(response => {
         const data = response.data;
         const filteredProducts = normalizedCategory === 'All' 

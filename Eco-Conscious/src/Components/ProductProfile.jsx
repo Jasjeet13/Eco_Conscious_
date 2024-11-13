@@ -613,29 +613,38 @@ const ProductProfile = () => {
   const [quantity, setQuantity] = useState(1);
   const [isInWishlist, setIsInWishlist] = useState(false);
   const [hoveredIcon, setHoveredIcon] = useState(null);
-  const [hovered, setHovered] = useState(false); // Define hovered here
-
+  const [loading, setLoading] = useState(true); // For loading state
+  const [error, setError] = useState(null); // For error handling
+  const [isInWishlist, setIsInWishlist] = useState(false);
+  const [hovered, setHovered] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
+    const token = localStorage.getItem('token'); // Changed from 'authToken' to 'token'
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/api/products/${id}`);
+        const response = await fetch(`http://localhost:3000/api/products/${id}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });
         const data = await response.json();
         setProduct(data);
-
-        // Check if the product is already in the wishlist
-        const wishlistResponse = await fetch('http://localhost:3000/api/wishlist');
-        const wishlistData = await wishlistResponse.json();
-        setIsInWishlist(wishlistData.some(item => item.productId === data._id));
       } catch (error) {
-        console.error('Error fetching product:', error);
+        setError('Error fetching product');
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchProduct();
   }, [id]);
+
+  if (!product) {
+    return <div>Loading...</div>;
+  }
 
   const addToWishlist = async () => {
     if (isInWishlist) {
@@ -669,38 +678,6 @@ const ProductProfile = () => {
       console.error('Error adding to wishlist:', error);
     }
   };
-
-  if (!product) {
-    return <div>Loading...</div>;
-  }
-
-  const addToCart = async () => {
-    try {
-      const response = await fetch('http://localhost:3000/api/cart/add', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          productId: product._id,
-          name: product.name,
-          price: product.price,
-          image: product.image,
-          description: product.description,
-        }),
-      });
-      const data = await response.json();
-      if (response.ok) {
-        alert(data.message);
-        navigate('/cart');
-      } else {
-        alert('Error adding to cart');
-      }
-    } catch (error) {
-      console.error('Error adding to cart:', error);
-    }
-  };
-
   const styles = {
     container: {
       display: 'flex',
@@ -710,105 +687,105 @@ const ProductProfile = () => {
       alignItems: 'flex-start',
     },
     imageGallery: {
-            flex: '1',
-            marginRight: '10px',
-            marginTop: "40px"
-          },
-          productImage: {
-            width: '600px',
-            borderRadius: '12px',
-            padding: "5px",
-            objectFit: 'contain',
-            height: '630px',
-            boxShadow: '0 0 10px rgba(0,0,0,0.1)',
-          },
-          details: {
-            padding: '40px',
-            flex: '2',
-          },
-          title: {
-            fontSize: '32px',
-            fontWeight: 'bold',
-            marginBottom: '15px',
-          },
-          price: {
-            fontSize: '28px',
-            color: '#e63946',
-            marginBottom: '15px',
-          },
-          reviews: {
-            display: 'flex',
-            alignItems: 'center',
-            marginBottom: '25px',
-          },
-          stars: {
-            color: '#ffcc00',
-            marginRight: '15px',
-            fontSize: '20px',
-          },
-          reviewsText: {
-            color: '#333',
-            fontSize: '18px',
-          },
-          description: {
-            marginBottom: '25px',
-            color: '#555',
-            lineHeight: '1.8',
-            fontSize: '18px',
-          },
-          stock: {
-            marginBottom: '15px',
-            fontSize: '18px',
-          },
-          productType: {
-            marginBottom: '15px',
-            fontSize: '18px',
-          },
-          cartOptions: {
-            display: 'flex',
-            alignItems: 'center',
-            marginBottom: '25px',
-          },
-          quantityInput: {
-            width: '70px',
-            padding: '10px',
-            marginRight: '30px',
-            fontSize: '18px',
-          },
-          addToCartButton: {
-            padding: '15px 30px',
-            border: '1px solid #000',
-            cursor: 'pointer',
-            backgroundColor: '#fff',
-            color: '#000',
-            marginRight: '30px',
-            display: 'flex',
-            alignItems: 'center',
-            fontSize: '18px',
-          },
-          wishlistButton: {
-            padding: '15px 30px',
-            border: '1px solid #000',
-            cursor: 'pointer',
-            backgroundColor: '#fff',
-            color: '#000',
-            marginRight: '30px',
-            display: 'flex',
-            alignItems: 'center',
-            fontSize: '18px',
-          },
-          buyNowButton: {
-            padding: "20px 40px",
-            backgroundColor: '#000',
-            color: '#fff',
-            border: 'none',
-            cursor: 'pointer',
-            width: '28%',
-            marginTop: '30px',
-            display: 'flex',
-            alignItems: 'center',
-            fontSize: '25px',
-          },
+      flex: '1',
+      marginRight: '10px',
+      marginTop: "40px"
+    },
+    productImage: {
+      width: '600px',
+      borderRadius: '12px',
+      padding:"5px",
+      objectFit: 'contain',
+      height: '630px',
+      boxShadow: '0 0 10px rgba(0,0,0,0.1)',
+    },
+    details: {
+      padding: '40px',
+      flex: '2',
+    },
+    title: {
+      fontSize: '32px',
+      fontWeight: 'bold',
+      marginBottom: '15px',
+    },
+    price: {
+      fontSize: '28px',
+      color: '#e63946',
+      marginBottom: '15px',
+    },
+    reviews: {
+      display: 'flex',
+      alignItems: 'center',
+      marginBottom: '25px',
+    },
+    stars: {
+      color: '#ffcc00',
+      marginRight: '15px',
+      fontSize: '20px',
+    },
+    reviewsText: {
+      color: '#333',
+      fontSize: '18px',
+    },
+    description: {
+      marginBottom: '25px',
+      color: '#555',
+      lineHeight: '1.8',
+      fontSize: '18px',
+    },
+    stock: {
+      marginBottom: '15px',
+      fontSize: '18px',
+    },
+    productType: {
+      marginBottom: '15px',
+      fontSize: '18px',
+    },
+    cartOptions: {
+      display: 'flex',
+      alignItems: 'center',
+      marginBottom: '25px',
+    },
+    quantityInput: {
+      width: '70px',
+      padding: '10px',
+      marginRight: '30px',
+      fontSize: '18px',
+    },
+    addToCartButton: {
+      padding: '15px 30px',
+      border: '1px solid #000',
+      cursor: 'pointer',
+      backgroundColor: '#fff',
+      color: '#000',
+      marginRight: '30px',
+      display: 'flex',
+      alignItems: 'center',
+      fontSize: '18px',
+    },
+    wishlistButton: {
+      padding: '15px 30px',
+      border: '1px solid #000',
+      cursor: 'pointer',
+      backgroundColor: '#fff',
+      color: '#000',
+      marginRight: '30px',
+      display: 'flex',
+      alignItems: 'center',
+      fontSize: '18px',
+    },
+    buyNowButton: {
+      padding:"20px 40px",
+      backgroundColor: '#000',
+      color: '#fff',
+      border: 'none',
+      cursor: 'pointer',
+      width: '28%',
+      marginTop: '30px',
+      display: 'flex',
+      alignItems: 'center',
+      fontSize: '25px',
+    },
     heart: {
       margin: '0px 20px 0px 0px',
       fontSize: '24px',
@@ -819,9 +796,17 @@ const ProductProfile = () => {
     // Other styles...
   };
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
   return (
     <div style={styles.container}>
-      <div><Navbar /></div>
+      <div><Navbar></Navbar> </div>
       <div style={styles.imageGallery}>
         <img
           src={product.image || 'https://via.placeholder.com/600'}
@@ -852,8 +837,9 @@ const ProductProfile = () => {
           <input
             type="number"
             min="1"
+            max={product.inStock} // Limiting the max quantity to available stock
             value={quantity}
-            onChange={(e) => setQuantity(e.target.value)}
+            onChange={handleQuantityChange}
             style={styles.quantityInput}
           />
           <button
@@ -870,17 +856,24 @@ const ProductProfile = () => {
           </button>
 
           <button
-            style={styles.wishlistButton}
-            onClick={addToWishlist}
-            onMouseEnter={() => setHovered(true)} // Set hovered to true on mouse enter
-            onMouseLeave={() => setHovered(false)} // Set hovered to false on mouse leave
-          >
-            <i className="fas fa-heart" style={styles.heart}></i>
-            {isInWishlist ? 'IN WISHLIST' : 'ADD TO WISHLIST'}
-          </button>
+  style={styles.wishlistButton}
+  onClick={addToWishlist}
+  onMouseEnter={() => setHoveredIcon('wishlist')}
+  onMouseLeave={() => setHoveredIcon(null)}
+>
+<i
+              className="fas fa-heart"
+              style={styles.heart}
+              onMouseEnter={(e) => e.currentTarget.style.color = 'red'}
+              onMouseLeave={(e) => e.currentTarget.style.color = '#ccc'}
+            ></i>
+      ADD TO WISHLIST
+</button>
+
         </div>
         <button style={styles.buyNowButton}>
-          BUY IT NOW
+          <i className="fas fa-credit-card" style={{ marginRight: '10px' }}></i>
+          Buy Now
         </button>
       </div>
     </div>
