@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate  } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import Navbar from './Navbar2';
+
 import Footer from './Footer';
 
 const ProductProfile = () => {

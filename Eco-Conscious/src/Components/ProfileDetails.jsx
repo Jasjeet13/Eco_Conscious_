@@ -11,34 +11,30 @@ useState - changes the state of the component, returns two things 1. current sta
 */
 
 const ProfileDetails = () => {
-  const { id } = useParams(); //object destructuring by using useParams hook
   const navigate = useNavigate();
-  console.log(`id received in ProfileDetails: ${id}`); // for debugging purposes
+  const token = localStorage.getItem("token"); // Retrieve token from localStorage
 
-  // State to store the profile details and profile id
   const [profile, setProfile] = useState(null);
-  const [profileId, setProfileId] = useState(null);
 
   useEffect(() => {
     //fetchProfile function is defined to fetch the user's profile data from the server
     const fetchProfile = async () => {
-      if (!id) {
-        //checks if id is null, undefined, or empty sting
-        console.error("No id provided "); //throw error if get executed
-        return; //out of callback function
+      if (!token) {
+        console.error("No token provided");
+        navigate("/login"); // Redirect to login if no token is available
+        return;
       }
 
       try {
-        const response = await fetch(`http://localhost:3000/api/profile/${id}`); //checks network and return promise
+        const response = await fetch("http://localhost:3000/api/profile", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
         if (response.ok) {
-          //checks if response is true or false, true if status code is between 200-299
           const data = await response.json();
-          console.log("Fetched profile data:", data);
-
           setProfile(data);
-          setProfileId(data.id);
-
-          console.log("Id received:", data.id);
         } else {
           console.error("Failed to fetch profile");
         }
@@ -48,12 +44,15 @@ const ProfileDetails = () => {
     };
 
     fetchProfile();
-  }, [id]);
+  }, [token, navigate]);
 
   const handleDelete = async () => {
     try {
-      const response = await fetch(`http://localhost:3000/api/delete/${id}`, {
+      const response = await fetch("http://localhost:3000/api/delete", {
         method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       if (response.ok) {
@@ -61,13 +60,10 @@ const ProfileDetails = () => {
         navigate("/");
       } else {
         const errorData = await response.json();
-        console.error(
-          "Failed to delete profile:",
-          errorData.message || errorData
-        );
+        console.error("Failed to delete profile:", errorData.message || errorData);
       }
     } catch (error) {
-      console.error("Error deleting profile:");
+      console.error("Error deleting profile:", error);
     }
   };
 
@@ -172,39 +168,10 @@ const ProfileDetails = () => {
           <span style={styles.label}>Address</span>
           <span style={styles.value}>{profile.address}</span>
         </div>
+
         <div style={styles.buttonGroup}>
-          <button
-            style={styles.button}
-            onMouseOver={(e) => {
-              e.currentTarget.style.backgroundColor =
-                styles.buttonHover.backgroundColor;
-              e.currentTarget.style.transform = styles.buttonHover.transform;
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.backgroundColor =
-                styles.button.backgroundColor;
-              e.currentTarget.style.transform = "scale(1)";
-            }}
-            onClick={() => navigate(`/edit/${id}`)}
-          >
-            <b>EDIT</b>
-          </button>
-          <button
-            style={styles.button}
-            onMouseOver={(e) => {
-              e.currentTarget.style.backgroundColor =
-                styles.buttonHover.backgroundColor;
-              e.currentTarget.style.transform = styles.buttonHover.transform;
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.backgroundColor =
-                styles.button.backgroundColor;
-              e.currentTarget.style.transform = "scale(1)";
-            }}
-            onClick={handleDelete}
-          >
-            <b>DELETE ACCOUNT</b>
-          </button>
+          <button style={styles.button} onClick={() => navigate(`/edit`)}>EDIT</button>
+          <button style={styles.button} onClick={handleDelete}>DELETE ACCOUNT</button>
         </div>
       </div>
     </div>

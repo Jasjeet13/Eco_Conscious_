@@ -1,7 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate hook for React Router
 
 const SignUp_Login = () => {
   const [error, setError] = useState(""); // State to handle error messages
+  const navigate = useNavigate(); // useNavigate hook to handle navigation after login
+
+  useEffect(() => {
+    // Check if the user is already authenticated based on token
+    const token = localStorage.getItem("token");
+    if (token) {
+      // Attempt to verify the token by making a simple fetch request to a protected route
+      fetch("http://localhost:3000/api/profile", {
+        method: "GET",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
+      })
+        .then((response) => {
+          if (response.status === 401) {
+            // If unauthorized, clear the token and show the login page
+            localStorage.removeItem("token");
+          } else if (response.ok) {
+            navigate("/home");
+          }
+        })
+        .catch((error) => {
+          console.error("Error verifying token:", error);
+        });
+    }
+  }, [navigate]);
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -19,25 +46,30 @@ const SignUp_Login = () => {
       });
 
       if (!response.ok) {
-        const errorData = await response.json(); // Read the response as JSON
-        throw new Error(errorData.message); // Use the message from the response
+        const errorData = await response.json();
+        throw new Error(errorData.message);
       }
 
       const data = await response.json();
       console.log("Login successful:", data);
 
-      // Assuming the ID is returned as part of the response, use it to navigate to the /home/id route
-      const userId = data.id; // Adjust based on your response structure
-      window.location.href = `/home/${userId}`;
+      // Redirect the user after login by token or other required info
+      const token = data.token; // Make sure the token is part of the response
+      if (token) {
+        // Set token in localStorage or sessionStorage
+        localStorage.setItem('token', token); // or use sessionStorage
+        navigate(`/home`); // Navigate to home after successful login
+      }
+
     } catch (error) {
       console.error("Error during login:", error);
-      setError(error.message); // Set error message to state
+      setError(error.message); // Display error message
     }
   };
 
   const handleSignUp = () => {
-    // Redirect to the signup route
-    window.location.href = `/signup`;
+    // Navigate to the signup page
+    navigate("/signup");
   };
 
   const styles = {
@@ -87,29 +119,32 @@ const SignUp_Login = () => {
     inputGroup: {
       marginBottom: "30px",
     },
+    input: {
+      width: "100%",
+      padding: "12px",
+      fontSize: "16px",
+      border: "1px solid #ccc",
+      // borderRadius: "5px",
+      boxShadow: "0 0 0 1000px white inset",
+      backgroundColor: "transparent",
+      color: "black",
+      outline: "none",
+    },
     label: {
       display: "block",
       marginBottom: "10px",
       fontSize: "14px",
       color: "black",
     },
-    input: {
-      width: "100%",
-      padding: "15px",
-      borderRadius: "0px",
-      border: "none",
-      borderBottom: "1px solid #ccc",
-      fontSize: "16px",
-      backgroundColor: "transparent",
-    },
+   
     button: {
-      backgroundColor: "#c49b63",
+      backgroundColor: "#007F4E",
       color: "white",
       padding: "15px 30px",
       border: "none",
       cursor: "pointer",
       fontSize: "18px",
-      borderRadius: "30px",
+      //  borderRadius: "30px",
       marginBottom: "10px",
     },
     heading: {
@@ -130,7 +165,7 @@ const SignUp_Login = () => {
       border: "2px solid white",
       cursor: "pointer",
       fontSize: "18px",
-      borderRadius: "30px",
+      // borderRadius: "30px",
       marginBottom: "20px",
       textAlign: "center",
     },
@@ -140,13 +175,14 @@ const SignUp_Login = () => {
     },
   };
 
+
+
   return (
     <div style={styles.container}>
       <div style={{ ...styles.box, ...styles.loginBox }}>
         <div>
           <h2 style={styles.heading}>Welcome back :)</h2>
-          {error && <div style={styles.error}>{error}</div>}{" "}
-          {/* Display error message */}
+          {error && <div style={styles.error}>{error}</div>}
           <form onSubmit={handleLogin}>
             <div style={styles.inputGroup}>
               <label htmlFor="email" style={styles.label}>
