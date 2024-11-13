@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 import SignUp_Login from "./Components/SignUp_Login";
 import SignUp from "./Components/SignUp";
 import Home from "./Components/Home";
@@ -34,7 +39,6 @@ function App() {
         <Route path="/edit/:id" element={<Edit />} />
         <Route path="/wishlist" element={<Wishlist />} />
 
-        {/* Add other routes here */}
       </Routes>
       {showFooter && <Footer />}
     </>
