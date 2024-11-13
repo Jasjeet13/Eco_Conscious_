@@ -1,10 +1,14 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const router = express.Router();
 const validateLogin = require("../Middlewares/validateLogin");
 const comparePassword = require("../Middlewares/comparePassword");
 const User = require("../models/user");
+const dotenv = require('dotenv');
+dotenv.config();
 
 
+const JWT_SECRET = process.env.JWT_SECRET;;
 
 // Handle login form submission
 router.post('/', validateLogin, async (req, res) => {
@@ -23,7 +27,14 @@ router.post('/', validateLogin, async (req, res) => {
       return res.status(400).json({ message: 'Incorrect password' });
     }
 
-    res.status(200).json({ message: 'Login successful', id: user._id });
+    // Generate JWT token
+    const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '1h' });
+
+    // Send token in the response body instead of using cookies
+    res.status(200).json({
+      message: 'Login successful',
+      token: token,  // Include the token in the response body
+    });
   } catch (error) {
     console.error('Error during login:', error);
     res.status(500).json({ message: 'Error logging in' });

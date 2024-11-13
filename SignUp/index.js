@@ -11,7 +11,12 @@ const wishlistRouter = require('./routes/wishlist');
 
 
 const errorHandler = require("./Middlewares/errorHandler");
+const authenticateToken = require("./Middlewares/tokenAuthentication");
 const cors = require('cors');
+const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const app = express();
 const port = 3000;
@@ -44,13 +49,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json()); // Support JSON-encoded bodies
 app.use(express.static('public')); // Serve static files
 
+
+
 app.use('/signup', signupRouter);
 app.use('/login', loginRouter);
-app.use('/api/profile', profileRouter);
-app.use('/api/products', productsRouter);
-app.use('/api/edit',editRouter);
-app.use('/api/delete',deleteRouter);
-app.use('/api/wishlist', wishlistRouter);
+
+
+app.use('/api/profile', authenticateToken, profileRouter);
+app.use('/api/products', authenticateToken, productsRouter);
+app.use('/api/edit', authenticateToken, editRouter);
+app.use('/api/delete', authenticateToken, deleteRouter);
+
 // Error handling middleware
 app.use(errorHandler);
 
