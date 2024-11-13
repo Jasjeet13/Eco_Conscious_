@@ -65,7 +65,7 @@ const Wishlist = () => {
       flexDirection: 'column',
       alignItems: 'center',
       width: '370px',
-      height: '430px',
+      height: '440px',
       padding: '10px',
       border: '1px solid #e0e0e0',
       borderRadius: '8px',
@@ -122,6 +122,7 @@ const Wishlist = () => {
         borderRadius: '5px',
         cursor: 'pointer',
         marginTop: '10px',
+        marginBottom: '10px',
         fontSize: '16px',
       },
       addButtonHover: {

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate  } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Navbar from './Navbar2';
-import Footer from './Footer';
 
 const ProductProfile = () => {
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const [hoveredIcon, setHoveredIcon] = useState(null);
+  const [isInWishlist, setIsInWishlist] = useState(false);
+  const [hovered, setHovered] = useState(false); // Track hover state
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -17,6 +17,11 @@ const ProductProfile = () => {
         const response = await fetch(`http://localhost:3000/api/products/${id}`);
         const data = await response.json();
         setProduct(data);
+
+        // Check if the product is already in the wishlist
+        const wishlistResponse = await fetch('http://localhost:3000/api/wishlist');
+        const wishlistData = await wishlistResponse.json();
+        setIsInWishlist(wishlistData.some(item => item.productId === data._id));
       } catch (error) {
         console.error('Error fetching product:', error);
       }
@@ -25,11 +30,12 @@ const ProductProfile = () => {
     fetchProduct();
   }, [id]);
 
-  if (!product) {
-    return <div>Loading...</div>;
-  }
-
   const addToWishlist = async () => {
+    if (isInWishlist) {
+      alert("This item is already in your wishlist.");
+      return;
+    }
+
     try {
       const response = await fetch('http://localhost:3000/api/wishlist/add', {
         method: 'POST',
@@ -41,11 +47,12 @@ const ProductProfile = () => {
           name: product.name,
           price: product.price,
           image: product.image,
-          description:product.description,
+          description: product.description,
         }),
       });
       const data = await response.json();
       if (response.ok) {
+        setIsInWishlist(true);
         alert(data.message);
         navigate('/wishlist');
       } else {
@@ -55,10 +62,15 @@ const ProductProfile = () => {
       console.error('Error adding to wishlist:', error);
     }
   };
+
+  if (!product) {
+    return <div>Loading...</div>;
+  }
+
   const styles = {
     container: {
       display: 'flex',
-      padding: '60px 30px', 
+      padding: '60px 30px',
       maxWidth: '100%',
       margin: '0 auto',
       alignItems: 'flex-start',
@@ -71,7 +83,7 @@ const ProductProfile = () => {
     productImage: {
       width: '600px',
       borderRadius: '12px',
-      padding:"5px",
+      padding: "5px",
       objectFit: 'contain',
       height: '630px',
       boxShadow: '0 0 10px rgba(0,0,0,0.1)',
@@ -152,7 +164,7 @@ const ProductProfile = () => {
       fontSize: '18px',
     },
     buyNowButton: {
-      padding:"20px 40px",
+      padding: "20px 40px",
       backgroundColor: '#000',
       color: '#fff',
       border: 'none',
@@ -164,22 +176,17 @@ const ProductProfile = () => {
       fontSize: '25px',
     },
     heart: {
-      margin: '0px 20px 0px 0px',  // top right bottom left
+      margin: '0px 20px 0px 0px',
       fontSize: '24px',
       cursor: 'pointer',
-      color: '#ccc',
+      color: isInWishlist ? 'red' : hovered ? 'red' : '#ccc', // Conditional color
       transition: 'color 0.3s ease',
-    },
-    icon: {
-      marginRight: '15px',
-      fontSize: '20px',
-      transition: 'color 0.3s, transform 0.3s',
     },
   };
 
   return (
     <div style={styles.container}>
-      <div><Navbar></Navbar> </div>
+      <div><Navbar /></div>
       <div style={styles.imageGallery}>
         <img
           src={product.image || 'https://via.placeholder.com/600'}
@@ -196,9 +203,7 @@ const ProductProfile = () => {
             3 reviews
           </a>
         </div>
-        <p style={styles.description}>
-          {product.description}
-        </p>
+        <p style={styles.description}>{product.description}</p>
         <p style={styles.stock}>
           <strong>Availability:</strong> {product.inStock ? 'In stock' : 'Out of stock'}
         </p>
@@ -214,38 +219,25 @@ const ProductProfile = () => {
             onChange={(e) => setQuantity(e.target.value)}
             style={styles.quantityInput}
           />
-          <button
-            style={styles.addToCartButton}
-            onMouseEnter={() => setHoveredIcon('cart')}
-            onMouseLeave={() => setHoveredIcon(null)}
-          >
-            <i
-              className={hoveredIcon === 'cart' ? 'fas fa-cart-plus' : 'fas fa-shopping-cart'}
-              style={styles.icon}
-            ></i>
+          <button style={styles.addToCartButton}>
+            <i className="fas fa-shopping-cart" style={styles.icon}></i>
             ADD TO CART
           </button>
           <button
-  style={styles.wishlistButton}
-  onClick={addToWishlist}
-  onMouseEnter={() => setHoveredIcon('wishlist')}
-  onMouseLeave={() => setHoveredIcon(null)}
->
-<i
+            style={styles.wishlistButton}
+            onClick={addToWishlist}
+          >
+            <i
               className="fas fa-heart"
               style={styles.heart}
-              onMouseEnter={(e) => e.currentTarget.style.color = 'red'}
-              onMouseLeave={(e) => e.currentTarget.style.color = '#ccc'}
+              onMouseEnter={() => setHovered(true)}
+              onMouseLeave={() => setHovered(false)}
             ></i>
-      ADD TO WISHLIST
-</button>
-
+            {isInWishlist ? 'IN WISHLIST' : 'ADD TO WISHLIST'}
+          </button>
         </div>
-        <button style={styles.buyNowButton}>
-          BUY IT NOW
-        </button>
+        <button style={styles.buyNowButton}>BUY IT NOW</button>
       </div>
-
     </div>
   );
 };
