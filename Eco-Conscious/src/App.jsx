@@ -4,12 +4,6 @@ import {
   Route,
   Routes,
   useLocation,
-} from "react-router-dom";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  useLocation,
   Navigate,
 } from "react-router-dom";
 import SignUp_Login from "./Components/SignUp_Login";
