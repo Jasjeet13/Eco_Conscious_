@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const productSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -7,9 +7,18 @@ const productSchema = new mongoose.Schema({
   category: { type: String, required: true },
   image: { type: String, required: true },
   inStock: { type: Boolean, required: true },
-  environmentalImpactScore: { type: Number, required: true },
+
+  //strings will be  like [high, medium, low]
+  //numbers will be in %age and score basis
+  carbonFootprint: { type: Number, required: true },
+  materialSourcing: { type: String, required: true },
+  recyclability: { type: Number, required: true },
+  waterUsage: { type: String, required: true },
+  energyEfficiency: { type: String, required: true },
+  biodegradability: { type: Number, required: true },
+  durability: { type: String, required: true },
 });
 
-const Product = mongoose.model('Product', productSchema);
+const Product = mongoose.model("Product", productSchema);
 
 module.exports = Product;
