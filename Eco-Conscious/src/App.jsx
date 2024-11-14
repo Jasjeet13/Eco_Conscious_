@@ -1,5 +1,11 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes, useLocation , Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useLocation,
+  Navigate,
+} from "react-router-dom";
 import SignUp_Login from "./Components/SignUp_Login";
 import SignUp from "./Components/SignUp";
 import Home from "./Components/Home";
@@ -13,14 +19,14 @@ import Wishlist from './Components/Wishlist';
 
 function App() {
   // Check if the user is authenticated by looking for the token in localStorage
-  const token = localStorage.getItem('token');
-  
+  const token = localStorage.getItem("token");
+
   // If there's no token, redirect to login page (this will also apply when the user logs out)
   const isAuthenticated = token !== null;
 
   return (
     <>
-       <Router>
+      <Router>
         <Navbar />
       <Routes>
         <Route path="/" element={<SignUp_Login />} />
