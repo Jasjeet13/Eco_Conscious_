@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 
 const styles = {
   container: {
@@ -185,11 +187,13 @@ const Wishlist = () => {
             >
               &times;
             </span>
-            <img src={item.image} alt={item.name} style={styles.image} />
+  <Link to={`/products/${item.category}/${item.productId}`}>
+    <img src={item.image} alt={item.name} style={styles.image} />
+  </Link>
             <div style={styles.name}>{item.name}</div>
             <div style={styles.price}>${item.price}</div>
             <div style={styles.description}>{item.description}</div>
-            <button style={styles.addButton}>View Details</button>
+            <button style={styles.addButton}>Add to bag</button>
           </div>
         ))
       ) : (
