@@ -1,12 +1,12 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import logo from "../public/logo.png";
-import { FaRegUser, FaRegHeart, FaSearch} from "react-icons/fa";
+import { FaRegUser, FaRegHeart, FaSearch } from "react-icons/fa";
 import { FiShoppingBag } from "react-icons/fi";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const token = localStorage.getItem("token"); 
+  const token = localStorage.getItem("token");
 
   const navigateToHome = () => {
     navigate("/home");
@@ -16,7 +16,7 @@ const Navbar = () => {
     if (token) {
       navigate("/profile");
     } else {
-      navigate("/login"); 
+      navigate("/login");
     }
   };
 
@@ -116,20 +116,46 @@ const Navbar = () => {
     <nav style={styles.navbar}>
       {/* Logo */}
       <img src={logo} alt="Logo" style={styles.logo} onClick={navigateToHome} />
-      <div style={styles.heading} onClick={navigateToHome}>Eco-Conscious</div>
+      <div style={styles.heading} onClick={navigateToHome}>
+        Eco-Conscious
+      </div>
 
       {/* Navigation Links */}
       <div style={styles.menuContainer}>
-        <button style={styles.menuItem} onClick={() => navigateToCategory("men's clothing")}>MEN</button>
-        <button style={styles.menuItem} onClick={() => navigateToCategory("women's clothing")}>WOMEN</button>
-        <button style={styles.menuItem} onClick={() => navigateToCategory("beauty")}>BEAUTY</button>
-        <button style={styles.menuItem} onClick={() => navigateToCategory("shoes")}>SHOES</button>
+        <button
+          style={styles.menuItem}
+          onClick={() => navigateToCategory("Beauty Products")}
+        >
+          Cosmatic
+        </button>
+        <button
+          style={styles.menuItem}
+          onClick={() => navigateToCategory("Footwear")}
+        >
+          Footwear
+        </button>
+        <button
+          style={styles.menuItem}
+          onClick={() => navigateToCategory("Bags")}
+        >
+          Bag
+        </button>
+        <button
+          style={styles.menuItem}
+          onClick={() => navigateToCategory("Clothing")}
+        >
+          Clothing
+        </button>
       </div>
 
       {/* Search Bar */}
       <div style={styles.searchContainer}>
-        <FaSearch style={{ marginRight: "15px" }}/>
-        <input type="text" placeholder="Search for products, and more" style={styles.searchInput} />
+        <FaSearch style={{ marginRight: "15px" }} />
+        <input
+          type="text"
+          placeholder="Search for products, and more"
+          style={styles.searchInput}
+        />
       </div>
 
       {/* Profile, Wishlist, and Bag Icons */}
@@ -148,7 +174,6 @@ const Navbar = () => {
         </div>
       </div>
     </nav>
-
   );
 };
 
