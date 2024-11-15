@@ -1,22 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
+
 import { useNavigate, useParams } from "react-router-dom";
 import logo from "../public/logo.png";
 import { FaRegUser, FaRegHeart, FaSearch} from "react-icons/fa";
 import { FiShoppingBag } from "react-icons/fi";
 
 const Navbar = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
+
   const token = localStorage.getItem("token"); 
+  const categories = {
+    "men": "men's clothing",
+    "women": "women's clothing",
+    beauty: "beauty",
+    shoes: "shoes",
+  };
+
 
   const navigateToHome = () => {
-    navigate("/home");
+    navigate(`/home/${id}`);
   };
 
   const navigateToProfile = () => {
     if (token) {
-      navigate("/profile");
+      navigate(`/profile/${id}`);
     } else {
-      navigate("/login"); 
+      navigate(`/login/${id}`); 
     }
   };
 
@@ -25,12 +36,28 @@ const Navbar = () => {
   };
 
   const navigateToBag = () => {
-    navigate("/bag");
+    navigate(`/bag/${id}`);
   };
 
   const navigateToCategory = (category) => {
     navigate(`/products/${category}`);
   };
+  const handleSearch = () => {
+    const lowerSearchTerm = searchTerm.toLowerCase();
+    if (categories[lowerSearchTerm]) {
+      navigateToCategory(categories[lowerSearchTerm]);
+    } else {
+      navigate(`/products?search=${searchTerm}`);
+    }
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  };
+
+
 
   const styles = {
     navbar: {
@@ -128,9 +155,17 @@ const Navbar = () => {
 
       {/* Search Bar */}
       <div style={styles.searchContainer}>
-        <FaSearch style={{ marginRight: "15px" }}/>
-        <input type="text" placeholder="Search for products, and more" style={styles.searchInput} />
+        <FaSearch style={{ cursor: "pointer" }} onClick={handleSearch} />
+        <input
+          type="text"
+          placeholder="Search for products, and more"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          onKeyPress={handleKeyPress}
+          style={styles.searchInput}
+        />
       </div>
+
 
       {/* Profile, Wishlist, and Bag Icons */}
       <div style={styles.iconsContainer}>
