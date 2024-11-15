@@ -13,7 +13,7 @@ const Navbar = () => {
   const token = localStorage.getItem("token"); 
 
   const categories = {
-    beauty: "Beauty Products",
+    cosmatic: "Beauty Products",
     footwear: "Footwear",
     bag: "Bags",
     clothing: "Clothing",
