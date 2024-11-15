@@ -1,26 +1,25 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const signupRouter = require("./routes/signup"); 
+const express = require("express");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const dotenv = require("dotenv");
+
+const signupRouter = require("./routes/signup");
 const loginRouter = require("./routes/login");
-const profileRouter = require("./routes/profile")
-const productsRouter = require('./routes/products');
-const editRouter = require("./routes/edit")
+const profileRouter = require("./routes/profile");
+const productsRouter = require("./routes/products");
+const editRouter = require("./routes/edit");
 const deleteRouter = require("./routes/delete");
-const wishlistRouter = require('./routes/wishlist');
+const wishlistRouter = require("./routes/wishlist");
+// const cartRouter = require('./routes/cart'); // Include your cart route
 
-
-const errorHandler = require("./Middlewares/errorHandler");
-const authenticateToken = require("./Middlewares/tokenAuthentication");
-const cors = require('cors');
-const jwt = require('jsonwebtoken');
-const dotenv = require('dotenv');
+const errorHandler = require("./middlewares/errorHandler");
+const authenticateToken = require("../SignUp/Middlewares/tokenAuthentication");
 
 dotenv.config();
 
 const app = express();
 const port = 3000;
-
 
 // Connect to MongoDB
 mongoose
@@ -35,19 +34,20 @@ mongoose
     console.error("Error connecting to MongoDB:", error.message);
   });
 
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Frontend URL
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    credentials: true,
+  })
+);
 
-app.use(cors({
-  origin: 'http://localhost:5173', 
-  methods: ['GET', 'POST' , 'PUT' , 'PATCH' , 'DELETE'], 
-  credentials: true,
-}));
-
-app.options('*', cors());
+app.options("*", cors());
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json()); // Support JSON-encoded bodies
-app.use(express.static('public')); // Serve static files
+app.use(bodyParser.json());
+app.use(express.static("public")); // Serve static files
 
 
 
@@ -65,6 +65,7 @@ app.use('/api/wishlist', authenticateToken, wishlistRouter);
 // Error handling middleware
 app.use(errorHandler);
 
+// Start server
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });

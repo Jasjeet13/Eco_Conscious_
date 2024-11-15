@@ -17,6 +17,7 @@ const ProfileDetails = () => {
   const [profile, setProfile] = useState(null);
 
   useEffect(() => {
+    //fetchProfile function is defined to fetch the user's profile data from the server
     const fetchProfile = async () => {
       if (!token) {
         console.error("No token provided");

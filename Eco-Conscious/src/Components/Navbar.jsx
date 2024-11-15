@@ -2,13 +2,41 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../public/logo.png";
 import { FaRegUser, FaRegHeart, FaSearch } from "react-icons/fa";
+import { FaRegUser, FaRegHeart, FaSearch } from "react-icons/fa";
 import { FiShoppingBag } from "react-icons/fi";
 
 const Navbar = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const token = localStorage.getItem("token"); 
+
+  const categories = {
+    beauty: "Beauty Products",
+    footwear: "Footwear",
+    bag: "Bags",
+    clothing: "Clothing",
+  };
+
+  const navigateToHome = () => {
+    navigate("/home");
+  };
   const token = localStorage.getItem("token");
   const [isProfileMenuVisible, setIsProfileMenuVisible] = useState(false);
 
+  const navigateToProfile = () => {
+    if (token) {
+      navigate("/profile");
+    } else {
+      navigate("/login"); 
+      // navigate(`/login/${id}`);
+    }
+  };
+
+  const navigateToWishlist = () => {
+    navigate("/wishlist");
+  };
   const showProfileMenu = () => setIsProfileMenuVisible(true);
   const hideProfileMenu = () => setIsProfileMenuVisible(false);
 
@@ -21,6 +49,26 @@ const Navbar = () => {
     // Navigate to the login page
     navigate("/");
   };
+
+  const navigateToCategory = (category) => {
+    navigate(`/products/${category}`);
+  };
+  const handleSearch = () => {
+    const lowerSearchTerm = searchTerm.toLowerCase();
+    if (categories[lowerSearchTerm]) {
+      navigateToCategory(categories[lowerSearchTerm]);
+    } else {
+      navigate(`/products?search=${searchTerm}`);
+    }
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  };
+
+
 
   const styles = {
     navbar: {
@@ -97,19 +145,49 @@ const Navbar = () => {
   return (
     <nav style={styles.navbar}>
       <img src={logo} alt="Logo" style={styles.logo} onClick={navigateToHome} />
-      <div style={styles.heading} onClick={navigateToHome}>Eco-Conscious</div>
+      <div style={styles.heading} onClick={navigateToHome}>
+        Eco-Conscious
+      </div>
 
       <div style={styles.menuContainer}>
-        <button style={styles.menuItem} onClick={() => navigateToCategory("men's clothing")}>MEN</button>
-        <button style={styles.menuItem} onClick={() => navigateToCategory("women's clothing")}>WOMEN</button>
-        <button style={styles.menuItem} onClick={() => navigateToCategory("beauty")}>BEAUTY</button>
-        <button style={styles.menuItem} onClick={() => navigateToCategory("shoes")}>SHOES</button>
+        <button
+          style={styles.menuItem}
+          onClick={() => navigateToCategory("Beauty Products")}
+        >
+          Cosmatic
+        </button>
+        <button
+          style={styles.menuItem}
+          onClick={() => navigateToCategory("Footwear")}
+        >
+          Footwear
+        </button>
+        <button
+          style={styles.menuItem}
+          onClick={() => navigateToCategory("Bags")}
+        >
+          Bag
+        </button>
+        <button
+          style={styles.menuItem}
+          onClick={() => navigateToCategory("Clothing")}
+        >
+          Clothing
+        </button>
       </div>
 
       <div style={styles.searchContainer}>
-        <FaSearch style={{ marginRight: "15px" }} />
-        <input type="text" placeholder="Search for products, and more" style={styles.searchInput} />
+        <FaSearch style={{ cursor: "pointer" }} onClick={handleSearch} />
+        <input
+          type="text"
+          placeholder="Search for products, and more"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          onKeyPress={handleKeyPress}
+          style={styles.searchInput}
+        />
       </div>
+
 
       <div style={styles.iconsContainer}>
         <div
@@ -151,3 +229,4 @@ const Navbar = () => {
 
 
 export default Navbar;
+
