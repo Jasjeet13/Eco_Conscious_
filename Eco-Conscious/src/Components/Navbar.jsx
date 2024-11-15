@@ -1,35 +1,25 @@
-import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import logo from "../public/logo.png";
-import { FaRegUser, FaRegHeart, FaSearch} from "react-icons/fa";
+import { FaRegUser, FaRegHeart, FaSearch } from "react-icons/fa";
 import { FiShoppingBag } from "react-icons/fi";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const token = localStorage.getItem("token"); 
+  const token = localStorage.getItem("token");
+  const [isProfileMenuVisible, setIsProfileMenuVisible] = useState(false);
 
-  const navigateToHome = () => {
-    navigate("/home");
-  };
+  const showProfileMenu = () => setIsProfileMenuVisible(true);
+  const hideProfileMenu = () => setIsProfileMenuVisible(false);
 
-  const navigateToProfile = () => {
-    if (token) {
-      navigate("/profile");
-    } else {
-      navigate("/login"); 
-    }
-  };
-
-  const navigateToWishlist = () => {
-    navigate("/wishlist");
-  };
-
-  const navigateToBag = () => {
-    navigate("/bag");
-  };
-
-  const navigateToCategory = (category) => {
-    navigate(`/products/${category}`);
+  const navigateToHome = () => navigate("/home");
+  const navigateToCategory = (category) => navigate(`/products/${category}`);
+  const logout = () => {
+    // Clear token from localStorage
+    localStorage.removeItem("token");
+  
+    // Navigate to the login page
+    navigate("/");
   };
 
   const styles = {
@@ -37,7 +27,7 @@ const Navbar = () => {
       display: "flex",
       alignItems: "center",
       justifyContent: "space-between",
-      padding: "20px 20px",
+      padding: "20px",
       boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.1)",
       position: "fixed",
       top: 0,
@@ -45,20 +35,9 @@ const Navbar = () => {
       width: "100%",
       backgroundColor: "#ffffff",
       zIndex: 1000,
-      boxSizing: "border-box",
     },
-    logo: {
-      height: "40px",
-      cursor: "pointer",
-      marginLeft: "20px",
-    },
-    heading: {
-      marginLeft: "10px",
-      fontSize: "18px",
-      fontWeight: "bold",
-      color: "#3e4152",
-      cursor: "pointer",
-    },
+    logo: { height: "40px", cursor: "pointer", marginLeft: "20px" },
+    heading: { marginLeft: "10px", fontSize: "18px", fontWeight: "bold", color: "#3e4152", cursor: "pointer" },
     menuContainer: {
       display: "flex",
       flex: 1,
@@ -68,37 +47,17 @@ const Navbar = () => {
       fontWeight: "500",
       color: "#3e4152",
     },
-    menuItem: {
-      cursor: "pointer",
-      backgroundColor: "transparent",
-      border: "none",
-      color: "black",
-      fontSize: "14px",
-      fontWeight: "600",
-    },
+    menuItem: { cursor: "pointer", backgroundColor: "transparent", border: "none", color: "black", fontSize: "14px", fontWeight: "600" },
     searchContainer: {
       display: "flex",
       alignItems: "center",
       backgroundColor: "#f5f5f6",
       padding: "10px 20px",
-      //borderRadius: "20px",
       marginRight: "70px",
       width: "500px",
     },
-    searchInput: {
-      border: "none",
-      backgroundColor: "transparent",
-      outline: "none",
-      width: "100%",
-      fontSize: "14px",
-      color: "#3e4152",
-    },
-    iconsContainer: {
-      display: "flex",
-      alignItems: "center",
-      gap: "40px",
-      marginRight: "40px",
-    },
+    searchInput: { border: "none", backgroundColor: "transparent", outline: "none", width: "100%", fontSize: "14px", color: "#3e4152" },
+    iconsContainer: { display: "flex", alignItems: "center", gap: "40px", marginRight: "40px" },
     iconWrapper: {
       display: "flex",
       flexDirection: "column",
@@ -106,19 +65,40 @@ const Navbar = () => {
       fontSize: "14px",
       color: "#3e4152",
       cursor: "pointer",
+      height: "100%",
+      justifyContent: "center",
+      borderBottom: "2px solid transparent", 
+      transition: "border-bottom 0.3s ease",
     },
-    icon: {
-      fontSize: "20px",
+    iconWrapperHover: {
+      borderBottom: "2px solid #007F4E", 
+    },
+    icon: { fontSize: "20px" },
+    profileMenu: {
+      position: "absolute",
+      top: "60px",
+      right: "110px",
+      width: "200px",
+      backgroundColor: "#ffffff",
+      boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+      borderRadius: "8px",
+      overflow: "hidden",
+      zIndex: 1001,
+    },
+    profileMenuItem: {
+      padding: "10px 20px",
+      fontSize: "14px",
+      color: "#333",
+      cursor: "pointer",
+      borderBottom: "1px solid #f0f0f0",
     },
   };
 
   return (
     <nav style={styles.navbar}>
-      {/* Logo */}
       <img src={logo} alt="Logo" style={styles.logo} onClick={navigateToHome} />
       <div style={styles.heading} onClick={navigateToHome}>Eco-Conscious</div>
 
-      {/* Navigation Links */}
       <div style={styles.menuContainer}>
         <button style={styles.menuItem} onClick={() => navigateToCategory("men's clothing")}>MEN</button>
         <button style={styles.menuItem} onClick={() => navigateToCategory("women's clothing")}>WOMEN</button>
@@ -126,30 +106,48 @@ const Navbar = () => {
         <button style={styles.menuItem} onClick={() => navigateToCategory("shoes")}>SHOES</button>
       </div>
 
-      {/* Search Bar */}
       <div style={styles.searchContainer}>
-        <FaSearch style={{ marginRight: "15px" }}/>
+        <FaSearch style={{ marginRight: "15px" }} />
         <input type="text" placeholder="Search for products, and more" style={styles.searchInput} />
       </div>
 
-      {/* Profile, Wishlist, and Bag Icons */}
       <div style={styles.iconsContainer}>
-        <div style={styles.iconWrapper} onClick={navigateToProfile}>
+        <div
+          style={{ ...styles.iconWrapper, ...(isProfileMenuVisible && styles.iconWrapperHover) }}
+          onMouseEnter={showProfileMenu}
+          onMouseLeave={hideProfileMenu}
+        >
           <FaRegUser style={styles.icon} />
           <span>Profile</span>
+
+          {isProfileMenuVisible && (
+            <div style={styles.profileMenu}>
+              <div style={styles.profileMenuItem} onClick={() => navigate("/profile")}>Account</div>
+              <div style={styles.profileMenuItem} onClick={() => navigate("/wishlist")}>Wishlist</div>
+              <div style={styles.profileMenuItem} onClick={() => navigate("/gift-cards")}>Orders</div>
+              <div style={styles.profileMenuItem} onClick={() => navigate("/contact")}>Edit Account</div>
+              <div style={styles.profileMenuItem} onClick={logout}>Logout</div>
+            </div>
+          )}
         </div>
-        <div style={styles.iconWrapper} onClick={navigateToWishlist}>
+
+        <div
+          style={{ ...styles.iconWrapper }}
+          onMouseEnter={() => setIsProfileMenuVisible(false)}
+          onMouseLeave={() => setIsProfileMenuVisible(false)}
+        >
           <FaRegHeart style={styles.icon} />
           <span>Wishlist</span>
         </div>
-        <div style={styles.iconWrapper} onClick={navigateToBag}>
+        <div style={{ ...styles.iconWrapper }} onClick={() => navigate("/bag")}>
           <FiShoppingBag style={styles.icon} />
           <span>Bag</span>
         </div>
       </div>
     </nav>
-
   );
 };
+
+
 
 export default Navbar;

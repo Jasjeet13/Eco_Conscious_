@@ -8,6 +8,7 @@ import ProductProfile from "./Components/ProductProfile";
 import ProductList from "./Components/ProductList";
 import Edit from "./Components/Edit";
 import Footer from "./Components/Footer";
+import Wishlist from "./Components/Wishlist";
 import Navbar from "./Components/Navbar";
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
         <Route path="/products/:category" element={<ProductList />} />
         <Route path="/products/:category/:id" element={<ProductProfile />} />
         <Route path="/edit" element={isAuthenticated ? <Edit /> : <Navigate to="/" />} />
+        <Route path="/wishlist" element={isAuthenticated ? <Wishlist /> : <Navigate to="/" />} />
       </Routes>
       <Footer />
     </Router>

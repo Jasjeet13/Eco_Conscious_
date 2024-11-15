@@ -59,6 +59,8 @@ app.use('/api/profile', authenticateToken, profileRouter);
 app.use('/api/products', authenticateToken, productsRouter);
 app.use('/api/edit', authenticateToken, editRouter);
 app.use('/api/delete', authenticateToken, deleteRouter);
+app.use('/api/wishlist', authenticateToken, wishlistRouter);
+
 
 // Error handling middleware
 app.use(errorHandler);
