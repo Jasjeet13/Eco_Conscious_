@@ -14,7 +14,7 @@ const wishlistRouter = require("./routes/wishlist");
 // const cartRouter = require('./routes/cart'); // Include your cart route
 
 const errorHandler = require("./middlewares/errorHandler");
-const authenticateToken = require("./Middlewares/tokenAuthentication");
+const authenticateToken = require("../SignUp/Middlewares/tokenAuthentication");
 
 dotenv.config();
 

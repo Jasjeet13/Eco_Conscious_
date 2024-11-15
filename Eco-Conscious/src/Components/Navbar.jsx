@@ -2,12 +2,13 @@ import React, { useState } from "react";
 
 import { useNavigate, useParams } from "react-router-dom";
 import logo from "../public/logo.png";
-import { FaRegUser, FaRegHeart, FaSearch} from "react-icons/fa";
+import { FaRegUser, FaRegHeart, FaSearch } from "react-icons/fa";
 import { FiShoppingBag } from "react-icons/fi";
 
 const Navbar = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+<<<<<<< HEAD
   const [searchTerm, setSearchTerm] = useState("");
 
   const token = localStorage.getItem("token"); 
@@ -18,6 +19,9 @@ const Navbar = () => {
     shoes: "shoes",
   };
 
+=======
+  const token = localStorage.getItem("token");
+>>>>>>> 631cfd7b4f323bb1907a63cefe25a239920ac33a
 
   const navigateToHome = () => {
     navigate(`/home/${id}`);
@@ -27,7 +31,11 @@ const Navbar = () => {
     if (token) {
       navigate(`/profile/${id}`);
     } else {
+<<<<<<< HEAD
       navigate(`/login/${id}`); 
+=======
+      navigate("/login");
+>>>>>>> 631cfd7b4f323bb1907a63cefe25a239920ac33a
     }
   };
 
@@ -143,18 +151,41 @@ const Navbar = () => {
     <nav style={styles.navbar}>
       {/* Logo */}
       <img src={logo} alt="Logo" style={styles.logo} onClick={navigateToHome} />
-      <div style={styles.heading} onClick={navigateToHome}>Eco-Conscious</div>
+      <div style={styles.heading} onClick={navigateToHome}>
+        Eco-Conscious
+      </div>
 
       {/* Navigation Links */}
       <div style={styles.menuContainer}>
-        <button style={styles.menuItem} onClick={() => navigateToCategory("men's clothing")}>MEN</button>
-        <button style={styles.menuItem} onClick={() => navigateToCategory("women's clothing")}>WOMEN</button>
-        <button style={styles.menuItem} onClick={() => navigateToCategory("beauty")}>BEAUTY</button>
-        <button style={styles.menuItem} onClick={() => navigateToCategory("shoes")}>SHOES</button>
+        <button
+          style={styles.menuItem}
+          onClick={() => navigateToCategory("Beauty Products")}
+        >
+          Cosmatic
+        </button>
+        <button
+          style={styles.menuItem}
+          onClick={() => navigateToCategory("Footwear")}
+        >
+          Footwear
+        </button>
+        <button
+          style={styles.menuItem}
+          onClick={() => navigateToCategory("Bags")}
+        >
+          Bag
+        </button>
+        <button
+          style={styles.menuItem}
+          onClick={() => navigateToCategory("Clothing")}
+        >
+          Clothing
+        </button>
       </div>
 
       {/* Search Bar */}
       <div style={styles.searchContainer}>
+<<<<<<< HEAD
         <FaSearch style={{ cursor: "pointer" }} onClick={handleSearch} />
         <input
           type="text"
@@ -162,6 +193,12 @@ const Navbar = () => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           onKeyPress={handleKeyPress}
+=======
+        <FaSearch style={{ marginRight: "15px" }} />
+        <input
+          type="text"
+          placeholder="Search for products, and more"
+>>>>>>> 631cfd7b4f323bb1907a63cefe25a239920ac33a
           style={styles.searchInput}
         />
       </div>
@@ -183,7 +220,6 @@ const Navbar = () => {
         </div>
       </div>
     </nav>
-
   );
 };
 
