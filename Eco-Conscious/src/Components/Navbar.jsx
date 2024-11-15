@@ -8,34 +8,27 @@ import { FiShoppingBag } from "react-icons/fi";
 const Navbar = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-<<<<<<< HEAD
   const [searchTerm, setSearchTerm] = useState("");
 
   const token = localStorage.getItem("token"); 
+
   const categories = {
-    "men": "men's clothing",
-    "women": "women's clothing",
-    beauty: "beauty",
-    shoes: "shoes",
+    beauty: "Beauty Products",
+    footwear: "Footwear",
+    bag: "Bags",
+    clothing: "Clothing",
   };
 
-=======
-  const token = localStorage.getItem("token");
->>>>>>> 631cfd7b4f323bb1907a63cefe25a239920ac33a
-
   const navigateToHome = () => {
-    navigate(`/home/${id}`);
+    navigate("/home");
   };
 
   const navigateToProfile = () => {
     if (token) {
-      navigate(`/profile/${id}`);
+      navigate("/profile");
     } else {
-<<<<<<< HEAD
-      navigate(`/login/${id}`); 
-=======
-      navigate("/login");
->>>>>>> 631cfd7b4f323bb1907a63cefe25a239920ac33a
+      navigate("/login"); 
+      // navigate(`/login/${id}`);
     }
   };
 
@@ -44,7 +37,7 @@ const Navbar = () => {
   };
 
   const navigateToBag = () => {
-    navigate(`/bag/${id}`);
+    navigate("/bag");
   };
 
   const navigateToCategory = (category) => {
@@ -185,7 +178,6 @@ const Navbar = () => {
 
       {/* Search Bar */}
       <div style={styles.searchContainer}>
-<<<<<<< HEAD
         <FaSearch style={{ cursor: "pointer" }} onClick={handleSearch} />
         <input
           type="text"
@@ -193,12 +185,6 @@ const Navbar = () => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           onKeyPress={handleKeyPress}
-=======
-        <FaSearch style={{ marginRight: "15px" }} />
-        <input
-          type="text"
-          placeholder="Search for products, and more"
->>>>>>> 631cfd7b4f323bb1907a63cefe25a239920ac33a
           style={styles.searchInput}
         />
       </div>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
+import SecondaryNavbar from './SecondaryNavbar';
 import Navbar from "./Navbar";
 
 const ProductList = () => {
@@ -8,8 +9,9 @@ const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [filter, setFilter] = useState(""); // To manage selected filter
+  const [sortOption, setSortOption] = useState(""); // To manage sorting option
 
-  // Updated category mapping
   const categoryMapping = {
     beauty: "Beauty Products",
     footwear: "Footwear",
@@ -17,15 +19,14 @@ const ProductList = () => {
     clothing: "Clothing",
   };
 
-  const normalizedCategory =
-    categoryMapping[category.toLowerCase()] || category;
+  const normalizedCategory = categoryMapping[category.toLowerCase()] || category;
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
       .get("http://localhost:3000/api/products", {
         headers: {
-          Authorization: `Bearer ${token}`, // Set Authorization header with the token
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {
@@ -34,29 +35,75 @@ const ProductList = () => {
           normalizedCategory === "All"
             ? data
             : data.filter((product) => product.category === normalizedCategory);
-        setProducts(filteredProducts);
+
+        // Apply the filter and sort
+        const filteredAndSortedProducts = filterProducts(filteredProducts);
+        setProducts(filteredAndSortedProducts);
         setLoading(false);
       })
       .catch((error) => {
         setError(error);
         setLoading(false);
       });
-  }, [normalizedCategory]);
+  }, [normalizedCategory, filter, sortOption]); // Dependency on filter and sortOption
+
+  // Filter products based on selected filter option
+  const filterProducts = (products) => {
+    if (!filter) return products;
+
+    return products.filter((product) => {
+      switch (filter) {
+        case "low_carbon_footprint":
+          return product.carbonFootprint < 10;
+        case "material_sourcing_good":
+          return product.materialSourcing === "good";
+        case "material_sourcing_better":
+          return product.materialSourcing === "better";
+        case "material_sourcing_best":
+          return product.materialSourcing === "best";
+        case "high_recyclability":
+          return product.recyclability >= 85;
+        case "low_water_usage":
+          return product.waterUsage === "low";
+        case "high_energy_efficiency":
+          return product.energyEfficiency === "high";
+        case "high_biodegradability":
+          return product.biodegradability > 90;
+        default:
+          return true;
+      }
+    });
+  };
+
+  // Sort products based on selected sorting option
+  const sortProducts = (products) => {
+    if (sortOption === "price_low_high") {
+      return products.sort((a, b) => a.price - b.price); // Sort low to high
+    } else if (sortOption === "price_high_low") {
+      return products.sort((a, b) => b.price - a.price); // Sort high to low
+    }
+    return products;
+  };
+
+  // Apply both filter and sort
+  const filteredAndSortedProducts = sortProducts(filterProducts(products));
 
   if (loading) return <p>Loading products...</p>;
   if (error) return <p>Error fetching products: {error.message}</p>;
 
   return (
     <div style={styles.app}>
-      <h2 style={styles.title}>
-        {normalizedCategory.charAt(0).toUpperCase() +
-          normalizedCategory.slice(1)}
-      </h2>
+      <Navbar />
+      <SecondaryNavbar
+        currentCategory={normalizedCategory}
+        onSortSelect={(value) => setSortOption(value)} // Update sort option
+        onFilterSelect={(value) => setFilter(value)} // Update filter option
+      />
       <div style={styles.productGrid}>
-        {products.length === 0 ? (
-          <p>No products available in this category.</p>
+        {filteredAndSortedProducts.length === 0 ? (
+          <p>No products match the selected criteria.</p>
         ) : (
-          products.map((product) => (
+          filteredAndSortedProducts.map((product) => (
             <Link
               to={`/products/${category}/${product._id}`}
               key={product._id}
@@ -75,10 +122,6 @@ const ProductList = () => {
                 </div>
                 <div style={styles.price}>
                   <span>$ {product.price}</span>
-                  {/* <del style={styles.originalPrice}> $ {product.originalPrice}</del> */}
-                  <span style={styles.discount}>
-                    ({product.discount}60% OFF)
-                  </span>
                 </div>
               </div>
             </Link>
@@ -95,12 +138,6 @@ const styles = {
     backgroundColor: "#f9f9f9",
     margin: 0,
     padding: "20px",
-  },
-  title: {
-    fontSize: "24px",
-    marginTop: "60px",
-    marginBottom: "20px",
-    textAlign: "center",
   },
   productGrid: {
     display: "grid",
@@ -136,24 +173,6 @@ const styles = {
     fontSize: "14px",
     color: "#777",
     margin: "5px 0",
-  },
-  rating: {
-    fontSize: "14px",
-    color: "#ff8c00",
-    margin: "5px 0",
-  },
-  price: {
-    fontSize: "16px",
-    color: "#333",
-    margin: "10px 0",
-  },
-  originalPrice: {
-    color: "#999",
-    marginLeft: "10px",
-  },
-  discount: {
-    color: "#ff3b3b",
-    marginLeft: "10px",
   },
 };
 
