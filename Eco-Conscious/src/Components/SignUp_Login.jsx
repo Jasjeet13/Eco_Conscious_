@@ -21,7 +21,7 @@ const SignUp_Login = () => {
             // If unauthorized, clear the token and show the login page
             localStorage.removeItem("token");
           } else if (response.ok) {
-            navigate(`/home/${id}`);
+            navigate("/home");
           }
         })
         .catch((error) => {

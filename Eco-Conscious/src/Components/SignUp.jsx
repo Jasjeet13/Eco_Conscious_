@@ -22,7 +22,7 @@ const SignUp = () => {
         const responseData = await response.json();
         const id = responseData.id;
         console.log('Id received:', id);
-        window.location.href = "/home";
+        window.location.href = `/home/${id}`;
       } else {
         const responseData = await response.json();
         setError(responseData.message || "Signup failed");
