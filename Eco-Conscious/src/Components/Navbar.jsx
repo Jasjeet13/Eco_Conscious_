@@ -13,7 +13,7 @@ const Navbar = () => {
   const token = localStorage.getItem("token"); 
 
   const categories = {
-    cosmatic: "Beauty Products",
+    cosmetic: "Beauty Products",
     footwear: "Footwear",
     bag: "Bags",
     clothing: "Clothing",
@@ -154,7 +154,7 @@ const Navbar = () => {
           style={styles.menuItem}
           onClick={() => navigateToCategory("Beauty Products")}
         >
-          Cosmatic
+          Cosmetic
         </button>
         <button
           style={styles.menuItem}
