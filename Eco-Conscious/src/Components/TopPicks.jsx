@@ -18,6 +18,7 @@ const TopPicks = () => {
 
         const data = response.data;
 
+        // Define categories
         const categories = {
           cosmetic: "Beauty Products",
           footwear: "Footwear",
@@ -25,6 +26,7 @@ const TopPicks = () => {
           clothing: "Clothing",
         };
 
+        // Select one product from each category
         const selectedPicks = Object.keys(categories).map((key) => {
           const productsInCategory = data.filter(
             (product) =>
@@ -39,13 +41,30 @@ const TopPicks = () => {
           return { ...productsInCategory[randomIndex], key };
         });
 
-        setTopPicks(selectedPicks.filter((pick) => pick)); // Filter out nulls
+        const finalPicks = selectedPicks.filter((pick) => pick); // Filter out nulls
+
+        // Save to localStorage with timestamp
+        localStorage.setItem("topPicks", JSON.stringify(finalPicks));
+        localStorage.setItem("topPicksTimestamp", Date.now());
+
+        setTopPicks(finalPicks);
       } catch (error) {
         console.error("Error fetching Top Picks:", error);
       }
     };
 
-    fetchTopPicks();
+    // Check for cached data
+    const cachedPicks = localStorage.getItem("topPicks");
+    const cachedTimestamp = localStorage.getItem("topPicksTimestamp");
+    const oneHour = 30 * 60 * 1000;
+
+    if (cachedPicks && cachedTimestamp && Date.now() - cachedTimestamp < oneHour) {
+      console.log("Using cached Top Picks...");
+      setTopPicks(JSON.parse(cachedPicks));
+    } else {
+      console.log("Fetching new Top Picks...");
+      fetchTopPicks();
+    }
   }, []);
 
   return (
@@ -144,7 +163,7 @@ const styles = {
   viewMoreButton: {
     marginTop: "10px",
     padding: "8px 12px",
-    backgroundColor: "rgb(175, 220, 125)", // Updated default color
+    backgroundColor: "rgb(175, 220, 125)",
     color: "#fff",
     border: "none",
     borderRadius: "4px",
