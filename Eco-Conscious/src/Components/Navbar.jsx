@@ -35,7 +35,7 @@ const Navbar = ({ onSearch }) => {
   };
 
   const navigateToBag = () => {
-    navigate("/bag");
+    navigate("/cart");
   };
 
   const navigateToCategory = (category) => {
@@ -198,7 +198,7 @@ const Navbar = ({ onSearch }) => {
           </button>
           <button
             className="menu-item"
-            onClick={() => navigateToCategory("bags")}
+            onClick={() => navigateToCategory("cart")}
           >
             Bag
           </button>
