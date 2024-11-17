@@ -36,7 +36,7 @@ function App() {
         <Route path="/products/:category" element={<ProductList />} />
         <Route path="/products/:category/:id" element={<ProductProfile />} />
         <Route path="/edit" element={isAuthenticated ? <Edit /> : <Navigate to="/" />} />
-        <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/wishlist" element={isAuthenticated ? <Wishlist />:<Navigate to="/" />} />
       </Routes>
       <Footer />
     </Router>

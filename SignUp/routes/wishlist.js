@@ -1,22 +1,22 @@
 const express = require('express');
 const router = express.Router();
-const WishlistModel = require('../models/Wishlist'); // Adjust path if needed
-const authenticateToken = require('../Middlewares/tokenAuthentication'); // Adjust path if needed
+const WishlistModel = require('../models/Wishlist'); 
+const authenticateToken = require('../Middlewares/tokenAuthentication');
 
-// Get all wishlist items for the logged-in user
+
 router.get('/', authenticateToken, async (req, res) => {
   try {
-    console.log("Fetching wishlist for user ID:", req.user.id); // Debug log for user ID
+    console.log("Fetching wishlist for user ID:", req.user.id); 
     const wishlistItems = await WishlistModel.find({ userId: req.user.id });
-    console.log("Wishlist items fetched:", wishlistItems); // Debug log for items
-    res.json(wishlistItems);
+    console.log("Wishlist items fetched:", wishlistItems); 
+    res.json(wishlistItems);//back to the client as a JSON response.
   } catch (error) {
-    console.error('Error fetching wishlist items:', error); // Log error for debugging
+    console.error('Error fetching wishlist items:', error); 
     res.status(500).json({ message: 'Server error while fetching wishlist items' });
   }
 });
 
-// Add item to wishlist
+
 router.post('/add', authenticateToken, async (req, res) => {
   const { productId, name, price, image, description } = req.body;
   try {
@@ -37,19 +37,19 @@ router.post('/add', authenticateToken, async (req, res) => {
     await newWishlistItem.save();
     res.status(201).json({ message: 'Item added to wishlist' });
   } catch (error) {
-    console.error('Error adding item to wishlist:', error); // Log error for debugging
+    console.error('Error adding item to wishlist:', error); 
     res.status(500).json({ message: 'Server error while adding item to wishlist' });
   }
 });
 
-// Remove item from wishlist
+
 router.delete('/remove/:productId', authenticateToken, async (req, res) => {
   const { productId } = req.params;
-  const userId = req.user.id; // Assuming req.user.id is populated by the JWT middleware
-  console.log('Removing item for userId:', userId, 'and productId:', productId); // Debugging log
+  const userId = req.user.id; 
+  console.log('Removing item for userId:', userId, 'and productId:', productId); 
 
   try {
-    const deletedItem = await WishlistModel.findOneAndDelete({
+    const deletedItem = await WishlistModel.findOneAndDelete({//mongoose functon filter and delete
       userId: userId,
       productId: productId
     });
