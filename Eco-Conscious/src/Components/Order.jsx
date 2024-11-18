@@ -181,7 +181,7 @@ const Order = () => {
                 <strong>Price:</strong> ${item.productId.price}
               </p>
               <p style={styles.text}>
-                <strong>Total:</strong> ${(item.quantity * item.productId.price).toFixed(2)}
+                <strong>Total: { item.productId.price} * {item.quantity}=</strong> ${(item.quantity * item.productId.price).toFixed(2)}
               </p>
             </div>
           </div>
