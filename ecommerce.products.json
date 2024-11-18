@@ -240,11 +240,11 @@
     "ecoScore": 68
   },
   {
-    "name": "Women Shoes Eco-Friendly Platform Sneakers",
-    "description": "Stylish and comfortable platform sneakers made from organic cotton and recycled rubber, perfect for everyday wear.",
+    "name": "Women Black Heels",
+    "description": "Stylish and comfortable heels made from Eco-Friendly material, perfect for everyday wear.",
     "price": 79.99,
     "category": "Footwear",
-    "image": "https://cdn18.nnnow.com/web-images/large/styles/D290FXLMFDF/1689330053752/3.jpg",
+    "image": "https://th.bing.com/th/id/OIP.NnJ692e5JQx88vUgvJjBbwAAAA?w=462&h=450&rs=1&pid=ImgDetMain",
     "inStock": true,
     "carbonFootprint": 5.2,
     "materialSourcing": "best",
@@ -256,11 +256,11 @@
     "ecoScore": 74.03999999999999
   },
   {
-    "name": "Women Shoes Chic Vegan Leather Flats",
-    "description": "Sleek and chic vegan leather flats, offering both elegance and comfort with a cruelty-free design.",
+    "name": "Women Stylish Heels",
+    "description": "Sleek and chic vegan heels, offering both elegance and comfort with a cruelty-free design.",
     "price": 59.99,
     "category": "Footwear",
-    "image": "https://m.media-amazon.com/images/I/61Xfbw5aB+L.SY695.jpg",
+    "image": "https://i.pinimg.com/originals/07/82/8e/07828e9e5e8f7c402e3f31f4507e4533.jpg",
     "inStock": true,
     "carbonFootprint": 3.4,
     "materialSourcing": "better",
@@ -272,11 +272,11 @@
     "ecoScore": 63.68
   },
   {
-    "name": "Women Shoes Recycled Rubber Ballet Flats",
-    "description": "Ballet flats made from recycled rubber and organic materials, combining fashion with sustainability.",
+    "name": "Women High Heel Sandals",
+    "description": "Heels made from organic materials, combining fashion with sustainability.",
     "price": 49.99,
     "category": "Footwear",
-    "image": "https://m.media-amazon.com/images/I/71m+EGqdJ0L.SY575.jpg",
+    "image": "https://th.bing.com/th/id/OIP.14ws8G6RFbnGfhO30HBD4gHaHa?w=198&h=198&c=7&r=0&o=5&dpr=1.3&pid=1.7",
     "inStock": true,
     "carbonFootprint": 4.1,
     "materialSourcing": "good",
@@ -628,7 +628,7 @@
     "description": "A beautiful Anarkali kurta set with floral prints, paired with matching palazzo pants. Designed for comfort and elegance, perfect for festive occasions.",
     "price": 45.99,
     "category": "Clothing",
-    "image": "https://tse1.mm.bing.net/th?id=OIP.TU1I6ekIWLYuYqQBOH6iDAHaJ4&pid=Api&P=0&h=180",
+    "image": "https://m.media-amazon.com/images/I/614q9dL+D4L._SY741_.jpg",
     "inStock": true,
     "carbonFootprint": 2.6,
     "materialSourcing": "best",
@@ -736,11 +736,11 @@
     "ecoScore": null
   },
   {
-    "name": "Casual Striped Women's Dress",
+    "name": "Snowy Women's Dress",
     "description": "This casual striped dress is both stylish and versatile. With its lightweight fabric, it’s ideal for everyday wear, offering comfort and a chic look.",
     "price": 29.99,
     "category": "Clothing",
-    "image": "https://m.media-amazon.com/images/I/71O0FPof2DL._SY741_.jpg",
+    "image": "https://i.pinimg.com/736x/d9/ec/c7/d9ecc74e3a63afa7202548b1d77d7581.jpg",
     "inStock": true,
     "carbonFootprint": 2.3,
     "materialSourcing": "eco-friendly",
