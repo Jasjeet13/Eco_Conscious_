@@ -147,13 +147,19 @@ const Navbar = ({ onSearch }) => {
           }
 
           /* Hide categories menu and search bar at 768px and below */
-          @media (max-width: 768px) {
+          @media (max-width: 1000px) {
+
+            .icons-container {
+              gap: 20px;
+            }
+          }
+          @media (max-width: 800px) {
             .menu-container,
             .search-container {
               display: none;
             }
             .icons-container {
-              gap: 20px;
+              gap: 60px;
             }
           }
 
@@ -164,6 +170,7 @@ const Navbar = ({ onSearch }) => {
             }
             .icons-container {
               margin-right: 20px;
+              gap:50px;
             }
             .navbar-logo {
               height: 40px;
