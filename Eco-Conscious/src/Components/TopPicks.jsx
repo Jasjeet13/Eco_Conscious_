@@ -1,108 +1,207 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import { height, width } from "@fortawesome/free-solid-svg-icons/fa0";
 
 const TopPicks = () => {
-  const picks = [
-    {
-      id: "66d00d5c7d5a8882e1b44d8c",
-      imageUrl: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRgaKUvGBZzATr558R_6TOBC-rM0mNJn42AyrIS3F_hv0U-yx1ki26Iaug1nZFmcfGMntKdnFQsS-wd2yur5voJLswu_LpiYTx4xCVAqp058r_DPRQJplWl",
-      title: "ROYALICA Women Black and White Colour Collared Checked Shirt with Heavy",
-      description: "ROYALICA Women Black and White Colour Collared Checked Shirt with Heavy",
-    },
-    {
-      id: "66d00d5c7d5a8882e1b44d76",
-      imageUrl: "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcSguOdkliodaoG68WHrA2gyORC5FxjqmsDeLWJF4Vq7JPvhhTO1-wYi0afZC3A35-OvvyW158pK6IzmXScZBE5YSb0KUa-8YY4uBwcZmyah",
-      title: "CB-COLEBROOK Men's shirt",
-      description: " Men's Casual Button Down Shirts Long Sleeve Linen Shirt Fashion Textured Beach Summer Shirt, Casual Shirt for Men, Men Stylish Shirt\nStyle:Casual, Neckline:Collar, Sleeve Length:Long Sleeve\nReguler Fit",
-    },
-    {
-      id: "66d00d5d7d5a8882e1b44def",
-      imageUrl: "https://m.media-amazon.com/images/I/411WDyKUhAL._SX300_SY300_QL70_FMwebp_.jpg",
-      title: "Mars 12 Shades Eyeshadow Palette",
-      description: "MARS 12 Shades Back to Basics Eyeshadow Palette with Free Applicator | Matte | Shimmer |classy | Highlighter | Beginner Friendly & Long Lasting Eye Shadow Palette (14.4 gm) (Shade-02)                             ",
-    },
-    {
-      id: "66d00d5d7d5a8882e1b44e01",
-      imageUrl: "https://cdn18.nnnow.com/web-images/large/styles/D290FXLMFDF/1689330053752/3.jpg",
-      title: "Men Solid Lace Up Dorit Sneakers",
-      description: "Round toe, Central lacing, Panelled upper with logo, Padded top line, Reinforced heel, unter\nPull-up tabs, Cushioned footed, Textured outsole, Solid pattern   ",
-    },
-  ];
+  const [topPicks, setTopPicks] = useState([]);
+  const [hoveredButton, setHoveredButton] = useState(null);
+
+  useEffect(() => {
+    const fetchTopPicks = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.get("http://localhost:3000/api/products", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const data = response.data;
+
+        // Define categories
+        const categories = {
+          cosmetic: "Beauty Products",
+          footwear: "Footwear",
+          bag: "Bags",
+          clothing: "Clothing",
+        };
+
+        // Select one product from each category
+        const selectedPicks = Object.keys(categories).map((key) => {
+          const productsInCategory = data.filter(
+            (product) =>
+              product.category?.toLowerCase() === key ||
+              product.category === categories[key]
+          );
+
+          if (productsInCategory.length === 0) return null; // Skip empty categories
+          const randomIndex = Math.floor(
+            Math.random() * productsInCategory.length
+          );
+          return { ...productsInCategory[randomIndex], key };
+        });
+
+        const finalPicks = selectedPicks.filter((pick) => pick); // Filter out nulls
+
+        // Save to localStorage with timestamp
+        localStorage.setItem("topPicks", JSON.stringify(finalPicks));
+        localStorage.setItem("topPicksTimestamp", Date.now());
+
+        setTopPicks(finalPicks);
+      } catch (error) {
+        console.error("Error fetching Top Picks:", error);
+      }
+    };
+
+    // Check for cached data
+    const cachedPicks = localStorage.getItem("topPicks");
+    const cachedTimestamp = localStorage.getItem("topPicksTimestamp");
+    const oneHour = 30 * 60 * 1000;
+
+    if (cachedPicks && cachedTimestamp && Date.now() - cachedTimestamp < oneHour) {
+      console.log("Using cached Top Picks...");
+      setTopPicks(JSON.parse(cachedPicks));
+    } else {
+      console.log("Fetching new Top Picks...");
+      fetchTopPicks();
+    }
+  }, []);
 
   return (
+    <div style={styles.outer_container}>
+      <h1>Top Picks for You</h1>
     <div style={styles.container}>
-      <h2 style={styles.title}>Top Picks for You</h2>
-      <div style={styles.grid}>
-        {picks.map((pick) => (
-          <div key={pick.id} style={styles.item}>
-            <img src={pick.imageUrl} alt={pick.title} style={styles.image} />
-            <h3 style={styles.itemTitle}>{pick.title}</h3>
-            <p style={styles.description}>{pick.description}</p>
-            <Link to={`/products/${pick.category}/${pick.id}`} style={styles.button}>
-              View More
-            </Link>
-          </div>
-        ))}
-      </div>
+      {topPicks.map((product) => (
+        <div
+          key={product._id}
+          style={styles.innerDiv}
+          onMouseEnter={(e) =>
+            (e.currentTarget.style.transform = "scale(1.05)")
+          }
+          onMouseLeave={(e) =>
+            (e.currentTarget.style.transform = "scale(1)")
+          }
+        >
+          <Link
+            to={`/products/${product.category}/${product._id}`}
+            style={styles.link}
+          >
+            <div style={styles.imageContainer}>
+              <img
+                src={product.image}
+                alt={product.name}
+                style={styles.image}
+              />
+            </div>
+            <div style={styles.contentContainer}>
+              <div style={styles.nameContainer}>
+                <h3 style={styles.name}>{product.name}</h3>
+              </div>
+              <div style={styles.priceContainer}>
+                <p style={styles.price}>${product.price}</p>
+              </div>
+              
+            </div>
+          </Link>
+          {/* <button
+            style={{
+              ...styles.viewMoreButton,
+              backgroundColor:
+                hoveredButton === product._id ? "green" : "rgb(175, 220, 125)",
+            }}
+            onMouseEnter={() => setHoveredButton(product._id)}
+            onMouseLeave={() => setHoveredButton(null)}
+          >
+            View More
+          </button> */}
+        </div>
+      ))}
+    </div>
     </div>
   );
 };
 
 const styles = {
+  outer_container: {
+    backgroundColor :"#f2f2f2",
+    // backgroundColor : "#f0eadd",
+    width :"100%",
+    paddingTop: "10px",
+    textAlign : "center"
+  },
   container: {
-    width: "97.5vw",
-    padding: "20px",
-    backgroundColor: "#fffff0",
-    boxSizing: "border-box",
-  },
-  title: {
-    fontSize: "2rem",
-    marginBottom: "20px",
-    textAlign: "center",
-    color: "#333",
-  },
-  grid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-    gap: "15px",
-    width: "100%",
-    maxWidth: "96%",
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "20px",
+    width: "80%",
+    justifyContent: "center",
     margin: "0 auto",
-    boxSizing: "border-box",
+    paddingBottom : "40px"
+    
   },
-  item: {
+  innerDiv: {
+    flex: "1 1 22%",
+    minWidth: "250px",
+    backgroundColor: "#f2f2f2",
+    border: "1px solid #ccc",
+    // borderRadius: "8px",
+    overflow: "hidden",
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+    textAlign: "left",
+    transition: "transform 0.3s ease",
+  },
+  imageContainer: {
     backgroundColor: "#fff",
-    borderRadius: "8px",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-    padding: "15px",
-    textAlign: "center",
-    boxSizing: "border-box",
+    // borderBottom: "1px solid #ddd",
   },
   image: {
     width: "100%",
-    height: "400px",
-    borderRadius: "8px",
+    height: "250px",
+    objectFit: "contain",
   },
-  itemTitle: {
-    fontSize: "1.5rem",
-    margin: "10px 0",
+  contentContainer: {
+    padding: "15px",
+    backgroundColor :"#f0eadd"
+  },
+  nameContainer: {
+    marginBottom: "5px",
+    height : "30px",
+  },
+  name: {
+    fontSize: "16px",
+    color: "#333",
+  },
+  priceContainer: {
+    marginBottom: "10px",
+    marginTop : "10px",
+    height : "20px",
+  },
+  price: {
+    fontSize: "16px",
+    color: "black",
+  },
+  descriptionContainer: {
+    marginBottom: "10px",
   },
   description: {
-    fontSize: "1rem",
-    color: "#666",
+    fontSize: "14px",
+    color: "#555",
   },
-  button: {
-    marginTop: "10px",
-    padding: "10px 20px",
-    fontSize: "1rem",
-    color: "black",
-    fontWeight: "600",
-    backgroundColor: "#ace1af",
-    border: "none",
-    borderRadius: "30px",
-    cursor: "pointer",
-    transition: "background-color 0.3s",
+  link: {
     textDecoration: "none",
+    color: "inherit",
+  },
+  viewMoreButton: {
+    margin: "15px 0",
+    padding: "10px 15px",
+    backgroundColor: "rgb(175, 220, 125)",
+    color: "#fff",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer",
+    fontSize: "14px",
+    transition: "background-color 0.3s ease",
   },
 };
 

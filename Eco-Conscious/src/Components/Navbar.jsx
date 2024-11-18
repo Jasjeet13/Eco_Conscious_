@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate , useParams } from "react-router-dom";
 import logo from "../public/logo.png";
-import { FaRegUser, FaRegHeart, FaSearch } from "react-icons/fa";
 import { FaRegUser, FaRegHeart, FaSearch } from "react-icons/fa";
 import { FiShoppingBag } from "react-icons/fi";
 
@@ -22,7 +21,7 @@ const Navbar = () => {
   const navigateToHome = () => {
     navigate("/home");
   };
-  const token = localStorage.getItem("token");
+  
   const [isProfileMenuVisible, setIsProfileMenuVisible] = useState(false);
 
   const navigateToProfile = () => {
@@ -40,7 +39,6 @@ const Navbar = () => {
   const showProfileMenu = () => setIsProfileMenuVisible(true);
   const hideProfileMenu = () => setIsProfileMenuVisible(false);
 
-  const navigateToHome = () => navigate("/home");
   const navigateToCategory = (category) => navigate(`/products/${category}`);
   const logout = () => {
     // Clear token from localStorage
@@ -50,9 +48,7 @@ const Navbar = () => {
     navigate("/");
   };
 
-  const navigateToCategory = (category) => {
-    navigate(`/products/${category}`);
-  };
+  
   const handleSearch = () => {
     const lowerSearchTerm = searchTerm.toLowerCase();
     if (categories[lowerSearchTerm]) {
@@ -154,7 +150,7 @@ const Navbar = () => {
           style={styles.menuItem}
           onClick={() => navigateToCategory("Beauty Products")}
         >
-          Cosmatic
+          Cosmetic
         </button>
         <button
           style={styles.menuItem}

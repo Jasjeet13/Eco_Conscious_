@@ -1,10 +1,44 @@
-import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Edit = () => {
-  const { id } = useParams();
+  const token = localStorage.getItem("token"); // Retrieve token from localStorage
   const navigate = useNavigate();
-  console.log(`id received in edit component: ${id}`);
+  const [userDetails, setUserDetails] = useState({
+    username: "",
+    fullName: "",
+    email: "",
+    address: "",
+    phoneNumber: "",
+  });
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/api/user", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // Include token in the Authorization header
+          },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setUserDetails(data); // Set state with fetched user data
+        } else {
+          console.error("Failed to fetch user details");
+        }
+      } catch (error) {
+        console.error("Error fetching user details:", error);
+      }
+    };
+
+    if (token) {
+      fetchUserDetails();
+    } else {
+      console.error("Token is missing");
+    }
+  }, [token]); // Re-fetch if the token changes
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -18,22 +52,23 @@ const Edit = () => {
     };
 
     try {
-      const response = await fetch(`http://localhost:3000/api/edit/${id}`, {
+      const response = await fetch("http://localhost:3000/api/edit", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // Include token in the Authorization header
         },
         body: JSON.stringify(updatedDetails),
       });
 
       if (response.ok) {
-        console.log('Id received in edit :', id);
-        navigate(`/profile/${id}`); // Redirect to the profile details page after a successful update
+        console.log("User details updated");
+        navigate("/profile"); // Redirect to profile page after successful update
       } else {
-        console.error('Failed to update profile');
+        console.error("Failed to update profile");
       }
     } catch (error) {
-      console.error('Error updating profile:', error);
+      console.error("Error updating profile:", error);
     }
   };
 
