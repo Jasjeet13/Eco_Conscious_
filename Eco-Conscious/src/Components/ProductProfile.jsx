@@ -178,6 +178,7 @@ const ProductProfile = () => {
         alignItems: "flex-start",
       }}
     >
+      {/* image */}
       <div style={{ flex: "1", marginRight: "10px", marginTop: "40px" }}>
         <img
           src={product.image || "https://via.placeholder.com/600"}
@@ -192,152 +193,183 @@ const ProductProfile = () => {
           }}
         />
       </div>
-      <div style={{ padding: "40px", flex: "2" }}>
-        <h1
-          style={{ fontSize: "32px", fontWeight: "bold", marginBottom: "15px" }}
-        >
-          {product.name}
-        </h1>
-        <p style={{ fontSize: "28px", color: "#e63946", marginBottom: "15px" }}>
-          ${product.price}
-        </p>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            marginBottom: "25px",
-          }}
-        >
-          <span
-            style={{ color: "#ffcc00", marginRight: "15px", fontSize: "20px" }}
-          >
-            ★★★★★
-          </span>
-          <a href="#reviews" style={{ color: "#333", fontSize: "18px" }}>
-            3 reviews
-          </a>
-        </div>
-        <p
-          style={{
-            marginBottom: "25px",
-            color: "#555",
-            lineHeight: "1.8",
-            fontSize: "18px",
-          }}
-        >
-          {product.description}
-        </p>
-        <p style={{ marginBottom: "15px", fontSize: "18px" }}>
-          <strong>Availability:</strong>{" "}
-          {product.inStock ? "In stock" : "Out of stock"}
-        </p>
-        <p style={{ marginBottom: "15px", fontSize: "18px" }}>
-          <strong>Product Type:</strong> {product.category}
-        </p>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            marginBottom: "25px",
-          }}
-        >
-<input
-  type="number"
-  min="1"
-  max="20"
-  value={quantity}
-  onChange={handleQuantityChange}
-  style={{
-    width: "70px",
-    padding: "10px",
-    marginRight: "30px",
-    fontSize: "18px",
-  }}
-/>
-
-<button
-  style={{
-    padding: "15px 30px",
-    border: "1px solid #000",
-    cursor: "pointer",
-    cursor: "pointer",
-    backgroundColor: "#fff",
-    color: "#000",
-    marginRight: "30px",
-    display: "flex",
-    alignItems: "center",
-    fontSize: "18px",
-  }}
-  onClick={addToCart}  // On click, add item to cart and redirect
-  onMouseEnter={() => setHoveredIcon("cart")}
-  onMouseLeave={() => setHoveredIcon(null)}
->
-  <i
-    className={hoveredIcon === "cart" ? "fas fa-cart-plus" : "fas fa-shopping-cart"}
-    style={{
-      margin: "0px 20px 0px 0px",
-      fontSize: "24px",
-      cursor: "pointer",
-      color: isInCart ? "#088F8F" : hoveredIcon === "cart" ? "#088F8F" : "#ccc",
-      transition: "color 0.3s ease",
-    }}
-
-  ></i>
-  ADD TO CART
-</button>
-
-
-          <button
+      {/* discription */}
+      <div
+        style={{
+          display: "flex",
+          padding: "5px 5px",
+          maxWidth: "100%",
+          margin: "0 auto",
+          alignItems: "flex-start",
+        }}
+      >
+        {/* order details */}
+        <div style={{ padding: "10px", flex: "2" }}>
+          <h1
             style={{
-              padding: "15px 30px",
-              border: "1px solid #000",
-              cursor: "pointer",
-              backgroundColor: "#fff",
-              color: "#000",
-              marginRight: "30px",
+              fontSize: "32px",
+              fontWeight: "bold",
+              marginBottom: "15px",
+            }}
+          >
+            {product.name}
+          </h1>
+          <p
+            style={{ fontSize: "28px", color: "#e63946", marginBottom: "15px" }}
+          >
+            ${product.price}
+          </p>
+          <div
+            style={{
               display: "flex",
               alignItems: "center",
+              marginBottom: "25px",
+            }}
+          >
+            <span
+              style={{
+                color: "#ffcc00",
+                marginRight: "15px",
+                fontSize: "20px",
+              }}
+            >
+              ★★★★★
+            </span>
+            <a href="#reviews" style={{ color: "#333", fontSize: "18px" }}>
+              3 reviews
+            </a>
+          </div>
+          <p
+            style={{
+              marginBottom: "25px",
+              color: "#555",
+              lineHeight: "1.8",
               fontSize: "18px",
             }}
-            onClick={addToWishlist}
+          >
+            {product.description}
+          </p>
+          <p style={{ marginBottom: "15px", fontSize: "18px" }}>
+            <strong>Availability:</strong>{" "}
+            {product.inStock ? "In stock" : "Out of stock"}
+          </p>
+          <p style={{ marginBottom: "15px", fontSize: "18px" }}>
+            <strong>Product Type:</strong> {product.category}
+          </p>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              marginBottom: "25px",
+            }}
+          >
+            <input
+              type="number"
+              min="1"
+              max={product.inStock}
+              value={quantity}
+              onChange={handleQuantityChange}
+              style={{
+                width: "70px",
+                padding: "10px",
+                marginRight: "30px",
+                fontSize: "18px",
+              }}
+            />
+            <button
+              style={{
+                padding: "15px 30px",
+                border: "1px solid #000",
+                cursor: "pointer",
+                backgroundColor: "#fff",
+                color: "#000",
+                marginRight: "30px",
+                display: "flex",
+                alignItems: "center",
+                fontSize: "18px",
+              }}
+              onMouseEnter={() => setHoveredIcon("cart")}
+              onMouseLeave={() => setHoveredIcon(null)}
+            >
+              <i
+                className={
+                  hoveredIcon === "cart"
+                    ? "fas fa-cart-plus"
+                    : "fas fa-shopping-cart"
+                }
+                style={{
+                  marginRight: "15px",
+                  fontSize: "20px",
+                  transition: "color 0.3s, transform 0.3s",
+                }}
+              ></i>
+              ADD TO CART
+            </button>
+            <button
+              style={{
+                padding: "15px 30px",
+                border: "1px solid #000",
+                cursor: "pointer",
+                backgroundColor: "#fff",
+                color: "#000",
+                marginRight: "30px",
+                display: "flex",
+                alignItems: "center",
+                fontSize: "18px",
+              }}
+              onClick={addToWishlist}
+            >
+              <i
+                className="fas fa-heart"
+                style={{
+                  margin: "0px 20px 0px 0px",
+                  fontSize: "24px",
+                  cursor: "pointer",
+                  color: isInWishlist
+                    ? "#ff0000"
+                    : hoveredIcon === "heart"
+                    ? "#ff0000"
+                    : "#ccc",
+                  transition: "color 0.3s ease",
+                }}
+                onMouseEnter={() => setHoveredIcon("heart")}
+                onMouseLeave={() => setHoveredIcon(null)}
+              ></i>
+              {isInWishlist ? "IN WISHLIST" : "ADD TO WISHLIST"}
+            </button>
+          </div>
+          <button
+            style={{
+              padding: "20px 40px",
+              backgroundColor: "#000",
+              color: "#fff",
+              border: "none",
+              cursor: "pointer",
+              width: "28%",
+              marginTop: "30px",
+              display: "flex",
+              alignItems: "center",
+              fontSize: "25px",
+            }}
           >
             <i
-              className="fas fa-heart"
-              style={{
-                margin: "0px 20px 0px 0px",
-                fontSize: "24px",
-                cursor: "pointer",
-                color: isInWishlist
-                  ? "#ff0000"
-                  : hoveredIcon === "heart"
-                  ? "#ff0000"
-                  : "#ccc",
-                transition: "color 0.3s ease",
-              }}
-              onMouseEnter={() => setHoveredIcon("heart")}
-              onMouseLeave={() => setHoveredIcon(null)}
+              className="fas fa-credit-card"
+              style={{ marginRight: "10px" }}
             ></i>
-            {isInWishlist ? "IN WISHLIST" : "ADD TO WISHLIST"}
+            Buy Now
           </button>
-
         </div>
-        <button
+        {/* environment criteria */}
+        <div
           style={{
-            padding: "20px 40px",
-            backgroundColor: "#000",
-            color: "#fff",
-            border: "none",
-            cursor: "pointer",
-            width: "28%",
+            background: "yellow",
+            padding: "10px",
+            flex: "2",
             marginTop: "30px",
-            display: "flex",
-            alignItems: "center",
-            fontSize: "25px",
           }}
         >
-          <i className="fas fa-credit-card" style={{ marginRight: "10px" }}></i>
-          Buy Now
-        </button>
+          <p>Eco Impact</p>
+        </div>
       </div>
     </div>
   );
