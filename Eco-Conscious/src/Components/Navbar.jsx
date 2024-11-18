@@ -198,7 +198,7 @@ const Navbar = ({ onSearch }) => {
           </button>
           <button
             className="menu-item"
-            onClick={() => navigateToCategory("cart")}
+            onClick={() => navigateToCategory("bags")}
           >
             Bag
           </button>
@@ -208,6 +208,7 @@ const Navbar = ({ onSearch }) => {
           >
             Clothing
           </button>
+          
         </div>
 
         <div className="search-container">
@@ -235,6 +236,7 @@ const Navbar = ({ onSearch }) => {
             <FiShoppingBag className="icon" />
             <span>Bag</span>
           </div>
+          
         </div>
       </nav>
     </>
