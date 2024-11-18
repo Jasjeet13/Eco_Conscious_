@@ -1,12 +1,14 @@
 import React from "react";
-import {
-  FaFacebookF,
-  FaInstagram,
-  FaTwitter,
-  FaEnvelope,
-} from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaTwitter, FaEnvelope } from "react-icons/fa";
+import { useNavigate } from "react-router-dom"; // Import the useNavigate hook
 
 const Footer = () => {
+  const navigate = useNavigate(); // Initialize navigate function
+
+  const navigateToCategory = (category) => {
+    navigate(`/products/${category}`);
+  };
+
   const styles = {
     container: {
       position: "relative",
@@ -42,6 +44,7 @@ const Footer = () => {
     },
     footerListItem: {
       marginBottom: "10px",
+      cursor: "pointer", // Make it clear that these are clickable
     },
     footerBottom: {
       display: "flex",
@@ -54,7 +57,7 @@ const Footer = () => {
     socialIcons: {
       display: "flex",
       gap: "20px",
-      },
+    },
     socialIcon: {
       fontSize: "30px",
       cursor: "pointer",
@@ -73,10 +76,10 @@ const Footer = () => {
           <div style={styles.footerColumn}>
             <h4 style={styles.footerHeading}>CATEGORIES</h4>
             <ul style={styles.footerList}>
-              <li style={styles.footerListItem}>Women's Wear</li>
-              <li style={styles.footerListItem}>Men's Wear</li>
-              <li style={styles.footerListItem}>Beauty</li>
-              <li style={styles.footerListItem}>Shoes</li>
+              <li style={styles.footerListItem} onClick={() => navigateToCategory("Beauty Products")}>Cosmetic</li>
+              <li style={styles.footerListItem} onClick={() => navigateToCategory("Bags")}>Bags</li>
+              <li style={styles.footerListItem} onClick={() => navigateToCategory("Clothing")}>Clothing</li>
+              <li style={styles.footerListItem} onClick={() => navigateToCategory("Footwear")}>Footwear</li>
             </ul>
           </div>
           <div style={styles.footerColumn}>
@@ -106,7 +109,7 @@ const Footer = () => {
           </div>
           <div style={styles.footerColumn}>
             <h4 style={styles.footerHeading}>CONTACT US</h4>
-            <p>Call: +1 (xxx) xxx xxx(toll free)</p>
+            <p>Call: +1 (xxx) xxx xxx (toll free)</p>
             <p>Email: support@example.com</p>
             <p>Mon to Fri 11 AM - 7 PM (PST)</p>
           </div>

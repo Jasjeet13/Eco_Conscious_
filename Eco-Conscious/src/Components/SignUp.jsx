@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const [error, setError] = useState("");
 
   const handleSubmit = async (event) => {
@@ -19,10 +21,12 @@ const SignUp = () => {
       });
 
       if (response.ok) {
+        
         const responseData = await response.json();
         const id = responseData.id;
         console.log('Id received:', id);
-        window.location.href = `/home/${id}`;
+        navigate("/home");
+        
       } else {
         const responseData = await response.json();
         setError(responseData.message || "Signup failed");

@@ -1,27 +1,19 @@
-import React, { useEffect, useState } from "react"; //importing useEffect and UseEffect hook from react library
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; //importing FontAwsomeIcons from the fortawesome/react-fontwaesome library
-import { faUser } from "@fortawesome/free-solid-svg-icons"; //importing feUser
-import { useParams, useNavigate } from "react-router-dom"; //importing useParams and useNavigate from react-router-dom library
-
-/*
-userEffect - handles effect after some chages, used while fetching data or manually updating dom,
-by default it runs on each 
-useState - changes the state of the component, returns two things 1. current state 2. function that updates the state
-
-*/
+import React, { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { useParams, useNavigate } from "react-router-dom";
 
 const ProfileDetails = () => {
   const navigate = useNavigate();
-  const token = localStorage.getItem("token"); // Retrieve token from localStorage
+  const token = localStorage.getItem("token");
 
   const [profile, setProfile] = useState(null);
 
   useEffect(() => {
-    //fetchProfile function is defined to fetch the user's profile data from the server
     const fetchProfile = async () => {
       if (!token) {
         console.error("No token provided");
-        navigate("/login"); // Redirect to login if no token is available
+        navigate("/login");
         return;
       }
 
@@ -85,7 +77,6 @@ const ProfileDetails = () => {
       padding: "60px",
       backgroundColor: "#ffffff",
       boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.1)",
-      //borderRadius: "40px",
     },
     headingContainer: {
       display: "flex",
@@ -126,11 +117,9 @@ const ProfileDetails = () => {
       width: "45%",
       height: "60px",
       padding: "15px",
-      //backgroundColor:"white",
       backgroundColor: "#ace1af",
       color: "#333",
       border: "none",
-      // borderRadius: "30px",
       fontSize: "18px",
       cursor: "pointer",
       transition: "background-color 0.3s ease, transform 0.3s ease",
@@ -171,8 +160,15 @@ const ProfileDetails = () => {
         </div>
 
         <div style={styles.buttonGroup}>
-          <button style={styles.button} onClick={() => navigate(`/edit`)}>EDIT</button>
-          <button style={styles.button} onClick={handleDelete}>DELETE ACCOUNT</button>
+          <button
+            style={styles.button}
+            onClick={() => navigate(`/edit`)}
+          >
+            EDIT
+          </button>
+          <button style={styles.button} onClick={handleDelete}>
+            DELETE ACCOUNT
+          </button>
         </div>
       </div>
     </div>
