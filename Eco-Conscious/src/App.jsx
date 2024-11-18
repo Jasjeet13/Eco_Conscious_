@@ -16,6 +16,7 @@ import Edit from "./Components/Edit";
 import Wishlist from "./Components/Wishlist";
 import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
+import Cart from './Components/Cart';
 
 function App() {
   // Check if the user is authenticated by looking for the token in localStorage
@@ -46,7 +47,8 @@ function App() {
         <Route path="/products/:category" element={<ProductList />} />
         <Route path="/products/:category/:id" element={<ProductProfile />} />
         <Route path="/edit" element={isAuthenticated ? <Edit /> : <Navigate to="/" />} />
-        <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/wishlist" element={isAuthenticated ? <Wishlist />:<Navigate to="/" />} />
+        <Route path="/cart" element={isAuthenticated ? <Cart />:<Navigate to="/" />} />
       </Routes>
 
       {/* Conditionally render Footer */}

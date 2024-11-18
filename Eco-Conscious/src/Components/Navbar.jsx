@@ -4,18 +4,18 @@ import logo from "../public/logo.png";
 import { FaRegUser, FaRegHeart, FaSearch } from "react-icons/fa";
 import { FiShoppingBag } from "react-icons/fi";
 
-const Navbar = () => {
+const Navbar = ({ onSearch }) => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
 
-  const token = localStorage.getItem("token"); 
+  const token = localStorage.getItem("token");
 
-  const categories = {
-    beauty: "Beauty Products",
-    footwear: "Footwear",
-    bag: "Bags",
-    clothing: "Clothing",
+  const categoryMapping = {
+    beauty: "beauty",
+  footwear: "footwear",
+  bags: "bags",
+  clothing: "clothing",
   };
 
   const navigateToHome = () => {
@@ -28,8 +28,7 @@ const Navbar = () => {
     if (token) {
       navigate("/profile");
     } else {
-      navigate("/login"); 
-      // navigate(`/login/${id}`);
+      navigate("/login");
     }
   };
 
@@ -50,11 +49,18 @@ const Navbar = () => {
 
   
   const handleSearch = () => {
-    const lowerSearchTerm = searchTerm.toLowerCase();
-    if (categories[lowerSearchTerm]) {
-      navigateToCategory(categories[lowerSearchTerm]);
+    const normalizedSearchTerm = searchTerm.trim().toLowerCase();
+
+    // Check if search term matches a category
+    const matchedCategory = Object.keys(categoryMapping).find(
+      (key) => categoryMapping[key] === normalizedSearchTerm
+    );
+
+    if (matchedCategory) {
+      navigateToCategory(matchedCategory);
     } else {
-      navigate(`/products?search=${searchTerm}`);
+      // If no category match, perform product search
+      onSearch(normalizedSearchTerm);
     }
   };
 

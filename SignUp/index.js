@@ -11,7 +11,7 @@ const productsRouter = require("./routes/products");
 const editRouter = require("./routes/edit");
 const deleteRouter = require("./routes/delete");
 const wishlistRouter = require("./routes/wishlist");
-// const cartRouter = require('./routes/cart'); // Include your cart route
+const cartRouter = require('./routes/cart'); // Include your cart route
 
 const errorHandler = require("./middlewares/errorHandler");
 const authenticateToken = require("../SignUp/Middlewares/tokenAuthentication");
@@ -49,18 +49,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("public")); // Serve static files
 
-
-
-app.use('/signup', signupRouter);
-app.use('/login', loginRouter);
-
-
-app.use('/api/profile', authenticateToken, profileRouter);
-app.use('/api/products', authenticateToken, productsRouter);
-app.use('/api/edit', authenticateToken, editRouter);
-app.use('/api/delete', authenticateToken, deleteRouter);
-app.use('/api/wishlist', authenticateToken, wishlistRouter);
-
+// Routes
+app.use("/signup", signupRouter);
+app.use("/login", loginRouter);
+app.use("/api/profile", authenticateToken, profileRouter);
+app.use("/api/products", authenticateToken, productsRouter);
+app.use("/api/edit", authenticateToken, editRouter);
+app.use("/api/delete", authenticateToken, deleteRouter);
+app.use("/api/wishlist", authenticateToken, wishlistRouter); // Wishlist route
+app.use('/api/cart', authenticateToken, cartRouter); // Cart route
 
 // Error handling middleware
 app.use(errorHandler);

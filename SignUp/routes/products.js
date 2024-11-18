@@ -1,34 +1,59 @@
 const express = require("express");
 const router = express.Router();
-const Product = require("../product"); // Adjust the path if necessary
+const Product = require("../product");
 const authenticateToken = require("../Middlewares/tokenAuthentication");
 
-// Shuffle function to randomize the order
 const shuffleArray = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+    [array[i], array[j]] = [array[j], array[i]];
   }
   return array;
 };
 
-// Route to fetch all products (protected by token authentication)
 router.get("/", authenticateToken, async (req, res) => {
+  const { search, category } = req.query;
+
   try {
-    const products = await Product.find(); // Fetch all products from the database
-    const shuffledProducts = shuffleArray(products); // Shuffle the products array
-    res.json(shuffledProducts); // Send the shuffled products as a JSON response
+    let query = {};
+    if (category) {
+      query.category = category;
+    }
+    if (search) {
+      query.name = { $regex: search, $options: "i" };
+    }
+
+    const products = await Product.find(query);
+
+    const shuffledProducts = shuffleArray(products);
+
+    res.json(shuffledProducts);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
 
-// Route to fetch a single product (protected by token authentication)
 router.get("/:id", authenticateToken, async (req, res) => {
   try {
-    const product = await Product.findById(req.params.id); // Fetch product by id
+    const product = await Product.findById(req.params.id);
     if (!product) return res.status(404).json({ message: "Product not found" });
-    res.json(product); // Send the product as a JSON response
+    res.json(product);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+router.get("/:id/related", authenticateToken, async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    if (!product) return res.status(404).json({ message: "Product not found" });
+
+    const relatedProducts = await Product.find({
+      category: product.category, // Match by category
+      _id: { $ne: product._id }, // Exclude the current product
+    }).limit(5); // Limit to 5 alternatives
+
+    res.json(relatedProducts);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

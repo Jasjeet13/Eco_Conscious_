@@ -9,14 +9,15 @@ const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [filter, setFilter] = useState(""); // To manage selected filter
-  const [sortOption, setSortOption] = useState(""); // To manage sorting option
+  const [filter, setFilter] = useState("");
+  const [sortOption, setSortOption] = useState("");
+  const [searchTerm, setSearchTerm] = useState(""); // New state for search term
 
   const categoryMapping = {
-    beauty: "Beauty Products",
-    footwear: "Footwear",
-    bags: "Bags",
-    clothing: "Clothing",
+  beauty: "Beauty Products",
+  footwear: "Footwear",
+  bags: "Bags",
+  clothing: "Clothing",
   };
 
   const normalizedCategory = categoryMapping[category.toLowerCase()] || category;
@@ -36,7 +37,6 @@ const ProductList = () => {
             ? data
             : data.filter((product) => product.category === normalizedCategory);
 
-        // Apply the filter and sort
         const filteredAndSortedProducts = filterProducts(filteredProducts);
         setProducts(filteredAndSortedProducts);
         setLoading(false);
@@ -45,42 +45,59 @@ const ProductList = () => {
         setError(error);
         setLoading(false);
       });
-  }, [normalizedCategory, filter, sortOption]); // Dependency on filter and sortOption
+  }, [normalizedCategory, filter, sortOption]); // Dependency on filter, sortOption
 
-  // Filter products based on selected filter option
+  // Function to handle filtering based on the search term
+  const handleSearch = (term) => {
+    setSearchTerm(term.toLowerCase()); // Update search term state
+  };
+
+  // Filter products based on selected filter and search term
   const filterProducts = (products) => {
-    if (!filter) return products;
+    let filtered = products;
 
-    return products.filter((product) => {
-      switch (filter) {
-        case "low_carbon_footprint":
-          return product.carbonFootprint < 10;
-        case "material_sourcing_good":
-          return product.materialSourcing === "good";
-        case "material_sourcing_better":
-          return product.materialSourcing === "better";
-        case "material_sourcing_best":
-          return product.materialSourcing === "best";
-        case "high_recyclability":
-          return product.recyclability >= 85;
-        case "low_water_usage":
-          return product.waterUsage === "low";
-        case "high_energy_efficiency":
-          return product.energyEfficiency === "high";
-        case "high_biodegradability":
-          return product.biodegradability > 90;
-        default:
-          return true;
-      }
-    });
+    // Apply category filters
+    if (filter) {
+      filtered = filtered.filter((product) => {
+        switch (filter) {
+          case "low_carbon_footprint":
+            return product.carbonFootprint < 10;
+          case "material_sourcing_good":
+            return product.materialSourcing === "good";
+          case "material_sourcing_better":
+            return product.materialSourcing === "better";
+          case "material_sourcing_best":
+            return product.materialSourcing === "best";
+          case "high_recyclability":
+            return product.recyclability >= 85;
+          case "low_water_usage":
+            return product.waterUsage === "low";
+          case "high_energy_efficiency":
+            return product.energyEfficiency === "high";
+          case "high_biodegradability":
+            return product.biodegradability > 90;
+          default:
+            return true;
+        }
+      });
+    }
+
+    // Apply search term filtering
+    if (searchTerm) {
+      filtered = filtered.filter((product) =>
+        product.name.toLowerCase().includes(searchTerm)
+      );
+    }
+
+    return filtered;
   };
 
   // Sort products based on selected sorting option
   const sortProducts = (products) => {
     if (sortOption === "price_low_high") {
-      return products.sort((a, b) => a.price - b.price); // Sort low to high
+      return products.sort((a, b) => a.price - b.price);
     } else if (sortOption === "price_high_low") {
-      return products.sort((a, b) => b.price - a.price); // Sort high to low
+      return products.sort((a, b) => b.price - a.price);
     }
     return products;
   };
@@ -93,11 +110,11 @@ const ProductList = () => {
 
   return (
     <div style={styles.app}>
-      <Navbar />
+      <Navbar onSearch={handleSearch} /> {/* Pass the handleSearch callback to Navbar */}
       <SecondaryNavbar
         currentCategory={normalizedCategory}
-        onSortSelect={(value) => setSortOption(value)} // Update sort option
-        onFilterSelect={(value) => setFilter(value)} // Update filter option
+        onSortSelect={(value) => setSortOption(value)}
+        onFilterSelect={(value) => setFilter(value)}
       />
       <div style={styles.productGrid}>
         {filteredAndSortedProducts.length === 0 ? (

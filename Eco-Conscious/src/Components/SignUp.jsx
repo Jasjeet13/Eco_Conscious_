@@ -20,7 +20,7 @@ const SignUp = () => {
         body: JSON.stringify(data),
       });
 
-      if (response.ok) {y
+      if (response.ok) {
         
         const responseData = await response.json();
         const id = responseData.id;
