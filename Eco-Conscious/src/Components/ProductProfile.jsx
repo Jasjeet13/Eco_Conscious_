@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import EnvironmentCriteria from "./EnvironmentCriteria";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Footer from "./Footer";
+import Alternative from "./alternative";
 
 const ProductProfile = () => {
   const [product, setProduct] = useState(null);
@@ -369,8 +370,10 @@ const ProductProfile = () => {
           </div>
         </div>
       </div>
-      {/* Product details */}
-      {/* <Alternative currentProduct={product} products={relatedProducts} /> */}
+      <Alternative
+        category={product.category}
+        currentEcoScore={product.ecoScore}
+      />
     </>
   );
 };

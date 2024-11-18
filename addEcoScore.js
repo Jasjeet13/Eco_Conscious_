@@ -45,8 +45,9 @@ const calculateEcoScore = (product) => {
   const durabilityScore = Math.min(durabilityInMonths / 12, 1) * 10; // 10% weightage in ecoscore
   score += durabilityScore;
 
-  return Math.min(score, 100); //score does not exceed 100
+  return parseFloat(Math.min(score, 100).toFixed(2)); //score does not exceed 100, rounded to 2 decimal places
 };
+
 
 fs.readFile(filePath, "utf8", (err, data) => {
   if (err) {
