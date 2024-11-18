@@ -198,7 +198,7 @@ const Navbar = ({ onSearch }) => {
           </button>
           <button
             className="menu-item"
-            onClick={() => navigateToCategory("cart")}
+            onClick={() => navigateToCategory("bags")}
           >
             Bag
           </button>
