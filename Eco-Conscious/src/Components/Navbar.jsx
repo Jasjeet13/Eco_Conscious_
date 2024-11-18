@@ -169,8 +169,8 @@ const Navbar = ({ onSearch }) => {
               padding: 20px;
             }
             .icons-container {
-              margin-right: 20px;
-              gap:50px;
+              margin-right: 5px;
+              gap:40px;
             }
             .navbar-logo {
               height: 40px;
