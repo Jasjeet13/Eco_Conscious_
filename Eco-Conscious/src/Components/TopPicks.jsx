@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { height, width } from "@fortawesome/free-solid-svg-icons/fa0";
 
 const TopPicks = () => {
   const [topPicks, setTopPicks] = useState([]);
-  const [hoveredButton, setHoveredButton] = useState(null); // Track hovered button
+  const [hoveredButton, setHoveredButton] = useState(null);
 
   useEffect(() => {
     const fetchTopPicks = async () => {
@@ -68,111 +69,140 @@ const TopPicks = () => {
   }, []);
 
   return (
+    <div style={styles.outer_container}>
+      <h1>Top Picks for You</h1>
     <div style={styles.container}>
-      <h2 style={styles.heading}>Top Picks</h2>
-      <div style={styles.grid}>
-        {topPicks.map((product) => (
-          <div
-            key={product._id}
-            style={styles.card}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.transform = "scale(1.05)")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.transform = "scale(1)")
-            }
+      {topPicks.map((product) => (
+        <div
+          key={product._id}
+          style={styles.innerDiv}
+          onMouseEnter={(e) =>
+            (e.currentTarget.style.transform = "scale(1.05)")
+          }
+          onMouseLeave={(e) =>
+            (e.currentTarget.style.transform = "scale(1)")
+          }
+        >
+          <Link
+            to={`/products/${product.category}/${product._id}`}
+            style={styles.link}
           >
-            <Link
-              to={`/products/${product.category}/${product._id}`}
-              style={styles.link}
-            >
+            <div style={styles.imageContainer}>
               <img
                 src={product.image}
                 alt={product.name}
                 style={styles.image}
               />
-              <h3 style={styles.name}>{product.name}</h3>
-              <p style={styles.price}>${product.price}</p>
-              <p style={styles.description}>{product.description}</p>
-            </Link>
-            <Link to={`/products/${product.key}`} style={styles.viewMoreLink}>
-              <button
-                style={{
-                  ...styles.viewMoreButton,
-                  backgroundColor:
-                    hoveredButton === product._id ? "green" : "rgb(175 220 125)",
-                }}
-                onMouseEnter={() => setHoveredButton(product._id)}
-                onMouseLeave={() => setHoveredButton(null)}
-              >
-                View More
-              </button>
-            </Link>
-          </div>
-        ))}
-      </div>
+            </div>
+            <div style={styles.contentContainer}>
+              <div style={styles.nameContainer}>
+                <h3 style={styles.name}>{product.name}</h3>
+              </div>
+              <div style={styles.priceContainer}>
+                <p style={styles.price}>${product.price}</p>
+              </div>
+              
+            </div>
+          </Link>
+          {/* <button
+            style={{
+              ...styles.viewMoreButton,
+              backgroundColor:
+                hoveredButton === product._id ? "green" : "rgb(175, 220, 125)",
+            }}
+            onMouseEnter={() => setHoveredButton(product._id)}
+            onMouseLeave={() => setHoveredButton(null)}
+          >
+            View More
+          </button> */}
+        </div>
+      ))}
+    </div>
     </div>
   );
 };
 
 const styles = {
+  outer_container: {
+    backgroundColor :"#f2f2f2",
+    // backgroundColor : "#f0eadd",
+    width :"100%",
+    paddingTop: "10px",
+    textAlign : "center"
+  },
   container: {
-    padding: "20px",
-    textAlign: "center",
-  },
-  heading: {
-    fontSize: "24px",
-    marginBottom: "20px",
-  },
-  grid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(4, 1fr)",
-    gap: "16px",
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "20px",
+    width: "80%",
     justifyContent: "center",
+    margin: "0 auto",
+    paddingBottom : "40px"
+    
   },
-  card: {
-    backgroundColor: "#fff",
-    border: "1px solid #ddd",
-    borderRadius: "8px",
+  innerDiv: {
+    flex: "1 1 22%",
+    minWidth: "250px",
+    backgroundColor: "#f2f2f2",
+    border: "1px solid #ccc",
+    // borderRadius: "8px",
     overflow: "hidden",
-    textAlign: "center",
-    padding: "20px",
-    transition: "transform 0.3s ease, box-shadow 0.3s ease",
-    boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
-    cursor: "pointer",
+    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+    textAlign: "left",
+    transition: "transform 0.3s ease",
+  },
+  imageContainer: {
+    backgroundColor: "#fff",
+    // borderBottom: "1px solid #ddd",
   },
   image: {
     width: "100%",
-    height: "150px",
+    height: "250px",
     objectFit: "contain",
-    marginBottom: "10px",
-    borderRadius: "8px",
+  },
+  contentContainer: {
+    padding: "15px",
+    backgroundColor :"#f0eadd"
+  },
+  nameContainer: {
+    marginBottom: "5px",
+    height : "30px",
   },
   name: {
     fontSize: "16px",
     color: "#333",
   },
+  priceContainer: {
+    marginBottom: "10px",
+    marginTop : "10px",
+    height : "20px",
+  },
   price: {
+    fontSize: "16px",
+    color: "black",
+  },
+  descriptionContainer: {
+    marginBottom: "10px",
+  },
+  description: {
     fontSize: "14px",
-    color: "#777",
+    color: "#555",
   },
   link: {
     textDecoration: "none",
     color: "inherit",
   },
   viewMoreButton: {
-    marginTop: "10px",
-    padding: "8px 12px",
+    margin: "15px 0",
+    padding: "10px 15px",
     backgroundColor: "rgb(175, 220, 125)",
     color: "#fff",
     border: "none",
     borderRadius: "4px",
+    borderRadius: "4px",
     cursor: "pointer",
     fontSize: "14px",
     transition: "background-color 0.3s ease",
-  },
-  viewMoreLink: {
-    textDecoration: "none",
   },
 };
 

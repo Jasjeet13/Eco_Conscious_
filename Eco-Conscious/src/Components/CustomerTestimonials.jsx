@@ -44,7 +44,7 @@ const CustomerTestimonials = () => {
 const styles = {
   container: {
     padding: "40px 20px",
-    backgroundColor: "#e8f5e9", // Light green background
+    backgroundColor: "#f2f2f2", 
     textAlign: "center",
   },
   title: {

@@ -113,7 +113,7 @@ const ProductProfile = () => {
         alert(data.message);
         navigate("/wishlist");
       } else {
-        alert(data.message || "Error adding to wishlist");
+        alert(data.message || 'Error adding to wishlist');
       }
     } catch (error) {
       console.error("Error adding to wishlist:", error);
