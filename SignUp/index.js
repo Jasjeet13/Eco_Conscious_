@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const dotenv = require("dotenv");
 
+// Import Routes
 const signupRouter = require("./routes/signup");
 const loginRouter = require("./routes/login");
 const profileRouter = require("./routes/profile");
@@ -12,9 +13,10 @@ const editRouter = require("./routes/edit");
 const deleteRouter = require("./routes/delete");
 const wishlistRouter = require("./routes/wishlist");
 const cartRouter = require('./routes/cart'); // Include your cart route
-
-const errorHandler = require("./middlewares/errorHandler");
-const authenticateToken = require("../SignUp/Middlewares/tokenAuthentication");
+const orderRoutes = require("./routes/order");
+const errorHandler = require("./Middlewares/errorHandler");
+const searchRouter = require("./routes/search");
+const authenticateToken = require("./Middlewares/tokenAuthentication"); // Adjust the path if needed
 
 dotenv.config();
 
@@ -34,15 +36,16 @@ mongoose
     console.error("Error connecting to MongoDB:", error.message);
   });
 
+// CORS configuration
 app.use(
   cors({
-    origin: "http://localhost:5173", // Frontend URL
+    origin: "http://localhost:5173", // Frontend URL where your React app is running
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
   })
 );
 
-app.options("*", cors());
+app.options("*", cors()); // Allow pre-flight requests
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -58,6 +61,8 @@ app.use("/api/edit", authenticateToken, editRouter);
 app.use("/api/delete", authenticateToken, deleteRouter);
 app.use("/api/wishlist", authenticateToken, wishlistRouter); // Wishlist route
 app.use('/api/cart', authenticateToken, cartRouter); // Cart route
+app.use("/api/order", authenticateToken, orderRoutes); 
+app.use("/api/search", searchRouter); 
 
 // Error handling middleware
 app.use(errorHandler);

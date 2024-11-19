@@ -51,7 +51,7 @@ router.get("/:id/related", authenticateToken, async (req, res) => {
     const relatedProducts = await Product.find({
       category: product.category, // Match by category
       _id: { $ne: product._id }, // Exclude the current product
-    }).limit(5); // Limit to 5 alternatives
+    }).limit(3); // Limit to 3 alternatives
 
     res.json(relatedProducts);
   } catch (err) {

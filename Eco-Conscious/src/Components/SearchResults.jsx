@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";  // Import axios for API calls
 
 const SearchResults = () => {
   const { term } = useParams();  // Get the search term from the URL
@@ -13,23 +12,21 @@ const SearchResults = () => {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        const token = localStorage.getItem("token");  // Retrieve token from localStorage
-
-        // Make the request with axios, passing the token in the Authorization header
-        const response = await axios.get(`http://localhost:3000/api/products/${term}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,  // Send the token in the header
-          },
-        });
-
-        setProducts(response.data);  // Update the state with fetched products
+        const response = await fetch(`/api/products/name/${term}`);
+        
+        // Check if the response is OK (status 200)
+        if (!response.ok) {
+          throw new Error("Failed to fetch products");
+        }
+        
+        const data = await response.json();
+        setProducts(data);
       } catch (error) {
-        setError(error.response ? error.response.data.message : error.message);  // Handle error
+        setError(error.message);
       } finally {
-        setLoading(false);  // Stop loading when the fetch is complete
+        setLoading(false);
       }
     };
-
     fetchProducts();
   }, [term]);  // Re-fetch when the search term changes
 
@@ -48,7 +45,7 @@ const SearchResults = () => {
         ) : (
           <ul>
             {products.map((product) => (
-              <li key={product._id}>{product.name}</li>  
+              <li key={product._id}>{product.name}</li>  // Display the product name
             ))}
           </ul>
         )}
