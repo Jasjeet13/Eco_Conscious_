@@ -48,30 +48,23 @@ const Navbar = ({ onSearch }) => {
   };
 
   
-  const handleSearch = () => {
+  const handleSearch = (e) => {
+    e.preventDefault();
+    
     const normalizedSearchTerm = searchTerm.trim().toLowerCase();
-
-    // Check if search term matches a category
-    const matchedCategory = Object.keys(categoryMapping).find(
-      (key) => categoryMapping[key] === normalizedSearchTerm
+  
+    // Check if the entered term matches a category
+    const matchedCategory = Object.keys(categoryMapping).find((key) => 
+      categoryMapping[key].toLowerCase() === normalizedSearchTerm
     );
-
+  
     if (matchedCategory) {
-      navigateToCategory(matchedCategory);
-    } else {
-      // If no category match, perform product search
-      onSearch(normalizedSearchTerm);
+      navigateToCategory(categoryMapping[matchedCategory]);
+    } else if (searchTerm.trim()) {
+      navigate(`/search/${searchTerm}`); // Default search behavior
     }
   };
-
-  const handleKeyPress = (event) => {
-    if (event.key === "Enter") {
-      handleSearch();
-    }
-  };
-
-
-
+  
   const styles = {
     navbar: {
       display: "flex",
@@ -156,7 +149,7 @@ const Navbar = ({ onSearch }) => {
           style={styles.menuItem}
           onClick={() => navigateToCategory("Beauty Products")}
         >
-          Cosmetic
+          Beauty
         </button>
         <button
           style={styles.menuItem}
@@ -178,17 +171,16 @@ const Navbar = ({ onSearch }) => {
         </button>
       </div>
 
-      <div style={styles.searchContainer}>
-        <FaSearch style={{ cursor: "pointer" }} onClick={handleSearch} />
+      <form style={styles.searchContainer} onSubmit={handleSearch}>
+        <FaSearch style={{ cursor: "pointer" }} />
         <input
           type="text"
           placeholder="Search for products, and more"
+          style={styles.searchInput}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          onKeyPress={handleKeyPress}
-          style={styles.searchInput}
         />
-      </div>
+      </form>
 
 
       <div style={styles.iconsContainer}>
