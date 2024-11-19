@@ -131,7 +131,7 @@ const Navbar = ({ onSearch }) => {
       width: "200px",
       backgroundColor: "#ffffff",
       boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
-      borderRadius: "8px",
+      // borderRadius: "8px",
       overflow: "hidden",
       zIndex: 1001,
     },
@@ -204,7 +204,7 @@ const Navbar = ({ onSearch }) => {
             <div style={styles.profileMenu}>
               <div style={styles.profileMenuItem} onClick={() => navigate("/profile")}>Account</div>
               <div style={styles.profileMenuItem} onClick={() => navigate("/wishlist")}>Wishlist</div>
-              <div style={styles.profileMenuItem} onClick={() => navigate("/gift-cards")}>Orders</div>
+              <div style={styles.profileMenuItem} onClick={() => navigate("/order")}>Orders</div>
               <div style={styles.profileMenuItem} onClick={() => navigate("/contact")}>Edit Account</div>
               <div style={styles.profileMenuItem} onClick={logout}>Logout</div>
             </div>
@@ -216,10 +216,10 @@ const Navbar = ({ onSearch }) => {
           onMouseEnter={() => setIsProfileMenuVisible(false)}
           onMouseLeave={() => setIsProfileMenuVisible(false)}
         >
-          <FaRegHeart style={styles.icon} />
+          <FaRegHeart style={styles.icon} onClick={() => navigate("/wishlist")}/>
           <span>Wishlist</span>
         </div>
-        <div style={{ ...styles.iconWrapper }} onClick={() => navigate("/bag")}>
+        <div style={{ ...styles.iconWrapper }} onClick={() => navigate("/cart")}>
           <FiShoppingBag style={styles.icon} />
           <span>Bag</span>
         </div>

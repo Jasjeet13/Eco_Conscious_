@@ -23,7 +23,7 @@ const styles = {
     flexDirection: 'column',
     alignItems: 'center',
     width: '370px',
-    height: '440px',
+    height: '400px',
     padding: '10px',
     border: '1px solid #e0e0e0',
     borderRadius: '8px',
@@ -193,7 +193,7 @@ const Wishlist = () => {
             <div style={styles.name}>{item.name}</div>
             <div style={styles.price}>${item.price}</div>
             <div style={styles.description}>{item.description}</div>
-            <button style={styles.addButton}>Add to bag</button>
+            {/* <button style={styles.addButton}>Add to bag</button> */}
           </div>
         ))
       ) : (
