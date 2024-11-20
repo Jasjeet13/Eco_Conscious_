@@ -199,7 +199,6 @@ const styles = {
     color: "#fff",
     border: "none",
     borderRadius: "4px",
-    borderRadius: "4px",
     cursor: "pointer",
     fontSize: "14px",
     transition: "background-color 0.3s ease",

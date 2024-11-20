@@ -18,6 +18,7 @@ import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
 import Cart from './Components/Cart';
 import Order from './Components/Order';
+import OrderHistory from './Components/OrderHistory';
 import SearchResults from "./Components/SearchResults";
 import Alternative from "./Components/Alternative";
 
@@ -54,8 +55,7 @@ function App() {
         <Route path="/cart" element={isAuthenticated ? <Cart />:<Navigate to="/" />} />
         <Route path="/order/:orderId" element={<Order />} />
         <Route path="/search/:term" element={<SearchResults />} />
-        <Route path="/alternatives/:category/:id" element={<Alternative />} />
-
+        <Route path="/alternatives/:category/:id" element={<Alternative />} />        <Route path="/order-history"  element={isAuthenticated ? <OrderHistory /> : <Navigate to="/" />}/>
 
       </Routes>
 

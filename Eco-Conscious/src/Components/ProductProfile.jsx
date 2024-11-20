@@ -329,6 +329,8 @@ const ProductProfile = () => {
               ></i>
               ADD TO CART
             </button>
+
+
             <button
               style={{
                 padding: "15px 30px",

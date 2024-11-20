@@ -101,7 +101,6 @@ const Cart = () => {
 
   const handleCheckout = async () => {
     try {
-      // Send the cart items to the backend for order creation
       const response = await fetch(
         "http://localhost:3000/api/order/place-order",
         {
@@ -110,16 +109,12 @@ const Cart = () => {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
             "Content-Type": "application/json",
           },
-          // Send any necessary data in the body (if required)
         }
       );
 
       const data = await response.json();
-
-      // Check if the response is successful
       if (response.ok) {
         alert("Order placed successfully!");
-        // Navigate to the order page and pass the order data or order ID
         navigate(`/order/${data.order._id}`);
       } else {
         console.error("Error response:", data);
@@ -131,7 +126,7 @@ const Cart = () => {
     }
   };
 
-  // Calculate total price (already implemented)
+  // Calculate total price
   const getTotalPrice = () => {
     return cartItems
       .reduce((total, item) => {
@@ -152,6 +147,9 @@ const Cart = () => {
 
   return (
     <div style={{ padding: "90px", maxWidth: "100%" }}>
+      {/* Heading */}
+      <h3 style={styles.heading}>Your Cart Items</h3>
+
       {/* If the cart is empty */}
       {cartItems.length === 0 ? (
         <div
@@ -263,17 +261,20 @@ const Cart = () => {
             ))}
           </div>
 
-          {/* Right Section: Order Summary */}
+          {/* Right side - Order Summary */}
           <div
             style={{
               flex: 1,
               padding: "40px",
               marginTop: "5px",
               borderLeft: "2px solid #ddd",
-              // borderRadius: "10px",
-              // boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
+              padding: "20px",
+              border: "1px solid #ddd",
+              borderRadius: "10px",
+              boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
+              marginLeft: "20px",
               height: "auto",
-              maxHeight: "270px",
+              maxHeight: "300px",
               overflowY: "auto",
             }}
           >
@@ -282,26 +283,27 @@ const Cart = () => {
               <p style={{ fontSize: "18px" }}>
                 <strong>Items in Cart:</strong> {cartItems.length}
               </p>
-              <p style={{ fontSize: "18px" }}>
+              <p style={{ fontSize: "18px", margin: "5px 0" }}>
                 <strong>Total Price:</strong> ${getTotalPrice()}
               </p>
             </div>
 
             <div style={{ marginBottom: "20px" }}>
-              <p style={{ fontSize: "18px" }}>
-                <strong>Shipping:</strong> Free (if applicable)
+              <p style={{ fontSize: "18px", fontWeight: "600" }}>
+                Estimated Delivery Time: 4-7 days
               </p>
             </div>
 
             <button
               onClick={handleCheckout}
               style={{
-                padding: "15px 20px",
+                padding: "15px 30px",
                 backgroundColor: "#000",
                 color: "#fff",
                 border: "none",
                 cursor: "pointer",
-                width: "50%",
+                borderRadius: "5px",
+                width: "100%",
                 fontSize: "18px",
               }}
             >
