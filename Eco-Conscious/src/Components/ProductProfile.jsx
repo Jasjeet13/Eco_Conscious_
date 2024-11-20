@@ -360,8 +360,7 @@ const ProductProfile = () => {
                     : "#ccc",
                   transition: "color 0.3s ease",
                 }}
-                // onMouseEnter={() => setHoveredIcon("heart")}
-                // onMouseLeave={() => setHoveredIcon(null)}
+                
               ></i>
               {isInWishlist ? "IN WISHLIST" : "ADD TO WISHLIST"}
             </button>
