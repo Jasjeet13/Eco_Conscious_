@@ -16,6 +16,7 @@ const cartRouter = require('./routes/cart'); // Include your cart route
 const orderRoutes = require("./routes/order");
 const errorHandler = require("./Middlewares/errorHandler");
 const searchRouter = require("./routes/search");
+const alternativeRouter = require("./routes/alternative");
 const authenticateToken = require("./Middlewares/tokenAuthentication"); // Adjust the path if needed
 
 dotenv.config();
@@ -63,6 +64,7 @@ app.use("/api/wishlist", authenticateToken, wishlistRouter); // Wishlist route
 app.use('/api/cart', authenticateToken, cartRouter); // Cart route
 app.use("/api/order", authenticateToken, orderRoutes); 
 app.use("/api/search", searchRouter); 
+app.use("/api/alternatives", alternativeRouter); 
 
 // Error handling middleware
 app.use(errorHandler);

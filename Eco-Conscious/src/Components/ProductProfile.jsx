@@ -369,7 +369,11 @@ const ProductProfile = () => {
           </div>
         </div>
       </div>
-      <Alternative></Alternative>
+        <Alternative 
+        productId={product._id} 
+        category={product.category} 
+        />
+
     </>
   );
 };

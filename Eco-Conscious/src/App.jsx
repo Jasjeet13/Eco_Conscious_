@@ -19,6 +19,7 @@ import Navbar from "./Components/Navbar";
 import Cart from './Components/Cart';
 import Order from './Components/Order';
 import SearchResults from "./Components/SearchResults";
+import Alternative from "./Components/Alternative";
 
 function App() {
   // Check if the user is authenticated by looking for the token in localStorage
@@ -33,7 +34,7 @@ function App() {
   return (
     <>
       {/* Conditionally render Navbar */}
-      {location.pathname !== "/" && <Navbar />}
+      {location.pathname !== "/" && location.pathname !== "/signup" &&<Navbar />}
 
       <Routes>
         <Route path="/" element={<SignUp_Login />} />
@@ -53,13 +54,14 @@ function App() {
         <Route path="/cart" element={isAuthenticated ? <Cart />:<Navigate to="/" />} />
         <Route path="/order/:orderId" element={<Order />} />
         <Route path="/search/:term" element={<SearchResults />} />
+        <Route path="/alternatives/:category/:id" element={<Alternative />} />
 
 
 
       </Routes>
 
       {/* Conditionally render Footer */}
-      {location.pathname !== "/" && <Footer />}
+      {location.pathname !== "/" && location.pathname !== "/signup" && <Footer />}
     </>
   );
 }
