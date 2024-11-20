@@ -22,11 +22,11 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    width: '370px',
-    height: '400px',
+    width: '310px',
+    height: '310px',
     padding: '10px',
     border: '1px solid #e0e0e0',
-    borderRadius: '8px',
+    // borderRadius: '8px',
     objectFit: 'contain',
     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
     transition: 'transform 0.2s',
@@ -44,13 +44,15 @@ const styles = {
     marginBottom: '15px',
   },
   name: {
-    fontSize: '20px',
+    fontSize: '16px',
+    fontWeight:"700",
     color: '#555',
     margin: '10px 0 5px',
   },
   price: {
     fontSize: '16px',
     color: '#888',
+    fontWeight:"500",
   },
   description: {
     fontSize: '14px',
@@ -61,30 +63,15 @@ const styles = {
   },
   cross: {
     position: 'absolute',
-    top: '10px',
-    right: '10px',
-    fontSize: '20px',
+    top: '3px',
+    right: '20px',
+    fontSize: '25px',
     cursor: 'pointer',
-    color: '#888',
+    color: "#007F4E",
     transition: 'color 0.3s ease',
   },
-  crossHover: {
-    color: 'red',
-  },
-  addButton: {
-    backgroundColor: 'rgb(146 221 151)',
-    color: '#fff',
-    border: 'none',
-    padding: '10px 20px',
-    borderRadius: '5px',
-    cursor: 'pointer',
-    marginTop: '10px',
-    marginBottom: '10px',
-    fontSize: '16px',
-  },
-  addButtonHover: {
-    backgroundColor: 'green',
-  },
+  
+  
 };
 
 const Wishlist = () => {
@@ -186,15 +173,15 @@ const Wishlist = () => {
               onClick={() => handleRemoveFromWishlist(item.productId)}
             >
               &times;
-            </span>
-  <Link to={`/products/${item.category}/${item.productId}`}>
+            </span><Link to={`/products/${item.category}/${item.productId}`}
+            style={{ textDecoration: "none", color: "inherit" }}>
     <img src={item.image} alt={item.name} style={styles.image} />
-  </Link>
+  
             <div style={styles.name}>{item.name}</div>
             <div style={styles.price}>${item.price}</div>
-            <div style={styles.description}>{item.description}</div>
+            {/* <div style={styles.description}>{item.description}</div> */}
             {/* <button style={styles.addButton}>Add to bag</button> */}
-          </div>
+            </Link></div>
         ))
       ) : (
         <div>No items in your wishlist</div>

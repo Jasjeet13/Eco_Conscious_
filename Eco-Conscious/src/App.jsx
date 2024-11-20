@@ -52,7 +52,6 @@ function App() {
         <Route path="/cart" element={isAuthenticated ? <Cart />:<Navigate to="/" />} />
         <Route path="/order/:orderId" element={<Order />} />
 
-
       </Routes>
 
       {/* Conditionally render Footer */}

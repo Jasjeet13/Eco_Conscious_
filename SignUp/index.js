@@ -12,44 +12,40 @@ const productsRouter = require("./routes/products");
 const editRouter = require("./routes/edit");
 const deleteRouter = require("./routes/delete");
 const wishlistRouter = require("./routes/wishlist");
-const cartRouter = require('./routes/cart'); // Include your cart route
+const cartRouter = require('./routes/cart');
 const orderRoutes = require("./routes/order");
 const errorHandler = require("./Middlewares/errorHandler");
-const authenticateToken = require("./Middlewares/tokenAuthentication"); // Adjust the path if needed
+const authenticateToken = require("./Middlewares/tokenAuthentication");
 
 dotenv.config();
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // Connect to MongoDB
 mongoose
-  .connect("mongodb://127.0.0.1:27017/ecommerce", {
+  .connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/ecommerce", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => {
-    console.log("Connected to MongoDB");
-  })
-  .catch((error) => {
-    console.error("Error connecting to MongoDB:", error.message);
-  });
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((error) => console.error("Error connecting to MongoDB:", error.message));
 
 // CORS configuration
 app.use(
   cors({
-    origin: "http://localhost:5173", // Frontend URL where your React app is running
+    origin: "http://localhost:5173", // Update for production
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
   })
 );
 
-app.options("*", cors()); // Allow pre-flight requests
+app.options("*", cors());
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static("public")); // Serve static files
+app.use(express.static("public"));
 
 // Routes
 app.use("/signup", signupRouter);
@@ -58,10 +54,9 @@ app.use("/api/profile", authenticateToken, profileRouter);
 app.use("/api/products", authenticateToken, productsRouter);
 app.use("/api/edit", authenticateToken, editRouter);
 app.use("/api/delete", authenticateToken, deleteRouter);
-app.use("/api/wishlist", authenticateToken, wishlistRouter); // Wishlist route
-app.use('/api/cart', authenticateToken, cartRouter); // Cart route
-app.use("/api/order", authenticateToken, orderRoutes); // Orders route (pluralized endpoint)
-
+app.use("/api/wishlist", authenticateToken, wishlistRouter);
+app.use('/api/cart', authenticateToken, cartRouter);
+app.use("/api/order", authenticateToken, orderRoutes);
 
 // Error handling middleware
 app.use(errorHandler);

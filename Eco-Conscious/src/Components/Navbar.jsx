@@ -38,6 +38,9 @@ const Navbar = ({ onSearch }) => {
   const navigateToBag = () => {
     navigate("/cart");
   };
+  const navigateToOrders = () => {
+    navigate("/orders");
+  };
 
   const showProfileMenu = () => setIsProfileMenuVisible(true);
   const hideProfileMenu = () => setIsProfileMenuVisible(false);
@@ -313,6 +316,10 @@ const Navbar = ({ onSearch }) => {
             <FiShoppingBag className="icon" />
             <span>Bag</span>
           </div>
+          <div className="icon-wrapper" onClick={navigateToOrders}>
+            <FiShoppingBag className="icon" />
+            <span>Order</span>
+          </div>
         </div>
       </nav></>
   );
@@ -321,4 +328,6 @@ const Navbar = ({ onSearch }) => {
 
 
 export default Navbar;
+
+
 
