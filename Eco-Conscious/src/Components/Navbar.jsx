@@ -216,11 +216,11 @@ const Navbar = ({ onSearch }) => {
         <div
           style={{ ...styles.iconWrapper }}
           onMouseEnter={() => setIsProfileMenuVisible(false)}
-          onMouseLeave={() => setIsProfileMenuVisible(false)}
-        >
-          <FaRegHeart style={styles.icon} onClick={() => navigate("/wishlist")}/>
-          <span style={styles.icontext}>Wishlist</span>
+          onMouseLeave={() => setIsProfileMenuVisible(false)} onClick={() => navigate("/wishlist")}>
+          <FaRegHeart style={styles.icon}/>
+          <span>Wishlist</span>
         </div>
+        
         <div style={{ ...styles.iconWrapper }} onClick={() => navigate("/cart")}>
           <FiShoppingBag style={styles.icon} />
           <span style={styles.icontext}>Bag</span>
