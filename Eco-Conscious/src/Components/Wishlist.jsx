@@ -1,151 +1,200 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const styles = {
   container: {
-    padding: '40px',
-    display: 'flex',
-    flexWrap: 'wrap',
-    gap: '20px',
-    justifyContent: 'center',
+    padding: "40px",
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "20px",
+    justifyContent: "center",
   },
   title: {
-    fontSize: '32px',
-    textAlign: 'center',
-    marginTop: '50px',
-    marginBottom: '30px',
-    color: '#333',
-    width: '100%',
+    fontSize: "32px",
+    textAlign: "center",
+    marginTop: "50px",
+    marginBottom: "30px",
+    color: "#333",
+    width: "100%",
   },
   wishlistItem: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    width: '310px',
-    height: '310px',
-    padding: '10px',
-    border: '1px solid #e0e0e0',
-    // borderRadius: '8px',
-    objectFit: 'contain',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-    transition: 'transform 0.2s',
-    textAlign: 'center',
-    position: 'relative',
-  },
-  wishlistItemHover: {
-    transform: 'scale(1.02)',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    width: "330px",
+    height: "340px",
+    padding: "20px",
+    border: "1px solid #e0e0e0",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+    transition: "transform 0.2s",
+    textAlign: "center",
+    position: "relative",
   },
   image: {
-    width: '100%',
-    height: '200px',
-    objectFit: 'contain',
-    borderRadius: '8px',
-    marginBottom: '15px',
+    width: "100%",
+    height: "200px",
+    objectFit: "contain",
+    borderRadius: "8px",
+    marginBottom: "15px",
   },
   name: {
-    fontSize: '16px',
-    fontWeight:"700",
-    color: '#555',
-    margin: '10px 0 5px',
+    fontSize: "16px",
+    fontWeight: "700",
+    color: "black",
+    margin: "10px 0 5px",
   },
   price: {
-    fontSize: '16px',
-    color: '#888',
-    fontWeight:"500",
-  },
-  description: {
-    fontSize: '14px',
-    color: '#777',
-    marginTop: '10px',
-    textAlign: 'center',
-    padding: '0 10px',
+    fontSize: "16px",
+    color: "#555",
+    fontWeight: "500",
   },
   cross: {
-    position: 'absolute',
-    top: '3px',
-    right: '20px',
-    fontSize: '25px',
-    cursor: 'pointer',
+    position: "absolute",
+    top: "3px",
+    right: "20px",
+    fontSize: "25px",
+    cursor: "pointer",
     color: "#007F4E",
-    transition: 'color 0.3s ease',
+    transition: "color 0.3s ease",
   },
-  
-  
+  addButton: {
+    position: "absolute",
+    top: "89%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    backgroundColor: "transparent",
+    color: "black",
+    border: "2px solid black",
+    padding: "10px 20px",
+    cursor: "pointer",
+    fontSize: "16px",
+    transition: "all 0.3s ease",
+  },
+  addButtonHover: {
+    backgroundColor: "#007f4e",
+    color: "white",
+    transform: "translate(-50%, -55%)",
+    border: "none",
+  },
 };
 
 const Wishlist = () => {
   const [wishlistItems, setWishlistItems] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [hoveredItem, setHoveredItem] = useState(null);
+  const [hoveredButton, setHoveredButton] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchWishlist = async () => {
-      const token = localStorage.getItem('token'); 
+      const token = localStorage.getItem("token");
 
       if (!token) {
-        setError('User is not authenticated');
+        setError("User is not authenticated");
+        setLoading(false);
         return;
       }
 
       try {
-        const response = await fetch('http://localhost:3000/api/wishlist', {
-          method: 'GET',
+        const response = await fetch("http://localhost:3000/api/wishlist", {
+          method: "GET",
           headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
           },
         });
 
         if (!response.ok) {
-          if (response.status === 401) {
-            setError('Unauthorized access - Please log in again.');
-          } else {
-            setError('Failed to fetch wishlist data');
-          }
+          setError("Failed to fetch wishlist data");
+          setLoading(false);
           return;
         }
 
         const data = await response.json();
         setWishlistItems(data);
       } catch (error) {
-        console.error('Fetch error:', error);
-        setError('An error occurred while fetching wishlist data');
+        console.error("Fetch error:", error);
+        setError("An error occurred while fetching wishlist data");
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchWishlist();
   }, []);
 
+  const addToCart = async (item) => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("You need to be logged in to add items to your cart.");
+      return;
+    }
+    try {
+      const response = await fetch("http://localhost:3000/api/cart/add", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          productId: item.productId,
+          name: item.name,
+          price: item.price,
+          image: item.image,
+          description: item.description,
+          quantity: 1, // Default quantity
+        }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        alert(data.message);
+        navigate("/cart");
+      } else {
+        alert(data.message || "Error adding to cart");
+      }
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+    }
+  };
+
   const handleRemoveFromWishlist = async (productId) => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
 
     if (!token) {
-      alert('You need to log in first');
+      alert("You need to log in first");
       return;
     }
 
     try {
-      const response = await fetch(`http://localhost:3000/api/wishlist/remove/${productId}`, {
-        method: 'DELETE',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      });
+      const response = await fetch(
+        `http://localhost:3000/api/wishlist/remove/${productId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (!response.ok) {
         const errorData = await response.json();
         alert(`Error removing item: ${errorData.message}`);
       } else {
-        alert('Item successfully removed from wishlist');
-        setWishlistItems(prevItems => prevItems.filter(item => item.productId !== productId));
+        alert("Item successfully removed from wishlist");
+        setWishlistItems((prevItems) =>
+          prevItems.filter((item) => item.productId !== productId)
+        );
       }
     } catch (error) {
-      console.error('Error removing item from wishlist:', error);
-      alert('Error removing item from wishlist');
+      console.error("Error removing item from wishlist:", error);
+      alert("Error removing item from wishlist");
     }
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   if (error) {
     return <div>{error}</div>;
@@ -160,28 +209,35 @@ const Wishlist = () => {
             key={item._id}
             style={{
               ...styles.wishlistItem,
-              ...(hoveredItem === index ? styles.wishlistItemHover : {}),
             }}
-            onMouseEnter={() => setHoveredItem(index)}
-            onMouseLeave={() => setHoveredItem(null)}
           >
             <span
-              style={{
-                ...styles.cross,
-                ...(hoveredItem === index ? styles.crossHover : {}),
-              }}
+              style={styles.cross}
               onClick={() => handleRemoveFromWishlist(item.productId)}
             >
               &times;
-            </span><Link to={`/products/${item.category}/${item.productId}`}
-            style={{ textDecoration: "none", color: "inherit" }}>
-    <img src={item.image} alt={item.name} style={styles.image} />
-  
-            <div style={styles.name}>{item.name}</div>
-            <div style={styles.price}>${item.price}</div>
-            {/* <div style={styles.description}>{item.description}</div> */}
-            {/* <button style={styles.addButton}>Add to bag</button> */}
-            </Link></div>
+            </span>
+            <Link
+              to={`/products/${item.category}/${item.productId}`}
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <img src={item.image} alt={item.name} style={styles.image} />
+              <div style={styles.name}>{item.name}</div>
+              <div style={styles.price}>${item.price}</div>
+            </Link>
+            <button
+              style={
+                hoveredButton === index
+                  ? { ...styles.addButton, ...styles.addButtonHover }
+                  : styles.addButton
+              }
+              onClick={() => addToCart(item)}
+              onMouseEnter={() => setHoveredButton(index)}
+              onMouseLeave={() => setHoveredButton(null)}
+            >
+              Add to bag
+            </button>
+          </div>
         ))
       ) : (
         <div>No items in your wishlist</div>
@@ -189,4 +245,5 @@ const Wishlist = () => {
     </div>
   );
 };
+
 export default Wishlist;
