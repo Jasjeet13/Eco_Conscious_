@@ -18,6 +18,7 @@ import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
 import Cart from './Components/Cart';
 import Order from './Components/Order';
+import OrderHistory from "./Components/OrderHistory";
 
 function App() {
   // Check if the user is authenticated by looking for the token in localStorage
@@ -51,7 +52,8 @@ function App() {
         <Route path="/wishlist" element={isAuthenticated ? <Wishlist />:<Navigate to="/" />} />
         <Route path="/cart" element={isAuthenticated ? <Cart />:<Navigate to="/" />} />
         <Route path="/order/:orderId" element={<Order />} />
-
+        <Route path="/order-history"  element={isAuthenticated ? <OrderHistory /> : <Navigate to="/" />}
+/>
 
       </Routes>
 
