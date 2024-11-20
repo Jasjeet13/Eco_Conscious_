@@ -21,12 +21,10 @@ const SignUp = () => {
       });
 
       if (response.ok) {
-        
         const responseData = await response.json();
         const id = responseData.id;
-        console.log('Id received:', id);
+        console.log("Id received:", id);
         navigate("/home");
-        
       } else {
         const responseData = await response.json();
         setError(responseData.message || "Signup failed");
@@ -47,71 +45,72 @@ const SignUp = () => {
       alignItems: "center",
     },
     loginBox: {
-      padding: "5px 40px",
-      boxShadow: "5px 0 10px rgba(0, 0, 0, 0.1)",
+      padding: "40px",
+      boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.1)",
       textAlign: "center",
-      width: "50%",
-      borderRadius: "20px",
-      backgroundColor: "#ffffff", // Add a background color to make the box visible
+      width: "100%",
+      maxWidth: "600px",
+      //borderRadius: "8px",
+      backgroundColor: "#ffffff",
     },
     inputGroupContainer: {
       display: "flex",
       flexWrap: "wrap",
-      gap: "5px",
+      gap: "20px",
+      marginBottom: "20px",
+    },
+    halfWidthInputGroupContainer: {
+      display: "flex",
+      gap: "20px",
+      width: "100%",
     },
     fullWidthInputGroup: {
-      flexBasis: "90%",
-      marginBottom: "15px",
-      textAlign: "left",
-    },
-    halfWidthInputGroup: {
-      flexBasis: "49%",
+      flexBasis: "100%",
       marginBottom: "20px",
       textAlign: "left",
+      borderBottom: "1px solid #ccc",
+    },
+    halfWidthInputGroup: {
+      flex: "1",
+      textAlign: "left",
+      borderBottom: "1px solid #ccc",
     },
     label: {
       display: "block",
-      marginBottom: "10px",
-      fontSize: "14px",
+      marginBottom: "5px",
+      fontSize: "16px",
+      color: "#444",
     },
     input: {
-      padding: "10px",
-      width: "100%", // Default for full-width inputs
-      borderRadius: "0px",
-      border: "none",
-      borderBottom: "1px solid #ccc",
+      width: "100%",
+      padding: "10px 0",
       fontSize: "16px",
-      backgroundColor: "transparent",
-    },
-    input2: {
-      padding: "10px",
-      width: "82%", // Default for full-width inputs
-      borderRadius: "0px",
+      
+      borderRadius: "0",
       border: "none",
-      borderBottom: "1px solid #ccc",
-      fontSize: "16px",
       backgroundColor: "transparent",
-    },
-    halfWidthInput: {
-      width: "70%", // Reduced width for half-width inputs
+      color: "#333",
     },
     button: {
-      backgroundColor: "#c49b63",
+      backgroundColor: "#007F4E",
       color: "white",
       padding: "15px",
       border: "none",
       cursor: "pointer",
       fontSize: "18px",
-      borderRadius: "30px",
-      marginTop: "30px",
-      marginBottom:"45px",
-      width: "25%",
+      //borderRadius: "8px",
+      width: "100%",
+      maxWidth: "200px",
+      marginTop: "10px",
+      transition: "background-color 0.3s ease, transform 0.3s ease",
     },
     heading: {
-      fontSize: "28px",
-      fontWeight: "500",
-      marginBottom: "30px",
+      fontSize: "24px",
+      fontWeight: "530",
+      marginTop:"0px",
+      marginBottom: "29px",
       textAlign: "center",
+      color: "#333",
     },
   };
 
@@ -119,9 +118,9 @@ const SignUp = () => {
     <div style={styles.mainbox}>
       <div style={styles.loginBox}>
         <h2 style={styles.heading}>Sign Up</h2>
-        {error && <p style={{ color: 'red', textAlign: 'center' }}>{error}</p>}
+        {error && <p style={{ color: "red", textAlign: "center" }}>{error}</p>}
         <form onSubmit={handleSubmit}>
-          <div style={styles.inputGroupContainer}>
+          <div style={styles.halfWidthInputGroupContainer}>
             <div style={styles.halfWidthInputGroup}>
               <label htmlFor="username" style={styles.label}>
                 USERNAME
@@ -131,7 +130,7 @@ const SignUp = () => {
                 id="username"
                 name="username"
                 required
-                style={styles.input2}
+                style={styles.input}
               />
             </div>
             <div style={styles.halfWidthInputGroup}>
@@ -143,21 +142,23 @@ const SignUp = () => {
                 id="fullname"
                 name="fullname"
                 required
-                style={styles.input2}
-              />
-            </div>
-            <div style={styles.fullWidthInputGroup}>
-              <label htmlFor="email" style={styles.label}>
-                EMAIL
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
                 style={styles.input}
               />
             </div>
+          </div>
+          <div style={styles.fullWidthInputGroup}>
+            <label htmlFor="email" style={styles.label}>
+              EMAIL
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              style={styles.input}
+            />
+          </div>
+          <div style={styles.halfWidthInputGroupContainer}>
             <div style={styles.halfWidthInputGroup}>
               <label htmlFor="password" style={styles.label}>
                 PASSWORD
@@ -167,7 +168,7 @@ const SignUp = () => {
                 id="password"
                 name="password"
                 required
-                style={styles.input2}
+                style={styles.input}
               />
             </div>
             <div style={styles.halfWidthInputGroup}>
@@ -179,39 +180,74 @@ const SignUp = () => {
                 id="confirmPassword"
                 name="confirmPassword"
                 required
-                style={styles.input2}
-              />
-            </div>
-            <div style={styles.fullWidthInputGroup}>
-              <label htmlFor="address" style={styles.label}>
-                ADDRESS
-              </label>
-              <input
-                type="text"
-                id="address"
-                name="address"
-                required
                 style={styles.input}
               />
             </div>
-            <div style={styles.fullWidthInputGroup}>
-              <label htmlFor="phoneNumber" style={styles.label}>
-                PHONE NUMBER
-              </label>
-              <input
-                type="tel"
-                id="phoneNumber"
-                name="phoneNumber"
-                required
-                style={styles.input}
-              />
-            </div>
+          </div>
+          <div style={styles.fullWidthInputGroup}>
+            <label htmlFor="address" style={styles.label}>
+              ADDRESS
+            </label>
+            <input
+              type="text"
+              id="address"
+              name="address"
+              required
+              style={styles.input}
+            />
+          </div>
+          <div style={styles.fullWidthInputGroup}>
+            <label htmlFor="phoneNumber" style={styles.label}>
+              PHONE NUMBER
+            </label>
+            <input
+              type="tel"
+              id="phoneNumber"
+              name="phoneNumber"
+              required
+              style={styles.input}
+            />
           </div>
           <button type="submit" style={styles.button}>
             SIGN UP
           </button>
         </form>
       </div>
+      <style jsx>{`
+        @media (max-width: 768px) {
+          .halfWidthInputGroupContainer {
+            flex-direction: column;
+          }
+
+          .loginBox {
+            padding: 20px;
+          }
+
+          .heading {
+            font-size: 20px;
+          }
+
+          .label,
+          .input {
+            font-size: 16px;
+          }
+
+          .button {
+            width: 100%;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .heading {
+            font-size: 18px;
+          }
+
+          .label,
+          .input {
+            font-size: 14px;
+          }
+        }
+      `}</style>
     </div>
   );
 };
