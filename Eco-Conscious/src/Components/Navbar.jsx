@@ -35,10 +35,6 @@ const Navbar = ({ onSearch }) => {
   const navigateToWishlist = () => {
     navigate("/wishlist");
   };
-  const navigateToBag = () => {
-    navigate("/cart");
-  };
-
   const showProfileMenu = () => setIsProfileMenuVisible(true);
   const hideProfileMenu = () => setIsProfileMenuVisible(false);
 
@@ -52,30 +48,23 @@ const Navbar = ({ onSearch }) => {
   };
 
   
-  const handleSearch = () => {
+  const handleSearch = (e) => {
+    e.preventDefault();
+    
     const normalizedSearchTerm = searchTerm.trim().toLowerCase();
-
-    // Check if search term matches a category
-    const matchedCategory = Object.keys(categoryMapping).find(
-      (key) => categoryMapping[key] === normalizedSearchTerm
+  
+    // Check if the entered term matches a category
+    const matchedCategory = Object.keys(categoryMapping).find((key) => 
+      categoryMapping[key].toLowerCase() === normalizedSearchTerm
     );
-
+  
     if (matchedCategory) {
-      navigateToCategory(matchedCategory);
-    } else {
-      // If no category match, perform product search
-      onSearch(normalizedSearchTerm);
+      navigateToCategory(categoryMapping[matchedCategory]);
+    } else if (searchTerm.trim()) {
+      navigate(`/search/${searchTerm}`); // Default search behavior
     }
   };
-
-  const handleKeyPress = (event) => {
-    if (event.key === "Enter") {
-      handleSearch();
-    }
-  };
-
-
-
+  
   const styles = {
     navbar: {
       display: "flex",
@@ -135,7 +124,7 @@ const Navbar = ({ onSearch }) => {
       width: "200px",
       backgroundColor: "#ffffff",
       boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
-      borderRadius: "8px",
+      // borderRadius: "8px",
       overflow: "hidden",
       zIndex: 1001,
     },
@@ -149,112 +138,6 @@ const Navbar = ({ onSearch }) => {
   };
 
   return (
-    <><style>{`
-        
-      .navbar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 20px 20px;
-        height: 70px;
-        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        background-color: #ffffff;
-        z-index: 1000;
-        box-sizing: border-box;
-      }
-      .navbar-logo {
-        height: 40px;
-        cursor: pointer;
-        margin-left: 20px;
-      }
-      .navbar-heading {
-        margin-left: 10px;
-        font-size: 18px;
-        font-weight: bold;
-        color: #3e4152;
-        cursor: pointer;
-      }
-      .menu-container {
-        display: flex;
-        flex: 1;
-        justify-content: center;
-        gap: 30px;
-        font-size: 16px;
-        font-weight: 500;
-        color: #3e4152;
-      }
-      .menu-item {
-        cursor: pointer;
-        background-color: transparent;
-        border: none;
-        color: black;
-        font-size: 14px;
-        font-weight: 600;
-      }
-      .search-container {
-        display: flex;
-        align-items: center;
-        background-color: #f5f5f6;
-        padding: 10px 20px;
-        margin-right: 70px;
-        width: 500px;
-      }
-      .search-input {
-        border: none;
-        background-color: transparent;
-        outline: none;
-        width: 100%;
-        font-size: 14px;
-        color: #3e4152;
-      }
-      .icons-container {
-        display: flex;
-        align-items: center;
-        gap: 40px;
-        margin-right: 40px;
-      }
-      .icon-wrapper {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        font-size: 14px;
-        color: #3e4152;
-        cursor: pointer;
-      }
-      .icon {
-        font-size: 20px;
-      }
-
-      /* Hide categories menu and search bar at 768px and below */
-      @media (max-width: 768px) {
-        .menu-container,
-        .search-container {
-          display: none;
-        }
-        .icons-container {
-          gap: 20px;
-        }
-      }
-
-      /* Show only the logo and icons at screens below 480px */
-      @media (max-width: 480px) {
-        .navbar {
-          padding: 20px;
-        }
-        .icons-container {
-          margin-right: 20px;
-        }
-        .navbar-logo {
-          height: 40px;
-          margin-left: 0;
-        }
-      }
-    
-  `}</style>
     <nav style={styles.navbar}>
       <img src={logo} alt="Logo" style={styles.logo} onClick={navigateToHome} />
       <div style={styles.heading} onClick={navigateToHome}>
@@ -266,7 +149,7 @@ const Navbar = ({ onSearch }) => {
           style={styles.menuItem}
           onClick={() => navigateToCategory("Beauty Products")}
         >
-          Cosmetic
+          Beauty
         </button>
         <button
           style={styles.menuItem}
@@ -288,33 +171,52 @@ const Navbar = ({ onSearch }) => {
         </button>
       </div>
 
-      <div style={styles.searchContainer}>
-        <FaSearch style={{ cursor: "pointer" }} onClick={handleSearch} />
+      <form style={styles.searchContainer} onSubmit={handleSearch}>
+        <FaSearch style={{ cursor: "pointer" }} />
         <input
           type="text"
           placeholder="Search for products, and more"
+          style={styles.searchInput}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          onKeyPress={handleKeyPress}
-          style={styles.searchInput}
         />
-      </div>
+      </form>
 
-        <div className="icons-container">
-          <div className="icon-wrapper" onClick={navigateToProfile}>
-            <FaRegUser className="icon" />
-            <span>Profile</span>
-          </div>
-          <div className="icon-wrapper" onClick={navigateToWishlist}>
-            <FaRegHeart className="icon" />
-            <span>Wishlist</span>
-          </div>
-          <div className="icon-wrapper" onClick={navigateToBag}>
-            <FiShoppingBag className="icon" />
-            <span>Bag</span>
-          </div>
+
+      <div style={styles.iconsContainer}>
+        <div
+          style={{ ...styles.iconWrapper, ...(isProfileMenuVisible && styles.iconWrapperHover) }}
+          onMouseEnter={showProfileMenu}
+          onMouseLeave={hideProfileMenu}
+        >
+          <FaRegUser style={styles.icon} />
+          <span>Profile</span>
+
+          {isProfileMenuVisible && (
+            <div style={styles.profileMenu}>
+              <div style={styles.profileMenuItem} onClick={() => navigate("/profile")}>Account</div>
+              <div style={styles.profileMenuItem} onClick={() => navigate("/wishlist")}>Wishlist</div>
+              <div style={styles.profileMenuItem} onClick={() => navigate("/order")}>Orders</div>
+              <div style={styles.profileMenuItem} onClick={() => navigate("/contact")}>Edit Account</div>
+              <div style={styles.profileMenuItem} onClick={logout}>Logout</div>
+            </div>
+          )}
         </div>
-      </nav></>
+
+        <div
+          style={{ ...styles.iconWrapper }}
+          onMouseEnter={() => setIsProfileMenuVisible(false)}
+          onMouseLeave={() => setIsProfileMenuVisible(false)}
+        >
+          <FaRegHeart style={styles.icon} onClick={() => navigate("/wishlist")}/>
+          <span>Wishlist</span>
+        </div>
+        <div style={{ ...styles.iconWrapper }} onClick={() => navigate("/cart")}>
+          <FiShoppingBag style={styles.icon} />
+          <span>Bag</span>
+        </div>
+      </div>
+    </nav>
   );
 };
 

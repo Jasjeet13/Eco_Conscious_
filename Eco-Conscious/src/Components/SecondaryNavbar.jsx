@@ -35,7 +35,7 @@ const styles = {
     padding: "10px 20px",
     backgroundColor: "#f8f8f8",
     borderBottom: "1px solid #ddd",
-    margin:"70px 0px 10px 30px",
+    margin:"85px 0px 10px 70px",
   },
   left: {
     flex: 1,
