@@ -1,70 +1,67 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+import axios from "axios";
+import Navbar from "./Navbar";
+import SecondaryNavbar from "./SecondaryNavbar";
 
-const Alternative = () => {
+const SearchResults = () => {
+  const { term } = useParams();
   const [products, setProducts] = useState([]);
-  const [alternatives, setAlternatives] = useState([]); // New state to store filtered alternatives
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Fetch products from the backend API
     const fetchProducts = async () => {
       try {
-        const response = await fetch("http://localhost:5173/api/products", {
+        setLoading(true);
+        const token = localStorage.getItem("token");
+
+        const response = await axios.get(`http://localhost:3000/api/search/${term}`, {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`, // Assuming token is stored in localStorage
+            Authorization: `Bearer ${token}`,
           },
         });
 
-        if (!response.ok) {
-          throw new Error(`HTTP Error! Status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        setProducts(data);
-        setLoading(false);
-
-        // Filter alternatives based on an 'ecoFriendly' flag (you can modify this logic)
-        const ecoFriendlyAlternatives = data.filter(
-          (product) => product.ecoFriendly === true // Example criterion
+        setProducts(response.data);
+      } catch (error) {
+        setError(
+          error.response
+            ? error.response.data.message || "Failed to fetch products"
+            : error.message
         );
-        setAlternatives(ecoFriendlyAlternatives);
-      } catch (err) {
-        setError(err.message);
+      } finally {
         setLoading(false);
       }
     };
 
     fetchProducts();
-  }, []);
+  }, [term]);
 
-  if (loading) {
-    return <p>Loading products...</p>;
-  }
-
-  if (error) {
-    return <p>Error: {error}</p>;
-  }
+  if (loading) return <p>Loading search results...</p>;
+  if (error) return <p>Error: {error}</p>;
 
   return (
+    <div style={styles.outerContainer}>
+      <SecondaryNavbar currentCategory={`${term}`} /> 
     <div style={styles.app}>
-      <h1 style={styles.heading}>Find Your Green Alternative!</h1>
+
       <div style={styles.productGrid}>
-        {alternatives.length > 0 ? (
-          alternatives.map((product) => (
+        {products.length === 0 ? (
+          <p>No products found for "{term}".</p>
+        ) : (
+          products.map((product) => (
             <Link
-              to={`/alternative-products/${product._id}`}
+              to={`/products/${product.category}/${product._id}`}
               key={product._id}
               style={{ textDecoration: "none", color: "inherit" }}
             >
               <div style={styles.productCard}>
                 <img
-                  src={product.image || "https://via.placeholder.com/200"}
+                  src={product.image || "placeholder.png"} // Fallback to placeholder if no image
                   alt={product.name}
                   style={styles.productImage}
                 />
-                <h3 style={styles.productBrand}>{product.brand}</h3>
+                {/* <h3 style={styles.productBrand}>{product.brand || "Brand"}</h3> */}
                 <p style={styles.productName}>{product.name}</p>
                 <div style={styles.rating}>
                   {product.rating} ★★★★★ | {product.reviews} reviews
@@ -75,31 +72,29 @@ const Alternative = () => {
               </div>
             </Link>
           ))
-        ) : (
-          <p>No alternative products found</p> // In case no alternatives are found
         )}
       </div>
+    </div>
     </div>
   );
 };
 
 const styles = {
+  outerContainer:{
+    backgroundColor: "#f9f9f9",
+  },
+
   app: {
     fontFamily: "Arial, sans-serif",
-    backgroundColor: "#f9f9f9",
     margin: 0,
     padding: "20px",
-  },
-  heading: {
-    fontSize: "24px",
-    fontWeight: "bold",
-    textAlign: "center",
-    marginBottom: "20px",
-    color: "#333",
+    width : "75%",
+    margin : "0 auto"
+    
   },
   productGrid: {
     display: "grid",
-    gridTemplateColumns: "repeat(4, 1fr)",
+    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", // Responsive grid
     gap: "16px",
     maxWidth: "1450px",
     margin: "0 auto",
@@ -110,10 +105,11 @@ const styles = {
     borderRadius: "4px",
     overflow: "hidden",
     textAlign: "center",
-    padding: "20px",
-    height: "330px", // Adjusted height for better flexibility
+    padding: "30px",
+    height: "290px",
     transition: "box-shadow 0.3s ease",
     boxShadow: "0 0 10px rgba(0,0,0,0.1)",
+    paddingBottom: "40px",
   },
   productImage: {
     width: "100%",
@@ -134,13 +130,13 @@ const styles = {
   rating: {
     fontSize: "12px",
     color: "#555",
-    margin: "5px 0",
+    margin: "10px 0",
   },
   price: {
     fontSize: "16px",
     fontWeight: "bold",
-    margin: "10px 0",
+    color: "#000",
   },
 };
 
-export default Alternative;
+export default SearchResults;

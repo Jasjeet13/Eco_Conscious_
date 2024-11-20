@@ -1,65 +1,92 @@
 import React, { useState, useEffect } from 'react';
 
+
 const styles = {
   container: {
     flex: 1,
-    padding: '20px',
-    backgroundColor: '#f0f8f4', // Light greenish background
+    padding: '30px',
+    backgroundColor: '#f9fafb', // Light background for a soft look
     fontFamily: "'Arial', sans-serif",
   },
   heading: {
-    fontSize: '28px',
-    marginTop: '70px',
+    marginTop: '80px',
+    fontSize: '32px',
     textAlign: 'center',
     marginBottom: '30px',
-    fontWeight: 'bold',
+    fontWeight: '700',
+    color: '#333',
   },
   itemsContainer: {
     display: 'flex',
-    flexWrap: 'wrap',
-    gap: '20px',
+    flexDirection: 'column',
+    gap: '30px',
     justifyContent: 'center',
+    alignItems: 'center',
   },
   orderContainer: {
-    marginBottom: '30px',
-    padding: '15px',
-    border: '1px solid #ddd',
-    borderRadius: '10px',
+    display: 'flex',
+    flexDirection: 'column',
+    padding: '20px',
+    borderRadius: '12px',
     backgroundColor: '#ffffff',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+    boxShadow: '0 6px 12px rgba(0, 0, 0, 0.1)',
+    width: '80%',
+    maxWidth: '900px',
+    margin: '20px 0',
+  },
+  orderHeader: {
+    fontSize: '24px',
+    fontWeight: 'bold',
+    marginBottom: '15px',
+    color: '#444',
+  },
+  orderDetails: {
+    fontSize: '16px',
+    color: '#555',
+    marginBottom: '15px',
   },
   itemContainer: {
     display: 'flex',
-    padding: '10px',
+    padding: '15px',
     border: '1px solid #ddd',
     borderRadius: '10px',
-    backgroundColor: '#ffffff',
-    marginBottom: '10px',
+    backgroundColor: '#fafafa',
+    marginBottom: '15px',
+    alignItems: 'center',
+    gap: '20px',
   },
   imageContainer: {
-    flex: 1,
-    maxWidth: '150px',
-    margin: '10px',
+    width: '150px',
+    height: '150px',
+    overflow: 'hidden',
+    borderRadius: '10px',
   },
   image: {
     width: '100%',
-    height: '150px',
+    height: '100%',
     objectFit: 'cover',
-    borderRadius: '10px',
   },
   productDetails: {
-    flex: 3,
-    marginLeft: '20px',
-    color: '#333',
+    flex: 1,
+    color: 'black',
   },
   productName: {
-    fontSize: '22px',
-    fontWeight: 'bold',
+    fontSize: '20px',
+    fontWeight: '600',
     marginBottom: '10px',
+    color: '#222',
   },
   text: {
     fontSize: '16px',
+    color: 'black',
+    fontWeight: '550',
     marginBottom: '8px',
+  },
+  totalPrice: {
+    fontSize: '18px',
+    fontWeight: '700',
+    color: '#333',
+    marginTop: '10px',
   },
 };
 
@@ -109,13 +136,16 @@ const OrderHistory = () => {
       <div style={styles.itemsContainer}>
         {orderHistory.map((order) => (
           <div key={order._id} style={styles.orderContainer}>
-            <h4>Order ID: {order._id}</h4>
-            <p style={styles.text}>
-              <strong>Total Price:</strong> ${order.totalPrice.toFixed(2)}
-            </p>
-            <p style={styles.text}>
-              <strong>Order Date:</strong> {new Date(order.createdAt).toLocaleDateString()}
-            </p>
+            <div style={styles.productDetails}>
+              <h4>Order ID: {order._id}</h4>
+              <p style={styles.text}>
+                <strong>Order Date: </strong> {new Date(order.createdAt).toLocaleDateString()}
+              </p>
+              <p style={styles.text}>
+                <strong>Total Price: </strong> ${order.totalPrice.toFixed(2)}
+              </p><br />
+            </div>
+            {/* Order items displayed horizontally */}
             <div>
               {order.items.map((item) => (
                 <div key={item.productId?._id} style={styles.itemContainer}>
@@ -139,7 +169,7 @@ const OrderHistory = () => {
                       <strong>Price:</strong> ${item.productId?.price || "N/A"}
                     </p>
                     <p style={styles.text}>
-                      <strong>Total:</strong> ${(item.productId ? item.quantity * item.productId.price : 0).toFixed(2)}
+                      <strong>Total: ${item.productId.price} * {item.quantity} = </strong> ${(item.productId ? item.quantity * item.productId.price : 0).toFixed(2)}
                     </p>
                   </div>
                 </div>

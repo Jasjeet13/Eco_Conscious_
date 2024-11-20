@@ -10,11 +10,13 @@ const styles = {
   container: {
     flex: 1, // This makes the content grow to fill available space
     padding: "20px",
-    height: "400px",
     backgroundColor: "#f0f8f4", // Light greenish background
     fontFamily: "'Arial', sans-serif",
   },
   footer: {
+    
+
+    
     padding: "10px",
     backgroundColor: "#333",
     color: "#fff",

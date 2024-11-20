@@ -45,7 +45,7 @@
     "energyEfficiency": "high",
     "biodegradability": 88,
     "durability": "10 months",
-    "ecoScore": 68.53333333333333
+    "ecoScore": 68.53
   },
   {
     "name": "EcoShine Hydrating Shampoo",
@@ -253,7 +253,7 @@
     "energyEfficiency": "moderate",
     "biodegradability": 90,
     "durability": "3 years",
-    "ecoScore": 74.03999999999999
+    "ecoScore": 74.04
   },
   {
     "name": "Women Stylish Heels",
@@ -272,7 +272,7 @@
     "ecoScore": 63.68
   },
   {
-    "name": "Women High Heel Sandals",
+    "name": "Women High Heels Sandals",
     "description": "Heels made from organic materials, combining fashion with sustainability.",
     "price": 49.99,
     "category": "Footwear",
@@ -384,7 +384,7 @@
     "ecoScore": 62.1
   },
   {
-    "name": "Eco-Friendly Travel Backpack",
+    "name": "Eco-Friendly  Backpack",
     "description": "Spacious and durable backpack made with 100% recycled materials, ideal for both travel and daily use.",
     "price": 49.99,
     "category": "Bags",
@@ -480,7 +480,7 @@
     "ecoScore": 64.1
   },
   {
-    "name": "Eco Chic Tote Handbag",
+    "name": "Eco Chic  Handbag",
     "description": "Stylish eco-friendly tote handbag made from recycled materials, perfect for everyday use.",
     "price": 54.99,
     "category": "Bags",
@@ -493,7 +493,7 @@
     "energyEfficiency": "high",
     "biodegradability": 75,
     "durability": "3 years",
-    "ecoScore": 76.46000000000001
+    "ecoScore": 76.46
   },
   {
     "name": "Organic Cotton Handbag",
@@ -685,7 +685,7 @@
     "energyEfficiency": "high",
     "biodegradability": 70,
     "durability": "2 years",
-    "ecoScore": 69.46000000000001
+    "ecoScore": 69.46
   },
   {
     "name": "Classic Black Men's Sports Zipper Jacket",
@@ -727,13 +727,13 @@
     "image": "https://i5.walmartimages.com/asr/4f0f511a-e097-4d8c-8e2c-977fd6fff53f_1.355b06c6f07b61138cdd66496bd074fc.jpeg",
     "inStock": true,
     "carbonFootprint": 2.1,
-    "materialSourcing": "sustainable",
+    "materialSourcing": "best",
     "recyclability": 80,
     "waterUsage": "low",
     "energyEfficiency": "high",
     "biodegradability": 65,
     "durability": "2 years",
-    "ecoScore": null
+    "ecoScore": 72.92
   },
   {
     "name": "Snowy Women's Dress",
@@ -743,13 +743,13 @@
     "image": "https://i.pinimg.com/736x/d9/ec/c7/d9ecc74e3a63afa7202548b1d77d7581.jpg",
     "inStock": true,
     "carbonFootprint": 2.3,
-    "materialSourcing": "eco-friendly",
+    "materialSourcing": "better",
     "recyclability": 85,
     "waterUsage": "moderate",
     "energyEfficiency": "moderate",
     "biodegradability": 70,
     "durability": "1.5 years",
-    "ecoScore": null
+    "ecoScore": 61.46
   },
   {
     "name": "Elegant Evening Women's Dress",
@@ -759,12 +759,12 @@
     "image": "https://i5.walmartimages.com/asr/a75a9755-92e3-45a6-89da-ccfad696a798.4b175929ee12c1d4a9ca84b9728173c7.jpeg",
     "inStock": true,
     "carbonFootprint": 2.7,
-    "materialSourcing": "best",
+    "materialSourcing": "good",
     "recyclability": 82,
     "waterUsage": "high",
     "energyEfficiency": "moderate",
     "biodegradability": 75,
     "durability": "3 years",
-    "ecoScore": 64.44
+    "ecoScore": 52.44
   }
 ]

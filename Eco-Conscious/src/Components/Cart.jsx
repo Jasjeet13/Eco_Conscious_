@@ -154,7 +154,6 @@ const Cart = () => {
       {/* <h1 style={{ width: "100%", textAlign: "center", fontSize: "40px", color: "#333", marginBottom: "30px" }}>
   Your Shopping Cart
 </h1> */}
-
       
        <div style={{ flex: 2, display: "flex", flexWrap: "wrap", gap: "20px" }}>
         
@@ -241,7 +240,9 @@ const Cart = () => {
         <h3 style={{ fontSize: "24px", marginBottom: "30px" }}>Order Summary</h3>
         <div style={{ marginBottom: "10px" }}>
           <p style={{ fontSize: "18px", margin: "20px 0" }}>
-            <strong>Items in Cart:</strong> {cartItems.length}
+            {/* <strong>Items in Cart:</strong> {cartItems.length} */}
+            <strong>Items in Cart:</strong> {cartItems.reduce((total, item) => total + item.quantity, 0)}
+
           </p>
           <p style={{ fontSize: "18px", margin: "5px 0" }}>
             <strong>Total Price:</strong> ${getTotalPrice()}

@@ -38,11 +38,6 @@ const Navbar = ({ onSearch }) => {
   const navigateToWishlist = () => {
     navigate("/wishlist");
   };
-
-  const navigateToBag = () => {
-    navigate("/cart");
-  };
-
   const showProfileMenu = () => setIsProfileMenuVisible(true);
   const hideProfileMenu = () => setIsProfileMenuVisible(false);
 
@@ -55,28 +50,24 @@ const Navbar = ({ onSearch }) => {
     navigate("/");
   };
 
-  const handleSearch = () => {
+  
+  const handleSearch = (e) => {
+    e.preventDefault();
+    
     const normalizedSearchTerm = searchTerm.trim().toLowerCase();
-
-    // Check if search term matches a category
-    const matchedCategory = Object.keys(categoryMapping).find(
-      (key) => categoryMapping[key] === normalizedSearchTerm
+  
+    // Check if the entered term matches a category
+    const matchedCategory = Object.keys(categoryMapping).find((key) => 
+      categoryMapping[key].toLowerCase() === normalizedSearchTerm
     );
-
+  
     if (matchedCategory) {
-      navigateToCategory(matchedCategory);
-    } else {
-      // If no category match, perform product search
-      onSearch(normalizedSearchTerm);
+      navigateToCategory(categoryMapping[matchedCategory]);
+    } else if (searchTerm.trim()) {
+      navigate(`/search/${searchTerm}`); // Default search behavior
     }
   };
-
-  const handleKeyPress = (event) => {
-    if (event.key === "Enter") {
-      handleSearch();
-    }
-  };
-
+  
   const styles = {
     navbar: {
       display: "flex",
@@ -129,6 +120,24 @@ const Navbar = ({ onSearch }) => {
       borderBottom: "2px solid #007F4E", 
     },
     icon: { fontSize: "20px" },
+    profileMenu: {
+      position: "absolute",
+      top: "60px",
+      right: "110px",
+      width: "200px",
+      backgroundColor: "#ffffff",
+      boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+      // borderRadius: "8px",
+      overflow: "hidden",
+      zIndex: 1001,
+    },
+    profileMenuItem: {
+      padding: "10px 20px",
+      fontSize: "14px",
+      color: "#333",
+      cursor: "pointer",
+      borderBottom: "1px solid #f0f0f0",
+    },
   };
 
   return (
@@ -139,38 +148,73 @@ const Navbar = ({ onSearch }) => {
       </div>
 
       <div style={styles.menuContainer}>
-        <button style={styles.menuItem} onClick={() => navigateToCategory("Beauty Products")}>Cosmetic</button>
-        <button style={styles.menuItem} onClick={() => navigateToCategory("Footwear")}>Footwear</button>
-        <button style={styles.menuItem} onClick={() => navigateToCategory("Bags")}>Bag</button>
-        <button style={styles.menuItem} onClick={() => navigateToCategory("Clothing")}>Clothing</button>
+        <button
+          style={styles.menuItem}
+          onClick={() => navigateToCategory("Beauty Products")}
+        >
+          Beauty
+        </button>
+        <button
+          style={styles.menuItem}
+          onClick={() => navigateToCategory("Footwear")}
+        >
+          Footwear
+        </button>
+        <button
+          style={styles.menuItem}
+          onClick={() => navigateToCategory("Bags")}
+        >
+          Bag
+        </button>
+        <button
+          style={styles.menuItem}
+          onClick={() => navigateToCategory("Clothing")}
+        >
+          Clothing
+        </button>
       </div>
 
-      <div style={styles.searchContainer}>
-        <FaSearch style={{ cursor: "pointer" }} onClick={handleSearch} />
+      <form style={styles.searchContainer} onSubmit={handleSearch}>
+        <FaSearch style={{ cursor: "pointer" }} />
         <input
           type="text"
           placeholder="Search for products, and more"
+          style={styles.searchInput}
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          onKeyPress={handleKeyPress}
-          style={styles.searchInput}
         />
-      </div>
+      </form>
+
 
       <div style={styles.iconsContainer}>
-        <div style={styles.iconWrapper} onClick={navigateToProfile}>
+        <div
+          style={{ ...styles.iconWrapper, ...(isProfileMenuVisible && styles.iconWrapperHover) }}
+          onMouseEnter={showProfileMenu}
+          onMouseLeave={hideProfileMenu}
+        >
           <FaRegUser style={styles.icon} />
           <span>Profile</span>
+
+          {isProfileMenuVisible && (
+            <div style={styles.profileMenu}>
+              <div style={styles.profileMenuItem} onClick={() => navigate("/profile")}>Account</div>
+              <div style={styles.profileMenuItem} onClick={() => navigate("/wishlist")}>Wishlist</div>
+              <div style={styles.profileMenuItem} onClick={() => navigate("/order-history")}>Order History</div>
+              <div style={styles.profileMenuItem} onClick={() => navigate("/contact")}>Edit Account</div>
+              <div style={styles.profileMenuItem} onClick={logout}>Logout</div>
+            </div>
+          )}
         </div>
-        <div style={styles.iconWrapper} onClick={navigateToOrderHistory}>
-          <FiPackage style={styles.icon} /> {/* Updated icon for Order History */}
-          <span>Order History</span>
-        </div>
-        <div style={styles.iconWrapper} onClick={navigateToWishlist}>
-          <FaRegHeart style={styles.icon} />
+
+        <div
+          style={{ ...styles.iconWrapper }}
+          onMouseEnter={() => setIsProfileMenuVisible(false)}
+          onMouseLeave={() => setIsProfileMenuVisible(false)}
+        >
+          <FaRegHeart style={styles.icon} onClick={() => navigate("/wishlist")}/>
           <span>Wishlist</span>
         </div>
-        <div style={styles.iconWrapper} onClick={navigateToBag}>
+        <div style={{ ...styles.iconWrapper }} onClick={() => navigate("/cart")}>
           <FiShoppingBag style={styles.icon} />
           <span>Bag</span>
         </div>

@@ -8,8 +8,8 @@ const testimonials = [
     text: "The eco-friendly fashion options are fantastic. I love how stylish and sustainable they are!",
   },
   {
-    name: "Kamaljeet",
-    location: "Punjab",
+    name: "Kamaljeet Kaur",
+    location: "Punjab, India",
     text: "Excellent quality and great for the planet. The zero-waste packaging is a big plus!",
   },
   {
