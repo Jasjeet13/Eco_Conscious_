@@ -156,7 +156,7 @@ const styles = {
   },
   app: {
     fontFamily: "Arial, sans-serif",
-    margin: 0,
+    // margin: 0,
     padding: "20px",
     width: "80%",
     margin: "0 auto", // Center the content

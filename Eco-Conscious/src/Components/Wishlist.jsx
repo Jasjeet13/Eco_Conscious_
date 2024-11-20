@@ -29,6 +29,10 @@ const styles = {
     transition: "transform 0.2s",
     textAlign: "center",
     position: "relative",
+    overflow: "hidden",
+  },
+  wishlistItemHover: {
+    transform: "scale(1.05)",
   },
   image: {
     width: "100%",
@@ -47,6 +51,23 @@ const styles = {
     fontSize: "16px",
     color: "#555",
     fontWeight: "500",
+  },
+  popup: {
+    position: "absolute",
+    bottom: "10px",
+    left: "50%",
+    transform: "translateX(-50%)",
+    backgroundColor: "#333",
+    color: "#fff",
+    padding: "8px 15px",
+    borderRadius: "5px",
+    fontSize: "14px",
+    opacity: 0,
+    transition: "opacity 0.3s ease",
+    pointerEvents: "none",
+  },
+  popupVisible: {
+    opacity: 1,
   },
   cross: {
     position: "absolute",
@@ -82,7 +103,7 @@ const Wishlist = () => {
   const [wishlistItems, setWishlistItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [hoveredButton, setHoveredButton] = useState(null);
+  const [hoveredItem, setHoveredItem] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -207,9 +228,13 @@ const Wishlist = () => {
         wishlistItems.map((item, index) => (
           <div
             key={item._id}
-            style={{
-              ...styles.wishlistItem,
-            }}
+            style={
+              hoveredItem === index
+                ? { ...styles.wishlistItem, ...styles.wishlistItemHover }
+                : styles.wishlistItem
+            }
+            onMouseEnter={() => setHoveredItem(index)}
+            onMouseLeave={() => setHoveredItem(null)}
           >
             <span
               style={styles.cross}
@@ -227,16 +252,15 @@ const Wishlist = () => {
             </Link>
             <button
               style={
-                hoveredButton === index
+                hoveredItem === index
                   ? { ...styles.addButton, ...styles.addButtonHover }
                   : styles.addButton
               }
               onClick={() => addToCart(item)}
-              onMouseEnter={() => setHoveredButton(index)}
-              onMouseLeave={() => setHoveredButton(null)}
             >
               Add to bag
             </button>
+            
           </div>
         ))
       ) : (

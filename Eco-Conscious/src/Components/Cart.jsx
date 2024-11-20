@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react"; 
 import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
@@ -6,6 +6,18 @@ const Cart = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+
+  // Define heading styles
+  const styles = {
+    heading: {
+      fontSize: '32px',
+      textAlign: 'center',
+      marginTop: '5px',
+      marginBottom: '50px',
+      color: '#333',
+      width: '100%',
+    },
+  };
 
   // Fetch cart items from API
   useEffect(() => {
@@ -48,7 +60,7 @@ const Cart = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:3000/api/cart/update`, {
+      const response = await fetch('http://localhost:3000/api/cart/update', {
         method: "PATCH",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -265,9 +277,6 @@ const Cart = () => {
           <div
             style={{
               flex: 1,
-              padding: "40px",
-              marginTop: "5px",
-              borderLeft: "2px solid #ddd",
               padding: "20px",
               border: "1px solid #ddd",
               borderRadius: "10px",
@@ -278,10 +287,10 @@ const Cart = () => {
               overflowY: "auto",
             }}
           >
-            <h2>Order Summary</h2>
-            <div>
-              <p style={{ fontSize: "18px" }}>
-                <strong>Items in Cart:</strong> {cartItems.length}
+            <h3 style={{ fontSize: "24px", marginBottom: "30px" }}>Order Summary</h3>
+            <div style={{ marginBottom: "10px" }}>
+              <p style={{ fontSize: "18px", margin: "20px 0" }}>
+                <strong>Items in Cart:</strong> {cartItems.reduce((total, item) => total + item.quantity, 0)}
               </p>
               <p style={{ fontSize: "18px", margin: "5px 0" }}>
                 <strong>Total Price:</strong> ${getTotalPrice()}
@@ -307,7 +316,7 @@ const Cart = () => {
                 fontSize: "18px",
               }}
             >
-              Place Order
+              Proceed to Checkout
             </button>
           </div>
         </div>

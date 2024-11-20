@@ -86,7 +86,7 @@ const styles = {
 
   app: {
     fontFamily: "Arial, sans-serif",
-    margin: 0,
+    // margin: 0,
     padding: "20px",
     width : "75%",
     margin : "0 auto"
