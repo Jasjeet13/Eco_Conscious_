@@ -57,7 +57,6 @@ function App() {
         <Route path="/alternatives/:category/:id" element={<Alternative />} />
 
 
-
       </Routes>
 
       {/* Conditionally render Footer */}

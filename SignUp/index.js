@@ -22,11 +22,11 @@ const authenticateToken = require("./Middlewares/tokenAuthentication"); // Adjus
 dotenv.config();
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // MongoDB Connection
 mongoose
-  .connect("mongodb://127.0.0.1:27017/ecommerce", {
+  .connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/ecommerce", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
