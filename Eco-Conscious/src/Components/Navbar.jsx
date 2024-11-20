@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate , useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import logo from "../public/logo.png";
 import { FaRegUser, FaRegHeart, FaSearch } from "react-icons/fa";
-import { FiShoppingBag } from "react-icons/fi";
+import { FiShoppingBag, FiPackage } from "react-icons/fi";
 
 const Navbar = ({ onSearch }) => {
-  const { id } = useParams();
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -13,15 +12,15 @@ const Navbar = ({ onSearch }) => {
 
   const categoryMapping = {
     beauty: "beauty",
-  footwear: "footwear",
-  bags: "bags",
-  clothing: "clothing",
+    footwear: "footwear",
+    bags: "bags",
+    clothing: "clothing",
   };
 
   const navigateToHome = () => {
     navigate("/home");
   };
-  
+
   const [isProfileMenuVisible, setIsProfileMenuVisible] = useState(false);
 
   const navigateToProfile = () => {
@@ -30,6 +29,10 @@ const Navbar = ({ onSearch }) => {
     } else {
       navigate("/login");
     }
+  };
+
+  const navigateToOrderHistory = () => {
+    navigate("/order-history"); // Corrected navigation to Order History page
   };
 
   const navigateToWishlist = () => {
@@ -42,7 +45,7 @@ const Navbar = ({ onSearch }) => {
   const logout = () => {
     // Clear token from localStorage
     localStorage.removeItem("token");
-  
+
     // Navigate to the login page
     navigate("/");
   };
@@ -196,7 +199,7 @@ const Navbar = ({ onSearch }) => {
             <div style={styles.profileMenu}>
               <div style={styles.profileMenuItem} onClick={() => navigate("/profile")}>Account</div>
               <div style={styles.profileMenuItem} onClick={() => navigate("/wishlist")}>Wishlist</div>
-              <div style={styles.profileMenuItem} onClick={() => navigate("/order")}>Orders</div>
+              <div style={styles.profileMenuItem} onClick={() => navigate("/order-history")}>Order History</div>
               <div style={styles.profileMenuItem} onClick={() => navigate("/edit")}>Edit Account</div>
               <div style={styles.profileMenuItem} onClick={logout}>Logout</div>
             </div>
@@ -219,8 +222,6 @@ const Navbar = ({ onSearch }) => {
     </nav>
   );
 };
-
-
 
 export default Navbar;
 

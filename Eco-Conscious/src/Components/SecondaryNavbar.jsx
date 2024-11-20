@@ -71,4 +71,33 @@ const SecondaryNavbar = ({ currentCategory, onSortSelect, onFilterSelect }) => {
   );
 };
 
+const styles = {
+  navbar: {
+    display: "flex",
+    justifyContent: "space-between",
+    padding: "10px 20px",
+    backgroundColor: "#f8f8f8",
+    borderBottom: "1px solid #ddd",
+    margin:"70px 0px 10px 30px",
+  },
+  left: {
+    flex: 1,
+    display: "flex",
+    alignItems: "center",
+  },
+  right: {
+    display: "flex",
+    gap: "15px",
+  },
+  dropdown: {
+    padding: "8px",
+    fontSize: "16px",
+  },
+  category: {
+    fontWeight: "bold",
+    fontSize: "22px",
+    margin:"0px 0px 0px 40px",
+  },
+};
+
 export default SecondaryNavbar;

@@ -14,6 +14,8 @@ const deleteRouter = require("./routes/delete");
 const wishlistRouter = require("./routes/wishlist");
 const cartRouter = require("./routes/cart");
 const orderRoutes = require("./routes/order");
+const orderhistoryRoutes = require("./routes/orderhistory");
+
 const errorHandler = require("./Middlewares/errorHandler");
 const searchRouter = require("./routes/search");
 const alternativeRouter = require("./routes/alternative");
@@ -22,11 +24,11 @@ const authenticateToken = require("./Middlewares/tokenAuthentication"); // Adjus
 dotenv.config();
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || process.env.PORT || 3000;
 
 // MongoDB Connection
 mongoose
-  .connect("mongodb://127.0.0.1:27017/ecommerce", {
+  .connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/ecommerce", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -57,6 +59,7 @@ app.use('/api/cart', authenticateToken, cartRouter); // Cart route
 app.use("/api/order", authenticateToken, orderRoutes); 
 app.use("/api/search", searchRouter); 
 app.use("/api/alternatives", alternativeRouter); 
+app.use("/api/order-history",authenticateToken,orderhistoryRoutes);
 
 // Error handling middleware
 app.use(errorHandler);
