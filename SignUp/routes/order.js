@@ -66,6 +66,43 @@ router.get('/:orderId', authenticateToken, async (req, res) => {
     res.status(500).json({ message: 'Error fetching order data' });
   }
 });
+// In your order routes file (e.g., order.js)
+router.post('/buy-now', authenticateToken, async (req, res) => {
+  try {
+    const userId = req.user.id; // Assuming user ID is set from JWT in authenticate middleware
+    const { productId, quantity, price } = req.body;
+
+    // Prepare order details
+    const orderItems = [
+      {
+        productId,
+        quantity,
+        price,
+        image: req.body.image,  // Assuming image is also passed
+      },
+    ];
+
+    // Calculate total price (only one product for Buy Now)
+    const totalPrice = price * quantity;
+
+    // Create the order
+    const order = new Order({
+      userId,
+      items: orderItems,
+      totalPrice,
+      createdAt: new Date(),
+    });
+
+    await order.save();
+
+    res.status(201).json({ message: 'Order placed successfully!', order });
+  } catch (error) {
+    console.error('Error placing order:', error);
+    res.status(500).json({ message: 'Error placing order. Please try again.' });
+  }
+});
+
+
 
 router.get('/api/products/:id', (req, res) => {
   const productId = req.params.id;

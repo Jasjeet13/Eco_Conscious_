@@ -58,7 +58,7 @@ const SignUp_Login = () => {
       if (token) {
         // Set token in localStorage or sessionStorage
         localStorage.setItem('token', token); // or use sessionStorage
-        navigate(`/home`); // Navigate to home after successful login
+        navigate("/home"); // Navigate to home after successful login
       }
 
     } catch (error) {

@@ -119,7 +119,41 @@ const ProductProfile = () => {
       console.error("Error adding to wishlist:", error);
     }
   };
-
+  const buyNow = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("You need to be logged in to place an order.");
+      return;
+    }
+  
+    try {
+      const response = await fetch("http://localhost:3000/api/order/buy-now", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          productId: product._id,
+          quantity, // Send the quantity selected by the user
+          price: product.price, // Send the product price
+          image: product.image, // Send product image URL
+        }),
+      });
+  
+      const data = await response.json();
+      if (response.ok) {
+        alert(data.message); // Show success message
+        navigate(`/order/${data.order._id}`); // Navigate to order details page
+      } else {
+        alert(data.message || "Error placing order");
+      }
+    } catch (error) {
+      console.error("Error placing order:", error);
+      alert("An error occurred while placing your order. Please try again.");
+    }
+  };
+  
   const addToCart = async () => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -295,6 +329,8 @@ const ProductProfile = () => {
               ></i>
               ADD TO CART
             </button>
+
+
             <button
               style={{
                 padding: "15px 30px",
@@ -308,6 +344,8 @@ const ProductProfile = () => {
                 fontSize: "18px",
               }}
               onClick={addToWishlist}
+              onMouseEnter={() => setHoveredIcon("heart")}
+              onMouseLeave={() => setHoveredIcon(null)}
             >
               <i
                 className="fas fa-heart"
@@ -322,8 +360,8 @@ const ProductProfile = () => {
                     : "#ccc",
                   transition: "color 0.3s ease",
                 }}
-                onMouseEnter={() => setHoveredIcon("heart")}
-                onMouseLeave={() => setHoveredIcon(null)}
+                // onMouseEnter={() => setHoveredIcon("heart")}
+                // onMouseLeave={() => setHoveredIcon(null)}
               ></i>
               {isInWishlist ? "IN WISHLIST" : "ADD TO WISHLIST"}
             </button>
@@ -337,23 +375,22 @@ const ProductProfile = () => {
             }}
           >
             <button
-              style={{
-                padding: "20px 40px",
-                backgroundColor: "#000",
-                color: "#fff",
-                border: "none",
-                cursor: "pointer",
-                fontSize: "25px",
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
-              <i
-                className="fas fa-credit-card"
-                style={{ marginRight: "10px" }}
-              ></i>
-              Buy Now
-            </button>
+  style={{
+    padding: "20px 40px",
+    backgroundColor: "#000",
+    color: "#fff",
+    border: "none",
+    cursor: "pointer",
+    fontSize: "25px",
+    display: "flex",
+    alignItems: "center",
+  }}
+  onClick={buyNow} // Call the buyNow function
+>
+  <i className="fas fa-credit-card" style={{ marginRight: "10px" }}></i>
+  Buy Now
+</button>
+
             <EnvironmentCriteria
               ecoScore={product.ecoScore}
               details={{
@@ -369,7 +406,11 @@ const ProductProfile = () => {
           </div>
         </div>
       </div>
-      <Alternative></Alternative>
+        <Alternative 
+        productId={product._id} 
+        category={product.category} 
+        />
+
     </>
   );
 };

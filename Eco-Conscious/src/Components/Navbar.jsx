@@ -200,7 +200,7 @@ const Navbar = ({ onSearch }) => {
               <div style={styles.profileMenuItem} onClick={() => navigate("/profile")}>Account</div>
               <div style={styles.profileMenuItem} onClick={() => navigate("/wishlist")}>Wishlist</div>
               <div style={styles.profileMenuItem} onClick={() => navigate("/order-history")}>Order History</div>
-              <div style={styles.profileMenuItem} onClick={() => navigate("/contact")}>Edit Account</div>
+              <div style={styles.profileMenuItem} onClick={() => navigate("/edit")}>Edit Account</div>
               <div style={styles.profileMenuItem} onClick={logout}>Logout</div>
             </div>
           )}
@@ -224,3 +224,4 @@ const Navbar = ({ onSearch }) => {
 };
 
 export default Navbar;
+
