@@ -6,7 +6,7 @@ const Edit = () => {
   const navigate = useNavigate();
   const [userDetails, setUserDetails] = useState({
     username: "",
-    fullName: "",
+    fullname: "",
     email: "",
     address: "",
     phoneNumber: "",
@@ -168,14 +168,14 @@ const Edit = () => {
               />
             </div>
             <div style={styles.inputGroup}>
-              <label htmlFor="fullName" style={styles.label}>
+              <label htmlFor="fullname" style={styles.label}>
                 Full Name
               </label>
               <input
                 type="text"
-                id="fullName"
-                name="fullName"
-                value={userDetails.fullName}
+                id="fullname"
+                name="fullname"
+                value={userDetails.fullname}
                 onChange={handleChange}
                 style={styles.input}
               />

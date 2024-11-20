@@ -4,14 +4,14 @@ const User = require('../models/user');
 
 // PUT route to update user details using token info
 router.put('/', async (req, res) => {
-  const { username, fullName, email, address, phoneNumber } = req.body;
+  const { username, fullname, email, address, phoneNumber } = req.body;
   const userId = req.user.id; // Use the ID from the decoded token
 
   try {
     // Find the user by ID (from token) and update their details
     const updatedUser = await User.findByIdAndUpdate(
       userId, // Use userId from token
-      { username, fullName, email, address, phoneNumber },
+      { username, fullname, email, address, phoneNumber },
       { new: true }
     );
 

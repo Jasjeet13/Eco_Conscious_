@@ -164,7 +164,7 @@ const styles = {
   productGrid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", // Responsive grid
-    gap: "25px",
+    gap: "30px",
     maxWidth: "1450px",
     margin: "0 auto",
   },

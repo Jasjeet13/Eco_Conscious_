@@ -119,7 +119,9 @@ const Navbar = ({ onSearch }) => {
     iconWrapperHover: {
       borderBottom: "2px solid #007F4E", 
     },
-    icon: { fontSize: "20px" },
+    icon: { 
+      fontSize: "20px",
+    },
     profileMenu: {
       position: "absolute",
       top: "60px",
@@ -138,6 +140,11 @@ const Navbar = ({ onSearch }) => {
       cursor: "pointer",
       borderBottom: "1px solid #f0f0f0",
     },
+    icontext :{
+      fontSize:"14px",
+      color:"black",
+      fontWeight:"500"
+    }
   };
 
   return (
@@ -193,7 +200,7 @@ const Navbar = ({ onSearch }) => {
           onMouseLeave={hideProfileMenu}
         >
           <FaRegUser style={styles.icon} />
-          <span>Profile</span>
+          <span style={styles.icontext}>Profile</span>
 
           {isProfileMenuVisible && (
             <div style={styles.profileMenu}>
@@ -212,11 +219,11 @@ const Navbar = ({ onSearch }) => {
           onMouseLeave={() => setIsProfileMenuVisible(false)}
         >
           <FaRegHeart style={styles.icon} onClick={() => navigate("/wishlist")}/>
-          <span>Wishlist</span>
+          <span style={styles.icontext}>Wishlist</span>
         </div>
         <div style={{ ...styles.iconWrapper }} onClick={() => navigate("/cart")}>
           <FiShoppingBag style={styles.icon} />
-          <span>Bag</span>
+          <span style={styles.icontext}>Bag</span>
         </div>
       </div>
     </nav>
