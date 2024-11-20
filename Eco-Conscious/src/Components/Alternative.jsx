@@ -1,82 +1,65 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
 
-const Alternative = () => {
-  const [products, setProducts] = useState([]);
-  const [alternatives, setAlternatives] = useState([]); // New state to store filtered alternatives
+const Alternative = ({ productId, category }) => {
+  const [alternatives, setAlternatives] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Fetch products from the backend API
-    const fetchProducts = async () => {
+    const fetchAlternatives = async () => {
       try {
-        const response = await fetch("http://localhost:5173/api/products", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`, // Assuming token is stored in localStorage
-          },
-        });
+        setLoading(true);
+        const token = localStorage.getItem("token");
 
-        if (!response.ok) {
-          throw new Error(`HTTP Error! Status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        setProducts(data);
-        setLoading(false);
-
-        // Filter alternatives based on an 'ecoFriendly' flag (you can modify this logic)
-        const ecoFriendlyAlternatives = data.filter(
-          (product) => product.ecoFriendly === true // Example criterion
+        const response = await axios.get(
+          `http://localhost:3000/api/alternatives/${category}/${productId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
-        setAlternatives(ecoFriendlyAlternatives);
-      } catch (err) {
-        setError(err.message);
+
+        setAlternatives(response.data); // Update state with alternatives
+      } catch (error) {
+        setError(
+          error.response
+            ? error.response.data.message || "Failed to fetch alternatives"
+            : error.message
+        );
+      } finally {
         setLoading(false);
       }
     };
 
-    fetchProducts();
-  }, []);
-
-  if (loading) {
-    return <p>Loading products...</p>;
-  }
-
-  if (error) {
-    return <p>Error: {error}</p>;
-  }
+    if (productId && category) {
+      fetchAlternatives();
+    }
+  }, [category, productId]); // Refetch when category or productId changes
 
   return (
-    <div style={styles.app}>
-      <h1 style={styles.heading}>Find Your Green Alternative!</h1>
-      <div style={styles.productGrid}>
-        {alternatives.length > 0 ? (
-          alternatives.map((product) => (
-            <Link
-              to={`/alternative-products/${product._id}`}
-              key={product._id}
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
-              <div style={styles.productCard}>
-                <img
-                  src={product.image || "https://via.placeholder.com/200"}
-                  alt={product.name}
-                  style={styles.productImage}
-                />
-                <h3 style={styles.productBrand}>{product.brand}</h3>
-                <p style={styles.productName}>{product.name}</p>
-                <div style={styles.rating}>
-                  {product.rating} ★★★★★ | {product.reviews} reviews
-                </div>
-                <div style={styles.price}>
-                  <span>$ {product.price}</span>
-                </div>
-              </div>
-            </Link>
-          ))
+    <div>
+      <h2>Alternatives</h2>
+
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error}</p>}
+
+      <div style={styles.alternativeGrid}>
+        {alternatives.length === 0 ? (
+          <p>No alternatives found.</p>
         ) : (
-          <p>No alternative products found</p> // In case no alternatives are found
+          alternatives.map((product) => (
+            <div key={product._id} style={styles.alternativeCard}>
+              <img
+                src={product.image}
+                alt={product.name}
+                style={styles.alternativeImage}
+              />
+              <h3 style={styles.productName}>{product.name}</h3>
+              <p>Price: ${product.price}</p>
+            </div>
+          ))
         )}
       </div>
     </div>
@@ -84,62 +67,27 @@ const Alternative = () => {
 };
 
 const styles = {
-  app: {
-    fontFamily: "Arial, sans-serif",
-    backgroundColor: "#f9f9f9",
-    margin: 0,
-    padding: "20px",
-  },
-  heading: {
-    fontSize: "24px",
-    fontWeight: "bold",
-    textAlign: "center",
-    marginBottom: "20px",
-    color: "#333",
-  },
-  productGrid: {
+  alternativeGrid: {
     display: "grid",
-    gridTemplateColumns: "repeat(4, 1fr)",
-    gap: "16px",
-    maxWidth: "1450px",
-    margin: "0 auto",
+    gridTemplateColumns: "repeat(3, 1fr)",
+    gap: "20px",
   },
-  productCard: {
-    backgroundColor: "#fff",
+  alternativeCard: {
     border: "1px solid #ddd",
     borderRadius: "4px",
-    overflow: "hidden",
+    padding: "10px",
     textAlign: "center",
-    padding: "20px",
-    height: "330px", // Adjusted height for better flexibility
-    transition: "box-shadow 0.3s ease",
-    boxShadow: "0 0 10px rgba(0,0,0,0.1)",
+    backgroundColor: "#fff",
   },
-  productImage: {
+  alternativeImage: {
     width: "100%",
-    height: "200px",
-    objectFit: "contain",
-    borderRadius: "8px",
-  },
-  productBrand: {
-    fontSize: "16px",
-    margin: "10px 0",
-    color: "#333",
+    height: "150px",
+    objectFit: "cover",
+    borderRadius: "4px",
   },
   productName: {
-    fontSize: "14px",
-    color: "#777",
-    margin: "5px 0",
-  },
-  rating: {
-    fontSize: "12px",
-    color: "#555",
-    margin: "5px 0",
-  },
-  price: {
     fontSize: "16px",
-    fontWeight: "bold",
-    margin: "10px 0",
+    color: "#333",
   },
 };
 

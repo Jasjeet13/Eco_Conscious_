@@ -124,7 +124,7 @@ const TopPicks = () => {
 
 const styles = {
   outer_container: {
-    backgroundColor :"#f2f2f2",
+    // backgroundColor :"#f2f2f2",
     // backgroundColor : "#f0eadd",
     width :"100%",
     paddingTop: "10px",
@@ -162,7 +162,7 @@ const styles = {
   },
   contentContainer: {
     padding: "15px",
-    backgroundColor :"#f0eadd"
+    backgroundColor :"#f2f2f2"
   },
   nameContainer: {
     marginBottom: "5px",
