@@ -342,6 +342,8 @@ const ProductProfile = () => {
                 fontSize: "18px",
               }}
               onClick={addToWishlist}
+              onMouseEnter={() => setHoveredIcon("heart")}
+              onMouseLeave={() => setHoveredIcon(null)}
             >
               <i
                 className="fas fa-heart"
@@ -356,8 +358,7 @@ const ProductProfile = () => {
                     : "#ccc",
                   transition: "color 0.3s ease",
                 }}
-                onMouseEnter={() => setHoveredIcon("heart")}
-                onMouseLeave={() => setHoveredIcon(null)}
+                
               ></i>
               {isInWishlist ? "IN WISHLIST" : "ADD TO WISHLIST"}
             </button>
