@@ -65,7 +65,7 @@ const ProfileDetails = () => {
   const styles = {
     whole: {
       display: "flex",
-      backgroundColor: "#f5f1eb",
+      backgroundColor: "#f2f2f2",
       alignItems: "center",
       justifyContent: "center",
       minHeight: "100vh",
@@ -78,7 +78,7 @@ const ProfileDetails = () => {
       padding: "40px",
       backgroundColor: "#ffffff",
       boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.1)",
-      borderRadius: "8px",
+      //borderRadius: "8px",
     },
     headingContainer: {
       display: "flex",
@@ -101,7 +101,7 @@ const ProfileDetails = () => {
       display: "flex",
       justifyContent: "space-between",
       borderBottom: "1px solid #ddd",
-      paddingBottom: "10px",
+      paddingBottom: "8px",
     },
     label: {
       fontSize: "18px",

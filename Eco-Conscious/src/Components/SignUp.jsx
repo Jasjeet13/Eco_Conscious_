@@ -37,7 +37,7 @@ const SignUp = () => {
 
   const styles = {
     mainbox: {
-      backgroundColor: "#f5f1eb",
+      backgroundColor: "#f2f2f2",
       width: "100vw",
       height: "100vh",
       display: "flex",
@@ -106,7 +106,7 @@ const SignUp = () => {
     },
     heading: {
       fontSize: "24px",
-      fontWeight: "530",
+      fontWeight: "580",
       marginTop:"0px",
       marginBottom: "29px",
       textAlign: "center",
