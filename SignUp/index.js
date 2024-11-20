@@ -12,37 +12,35 @@ const productsRouter = require("./routes/products");
 const editRouter = require("./routes/edit");
 const deleteRouter = require("./routes/delete");
 const wishlistRouter = require("./routes/wishlist");
-const cartRouter = require('./routes/cart');
+const cartRouter = require("./routes/cart");
 const orderRoutes = require("./routes/order");
 const errorHandler = require("./Middlewares/errorHandler");
-const authenticateToken = require("./Middlewares/tokenAuthentication");
+const searchRouter = require("./routes/search");
+const alternativeRouter = require("./routes/alternative");
+const authenticateToken = require("./Middlewares/tokenAuthentication"); // Adjust the path if needed
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Connect to MongoDB
+// MongoDB Connection
 mongoose
   .connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/ecommerce", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
   .then(() => console.log("Connected to MongoDB"))
-  .catch((error) => console.error("Error connecting to MongoDB:", error.message));
+  .catch((error) => console.error("MongoDB Connection Error:", error.message));
 
-// CORS configuration
+// Middleware
 app.use(
   cors({
-    origin: "http://localhost:5173", // Update for production
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
-
-app.options("*", cors());
-
-// Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("public"));
@@ -54,14 +52,16 @@ app.use("/api/profile", authenticateToken, profileRouter);
 app.use("/api/products", authenticateToken, productsRouter);
 app.use("/api/edit", authenticateToken, editRouter);
 app.use("/api/delete", authenticateToken, deleteRouter);
-app.use("/api/wishlist", authenticateToken, wishlistRouter);
-app.use('/api/cart', authenticateToken, cartRouter);
-app.use("/api/order", authenticateToken, orderRoutes);
+app.use("/api/wishlist", authenticateToken, wishlistRouter); // Wishlist route
+app.use('/api/cart', authenticateToken, cartRouter); // Cart route
+app.use("/api/order", authenticateToken, orderRoutes); 
+app.use("/api/search", searchRouter); 
+app.use("/api/alternatives", alternativeRouter); 
 
 // Error handling middleware
 app.use(errorHandler);
 
-// Start server
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+// Start Server
+app.listen(port, () =>
+  console.log(`Server running at http://localhost:${port}`)
+);

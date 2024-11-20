@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import EnvironmentCriteria from "./EnvironmentCriteria";
+import Alternative from "./Alternative";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Footer from "./Footer";
 
@@ -401,8 +402,11 @@ const ProductProfile = () => {
           </div>
         </div>
       </div>
-      {/* Product details */}
-      {/* <Alternative currentProduct={product} products={relatedProducts} /> */}
+        <Alternative 
+        productId={product._id} 
+        category={product.category} 
+        />
+
     </>
   );
 };
