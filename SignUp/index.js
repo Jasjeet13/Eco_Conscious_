@@ -12,7 +12,7 @@ const productsRouter = require("./routes/products");
 const editRouter = require("./routes/edit");
 const deleteRouter = require("./routes/delete");
 const wishlistRouter = require("./routes/wishlist");
-const cartRouter = require('./routes/cart'); // Include your cart route
+const cartRouter = require("./routes/cart");
 const orderRoutes = require("./routes/order");
 const errorHandler = require("./Middlewares/errorHandler");
 const searchRouter = require("./routes/search");
@@ -24,34 +24,26 @@ dotenv.config();
 const app = express();
 const port = 3000;
 
-// Connect to MongoDB
+// MongoDB Connection
 mongoose
   .connect("mongodb://127.0.0.1:27017/ecommerce", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => {
-    console.log("Connected to MongoDB");
-  })
-  .catch((error) => {
-    console.error("Error connecting to MongoDB:", error.message);
-  });
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((error) => console.error("MongoDB Connection Error:", error.message));
 
-// CORS configuration
+// Middleware
 app.use(
   cors({
-    origin: "http://localhost:5173", // Frontend URL where your React app is running
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
 );
-
-app.options("*", cors()); // Allow pre-flight requests
-
-// Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static("public")); // Serve static files
+app.use(express.static("public"));
 
 // Routes
 app.use("/signup", signupRouter);
@@ -69,7 +61,7 @@ app.use("/api/alternatives", alternativeRouter);
 // Error handling middleware
 app.use(errorHandler);
 
-// Start server
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
-});
+// Start Server
+app.listen(port, () =>
+  console.log(`Server running at http://localhost:${port}`)
+);

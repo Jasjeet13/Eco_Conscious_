@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
-import SecondaryNavbar from './SecondaryNavbar';
+import SecondaryNavbar from "./SecondaryNavbar";
 import Navbar from "./Navbar";
 
 const ProductList = () => {
@@ -14,10 +14,10 @@ const ProductList = () => {
   const [searchTerm, setSearchTerm] = useState(""); // New state for search term
 
   const categoryMapping = {
-  beauty: "Beauty Products",
-  footwear: "Footwear",
-  bags: "Bags",
-  clothing: "Clothing",
+    beauty: "Beauty Products",
+    footwear: "Footwear",
+    bags: "Bags",
+    clothing: "Clothing",
   };
 
   const normalizedCategory = categoryMapping[category.toLowerCase()] || category;
@@ -109,13 +109,13 @@ const ProductList = () => {
   if (error) return <p>Error fetching products: {error.message}</p>;
 
   return (
-    <div style={styles.app}>
-      <Navbar onSearch={handleSearch} /> {/* Pass the handleSearch callback to Navbar */}
+    <div style={styles.outerContainer}>
       <SecondaryNavbar
         currentCategory={normalizedCategory}
         onSortSelect={(value) => setSortOption(value)}
         onFilterSelect={(value) => setFilter(value)}
       />
+      <div style={styles.app}>
       <div style={styles.productGrid}>
         {filteredAndSortedProducts.length === 0 ? (
           <p>No products match the selected criteria.</p>
@@ -145,28 +145,33 @@ const ProductList = () => {
           ))
         )}
       </div>
+      </div>
     </div>
   );
 };
 
 const styles = {
+  outerContainer: {
+    backgroundColor: "#f9f9f9",
+  },
   app: {
     fontFamily: "Arial, sans-serif",
-    backgroundColor: "#f9f9f9",
     margin: 0,
     padding: "20px",
+    width: "80%",
+    margin: "0 auto", // Center the content
   },
   productGrid: {
     display: "grid",
-    gridTemplateColumns: "repeat(4, 1fr)",
-    gap: "16px",
+    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", // Responsive grid
+    gap: "25px",
     maxWidth: "1450px",
     margin: "0 auto",
   },
   productCard: {
     backgroundColor: "#fff",
     border: "1px solid #ddd",
-    borderRadius: "4px",
+    // borderRadius: "4px",
     overflow: "hidden",
     textAlign: "center",
     padding: "30px",
@@ -187,9 +192,20 @@ const styles = {
     color: "#333",
   },
   productName: {
-    fontSize: "14px",
-    color: "#777",
+    fontSize: "16px",
+    color: "black",
     margin: "5px 0",
+    fontWeight : "700",
+  },
+  rating: {
+    fontSize: "12px",
+    color: "#555",
+    margin: "10px 0",
+  },
+  price: {
+    fontSize: "16px",
+    fontWeight: "bold",
+    color: "#777",
   },
 };
 

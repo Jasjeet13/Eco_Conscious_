@@ -43,20 +43,5 @@ router.get("/:id", authenticateToken, async (req, res) => {
   }
 });
 
-router.get("/:id/related", authenticateToken, async (req, res) => {
-  try {
-    const product = await Product.findById(req.params.id);
-    if (!product) return res.status(404).json({ message: "Product not found" });
-
-    const relatedProducts = await Product.find({
-      category: product.category, // Match by category
-      _id: { $ne: product._id }, // Exclude the current product
-    }).limit(3); // Limit to 3 alternatives
-
-    res.json(relatedProducts);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
 
 module.exports = router;
