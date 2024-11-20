@@ -77,13 +77,16 @@ const Cart = () => {
   // Handle remove item
   const handleRemoveItem = async (productId) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/cart/remove/${productId}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `http://localhost:3000/api/cart/remove/${productId}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       const data = await response.json();
       if (response.ok) {
@@ -95,22 +98,24 @@ const Cart = () => {
       setError("Error removing item from cart");
     }
   };
+
   const handleCheckout = async () => {
     try {
       // Send the cart items to the backend for order creation
-      const response = await fetch("http://localhost:3000/api/order/place-order", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-          "Content-Type": "application/json",
-        },
-        // Send any necessary data in the body (if required)
-      });
-      
-      
-  
+      const response = await fetch(
+        "http://localhost:3000/api/order/place-order",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json",
+          },
+          // Send any necessary data in the body (if required)
+        }
+      );
+
       const data = await response.json();
-  
+
       // Check if the response is successful
       if (response.ok) {
         alert("Order placed successfully!");
@@ -125,10 +130,8 @@ const Cart = () => {
       alert("Error placing order. Please try again.");
     }
   };
-  
-  
 
-  // Calculate total price
+  // Calculate total price (already implemented)
   const getTotalPrice = () => {
     return cartItems
       .reduce((total, item) => {
@@ -148,127 +151,165 @@ const Cart = () => {
   }
 
   return (
-    
-    <div style={{ display: "flex", padding: "30px", maxWidth: "100%", margin: "0 auto" }}>
-      
-      {/* <h1 style={{ width: "100%", textAlign: "center", fontSize: "40px", color: "#333", marginBottom: "30px" }}>
-  Your Shopping Cart
-</h1> */}
-
-      
-       <div style={{ flex: 2, display: "flex", flexWrap: "wrap", gap: "20px" }}>
-        
-        {cartItems.length > 0 ? (
-          cartItems.map((item) => (
-            <div
-              key={item.productId}
-              style={{
-                width: "40%",
-                padding: "15px",
-                border: "1px solid #ddd",
-                borderRadius: "10px",
-                boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <img
-                src={item.image || "https://via.placeholder.com/150"}
-                alt={item.name}
-                style={{ width: "100%", height: "200px", objectFit: "contain", borderRadius: "10px" }}
-              />
-              <h3 style={{ fontSize: "20px", marginTop: "10px" }}>{item.name}</h3>
-              <p style={{ fontSize: "16px", color: "#555" }}>Price: ${item.price}</p>
-              <div>
-                <label htmlFor={`quantity-${item.productId}`}>Quantity: </label>
-                <input
-                  id={`quantity-${item.productId}`}
-                  type="number"
-                  value={item.quantity}
-                  min="1"
-                  max="20"
-                  onChange={(e) => handleQuantityChange(item.productId, Number(e.target.value))}
-                  style={{
-                    width: "60px",
-                    padding: "5px",
-                    textAlign: "center",
-                    marginLeft: "10px",
-                  }}
-                />
-              </div>
-              
-              <p style={{ fontSize: "18px", color: "#e63946" }}>
-                Total Amount: ${(item.price * item.quantity).toFixed(2)}
-              </p>
-              
-              <button
-                onClick={() => handleRemoveItem(item.productId)}
+    <div style={{ padding: "90px", maxWidth: "100%" }}>
+      {/* If the cart is empty */}
+      {cartItems.length === 0 ? (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "80vh",
+            textAlign: "center",
+          }}
+        >
+          <h1>Hey, it feels so light!</h1>
+          <p>There is nothing in your bag. Let's add some items.</p>
+          <button
+            onClick={() => navigate("/wishlist")}
+            style={{
+              padding: "15px 30px",
+              backgroundColor: "#000",
+              color: "#fff",
+              border: "none",
+              cursor: "pointer",
+              borderRadius: "5px",
+              marginTop: "20px",
+            }}
+          >
+            ADD ITEMS FROM WISHLIST
+          </button>
+        </div>
+      ) : (
+        <div style={{ display: "flex" }}>
+          {/* Left Section: Cart Items */}
+          <div
+            style={{
+              flex: 2,
+              display: "flex",
+              flexWrap: "wrap",
+              gap: "10px",
+            }}
+          >
+            {cartItems.map((item) => (
+              <div
+                key={item.productId}
                 style={{
-                  padding: "10px 20px",
-                  backgroundColor: "#e63946",
-                  color: "#fff",
-                  border: "none",
-                  cursor: "pointer",
-                  borderRadius: "5px",
-                  marginTop: "10px",
+                  width: "40%",
+                  padding: "20px",
+                  border: "1px solid #ddd",
+                  borderRadius: "10px",
+                  boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
+                  display: "flex",
+                  flexDirection: "column",
                 }}
               >
-                Remove
-              </button>
+                <img
+                  src={item.image || "https://via.placeholder.com/150"}
+                  alt={item.name}
+                  style={{
+                    width: "100%",
+                    height: "250px",
+                    objectFit: "contain",
+                    borderRadius: "10px",
+                  }}
+                />
+                <h3>{item.name}</h3>
+                <p style={{ color: "#555" }}>Price: ${item.price}</p>
+                <div>
+                  <label htmlFor={`quantity-${item.productId}`}>
+                    Quantity:{" "}
+                  </label>
+                  <input
+                    id={`quantity-${item.productId}`}
+                    type="number"
+                    value={item.quantity}
+                    min="1"
+                    max="20"
+                    onChange={(e) =>
+                      handleQuantityChange(
+                        item.productId,
+                        Number(e.target.value)
+                      )
+                    }
+                    style={{
+                      width: "60px",
+                      padding: "2px",
+                      textAlign: "center",
+                      marginLeft: "5px",
+                    }}
+                  />
+                </div>
+
+                <p style={{ color: "#e63946" }}>
+                  Total Amount: ${(item.price * item.quantity).toFixed(2)}
+                </p>
+
+                <button
+                  onClick={() => handleRemoveItem(item.productId)}
+                  style={{
+                    padding: "10px",
+                    backgroundColor: "#e63946",
+                    color: "#fff",
+                    border: "none",
+                    cursor: "pointer",
+                    borderRadius: "5px",
+                  }}
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+          </div>
+
+          {/* Right Section: Order Summary */}
+          <div
+            style={{
+              flex: 1,
+              padding: "40px",
+              marginTop: "5px",
+              borderLeft: "2px solid #ddd",
+              // borderRadius: "10px",
+              // boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
+              height: "auto",
+              maxHeight: "270px",
+              overflowY: "auto",
+            }}
+          >
+            <h2>Order Summary</h2>
+            <div>
+              <p style={{ fontSize: "18px" }}>
+                <strong>Items in Cart:</strong> {cartItems.length}
+              </p>
+              <p style={{ fontSize: "18px" }}>
+                <strong>Total Price:</strong> ${getTotalPrice()}
+              </p>
             </div>
-          ))
-        ) : (
-          <div>Your cart is empty!</div>
-        )}
-      </div>
 
-      {/* Right side - Order Summary */}
-      <div
-      
-        style={{
-          flex: 1,
-          padding: "20px",
-          border: "1px solid #ddd",
-          borderRadius: "10px",
-          boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
-          marginLeft: "20px",
-          height: "auto",
-          maxHeight: "300px",
-          overflowY: "auto",
-        }}
-      >
-        
-        <h3 style={{ fontSize: "24px", marginBottom: "30px" }}>Order Summary</h3>
-        <div style={{ marginBottom: "10px" }}>
-          <p style={{ fontSize: "18px", margin: "20px 0" }}>
-            <strong>Items in Cart:</strong> {cartItems.length}
-          </p>
-          <p style={{ fontSize: "18px", margin: "5px 0" }}>
-            <strong>Total Price:</strong> ${getTotalPrice()}
-          </p>
+            <div style={{ marginBottom: "20px" }}>
+              <p style={{ fontSize: "18px" }}>
+                <strong>Shipping:</strong> Free (if applicable)
+              </p>
+            </div>
+
+            <button
+              onClick={handleCheckout}
+              style={{
+                padding: "15px 20px",
+                backgroundColor: "#000",
+                color: "#fff",
+                border: "none",
+                cursor: "pointer",
+                width: "50%",
+                fontSize: "18px",
+              }}
+            >
+              Place Order
+            </button>
+          </div>
         </div>
-
-        <div style={{ marginBottom: "20px" }}>
-          <p style={{ fontSize: "18px" }}>
-            <strong>Shipping:</strong> Free (if applicable)
-          </p>
-        </div>
-
-        <button
-    onClick={handleCheckout}
-    style={{
-      padding: "15px 30px",
-      backgroundColor: "#000",
-      color: "#fff",
-      border: "none",
-      cursor: "pointer",
-      width: "100%",
-      fontSize: "18px",
-    }}
-  >
-    Proceed to Checkout
-  </button>
-      </div>
+      )}
     </div>
   );
 };

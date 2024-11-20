@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ProfileDetails = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-
   const [profile, setProfile] = useState(null);
 
   useEffect(() => {
@@ -66,27 +65,30 @@ const ProfileDetails = () => {
   const styles = {
     whole: {
       display: "flex",
-      backgroundColor: "#f5f1eb",
+      backgroundColor: "#f2f2f2",
       alignItems: "center",
       justifyContent: "center",
       minHeight: "100vh",
+      padding: "20px",
     },
     container: {
-      width: "800px",
+      width: "100%",
+      maxWidth: "600px",
       margin: "0 auto",
-      padding: "60px",
+      padding: "40px",
       backgroundColor: "#ffffff",
       boxShadow: "0px 5px 20px rgba(0, 0, 0, 0.1)",
+      //borderRadius: "8px",
     },
     headingContainer: {
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      marginBottom: "10px",
+      marginBottom: "20px",
     },
     heading: {
-      fontSize: "30px",
-      marginLeft: "20px",
+      fontSize: "24px",
+      marginLeft: "10px",
       color: "#333",
     },
     icon: {
@@ -95,39 +97,39 @@ const ProfileDetails = () => {
       opacity: "0.8",
     },
     detailGroup: {
-      marginBottom: "30px",
+      marginBottom: "20px",
       display: "flex",
       justifyContent: "space-between",
       borderBottom: "1px solid #ddd",
-      paddingBottom: "10px",
+      paddingBottom: "8px",
     },
     label: {
       fontSize: "18px",
       color: "#444",
+      flex: "1",
     },
     value: {
       fontSize: "18px",
       color: "#777",
+      textAlign: "right",
+      flex: "1",
     },
     buttonGroup: {
       display: "flex",
-      justifyContent: "space-evenly",
+      justifyContent: "center",
+      gap:"20px",
+      marginTop: "20px",
     },
     button: {
-      width: "45%",
-      height: "60px",
+      width: "40%",
       padding: "15px",
-      backgroundColor: "#ace1af",
-      color: "#333",
+      backgroundColor: "#007F4E",
+      color: "white",
       border: "none",
-      fontSize: "18px",
+      fontSize: "16px",
       cursor: "pointer",
       transition: "background-color 0.3s ease, transform 0.3s ease",
       textAlign: "center",
-    },
-    buttonHover: {
-      backgroundColor: "#007F4E",
-      transform: "scale(1.05)",
     },
   };
 
@@ -135,7 +137,7 @@ const ProfileDetails = () => {
     <div style={styles.whole}>
       <div style={styles.container}>
         <div style={styles.headingContainer}>
-          <FontAwesomeIcon icon={faUser} style={styles.icon} />
+         
           <h2 style={styles.heading}>Profile Details</h2>
         </div>
         <div style={styles.detailGroup}>
@@ -160,17 +162,48 @@ const ProfileDetails = () => {
         </div>
 
         <div style={styles.buttonGroup}>
-          <button
-            style={styles.button}
-            onClick={() => navigate(`/edit`)}
-          >
+          <button style={styles.button} onClick={() => navigate(`/edit`)}>
             EDIT
           </button>
           <button style={styles.button} onClick={handleDelete}>
-            DELETE ACCOUNT
+            DELETE
           </button>
         </div>
       </div>
+      <style jsx>{`
+        @media (max-width: 768px) {
+          .container {
+            padding: 20px;
+          }
+
+          .heading {
+            font-size: 20px;
+          }
+
+          .label, .value {
+            font-size: 16px;
+          }
+
+          .buttonGroup {
+            flex-direction: column;
+            gap: 10px;
+          }
+
+          .button {
+            width: 100%;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .heading {
+            font-size: 18px;
+          }
+
+          .label, .value {
+            font-size: 14px;
+          }
+        }
+      `}</style>
     </div>
   );
 };
