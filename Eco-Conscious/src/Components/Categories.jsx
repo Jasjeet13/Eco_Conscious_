@@ -13,8 +13,8 @@ const Categories = () => {
 
   return (
     <>
-      <div>
-        <h1 className="outer_container">Shop By Categories</h1>
+      <div className="outer_container">
+        <h1>Shop By Categories</h1>
 
         <div className="categoriesContainer">
           <div
