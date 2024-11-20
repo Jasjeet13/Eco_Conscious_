@@ -14,13 +14,15 @@ const deleteRouter = require("./routes/delete");
 const wishlistRouter = require("./routes/wishlist");
 const cartRouter = require('./routes/cart'); // Include your cart route
 const orderRoutes = require("./routes/order");
+const orderhistoryRoutes = require("./routes/orderhistory");
+
 const errorHandler = require("./Middlewares/errorHandler");
 const authenticateToken = require("./Middlewares/tokenAuthentication"); // Adjust the path if needed
 
 dotenv.config();
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // Connect to MongoDB
 mongoose
@@ -61,7 +63,7 @@ app.use("/api/delete", authenticateToken, deleteRouter);
 app.use("/api/wishlist", authenticateToken, wishlistRouter); // Wishlist route
 app.use('/api/cart', authenticateToken, cartRouter); // Cart route
 app.use("/api/order", authenticateToken, orderRoutes); // Orders route (pluralized endpoint)
-
+app.use("/api/order-history", authenticateToken, orderhistoryRoutes);
 
 // Error handling middleware
 app.use(errorHandler);
