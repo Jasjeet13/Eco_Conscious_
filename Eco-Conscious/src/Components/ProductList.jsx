@@ -11,7 +11,7 @@ const ProductList = () => {
   const [error, setError] = useState(null);
   const [filter, setFilter] = useState("");
   const [sortOption, setSortOption] = useState("");
-  const [searchTerm, setSearchTerm] = useState(""); // New state for search term
+  const [searchTerm, setSearchTerm] = useState("");
 
   const categoryMapping = {
     beauty: "Beauty Products",
@@ -21,6 +21,13 @@ const ProductList = () => {
   };
 
   const normalizedCategory = categoryMapping[category.toLowerCase()] || category;
+
+  useEffect(() => {
+    // Reset filter, sort, and search when the category changes
+    setFilter("");
+    setSortOption("");
+    setSearchTerm("");
+  }, [normalizedCategory]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -45,18 +52,11 @@ const ProductList = () => {
         setError(error);
         setLoading(false);
       });
-  }, [normalizedCategory, filter, sortOption]); // Dependency on filter, sortOption
+  }, [normalizedCategory, filter, sortOption]);
 
-  // Function to handle filtering based on the search term
-  const handleSearch = (term) => {
-    setSearchTerm(term.toLowerCase()); // Update search term state
-  };
-
-  // Filter products based on selected filter and search term
   const filterProducts = (products) => {
     let filtered = products;
 
-    // Apply category filters
     if (filter) {
       filtered = filtered.filter((product) => {
         switch (filter) {
@@ -82,7 +82,6 @@ const ProductList = () => {
       });
     }
 
-    // Apply search term filtering
     if (searchTerm) {
       filtered = filtered.filter((product) =>
         product.name.toLowerCase().includes(searchTerm)
@@ -92,7 +91,6 @@ const ProductList = () => {
     return filtered;
   };
 
-  // Sort products based on selected sorting option
   const sortProducts = (products) => {
     if (sortOption === "price_low_high") {
       return products.sort((a, b) => a.price - b.price);
@@ -102,8 +100,30 @@ const ProductList = () => {
     return products;
   };
 
-  // Apply both filter and sort
   const filteredAndSortedProducts = sortProducts(filterProducts(products));
+
+  const getFilterTag = (product) => {
+    switch (filter) {
+      case "low_carbon_footprint":
+        return `Low Carbon Footprint: ${product.carbonFootprint}`;
+      case "material_sourcing_good":
+        return "Material Sourcing: Good";
+      case "material_sourcing_better":
+        return "Material Sourcing: Better";
+      case "material_sourcing_best":
+        return "Material Sourcing: Best";
+      case "high_recyclability":
+        return `High Recyclability: ${product.recyclability}%`;
+      case "low_water_usage":
+        return "Low Water Usage";
+      case "high_energy_efficiency":
+        return "High Energy Efficiency";
+      case "high_biodegradability":
+        return `High Biodegradability: ${product.biodegradability}%`;
+      default:
+        return "";
+    }
+  };
 
   if (loading) return <p>Loading products...</p>;
   if (error) return <p>Error fetching products: {error.message}</p>;
@@ -112,39 +132,46 @@ const ProductList = () => {
     <div style={styles.outerContainer}>
       <SecondaryNavbar
         currentCategory={normalizedCategory}
+        sortOption={sortOption} // Pass sortOption to SecondaryNavbar
         onSortSelect={(value) => setSortOption(value)}
         onFilterSelect={(value) => setFilter(value)}
       />
       <div style={styles.app}>
-      <div style={styles.productGrid}>
-        {filteredAndSortedProducts.length === 0 ? (
-          <p>No products match the selected criteria.</p>
-        ) : (
-          filteredAndSortedProducts.map((product) => (
-            <Link
-              to={`/products/${category}/${product._id}`}
-              key={product._id}
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
-              <div style={styles.productCard}>
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  style={styles.productImage}
-                />
-                <h3 style={styles.productBrand}>{product.brand}</h3>
-                <p style={styles.productName}>{product.name}</p>
-                <div style={styles.rating}>
-                  {product.rating} ★★★★★ | {product.reviews} reviews
+        <div style={styles.productGrid}>
+          {filteredAndSortedProducts.length === 0 ? (
+            <p>No products match the selected criteria.</p>
+          ) : (
+            filteredAndSortedProducts.map((product) => (
+              <Link
+                to={`/products/${category}/${product._id}`}
+                key={product._id}
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                <div style={styles.productCard}>
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    style={styles.productImage}
+                  />
+                  <h3 style={styles.productBrand}>{product.brand}</h3>
+                  <p style={styles.productName}>{product.name}</p>
+                  <div style={styles.rating}>
+                    {product.rating} ★★★★★ | {product.reviews} reviews
+                  </div>
+                  <div style={styles.price}>
+                    <span>$ {product.price}</span>
+                  </div>
+                  {/* Add filter tag below the price */}
+                  {filter && (
+                    <div style={styles.filterTag}>
+                      {getFilterTag(product)}
+                    </div>
+                  )}
                 </div>
-                <div style={styles.price}>
-                  <span>$ {product.price}</span>
-                </div>
-              </div>
-            </Link>
-          ))
-        )}
-      </div>
+              </Link>
+            ))
+          )}
+        </div>
       </div>
     </div>
   );
@@ -156,26 +183,24 @@ const styles = {
   },
   app: {
     fontFamily: "Arial, sans-serif",
-    margin: 0,
     padding: "20px",
     width: "80%",
-    margin: "0 auto", // Center the content
+    margin: "0 auto",
   },
   productGrid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", // Responsive grid
-    gap: "25px",
+    gap: "30px",
     maxWidth: "1450px",
     margin: "0 auto",
   },
   productCard: {
     backgroundColor: "#fff",
     border: "1px solid #ddd",
-    // borderRadius: "4px",
     overflow: "hidden",
     textAlign: "center",
     padding: "30px",
-    height: "290px",
+    height: "300px", // Increased to accommodate the new tag
     transition: "box-shadow 0.3s ease",
     boxShadow: "0 0 10px rgba(0,0,0,0.1)",
     paddingBottom: "40px",
@@ -195,7 +220,7 @@ const styles = {
     fontSize: "16px",
     color: "black",
     margin: "5px 0",
-    fontWeight : "700",
+    fontWeight: "700",
   },
   rating: {
     fontSize: "12px",
@@ -206,6 +231,13 @@ const styles = {
     fontSize: "16px",
     fontWeight: "bold",
     color: "#777",
+  },
+  filterTag: {
+    // marginTop: "10px",
+    fontSize: "14px",
+    padding:'10px',
+    fontStyle: "italic",
+    color: "#00796b",
   },
 };
 

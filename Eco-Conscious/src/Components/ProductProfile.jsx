@@ -301,6 +301,8 @@ const ProductProfile = () => {
               ></i>
               ADD TO CART
             </button>
+
+
             <button
               style={{
                 padding: "10px 20px",
@@ -315,6 +317,8 @@ const ProductProfile = () => {
                 width:"217px"
               }}
               onClick={addToWishlist}
+              onMouseEnter={() => setHoveredIcon("heart")}
+              onMouseLeave={() => setHoveredIcon(null)}
             >
               <i
                 className="fas fa-heart"
@@ -329,8 +333,7 @@ const ProductProfile = () => {
                     : "#ccc",
                   transition: "color 0.3s ease",
                 }}
-                onMouseEnter={() => setHoveredIcon("heart")}
-                onMouseLeave={() => setHoveredIcon(null)}
+                
               ></i>
               {isInWishlist ? "IN WISHLIST" : "ADD TO WISHLIST"}
             </button>
