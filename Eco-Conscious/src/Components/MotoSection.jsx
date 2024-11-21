@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { FaLeaf, FaRecycle } from "react-icons/fa";
-import "./Styles/MotoSection.css"
+import "./Styles/MotoSection.css";
 
 const MotoSection = () => {
   return (
@@ -14,7 +15,9 @@ const MotoSection = () => {
             offering sustainable products and practices. Join us in making a
             positive impact on the planet.
           </p>
-          <button className="button_moto">Learn More</button>
+          <Link to="/learn-more">
+            <button className="button_moto">Learn More</button>
+          </Link>
         </div>
         <div className="iconContainer">
           <FaLeaf className="icon" />
