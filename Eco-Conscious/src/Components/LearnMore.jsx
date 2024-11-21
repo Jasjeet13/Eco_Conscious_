@@ -29,7 +29,7 @@ const LearnMore = () => {
         justifyContent: "center",
         alignItems: "center",
         height: "100vh",
-        backgroundColor: "#e8f5e9", // Light green background for a nature theme
+        backgroundColor: "rgb(242, 242, 242)", // Light green background for a nature theme
         position: "relative",
         overflow: "hidden",
       }}
@@ -39,6 +39,8 @@ const LearnMore = () => {
           backgroundColor: "#fff",
           padding: "20px",
           borderRadius: "10px",
+          //marginTop:'300px',
+          //marginBottom:'200px',
           boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
           maxWidth: "600px",
           textAlign: "center",
