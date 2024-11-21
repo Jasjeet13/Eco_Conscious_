@@ -33,16 +33,17 @@ const Navbar = () => {
 
   const navigateToHome = () => navigate("/home");
   const navigateToCategory = (category) => navigate(`/products/${category}`);
+
+  const logout=()=>{
+    localStorage.removeItem("token");
+    navigate("/");
+  }
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchTerm.trim()) navigate(`/search/${searchTerm}`);
   };
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  const logout = () => {
-    localStorage.removeItem("token");
-    navigate("/login");
-  };
 
   const styles = {
     navbar: {
