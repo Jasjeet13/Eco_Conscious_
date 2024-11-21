@@ -31,6 +31,11 @@ const styles = {
     position: "relative",
     overflow: "hidden",
   },
+ 
+ 
+ 
+ 
+ 
   wishlistItemHover: {
     transform: "scale(1.05)",
   },
