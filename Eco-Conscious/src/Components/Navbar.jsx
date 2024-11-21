@@ -1,73 +1,50 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../public/logo.png";
 import { FaRegUser, FaRegHeart, FaSearch } from "react-icons/fa";
-import { FiShoppingBag, FiPackage } from "react-icons/fi";
+import { FiShoppingBag } from "react-icons/fi";
+import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 
-const Navbar = ({ onSearch }) => {
+const Navbar = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
+  const [showSearch, setShowSearch] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isProfileMenuVisible, setIsProfileMenuVisible] = useState(false);
 
   const token = localStorage.getItem("token");
 
-  const categoryMapping = {
-    beauty: "beauty",
-    footwear: "footwear",
-    bags: "bags",
-    clothing: "clothing",
-  };
-
-  const navigateToHome = () => {
-    navigate("/home");
-  };
-
-  const [isProfileMenuVisible, setIsProfileMenuVisible] = useState(false);
-
-  const navigateToProfile = () => {
-    if (token) {
-      navigate("/profile");
-    } else {
-      navigate("/login");
-    }
-  };
-
-  const navigateToOrderHistory = () => {
-    navigate("/order-history"); // Corrected navigation to Order History page
-  };
-
-  const navigateToWishlist = () => {
-    navigate("/wishlist");
-  };
-  const showProfileMenu = () => setIsProfileMenuVisible(true);
-  const hideProfileMenu = () => setIsProfileMenuVisible(false);
-
-  const navigateToCategory = (category) => navigate(`/products/${category}`);
-  const logout = () => {
-    // Clear token from localStorage
-    localStorage.removeItem("token");
-
-    // Navigate to the login page
-    navigate("/");
-  };
-
+  // Handle responsive changes
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      setShowSearch(width >= 1055); // Show search bar only if width >= 1055
+      setIsMobile(width < 768);
+    };
+    handleResize(); // Initial check
+    window.addEventListener("resize", handleResize);
   
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  
+
+  const navigateToHome = () => navigate("/home");
+  const navigateToCategory = (category) => navigate(`/products/${category}`);
+
+  const logout=()=>{
+    localStorage.removeItem("token");
+    navigate("/");
+  }
   const handleSearch = (e) => {
     e.preventDefault();
-    
-    const normalizedSearchTerm = searchTerm.trim().toLowerCase();
-  
-    // Check if the entered term matches a category
-    const matchedCategory = Object.keys(categoryMapping).find((key) => 
-      categoryMapping[key].toLowerCase() === normalizedSearchTerm
-    );
-  
-    if (matchedCategory) {
-      navigateToCategory(categoryMapping[matchedCategory]);
-    } else if (searchTerm.trim()) {
-      navigate(`/search/${searchTerm}`); // Default search behavior
-    }
+    if (searchTerm.trim()) navigate(`/search/${searchTerm}`);
   };
-  
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+
   const styles = {
     navbar: {
       display: "flex",
@@ -82,8 +59,15 @@ const Navbar = ({ onSearch }) => {
       backgroundColor: "#ffffff",
       zIndex: 1000,
     },
-    logo: { height: "40px", cursor: "pointer", marginLeft: "20px" },
-    heading: { marginLeft: "10px", fontSize: "18px", fontWeight: "bold", color: "#3e4152", cursor: "pointer" },
+    logoContainer: { display: "flex", alignItems: "center", cursor: "pointer" },
+    logo: { height: "40px" },
+    heading: {
+      marginLeft: "10px",
+      fontSize: "18px",
+      fontWeight: "bold",
+      color: "#3e4152",
+      cursor: "pointer",
+    },
     menuContainer: {
       display: "flex",
       flex: 1,
@@ -113,13 +97,18 @@ const Navbar = ({ onSearch }) => {
       cursor: "pointer",
       height: "100%",
       justifyContent: "center",
-      borderBottom: "2px solid transparent", 
+      borderBottom: "2px solid transparent",
       transition: "border-bottom 0.3s ease",
     },
     iconWrapperHover: {
-      borderBottom: "2px solid #007F4E", 
+      borderBottom: "2px solid #007F4E",
     },
     icon: { fontSize: "20px" },
+    icontext: {
+      fontSize: "14px",
+      color: "black",
+      fontWeight: "500",
+    },
     profileMenu: {
       position: "absolute",
       top: "60px",
@@ -127,8 +116,6 @@ const Navbar = ({ onSearch }) => {
       width: "200px",
       backgroundColor: "#ffffff",
       boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
-      // borderRadius: "8px",
-      overflow: "hidden",
       zIndex: 1001,
     },
     profileMenuItem: {
@@ -138,85 +125,99 @@ const Navbar = ({ onSearch }) => {
       cursor: "pointer",
       borderBottom: "1px solid #f0f0f0",
     },
+    mobileMenu: {
+      display: "block",
+      position: "absolute",
+      top: "60px",
+      left: 0,
+      backgroundColor: "#ffffff",
+      width: "100%",
+      boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+      zIndex: 1001,
+    },
   };
 
   return (
     <nav style={styles.navbar}>
-      <img src={logo} alt="Logo" style={styles.logo} onClick={navigateToHome} />
-      <div style={styles.heading} onClick={navigateToHome}>
-        Eco-Conscious
+      {/* Logo and Eco-Conscious Text */}
+      <div style={styles.logoContainer} onClick={navigateToHome}>
+        <img src={logo} alt="Logo" style={styles.logo} />
+        <span style={styles.heading}>Eco-Conscious</span>
       </div>
 
-      <div style={styles.menuContainer}>
-        <button
-          style={styles.menuItem}
-          onClick={() => navigateToCategory("Beauty Products")}
-        >
+      {/* Navigation Links */}
+      <div
+        style={{
+          ...styles.menuContainer,
+          display: isMobile ? (isMenuOpen ? "block" : "none") : "flex",
+        }}
+      >
+        <button style={styles.menuItem} onClick={() => navigateToCategory("beauty")}>
           Beauty
         </button>
-        <button
-          style={styles.menuItem}
-          onClick={() => navigateToCategory("Footwear")}
-        >
+        <button style={styles.menuItem} onClick={() => navigateToCategory("footwear")}>
           Footwear
         </button>
-        <button
-          style={styles.menuItem}
-          onClick={() => navigateToCategory("Bags")}
-        >
-          Bag
+        <button style={styles.menuItem} onClick={() => navigateToCategory("bags")}>
+          Bags
         </button>
-        <button
-          style={styles.menuItem}
-          onClick={() => navigateToCategory("Clothing")}
-        >
+        <button style={styles.menuItem} onClick={() => navigateToCategory("clothing")}>
           Clothing
         </button>
       </div>
 
-      <form style={styles.searchContainer} onSubmit={handleSearch}>
-        <FaSearch style={{ cursor: "pointer" }} />
-        <input
-          type="text"
-          placeholder="Search for products, and more"
-          style={styles.searchInput}
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-      </form>
+      {/* Search Bar */}
+      {showSearch && (
+        <form style={styles.searchContainer} onSubmit={handleSearch}>
+          <FaSearch style={{ cursor: "pointer" }} />
+          <input
+            type="text"
+            placeholder="Search for products, and more"
+            style={styles.searchInput}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </form>
+      )}
 
-
+      {/* Icons */}
       <div style={styles.iconsContainer}>
         <div
-          style={{ ...styles.iconWrapper, ...(isProfileMenuVisible && styles.iconWrapperHover) }}
-          onMouseEnter={showProfileMenu}
-          onMouseLeave={hideProfileMenu}
+          style={{ ...styles.iconWrapper }}
+          onMouseEnter={() => setIsProfileMenuVisible(true)}
+          onMouseLeave={() => setIsProfileMenuVisible(false)}
         >
           <FaRegUser style={styles.icon} />
-          <span>Profile</span>
+          <span style={styles.icontext}>Profile</span>
 
+          {/* Dropdown Menu */}
           {isProfileMenuVisible && (
             <div style={styles.profileMenu}>
-              <div style={styles.profileMenuItem} onClick={() => navigate("/profile")}>Account</div>
-              <div style={styles.profileMenuItem} onClick={() => navigate("/wishlist")}>Wishlist</div>
-              <div style={styles.profileMenuItem} onClick={() => navigate("/order-history")}>Order History</div>
-              <div style={styles.profileMenuItem} onClick={() => navigate("/edit")}>Edit Account</div>
-              <div style={styles.profileMenuItem} onClick={logout}>Logout</div>
+              <div style={styles.profileMenuItem} onClick={() => navigate("/profile")}>
+                Account
+              </div>
+              <div style={styles.profileMenuItem} onClick={() => navigate("/wishlist")}>
+                Wishlist
+              </div>
+              <div style={styles.profileMenuItem} onClick={() => navigate("/order-history")}>
+                Order History
+              </div>
+              <div style={styles.profileMenuItem} onClick={() => navigate("/edit")}>
+                Edit Account
+              </div>
+              <div style={styles.profileMenuItem} onClick={logout}>
+                Logout
+              </div>
             </div>
           )}
         </div>
-
-        <div
-          style={{ ...styles.iconWrapper }}
-          onMouseEnter={() => setIsProfileMenuVisible(false)}
-          onMouseLeave={() => setIsProfileMenuVisible(false)}
-        >
-          <FaRegHeart style={styles.icon} onClick={() => navigate("/wishlist")}/>
-          <span>Wishlist</span>
+        <div style={styles.iconWrapper} onClick={() => navigate("/wishlist")}>
+          <FaRegHeart style={styles.icon} />
+          <span style={styles.icontext}>Wishlist</span>
         </div>
-        <div style={{ ...styles.iconWrapper }} onClick={() => navigate("/cart")}>
+        <div style={styles.iconWrapper} onClick={() => navigate("/cart")}>
           <FiShoppingBag style={styles.icon} />
-          <span>Bag</span>
+          <span style={styles.icontext}>Bag</span>
         </div>
       </div>
     </nav>
@@ -224,4 +225,3 @@ const Navbar = ({ onSearch }) => {
 };
 
 export default Navbar;
-

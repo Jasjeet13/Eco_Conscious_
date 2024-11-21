@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
-
 const styles = {
   container: {
     flex: 1,
     padding: '30px',
-    backgroundColor: '#f9fafb', // Light background for a soft look
+    backgroundColor: '#f9fafb',
     fontFamily: "'Arial', sans-serif",
   },
   heading: {
@@ -107,7 +106,7 @@ const OrderHistory = () => {
         });
 
         if (!response.ok) {
-          const errorData = await response.json();  // Log detailed error response
+          const errorData = await response.json();
           console.error(errorData);
           throw new Error('Failed to fetch order history');
         }
@@ -128,7 +127,11 @@ const OrderHistory = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
   if (orderHistory.length === 0)
-    return <div style={styles.container}><h3 style={styles.heading}>No orders found</h3></div>;
+    return (
+      <div style={styles.container}>
+        <h3 style={styles.heading}>No orders found</h3>
+      </div>
+    );
 
   return (
     <div style={styles.container}>
@@ -143,37 +146,37 @@ const OrderHistory = () => {
               </p>
               <p style={styles.text}>
                 <strong>Total Price: </strong> ${order.totalPrice.toFixed(2)}
-              </p><br />
+              </p>
+              <br />
             </div>
-            {/* Order items displayed horizontally */}
             <div>
-              {order.items.map((item) => (
-                <div key={item.productId?._id} style={styles.itemContainer}>
-                  {/* Left side - Image */}
-                  <div style={styles.imageContainer}>
-                    <img
-                      // Safely access image property with optional chaining
-                      src={item.productId?.image || "https://via.placeholder.com/150"}
-                      alt={item.productId?.name || "Image not available"}
-                      style={styles.image}
-                    />
+              {order.items.map((item) => {
+                const product = item.productId || {}; // Fallback to an empty object
+                return (
+                  <div key={product._id || item.id} style={styles.itemContainer}>
+                    <div style={styles.imageContainer}>
+                      <img
+                        src={product.image || 'https://via.placeholder.com/150'}
+                        alt={product.name || 'Image not available'}
+                        style={styles.image}
+                      />
+                    </div>
+                    <div style={styles.productDetails}>
+                      <p style={styles.productName}>{product.name || 'Product unavailable'}</p>
+                      <p style={styles.text}>
+                        <strong>Quantity:</strong> {item.quantity}
+                      </p>
+                      <p style={styles.text}>
+                        <strong>Price:</strong> ${product.price || 'N/A'}
+                      </p>
+                      <p style={styles.text}>
+                        <strong>Total: ${product.price} * {item.quantity} = </strong>{' '}
+                        ${(product.price ? item.quantity * product.price : 0).toFixed(2)}
+                      </p>
+                    </div>
                   </div>
-
-                  {/* Right side - Product Details */}
-                  <div style={styles.productDetails}>
-                    <p style={styles.productName}>{item.productId?.name || "Product unavailable"}</p>
-                    <p style={styles.text}>
-                      <strong>Quantity:</strong> {item.quantity}
-                    </p>
-                    <p style={styles.text}>
-                      <strong>Price:</strong> ${item.productId?.price || "N/A"}
-                    </p>
-                    <p style={styles.text}>
-                      <strong>Total: ${item.productId.price} * {item.quantity} = </strong> ${(item.productId ? item.quantity * item.productId.price : 0).toFixed(2)}
-                    </p>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         ))}

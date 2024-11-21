@@ -68,20 +68,22 @@ const Alternative = ({ productId, category }) => {
 
 const styles = {
   alternativeGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(3, 1fr)",
-    gap: "20px",
+    display: "flex",
+    // gridTemplateColumns: "repeat(3, 1fr)",
+    
   },
   alternativeCard: {
-    border: "1px solid #ddd",
+    border: "2px solid green",
     borderRadius: "4px",
     padding: "10px",
+    width:"330px",
+    margin:'10px',
     textAlign: "center",
     backgroundColor: "#fff",
   },
   alternativeImage: {
-    width: "100%",
-    height: "150px",
+    width: "200px",
+    height: "200px",
     objectFit: "cover",
     borderRadius: "4px",
   },

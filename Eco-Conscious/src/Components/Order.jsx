@@ -5,18 +5,15 @@ const styles = {
   pageWrapper: {
     display: "flex",
     flexDirection: "column",
-    minHeight: "100vh", // Ensure the wrapper takes full viewport height
+    minHeight: "100vh",
   },
   container: {
-    flex: 1, // This makes the content grow to fill available space
+    flex: 1,
     padding: "20px",
-    backgroundColor: "#f0f8f4", // Light greenish background
+    backgroundColor: "#f0f8f4",
     fontFamily: "'Arial', sans-serif",
   },
   footer: {
-    
-
-    
     padding: "10px",
     backgroundColor: "#333",
     color: "#fff",
@@ -29,7 +26,7 @@ const styles = {
     marginBottom: "30px",
     fontWeight: "bold",
   },
-  itemsContainer: {
+  responsiveContainer: {
     display: "flex",
     flexWrap: "wrap",
     gap: "20px",
@@ -71,49 +68,6 @@ const styles = {
     fontSize: "16px",
     marginBottom: "8px",
   },
-  responsiveContainer: {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "20px",
-    justifyContent: "center",
-  },
-};
-
-// Adding media query styles directly in React using JavaScript
-const useResponsiveStyles = () => {
-  const [responsiveStyles, setResponsiveStyles] = useState(styles.itemContainer);
-
-  useEffect(() => {
-    const handleResize = () => {
-      const screenWidth = window.innerWidth;
-
-      if (screenWidth <= 768) {
-        // Small screens: Full width
-        setResponsiveStyles({
-          ...styles.itemContainer,
-          flex: "1 1 100%",
-          maxWidth: "100%",
-        });
-      } else if (screenWidth <= 1024) {
-        // Medium screens: Two columns with smaller gaps
-        setResponsiveStyles({
-          ...styles.itemContainer,
-          flex: "1 1 calc(50% - 10px)",
-          maxWidth: "calc(50% - 10px)",
-        });
-      } else {
-        // Large screens: Two columns
-        setResponsiveStyles(styles.itemContainer);
-      }
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  return responsiveStyles;
 };
 
 const Order = () => {
@@ -121,7 +75,6 @@ const Order = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { orderId } = useParams();
-  const responsiveStyles = useResponsiveStyles();
 
   useEffect(() => {
     const fetchOrder = async () => {
@@ -162,32 +115,38 @@ const Order = () => {
     <div style={styles.container}>
       <h3 style={styles.heading}>Your Order Details</h3>
       <div style={styles.responsiveContainer}>
-        {order.items.map((item) => (
-          <div key={item.productId} style={responsiveStyles}>
-            {/* Left side - Image */}
-            <div style={styles.imageContainer}>
-              <img
-                src={item.productId.image || "https://via.placeholder.com/150"}
-                alt={item.productId.name}
-                style={styles.image}
-              />
-            </div>
+        {order.items.map((item, index) => {
+          const product = item.productId || {}; // Fallback to an empty object
+          return (
+            <div key={index} style={styles.itemContainer}>
+              {/* Left side - Image */}
+              <div style={styles.imageContainer}>
+                <img
+                  src={product.image || "https://via.placeholder.com/150"}
+                  alt={product.name || "No image available"}
+                  style={styles.image}
+                />
+              </div>
 
-            {/* Right side - Product Details */}
-            <div style={styles.productDetails}>
-              <p style={styles.productName}>{item.productId.name}</p>
-              <p style={styles.text}>
-                <strong>Quantity:</strong> {item.quantity}
-              </p>
-              <p style={styles.text}>
-                <strong>Price:</strong> ${item.productId.price}
-              </p>
-              <p style={styles.text}>
-                <strong>Total: { item.productId.price} * {item.quantity}=</strong> ${(item.quantity * item.productId.price).toFixed(2)}
-              </p>
+              {/* Right side - Product Details */}
+              <div style={styles.productDetails}>
+                <p style={styles.productName}>{product.name || "Product Unavailable"}</p>
+                <p style={styles.text}>
+                  <strong>Quantity:</strong> {item.quantity || "N/A"}
+                </p>
+                <p style={styles.text}>
+                  <strong>Price:</strong> ${product.price || "N/A"}
+                </p>
+                <p style={styles.text}>
+                  <strong>Total:</strong>{" "}
+                  {product.price
+                    ? `$${(product.price * item.quantity).toFixed(2)}`
+                    : "N/A"}
+                </p>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

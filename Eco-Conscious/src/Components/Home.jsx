@@ -6,6 +6,7 @@ import TopPicks from "../Components/TopPicks";
 import Categories from "./Categories";
 import MotoSection from "./MotoSection";
 import CustomerTestimonials from "./CustomerTestimonials";
+import BestProducts from "./Bestproduct";
 // import Footer from "./Footer";
 
 const Home = () => {
@@ -16,6 +17,7 @@ const Home = () => {
       <TopPicks />
       <Categories />
       <MotoSection />
+      <BestProducts />
       <CustomerTestimonials />
     </div>
   );

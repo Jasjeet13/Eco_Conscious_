@@ -1,15 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Styles/SecondaryNavbar.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 const SecondaryNavbar = ({ currentCategory, onSortSelect, onFilterSelect }) => {
+  const [showMaterialSubMenu, setShowMaterialSubMenu] = useState(false);
+
   return (
     <div className="secondary-navbar-container">
-      {/* Category Name on the Left */}
       <div className="category-name">{currentCategory}</div>
-
-      {/* Sort and Filter on the Right */}
       <div className="action-buttons">
         {/* Sort Dropdown */}
         <div
@@ -18,7 +17,7 @@ const SecondaryNavbar = ({ currentCategory, onSortSelect, onFilterSelect }) => {
           onMouseLeave={() => document.querySelector(".sort-menu").classList.remove("visible")}
         >
           <div className="menu-button">Sort By
-          <FontAwesomeIcon icon={faChevronDown}/>
+            <FontAwesomeIcon icon={faChevronDown} />
           </div>
           <div className="dropdown-menu sort-menu">
             <div className="dropdown-item" onClick={() => onSortSelect("price_low_high")}>
@@ -37,20 +36,32 @@ const SecondaryNavbar = ({ currentCategory, onSortSelect, onFilterSelect }) => {
           onMouseLeave={() => document.querySelector(".filter-menu").classList.remove("visible")}
         >
           <div className="menu-button">Filter By
-          <FontAwesomeIcon icon={faChevronDown}/>
+            <FontAwesomeIcon icon={faChevronDown} />
           </div>
           <div className="dropdown-menu filter-menu">
             <div className="dropdown-item" onClick={() => onFilterSelect("low_carbon_footprint")}>
               Low Carbon Footprint
             </div>
-            <div className="dropdown-item" onClick={() => onFilterSelect("material_sourcing_good")}>
-              Material Sourcing: Good
-            </div>
-            <div className="dropdown-item" onClick={() => onFilterSelect("material_sourcing_better")}>
-              Material Sourcing: Better
-            </div>
-            <div className="dropdown-item" onClick={() => onFilterSelect("material_sourcing_best")}>
-              Material Sourcing: Best
+            <div
+              className="dropdown-item material-sourcing"
+              onMouseEnter={() => setShowMaterialSubMenu(true)}
+              onMouseLeave={() => setShowMaterialSubMenu(false)}
+            >
+              Material Sourcing
+              
+              {showMaterialSubMenu && (
+                <div className="submenu">
+                  <div className="dropdown-item" onClick={() => onFilterSelect("material_sourcing_good")}>
+                    Good
+                  </div>
+                  <div className="dropdown-item" onClick={() => onFilterSelect("material_sourcing_better")}>
+                    Better
+                  </div>
+                  <div className="dropdown-item" onClick={() => onFilterSelect("material_sourcing_best")}>
+                    Best
+                  </div>
+                </div>
+              )}
             </div>
             <div className="dropdown-item" onClick={() => onFilterSelect("high_recyclability")}>
               High Recyclability
@@ -69,35 +80,6 @@ const SecondaryNavbar = ({ currentCategory, onSortSelect, onFilterSelect }) => {
       </div>
     </div>
   );
-};
-
-const styles = {
-  navbar: {
-    display: "flex",
-    justifyContent: "space-between",
-    padding: "10px 20px",
-    backgroundColor: "#f8f8f8",
-    borderBottom: "1px solid #ddd",
-    margin:"70px 0px 10px 30px",
-  },
-  left: {
-    flex: 1,
-    display: "flex",
-    alignItems: "center",
-  },
-  right: {
-    display: "flex",
-    gap: "15px",
-  },
-  dropdown: {
-    padding: "8px",
-    fontSize: "16px",
-  },
-  category: {
-    fontWeight: "bold",
-    fontSize: "22px",
-    margin:"0px 0px 0px 40px",
-  },
 };
 
 export default SecondaryNavbar;
