@@ -188,7 +188,6 @@ const Navbar = () => {
         >
           <FaRegUser style={styles.icon} />
           <span style={styles.icontext}>Profile</span>
-          <span style={styles.icontext}>Profile</span>
 
           {/* Dropdown Menu */}
           {isProfileMenuVisible && (
@@ -217,7 +216,6 @@ const Navbar = () => {
         </div>
         <div style={styles.iconWrapper} onClick={() => navigate("/cart")}>
           <FiShoppingBag style={styles.icon} />
-          <span style={styles.icontext}>Bag</span>
           <span style={styles.icontext}>Bag</span>
         </div>
       </div>
