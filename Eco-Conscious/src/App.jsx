@@ -22,6 +22,7 @@ import OrderHistory from './Components/OrderHistory';
 import SearchResults from "./Components/SearchResults";
 import Alternative from "./Components/Alternative";
 import Bestproduct from "./Components/Bestproduct";
+import LearnMore from "./Components/LearnMore";
 
 function App() {
   // Check if the user is authenticated by looking for the token in localStorage
@@ -59,7 +60,7 @@ function App() {
         <Route path="/search/:term" element={<SearchResults />} />
         <Route path="/alternatives/:category/:id" element={<Alternative />} />        
         <Route path="/order-history"  element={isAuthenticated ? <OrderHistory /> : <Navigate to="/" />}/>
-
+        <Route path="/learn-more"  element={<LearnMore />} />
       </Routes>
 
       {/* Conditionally render Footer */}
