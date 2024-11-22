@@ -1,5 +1,5 @@
 const fs = require("fs");
-const filePath = "ecommerce.products.json";
+const filePath = "ecommerce.product_updated.json";
 
 const calculateEcoScore = (product) => {
   let score = 0;
