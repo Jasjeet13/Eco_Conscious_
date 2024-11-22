@@ -11,7 +11,7 @@ const LearnMore = () => {
         id: Date.now() + Math.random(),
         x: Math.random() * window.innerWidth, // Random horizontal position
         y: -Math.random() * 100, // Slightly varied starting Y positions
-        delay: Math.random() * 10, // Add random delay for animation stagger
+        delay: Math.random() * 4, // Add random delay for animation stagger
       }));
       setLeaves(generatedLeaves);
 
