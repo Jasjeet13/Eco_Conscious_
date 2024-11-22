@@ -11,8 +11,8 @@ const ProductProfile = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isInCart, setIsInCart] = useState(false);
-  const [isInWishlist, setIsInWishlist] = useState(false); // To track if the product is in the wishlist
-  const [hoveredIcon, setHoveredIcon] = useState(null); // For hover effect
+  const [isInWishlist, setIsInWishlist] = useState(false);
+  const [hoveredIcon, setHoveredIcon] = useState(null);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -44,42 +44,9 @@ const ProductProfile = () => {
     fetchProduct();
   }, [id]);
 
-  // Check if product is in the wishlist when the component mounts
-  useEffect(() => {
-    const checkWishlist = async () => {
-      const token = localStorage.getItem("token");
-      if (!token) return;
-
-      try {
-        const response = await fetch("http://localhost:3000/api/wishlist", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          // Check if the current product is in the wishlist
-          const itemInWishlist = data.some(
-            (item) => item.productId === product._id
-          );
-          setIsInWishlist(itemInWishlist);
-        }
-      } catch (error) {
-        console.error("Error checking wishlist:", error);
-      }
-    };
-
-    if (product) {
-      checkWishlist();
-    }
-  }, [product]);
-
   const handleQuantityChange = (e) => {
-    const value = parseInt(e.target.value, 10) || 1; // Default to 1 if input is invalid
-    setQuantity(Math.min(Math.max(1, value), 20)); // Ensure quantity is between 1 and 20
+    const value = parseInt(e.target.value, 10) || 1;
+    setQuantity(Math.min(Math.max(1, value), 20));
   };
 
   const addToWishlist = async () => {
@@ -109,7 +76,7 @@ const ProductProfile = () => {
       });
       const data = await response.json();
       if (response.ok) {
-        setIsInWishlist(true); // Mark as in wishlist
+        setIsInWishlist(true);
         alert(data.message);
         navigate("/wishlist");
       } else {
@@ -119,6 +86,7 @@ const ProductProfile = () => {
       console.error("Error adding to wishlist:", error);
     }
   };
+  
   const buyNow = async () => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -135,16 +103,16 @@ const ProductProfile = () => {
         },
         body: JSON.stringify({
           productId: product._id,
-          quantity, // Send the quantity selected by the user
-          price: product.price, // Send the product price
-          image: product.image, // Send product image URL
+          quantity,
+          price: product.price,
+          image: product.image,
         }),
       });
 
       const data = await response.json();
       if (response.ok) {
-        alert(data.message); // Show success message
-        navigate(`/order/${data.order._id}`); // Navigate to order details page
+        alert(data.message);
+        navigate(`/order/${data.order._id}`);
       } else {
         alert(data.message || "Error placing order");
       }
@@ -153,6 +121,7 @@ const ProductProfile = () => {
       alert("An error occurred while placing your order. Please try again.");
     }
   };
+
 
   const addToCart = async () => {
     const token = localStorage.getItem("token");
@@ -173,7 +142,7 @@ const ProductProfile = () => {
           price: product.price,
           image: product.image,
           description: product.description,
-          quantity, // Include the selected quantity
+          quantity,
         }),
       });
       const data = await response.json();
@@ -204,24 +173,26 @@ const ProductProfile = () => {
           padding: "60px 30px",
           maxWidth: "100%",
           margin: "0 auto",
+          gap: "20px",
           alignItems: "flex-start",
+          flexWrap: "wrap",
         }}
       >
-        <div style={{ flex: "1", marginRight: "10px", marginTop: "40px" }}>
+        <div style={{ flex: "2", minWidth: "300px", marginTop: "40px" }}>
           <img
             src={product.image || "https://via.placeholder.com/600"}
             alt={product.name || "Product"}
             style={{
-              width: "600px",
+              width: "100%",
               borderRadius: "12px",
               padding: "5px",
               objectFit: "contain",
-              height: "630px",
+              height: "550px",
               boxShadow: "0 0 10px rgba(0,0,0,0.1)",
             }}
           />
         </div>
-        <div style={{ padding: "40px", flex: "2" }}>
+        <div style={{ flex: "3", padding: "40px", minWidth: "300px" }}>
           <h1
             style={{
               fontSize: "32px",
@@ -295,7 +266,7 @@ const ProductProfile = () => {
             />
             <button
               style={{
-                padding: "15px 30px",
+                padding: "10px 20px",
                 border: "1px solid #000",
                 cursor: "pointer",
                 backgroundColor: "#fff",
@@ -303,7 +274,9 @@ const ProductProfile = () => {
                 marginRight: "30px",
                 display: "flex",
                 alignItems: "center",
-                fontSize: "18px",
+                fontSize: "15px",
+                width:"200px",
+                
               }}
               onClick={addToCart}
               onMouseEnter={() => setHoveredIcon("cart")}
@@ -332,19 +305,20 @@ const ProductProfile = () => {
 
             <button
               style={{
-                padding: "15px 30px",
+                padding: "10px 20px",
                 border: "1px solid #000",
                 cursor: "pointer",
                 backgroundColor: "#fff",
                 color: "#000",
-                marginRight: "30px",
+                //marginRight: "30px",
                 display: "flex",
                 alignItems: "center",
-                fontSize: "18px",
+                fontSize: "15px",
+                width:"217px"
               }}
               onClick={addToWishlist}
               onMouseEnter={() => setHoveredIcon("heart")}
-              onMouseLeave={() => setHoveredIcon(null)}
+                onMouseLeave={() => setHoveredIcon(null)}
             >
               <i
                 className="fas fa-heart"

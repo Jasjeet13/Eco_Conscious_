@@ -151,6 +151,7 @@ const Edit = () => {
       <div style={styles.container}>
         <div style={styles.headingContainer}>
           <h2 style={styles.heading}>Edit Profile</h2>
+          
         </div>
         <form onSubmit={handleSubmit}>
           <div style={styles.inputGroupContainer}>

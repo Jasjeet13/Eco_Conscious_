@@ -138,10 +138,10 @@ const Order = () => {
                   <strong>Price:</strong> ${product.price || "N/A"}
                 </p>
                 <p style={styles.text}>
-                  <strong>Total:</strong>{" "}
+                  <strong>Total: </strong>${product.price} * {item.quantity} = <strong> {" "} 
                   {product.price
                     ? `$${(product.price * item.quantity).toFixed(2)}`
-                    : "N/A"}
+                    : "N/A"}</strong>
                 </p>
               </div>
             </div>
