@@ -80,7 +80,7 @@ const ProductProfile = () => {
         alert(data.message);
         navigate("/wishlist");
       } else {
-        alert(data.message || 'Error adding to wishlist');
+        alert(data.message || "Error adding to wishlist");
       }
     } catch (error) {
       console.error("Error adding to wishlist:", error);
@@ -93,7 +93,7 @@ const ProductProfile = () => {
       alert("You need to be logged in to place an order.");
       return;
     }
-  
+
     try {
       const response = await fetch("http://localhost:3000/api/order/buy-now", {
         method: "POST",
@@ -108,7 +108,7 @@ const ProductProfile = () => {
           image: product.image,
         }),
       });
-  
+
       const data = await response.json();
       if (response.ok) {
         alert(data.message);
@@ -121,6 +121,7 @@ const ProductProfile = () => {
       alert("An error occurred while placing your order. Please try again.");
     }
   };
+
 
   const addToCart = async () => {
     const token = localStorage.getItem("token");
@@ -301,6 +302,7 @@ const ProductProfile = () => {
               ></i>
               ADD TO CART
             </button>
+
             <button
               style={{
                 padding: "10px 20px",
@@ -331,7 +333,6 @@ const ProductProfile = () => {
                     : "#ccc",
                   transition: "color 0.3s ease",
                 }}
-                
               ></i>
               {isInWishlist ? "IN WISHLIST" : "ADD TO WISHLIST"}
             </button>
@@ -346,21 +347,24 @@ const ProductProfile = () => {
           >
             <button
               style={{
-                padding: "15px 26px",
-                backgroundColor: "black",
-                color: "white",
+                padding: "20px 40px",
+                backgroundColor: "#000",
+                color: "#fff",
                 border: "none",
                 cursor: "pointer",
-                fontSize: "16px",
+                fontSize: "25px",
                 display: "flex",
                 alignItems: "center",
-                width:"150px"
               }}
-              onClick={buyNow}
+              onClick={buyNow} // Call the buyNow function
             >
-              <i className="fas fa-credit-card" style={{ marginRight: "10px" }}></i>
+              <i
+                className="fas fa-credit-card"
+                style={{ marginRight: "10px" }}
+              ></i>
               Buy Now
             </button>
+
             <EnvironmentCriteria
               ecoScore={product.ecoScore}
               details={{
@@ -376,18 +380,7 @@ const ProductProfile = () => {
           </div>
         </div>
       </div>
-      {/* Place Alternative component next to the main product details */}
-      <div
-        style={{
-          display: "flex",
-          padding: "20px 30px",
-          gap: "20px",
-          flexDirection: "column",
-          maxWidth: "100%",
-        }}
-      >
-        <Alternative productId={product._id} category={product.category} />
-      </div>
+      <Alternative productId={product._id} category={product.category} />
     </>
   );
 };

@@ -58,6 +58,8 @@ const Alternative = ({ productId, category }) => {
               />
               <h3 style={styles.productName}>{product.name}</h3>
               <p>Price: ${product.price}</p>
+              {/* Display the ecoScore below the price */}
+              <p>EcoScore: {product.ecoScore}</p>
             </div>
           ))
         )}
@@ -70,14 +72,13 @@ const styles = {
   alternativeGrid: {
     display: "flex",
     // gridTemplateColumns: "repeat(3, 1fr)",
-    
   },
   alternativeCard: {
     border: "2px solid green",
     borderRadius: "4px",
     padding: "10px",
-    width:"330px",
-    margin:'10px',
+    width: "330px",
+    margin: "10px",
     textAlign: "center",
     backgroundColor: "#fff",
   },
