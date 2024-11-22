@@ -109,7 +109,7 @@ const styles = {
   },
   nameContainer: {
     marginBottom: "5px",
-    height: "30px",
+    height: "15px",
   },
   name: {
     fontSize: "16px",
