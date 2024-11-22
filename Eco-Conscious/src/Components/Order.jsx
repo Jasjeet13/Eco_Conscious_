@@ -10,7 +10,7 @@ const styles = {
   container: {
     flex: 1,
     padding: "20px",
-    backgroundColor: "#f0f8f4",
+    backgroundColor: "#e3efe9",
     fontFamily: "'Arial', sans-serif",
   },
   footer: {
