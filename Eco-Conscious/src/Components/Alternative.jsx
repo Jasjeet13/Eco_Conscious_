@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Alternative = ({ productId, category }) => {
   const [alternatives, setAlternatives] = useState([]);
@@ -50,6 +51,10 @@ const Alternative = ({ productId, category }) => {
           <p>No alternatives found.</p>
         ) : (
           alternatives.map((product) => (
+            <Link
+              to={`/products/${product.category}/${product._id}`}
+              style={{ textDecoration: "none", color: "inherit" }}
+              >
             <div key={product._id} style={styles.alternativeCard}>
               <img
                 src={product.image}
@@ -61,6 +66,7 @@ const Alternative = ({ productId, category }) => {
               {/* Display the ecoScore below the price */}
               <p>EcoScore: {product.ecoScore}</p>
             </div>
+            </Link>
           ))
         )}
       </div>
