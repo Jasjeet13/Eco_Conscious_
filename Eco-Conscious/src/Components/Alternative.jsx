@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import logo from "./download.png";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // The main Alternative component
 const Alternative = ({ productId, category }) => {

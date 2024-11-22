@@ -165,8 +165,8 @@ const styles = {
     backgroundColor :"#f2f2f2"
   },
   nameContainer: {
-    marginBottom: "5px",
-    height : "30px",
+    // marginBottom: "5px",
+    height : "15px",
   },
   name: {
     fontSize: "16px",
@@ -174,7 +174,7 @@ const styles = {
   },
   priceContainer: {
     marginBottom: "10px",
-    marginTop : "10px",
+    // marginTop : "5px",
     height : "20px",
   },
   price: {

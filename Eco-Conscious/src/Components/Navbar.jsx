@@ -38,10 +38,31 @@ const Navbar = () => {
     localStorage.removeItem("token");
     navigate("/");
   }
+
+  const categoryMapping = {
+    beauty: "beauty",
+  footwear: "footwear",
+  bags: "bags",
+  clothing: "clothing",
+};
+  
   const handleSearch = (e) => {
     e.preventDefault();
-    if (searchTerm.trim()) navigate(`/search/${searchTerm}`);
-  };
+    
+    const normalizedSearchTerm = searchTerm.trim().toLowerCase();
+  
+    // Check if the entered term matches a category
+    const matchedCategory = Object.keys(categoryMapping).find((key) => 
+      categoryMapping[key].toLowerCase() === normalizedSearchTerm
+    );
+  
+    if (matchedCategory) {
+      navigateToCategory(categoryMapping[matchedCategory]);
+    } else if (searchTerm.trim()) {
+      navigate(`/search/${searchTerm}`); // Default search behavior
+      }
+};
+  
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
 

@@ -177,3 +177,4 @@ const EnvironmentCriteria = ({ ecoScore, details }) => {
 };
 
 export default EnvironmentCriteria;
+

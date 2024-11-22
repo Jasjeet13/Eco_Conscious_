@@ -61,7 +61,7 @@ const ProductList = () => {
       filtered = filtered.filter((product) => {
         switch (filter) {
           case "low_carbon_footprint":
-            return product.carbonFootprint < 10;
+            return product.carbonFootprint < 5;
           case "material_sourcing_good":
             return product.materialSourcing === "good";
           case "material_sourcing_better":
