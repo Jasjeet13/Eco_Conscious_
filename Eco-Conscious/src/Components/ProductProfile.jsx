@@ -113,7 +113,7 @@ const ProductProfile = () => {
         alert(data.message);
         navigate("/wishlist");
       } else {
-        alert(data.message || 'Error adding to wishlist');
+        alert(data.message || "Error adding to wishlist");
       }
     } catch (error) {
       console.error("Error adding to wishlist:", error);
@@ -125,7 +125,7 @@ const ProductProfile = () => {
       alert("You need to be logged in to place an order.");
       return;
     }
-  
+
     try {
       const response = await fetch("http://localhost:3000/api/order/buy-now", {
         method: "POST",
@@ -140,7 +140,7 @@ const ProductProfile = () => {
           image: product.image, // Send product image URL
         }),
       });
-  
+
       const data = await response.json();
       if (response.ok) {
         alert(data.message); // Show success message
@@ -153,7 +153,7 @@ const ProductProfile = () => {
       alert("An error occurred while placing your order. Please try again.");
     }
   };
-  
+
   const addToCart = async () => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -330,7 +330,6 @@ const ProductProfile = () => {
               ADD TO CART
             </button>
 
-
             <button
               style={{
                 padding: "15px 30px",
@@ -360,7 +359,6 @@ const ProductProfile = () => {
                     : "#ccc",
                   transition: "color 0.3s ease",
                 }}
-                
               ></i>
               {isInWishlist ? "IN WISHLIST" : "ADD TO WISHLIST"}
             </button>
@@ -374,21 +372,24 @@ const ProductProfile = () => {
             }}
           >
             <button
-  style={{
-    padding: "20px 40px",
-    backgroundColor: "#000",
-    color: "#fff",
-    border: "none",
-    cursor: "pointer",
-    fontSize: "25px",
-    display: "flex",
-    alignItems: "center",
-  }}
-  onClick={buyNow} // Call the buyNow function
->
-  <i className="fas fa-credit-card" style={{ marginRight: "10px" }}></i>
-  Buy Now
-</button>
+              style={{
+                padding: "20px 40px",
+                backgroundColor: "#000",
+                color: "#fff",
+                border: "none",
+                cursor: "pointer",
+                fontSize: "25px",
+                display: "flex",
+                alignItems: "center",
+              }}
+              onClick={buyNow} // Call the buyNow function
+            >
+              <i
+                className="fas fa-credit-card"
+                style={{ marginRight: "10px" }}
+              ></i>
+              Buy Now
+            </button>
 
             <EnvironmentCriteria
               ecoScore={product.ecoScore}
@@ -405,11 +406,7 @@ const ProductProfile = () => {
           </div>
         </div>
       </div>
-        <Alternative 
-        productId={product._id} 
-        category={product.category} 
-        />
-
+      <Alternative productId={product._id} category={product.category} />
     </>
   );
 };
