@@ -86,7 +86,7 @@ const ProductProfile = () => {
       console.error("Error adding to wishlist:", error);
     }
   };
-  
+
   const buyNow = async () => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -121,7 +121,6 @@ const ProductProfile = () => {
       alert("An error occurred while placing your order. Please try again.");
     }
   };
-
 
   const addToCart = async () => {
     const token = localStorage.getItem("token");
@@ -170,48 +169,74 @@ const ProductProfile = () => {
       <div
         style={{
           display: "flex",
-          padding: "60px 30px",
+          padding: "40px 10px",
           maxWidth: "100%",
           margin: "0 auto",
           gap: "20px",
-          alignItems: "flex-start",
-          flexWrap: "wrap",
+          alignItems: "stretch", // Ensures both inner divs have the same height
+          height: "100vh", // Ensures the main div height fills the available space
         }}
       >
-        <div style={{ flex: "2", minWidth: "300px", marginTop: "40px" }}>
+        {/* Image Div */}
+        <div
+          style={{
+            flex: 1, // Ensures the image div gets equal height
+            minWidth: "280px",
+            marginTop: "40px",
+            display: "flex",
+            justifyContent: "center", // Center the image inside the div
+            alignItems: "center", // Center the image vertically
+          }}
+        >
           <img
             src={product.image || "https://via.placeholder.com/600"}
             alt={product.name || "Product"}
             style={{
               width: "100%",
+              height: "85vh", // Maintain image aspect ratio
               borderRadius: "12px",
-              padding: "5px",
+              padding: "10px",
               objectFit: "contain",
-              height: "550px",
               boxShadow: "0 0 10px rgba(0,0,0,0.1)",
             }}
           />
         </div>
-        <div style={{ flex: "3", padding: "40px", minWidth: "300px" }}>
+        {/* Product Details Div */}
+        <div
+          style={{
+            flex: 1, // Ensures the product details div gets equal height
+            padding: "50px 30px",
+            minWidth: "500px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between", // Ensures content is evenly spaced within the div
+          }}
+        >
           <h1
             style={{
               fontSize: "32px",
               fontWeight: "bold",
-              marginBottom: "15px",
+              marginBottom: "0px",
             }}
           >
             {product.name}
           </h1>
           <p
-            style={{ fontSize: "28px", color: "#e63946", marginBottom: "15px" }}
+            style={{
+              fontSize: "28px",
+              color: "#e63946",
+              marginBottom: "0px",
+            }}
           >
             ${product.price}
           </p>
+
+          {/* Ratings Section */}
           <div
             style={{
               display: "flex",
               alignItems: "center",
-              marginBottom: "25px",
+              marginBottom: "0px",
             }}
           >
             <span
@@ -227,9 +252,11 @@ const ProductProfile = () => {
               3 reviews
             </a>
           </div>
+
+          {/* Product Description */}
           <p
             style={{
-              marginBottom: "25px",
+              marginBottom: "0px",
               color: "#555",
               lineHeight: "1.8",
               fontSize: "18px",
@@ -237,6 +264,8 @@ const ProductProfile = () => {
           >
             {product.description}
           </p>
+
+          {/* Availability and Product Type */}
           <p style={{ marginBottom: "15px", fontSize: "18px" }}>
             <strong>Availability:</strong>{" "}
             {product.inStock ? "In stock" : "Out of stock"}
@@ -244,11 +273,12 @@ const ProductProfile = () => {
           <p style={{ marginBottom: "15px", fontSize: "18px" }}>
             <strong>Product Type:</strong> {product.category}
           </p>
+
+          {/* Quantity and Action Buttons */}
           <div
             style={{
               display: "flex",
               alignItems: "center",
-              marginBottom: "25px",
             }}
           >
             <input
@@ -260,7 +290,7 @@ const ProductProfile = () => {
               style={{
                 width: "70px",
                 padding: "10px",
-                marginRight: "30px",
+                marginRight: "15px",
                 fontSize: "18px",
               }}
             />
@@ -271,12 +301,11 @@ const ProductProfile = () => {
                 cursor: "pointer",
                 backgroundColor: "#fff",
                 color: "#000",
-                marginRight: "30px",
+                marginRight: "15px",
                 display: "flex",
                 alignItems: "center",
                 fontSize: "15px",
-                width:"200px",
-                
+                width: "200px",
               }}
               onClick={addToCart}
               onMouseEnter={() => setHoveredIcon("cart")}
@@ -310,15 +339,14 @@ const ProductProfile = () => {
                 cursor: "pointer",
                 backgroundColor: "#fff",
                 color: "#000",
-                //marginRight: "30px",
                 display: "flex",
                 alignItems: "center",
                 fontSize: "15px",
-                width:"217px"
+                width: "217px",
               }}
               onClick={addToWishlist}
               onMouseEnter={() => setHoveredIcon("heart")}
-                onMouseLeave={() => setHoveredIcon(null)}
+              onMouseLeave={() => setHoveredIcon(null)}
             >
               <i
                 className="fas fa-heart"
@@ -337,12 +365,14 @@ const ProductProfile = () => {
               {isInWishlist ? "IN WISHLIST" : "ADD TO WISHLIST"}
             </button>
           </div>
+
+          {/* Additional Action Buttons */}
           <div
             style={{
               display: "flex",
               alignItems: "center",
               gap: "50px",
-              marginBottom: "25px",
+              marginBottom: "20px",
             }}
           >
             <button
@@ -356,7 +386,7 @@ const ProductProfile = () => {
                 display: "flex",
                 alignItems: "center",
               }}
-              onClick={buyNow} // Call the buyNow function
+              onClick={buyNow}
             >
               <i
                 className="fas fa-credit-card"
@@ -364,23 +394,33 @@ const ProductProfile = () => {
               ></i>
               Buy Now
             </button>
-
-            <EnvironmentCriteria
-              ecoScore={product.ecoScore}
-              details={{
-                carbonFootprint: product.carbonFootprint,
-                materialSourcing: product.materialSourcing,
-                recyclability: product.recyclability,
-                waterUsage: product.waterUsage,
-                energyEfficiency: product.energyEfficiency,
-                biodegradability: product.biodegradability,
-                durability: product.durability,
-              }}
-            />
           </div>
         </div>
+        <div
+          style={{
+            position: "sticky",
+            right: "0",
+            width: "120px",
+            backgroundColor: "#fff",
+            zIndex: "1",
+            marginTop: "150px",
+          }}
+        >
+          <EnvironmentCriteria
+            ecoScore={product.ecoScore}
+            details={{
+              carbonFootprint: product.carbonFootprint,
+              materialSourcing: product.materialSourcing,
+              recyclability: product.recyclability,
+              waterUsage: product.waterUsage,
+              energyEfficiency: product.energyEfficiency,
+              biodegradability: product.biodegradability,
+              durability: product.durability,
+            }}
+          />
+          <Alternative productId={product._id} category={product.category} />
+        </div>
       </div>
-      <Alternative productId={product._id} category={product.category} />
     </>
   );
 };
