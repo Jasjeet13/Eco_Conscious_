@@ -9,6 +9,7 @@ const styles = {
     gap: "20px",
     justifyContent: "center",
   },
+  
   title: {
     fontSize: "32px",
     textAlign: "center",
@@ -25,17 +26,12 @@ const styles = {
     height: "340px",
     padding: "20px",
     border: "1px solid #e0e0e0",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+    boxShadow: "2px 4px 8px #b9fbc0",
     transition: "transform 0.2s",
     textAlign: "center",
     position: "relative",
     overflow: "hidden",
   },
- 
- 
- 
- 
- 
   wishlistItemHover: {
     transform: "scale(1.05)",
   },
