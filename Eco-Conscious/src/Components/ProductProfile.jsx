@@ -169,12 +169,12 @@ const ProductProfile = () => {
       <div
         style={{
           display: "flex",
-          padding: "40px 10px",
+          padding: "50px 10px",
           maxWidth: "100%",
           margin: "0 auto",
           gap: "20px",
           alignItems: "stretch", // Ensures both inner divs have the same height
-          height: "100vh", // Ensures the main div height fills the available space
+          height: "95vh", // Ensures the main div height fills the available space
         }}
       >
         {/* Image Div */}
@@ -182,7 +182,7 @@ const ProductProfile = () => {
           style={{
             flex: 1, // Ensures the image div gets equal height
             minWidth: "280px",
-            marginTop: "40px",
+            marginTop: "10px",
             display: "flex",
             justifyContent: "center", // Center the image inside the div
             alignItems: "center", // Center the image vertically
@@ -192,12 +192,12 @@ const ProductProfile = () => {
             src={product.image || "https://via.placeholder.com/600"}
             alt={product.name || "Product"}
             style={{
-              width: "100%",
-              height: "85vh", // Maintain image aspect ratio
-              borderRadius: "12px",
-              padding: "10px",
+              width: "90%",
+              height: "80vh",
+              padding: "20px",
               objectFit: "contain",
-              boxShadow: "0 0 10px rgba(0,0,0,0.1)",
+              borderLeft: "2px solid #d3d3d3", // Light grey left outline
+              borderRight: "2px solid #d3d3d3", // Light grey right outline
             }}
           />
         </div>
@@ -205,30 +205,23 @@ const ProductProfile = () => {
         <div
           style={{
             flex: 1, // Ensures the product details div gets equal height
-            padding: "50px 30px",
+            padding: "20px 0px 40px 30px",
             minWidth: "500px",
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between", // Ensures content is evenly spaced within the div
           }}
         >
-          <h1
-            style={{
-              fontSize: "32px",
-              fontWeight: "bold",
-              marginBottom: "0px",
-            }}
-          >
-            {product.name}
-          </h1>
+          <h1 styles={{ margin: "0", padding: "0" }}>{product.name}</h1>
           <p
             style={{
               fontSize: "28px",
               color: "#e63946",
-              marginBottom: "0px",
+              margin: "0",
+              padding: "0",
             }}
           >
-            ${product.price}
+            Price: ${product.price}
           </p>
 
           {/* Ratings Section */}
@@ -236,7 +229,8 @@ const ProductProfile = () => {
             style={{
               display: "flex",
               alignItems: "center",
-              marginBottom: "0px",
+              margin: "0",
+              padding: "0",
             }}
           >
             <span
@@ -256,7 +250,8 @@ const ProductProfile = () => {
           {/* Product Description */}
           <p
             style={{
-              marginBottom: "0px",
+              margin: "0",
+              padding: "0",
               color: "#555",
               lineHeight: "1.8",
               fontSize: "18px",
@@ -266,11 +261,11 @@ const ProductProfile = () => {
           </p>
 
           {/* Availability and Product Type */}
-          <p style={{ marginBottom: "15px", fontSize: "18px" }}>
+          <p style={{ margin: "0", padding: "0", fontSize: "18px" }}>
             <strong>Availability:</strong>{" "}
             {product.inStock ? "In stock" : "Out of stock"}
           </p>
-          <p style={{ marginBottom: "15px", fontSize: "18px" }}>
+          <p style={{ margin: "0", padding: "0", fontSize: "18px" }}>
             <strong>Product Type:</strong> {product.category}
           </p>
 
@@ -377,13 +372,13 @@ const ProductProfile = () => {
           >
             <button
               style={{
-                padding: "20px 40px",
+                padding: "16px 25px",
                 backgroundColor: "#000",
                 color: "#fff",
-                border: "none",
                 cursor: "pointer",
                 fontSize: "25px",
                 display: "flex",
+                marginLeft: "0px",
                 alignItems: "center",
               }}
               onClick={buyNow}
@@ -401,6 +396,7 @@ const ProductProfile = () => {
             position: "sticky",
             right: "0",
             width: "120px",
+            paddingRight: "10px",
             backgroundColor: "#fff",
             zIndex: "1",
             marginTop: "150px",

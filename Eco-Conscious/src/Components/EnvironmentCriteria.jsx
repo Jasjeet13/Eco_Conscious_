@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 const EnvironmentCriteria = ({ ecoScore, details }) => {
   const [currentScore, setCurrentScore] = useState(0);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isBoxOpen, setIsBoxOpen] = useState(false); // Track whether the box is open
+  const boxRef = useRef(null); // Reference to the message box
+  const buttonRef = useRef(null); // Reference to the button
 
   // Simulate percentage calculation
   useEffect(() => {
@@ -18,25 +20,48 @@ const EnvironmentCriteria = ({ ecoScore, details }) => {
     return () => clearInterval(interval);
   }, [ecoScore]);
 
-  const openModal = () => {
-    setIsModalOpen(true);
+  // Close the box if user clicks outside the button or box
+  const handleClickOutside = (event) => {
+    if (
+      boxRef.current &&
+      !boxRef.current.contains(event.target) &&
+      buttonRef.current &&
+      !buttonRef.current.contains(event.target)
+    ) {
+      setIsBoxOpen(false);
+    }
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
+  // Open/Close the box on button click
+  const handleButtonClick = () => {
+    setIsBoxOpen((prev) => !prev);
   };
+
+  useEffect(() => {
+    // Add event listener to handle clicks outside
+    document.addEventListener("click", handleClickOutside);
+
+    // Clean up event listener
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   return (
-    <div style={{ textAlign: "center", margin: "20px 0" }}>
+    <div
+      style={{ textAlign: "center", margin: "20px 0", position: "relative" }}
+    >
       {/* Circular Button with Progress Outline */}
       <div
-        onClick={openModal}
+        onClick={handleButtonClick} // Toggle box open/close on button click
+        ref={buttonRef}
         style={{
           position: "relative",
-          width: "90px", // Reduced by 25% from 120px to 90px
-          height: "90px", // Reduced by 25% from 120px to 90px
+          width: "90px",
+          marginBottom: "35px",
+          height: "90px",
           borderRadius: "50%",
-          backgroundColor: "#ffffff",
+          backgroundColor: "#e7f5e1",
           boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
           display: "flex",
           alignItems: "center",
@@ -52,25 +77,25 @@ const EnvironmentCriteria = ({ ecoScore, details }) => {
             position: "absolute",
             top: "0",
             left: "0",
-            transform: "rotate(-90deg)", // Start progress from the top
+            transform: "rotate(-90deg)",
           }}
         >
           <circle
             cx="45"
             cy="45"
-            r="40"
-            stroke="#eeeeee" // Background circle color
+            r="41"
+            stroke="#e7f5e1" // Background circle color
             strokeWidth="8"
             fill="none"
           />
           <circle
             cx="45"
             cy="45"
-            r="40"
+            r="41"
             stroke="#76c893" // Progress circle color
             strokeWidth="8"
             fill="none"
-            strokeDasharray="251" // Circumference of the circle: 2 * π * radius (2 * π * 40)
+            strokeDasharray="251" // Circumference of the circle
             strokeDashoffset={251 - (251 * currentScore) / 100} // Offset for progress
             style={{ transition: "stroke-dashoffset 0.2s ease" }}
           />
@@ -79,7 +104,7 @@ const EnvironmentCriteria = ({ ecoScore, details }) => {
         <div
           style={{
             zIndex: "2",
-            fontSize: "12px", // Reduced font size slightly for smaller button
+            fontSize: "14px",
             fontWeight: "bold",
             color: "#76c893",
             textAlign: "center",
@@ -92,27 +117,45 @@ const EnvironmentCriteria = ({ ecoScore, details }) => {
         </div>
       </div>
 
-      {/* Modal for Details */}
-      {isModalOpen && (
+      {/* Details Box that appears on click */}
+      {isBoxOpen && (
         <div
+          ref={boxRef}
           style={{
-            position: "fixed",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            backgroundColor: "#ffffff",
+            position: "absolute",
+            top: "140%",
+            left: "-355px", // Position it to the left of the button
+            transform: "translateY(-50%)", // Center it vertically
+            width: "300px",
+            backgroundColor: "#ffff",
+            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.5)",
             padding: "20px",
             borderRadius: "10px",
-            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-            zIndex: "1000",
-            width: "80%",
-            maxWidth: "500px",
+            zIndex: 10, // Ensure it's above other content
             textAlign: "left",
+            opacity: 1,
+            visibility: isBoxOpen ? "visible" : "hidden",
+            transition: "visibility 0.2s ease-in-out, opacity 0.2s ease-in-out", // Smooth transition
+            border: "2px solid #76c893", // Border for message box
           }}
         >
-          <h2 style={{ margin: "0 0 10px 0", color: "#76c893" }}>
+          {/* Beak-like Outline */}
+          <div
+            style={{
+              position: "absolute",
+              left: "100%", // Position the beak at the right edge of the box
+              top: "30%",
+              transform: "translateY(-50%)",
+              height: "2px",
+              borderLeft: "20px solid #76c893", // The color of the beak
+              borderTop: "15px solid transparent", // Create the beak shape
+              borderBottom: "15px solid transparent", // Create the beak shape
+            }}
+          />
+
+          <h3 style={{ fontSize: "18px", fontWeight: "600", color: "#76c893" }}>
             Environmental Criteria
-          </h2>
+          </h3>
           <div style={{ lineHeight: "1.6", color: "#333" }}>
             <p>
               <strong>Carbon Footprint:</strong> {details.carbonFootprint}
@@ -136,45 +179,10 @@ const EnvironmentCriteria = ({ ecoScore, details }) => {
               <strong>Durability:</strong> {details.durability}
             </p>
           </div>
-          <button
-            onClick={closeModal}
-            style={{
-              backgroundColor: "#76c893",
-              color: "white",
-              padding: "10px 15px",
-              fontSize: "16px",
-              border: "none",
-              borderRadius: "5px",
-              cursor: "pointer",
-              marginTop: "20px",
-              float: "right",
-            }}
-            onMouseOver={(e) => (e.target.style.backgroundColor = "#5da77a")}
-            onMouseOut={(e) => (e.target.style.backgroundColor = "#76c893")}
-          >
-            Close
-          </button>
         </div>
-      )}
-
-      {/* Overlay */}
-      {isModalOpen && (
-        <div
-          onClick={closeModal}
-          style={{
-            position: "fixed",
-            top: "0",
-            left: "0",
-            width: "100%",
-            height: "100%",
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-            zIndex: "999",
-          }}
-        ></div>
       )}
     </div>
   );
 };
 
 export default EnvironmentCriteria;
-

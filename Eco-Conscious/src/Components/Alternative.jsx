@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import logo from "./download.png";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import "./Styles/congratulationsText.css";
 import { Link } from "react-router-dom";
 
 // The main Alternative component
@@ -78,19 +78,25 @@ const Alternative = ({ productId, category }) => {
         <button style={styles.closeButton} onClick={closeDrawer}>
           &times;
         </button>
-        <h3 style={styles.title}>You May Also Like</h3>
+        <h3 style={styles.title}>Alternatives</h3>
         {loading && <p>Loading...</p>}
         {error && <p>Error: {error}</p>}
 
         <div style={styles.alternativeGrid}>
           {alternatives.length === 0 ? (
-            <p>No alternatives found.</p>
+            <div className="congratulationsText">
+              <p>
+                Congratulations, you've selected one of the most eco-friendly
+                options available!
+              </p>
+            </div>
           ) : (
             alternatives.map((product) => (
               <Link
                 to={`/products/${product.category}/${product._id}`}
                 key={product._id}
                 style={{ textDecoration: "none", color: "inherit" }}
+                onClick={closeDrawer} // Close drawer when clicking an alternative
               >
                 <div style={styles.alternativeCard}>
                   <img
@@ -99,8 +105,11 @@ const Alternative = ({ productId, category }) => {
                     style={styles.alternativeImage}
                   />
                   <h3 style={styles.productName}>{product.name}</h3>
-                  <p style={styles.productPrice}>Price: ${product.price}</p>
-                  <p style={styles.ecoScore}>EcoScore: {product.ecoScore}</p>
+                  <div style={styles.productDetails}>
+                    <p style={styles.productPrice}>${product.price}</p>
+                    {/* EcoScore in circular progress button */}
+                    <LoadingButton ecoScore={product.ecoScore} />
+                  </div>
                 </div>
               </Link>
             ))
@@ -114,6 +123,80 @@ const Alternative = ({ productId, category }) => {
   );
 };
 
+// EcoScore button with circular progress
+const LoadingButton = ({ ecoScore }) => {
+  const [currentScore, setCurrentScore] = useState(0);
+
+  // Loading the score over time for smooth transition
+  useEffect(() => {
+    let currentScoreValue = 0;
+    const interval = setInterval(() => {
+      currentScoreValue += 1;
+      if (currentScoreValue >= ecoScore) {
+        clearInterval(interval);
+      }
+      setCurrentScore(currentScoreValue);
+    }, 5);
+  }, [ecoScore]);
+
+  return (
+    <div
+      style={{
+        position: "relative",
+        width: "50px",
+        height: "50px",
+        borderRadius: "50%",
+        backgroundColor: "#fff",
+        boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <svg
+        width="50"
+        height="50"
+        style={{
+          position: "absolute",
+          top: "0",
+          left: "0",
+          transform: "rotate(-90deg)",
+        }}
+      >
+        <circle
+          cx="25"
+          cy="25"
+          r="20"
+          stroke="#eeeeee"
+          strokeWidth="4"
+          fill="none"
+        />
+        <circle
+          cx="25"
+          cy="25"
+          r="20"
+          stroke="#76c893"
+          strokeWidth="4"
+          fill="none"
+          strokeDasharray="125.6"
+          strokeDashoffset={125.6 - (125.6 * currentScore) / 100}
+          style={{ transition: "stroke-dashoffset 0.2s ease" }}
+        />
+      </svg>
+      <div
+        style={{
+          zIndex: "2",
+          fontSize: "12px",
+          fontWeight: "bold",
+          color: "#76c893",
+        }}
+      >
+        {currentScore}%
+      </div>
+    </div>
+  );
+};
+
 // Styles for the button, drawer, and alternatives section
 const styles = {
   container: {
@@ -123,11 +206,18 @@ const styles = {
     backgroundColor: "transparent",
     border: "none",
     cursor: "pointer",
-    padding: "0",
+    width: "88px", // Width of the button
+    height: "88px", // Height of the button
+    borderRadius: "50%", // Make it circular
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center", // Center the logo
+    boxShadow: "0px 2px 15px rgba(0, 0, 0, 0.3)", // Optional shadow for button
   },
   logoImage: {
-    width: "80px",
-    height: "80px",
+    width: "88px", // Adjust the logo size inside the button
+    height: "88px", // Adjust the logo size inside the button
+    borderRadius: "50%", // Ensure the logo is round (if logo itself is square)
   },
   drawer: {
     position: "fixed",
@@ -162,7 +252,7 @@ const styles = {
   alternativeGrid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", // Responsive grid layout
-    gap: "5px",
+    gap: "10px",
     marginLeft: "10px",
   },
   alternativeCard: {
@@ -174,10 +264,13 @@ const styles = {
     transition: "transform 0.3s ease",
     cursor: "pointer",
     boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)", // Card shadow for depth
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   alternativeImage: {
     width: "100%",
-    height: "150px",
+    height: "200px", // Ensure the image is consistent height
     objectFit: "cover",
     borderRadius: "10px",
     marginBottom: "15px",
@@ -192,18 +285,23 @@ const styles = {
     fontWeight: "bold",
     margin: "0px 0px",
   },
+  ecoScoreContainer: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: "10px",
+  },
   ecoScore: {
-    color: "#ff9800",
-    fontWeight: "bold",
+    marginLeft: "10px",
   },
   overlay: {
     position: "fixed",
     top: 0,
     left: 0,
-    width: "100%",
-    height: "100%",
+    right: 0,
+    bottom: 0,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
-    zIndex: 999,
+    zIndex: 500,
   },
 };
 
