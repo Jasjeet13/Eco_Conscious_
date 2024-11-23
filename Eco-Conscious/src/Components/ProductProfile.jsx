@@ -18,6 +18,7 @@ const ProductProfile = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+
     const fetchProduct = async () => {
       try {
         const response = await fetch(
@@ -41,7 +42,33 @@ const ProductProfile = () => {
         setLoading(false);
       }
     };
-    fetchProduct();
+    const checkWishlist = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/api/wishlist", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await response.json();
+        if (response.ok) {
+          const inWishlist = data.some((item) => item.productId === id);
+          setIsInWishlist(inWishlist);
+        } else {
+          console.error("Error checking wishlist status");
+        }
+      } catch (error) {
+        console.error("Error checking wishlist:", error);
+      }
+    };
+
+    if (token) {
+      fetchProduct();
+      checkWishlist();
+    } else {
+      setLoading(false);
+      setError("You need to be logged in to view product details.");
+    }
   }, [id]);
 
   const handleQuantityChange = (e) => {
