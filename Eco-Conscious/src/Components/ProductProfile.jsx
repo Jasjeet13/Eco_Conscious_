@@ -18,6 +18,7 @@ const ProductProfile = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+  
     const fetchProduct = async () => {
       try {
         const response = await fetch(
@@ -40,8 +41,33 @@ const ProductProfile = () => {
       } finally {
         setLoading(false);
       }
+    };const checkWishlist = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/api/wishlist", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await response.json();
+        if (response.ok) {
+          const inWishlist = data.some((item) => item.productId === id);
+          setIsInWishlist(inWishlist);
+        } else {
+          console.error("Error checking wishlist status");
+        }
+      } catch (error) {
+        console.error("Error checking wishlist:", error);
+      }
     };
-    fetchProduct();
+  
+    if (token) {
+      fetchProduct();
+      checkWishlist();
+    } else {
+      setLoading(false);
+      setError("You need to be logged in to view product details.");
+    }
   }, [id]);
 
   const handleQuantityChange = (e) => {
@@ -328,37 +354,38 @@ const ProductProfile = () => {
             </button>
 
             <button
-              style={{
-                padding: "10px 20px",
-                border: "1px solid #000",
-                cursor: "pointer",
-                backgroundColor: "#fff",
-                color: "#000",
-                display: "flex",
-                alignItems: "center",
-                fontSize: "15px",
-                width: "217px",
-              }}
-              onClick={addToWishlist}
-              onMouseEnter={() => setHoveredIcon("heart")}
-              onMouseLeave={() => setHoveredIcon(null)}
-            >
-              <i
-                className="fas fa-heart"
-                style={{
-                  margin: "0px 20px 0px 0px",
-                  fontSize: "24px",
-                  cursor: "pointer",
-                  color: isInWishlist
-                    ? "#ff0000"
-                    : hoveredIcon === "heart"
-                    ? "#ff0000"
-                    : "#ccc",
-                  transition: "color 0.3s ease",
-                }}
-              ></i>
-              {isInWishlist ? "IN WISHLIST" : "ADD TO WISHLIST"}
-            </button>
+  style={{
+    padding: "10px 20px",
+    border: "1px solid #000",
+    cursor: "pointer",
+    backgroundColor: "#fff",
+    color: "#000",
+    display: "flex",
+    alignItems: "center",
+    fontSize: "15px",
+    width: "217px",
+  }}
+  onClick={addToWishlist}
+  onMouseEnter={() => setHoveredIcon("heart")}
+  onMouseLeave={() => setHoveredIcon(null)}
+>
+  <i
+    className="fas fa-heart"
+    style={{
+      margin: "0px 20px 0px 0px",
+      fontSize: "24px",
+      cursor: "pointer",
+      color: isInWishlist
+        ? "#ff0000"
+        : hoveredIcon === "heart"
+        ? "#ff0000"
+        : "#ccc",
+      transition: "color 0.3s ease",
+    }}
+  ></i>
+  {isInWishlist ? "IN WISHLIST" : "ADD TO WISHLIST"}
+</button>
+
           </div>
 
           {/* Additional Action Buttons */}
