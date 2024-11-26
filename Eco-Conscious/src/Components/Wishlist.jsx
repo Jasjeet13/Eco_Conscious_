@@ -9,7 +9,6 @@ const styles = {
     gap: "20px",
     justifyContent: "center",
   },
-  
   title: {
     fontSize: "32px",
     textAlign: "center",
@@ -53,23 +52,6 @@ const styles = {
     color: "#555",
     fontWeight: "500",
   },
-  popup: {
-    position: "absolute",
-    bottom: "10px",
-    left: "50%",
-    transform: "translateX(-50%)",
-    backgroundColor: "#333",
-    color: "#fff",
-    padding: "8px 15px",
-    borderRadius: "5px",
-    fontSize: "14px",
-    opacity: 0,
-    transition: "opacity 0.3s ease",
-    pointerEvents: "none",
-  },
-  popupVisible: {
-    opacity: 1,
-  },
   cross: {
     position: "absolute",
     top: "3px",
@@ -97,6 +79,25 @@ const styles = {
     color: "white",
     transform: "translate(-50%, -55%)",
     border: "none",
+  },
+  emptyMessageContainer: {
+    textAlign: "center",
+    marginTop: "50px",
+  },
+  emptyMessageText: {
+    fontSize: "26px",
+    color: "#555",
+    fontWeight:"bold",
+    marginBottom: "20px",
+  },
+  goHomeButton: {
+    padding: "10px 20px",
+    backgroundColor: "#007bff",
+    color: "white",
+    border: "none",
+    borderRadius: "5px",
+    cursor: "pointer",
+    fontSize: "16px",
   },
 };
 
@@ -261,11 +262,29 @@ const Wishlist = () => {
             >
               Add to bag
             </button>
-            
           </div>
         ))
       ) : (
-        <div>No items in your wishlist</div>
+        <div style={styles.emptyMessageContainer}>
+          <p style={styles.emptyMessageText}>
+            Your wishlist is empty.</p><p>Explore our collection and find something amazing!
+          </p>
+          <button
+            onClick={() => navigate("/")}
+            style={{
+              padding: "15px 30px",
+              backgroundColor: "#000",
+              color: "#fff",
+              border: "none",
+              cursor: "pointer",
+              borderRadius: "5px",
+              fontSize:"20px",
+              marginTop: "20px",
+            }}
+          >
+            Explore more!
+          </button>
+        </div>
       )}
     </div>
   );
