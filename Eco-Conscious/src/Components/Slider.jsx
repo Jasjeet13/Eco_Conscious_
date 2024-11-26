@@ -144,7 +144,7 @@ const styles = {
     cursor: "pointer",
     transition: "background-color 0.3s ease",
     width : "350px",
-    height : "84px" 
+    height : "84px"
   },
   controlPrev: {
     position: "absolute",
