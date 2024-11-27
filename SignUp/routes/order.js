@@ -66,19 +66,17 @@ router.get('/:orderId', authenticateToken, async (req, res) => {
     res.status(500).json({ message: 'Error fetching order data' });
   }
 });
-// In your order routes file (e.g., order.js)
 router.post('/buy-now', authenticateToken, async (req, res) => {
   try {
-    const userId = req.user.id; // Assuming user ID is set from JWT in authenticate middleware
+    const userId = req.user.id;
     const { productId, quantity, price } = req.body;
-
     // Prepare order details
     const orderItems = [
       {
         productId,
         quantity,
         price,
-        image: req.body.image,  // Assuming image is also passed
+        image: req.body.image,  
       },
     ];
 
@@ -101,22 +99,5 @@ router.post('/buy-now', authenticateToken, async (req, res) => {
     res.status(500).json({ message: 'Error placing order. Please try again.' });
   }
 });
-
-
-
-router.get('/api/products/:id', (req, res) => {
-  const productId = req.params.id;
-  // Query the database to find the product
-  Product.findById(productId)
-    .then(product => {
-      if (!product) {
-        return res.status(404).json({ message: 'Product not found' });
-      }
-      res.json(product);
-    })
-    .catch(err => res.status(500).json({ message: 'Error retrieving product', error: err }));
-});
-
-
 
 module.exports = router;
