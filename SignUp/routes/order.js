@@ -84,18 +84,4 @@ router.get("/:orderId", authenticateToken, async (req, res) => {
   }
 });
 
-router.get("/api/products/:id", (req, res) => {
-  const productId = req.params.id;
-  Product.findById(productId)
-    .then((product) => {
-      if (!product) {
-        return res.status(404).json({ message: "Product not found" });
-      }
-      res.json(product);
-    })
-    .catch((err) =>
-      res.status(500).json({ message: "Error retrieving product", error: err })
-    );
-});
-
 module.exports = router;
