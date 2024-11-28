@@ -4,14 +4,12 @@ import axios from "axios";
 import "./Styles/congratulationsText.css";
 import { Link } from "react-router-dom";
 
-// The main Alternative component
 const Alternative = ({ productId, category }) => {
   const [alternatives, setAlternatives] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [showDrawer, setShowDrawer] = useState(false); // State for drawer visibility
+  const [showDrawer, setShowDrawer] = useState(false);
 
-  // Fetch alternatives when the component mounts or when productId/category changes
   useEffect(() => {
     const fetchAlternatives = async () => {
       try {
@@ -27,7 +25,7 @@ const Alternative = ({ productId, category }) => {
           }
         );
 
-        setAlternatives(response.data); // Update state with alternatives
+        setAlternatives(response.data);
       } catch (error) {
         setError(
           error.response
@@ -42,37 +40,24 @@ const Alternative = ({ productId, category }) => {
     if (productId && category) {
       fetchAlternatives();
     }
-  }, [category, productId]); // Refetch when category or productId changes
+  }, [category, productId]);
 
-  // Toggle drawer visibility
   const toggleDrawer = () => {
     setShowDrawer(!showDrawer);
   };
-
-  // Close the drawer
   const closeDrawer = () => {
     setShowDrawer(false);
   };
 
   return (
     <div style={styles.container}>
-      {/* Logo button to show alternatives */}
-      <button
-        style={styles.logoButton} // Styling for the logo button
-        onClick={toggleDrawer} // Toggle alternatives on click
-      >
-        <img
-          src={logo}
-          alt="Logo"
-          style={styles.logoImage} // Circle logo styling
-        />
+      <button style={styles.logoButton} onClick={toggleDrawer}>
+        <img src={logo} alt="Logo" style={styles.logoImage} />
       </button>
-
-      {/* Sliding drawer for alternatives */}
       <div
         style={{
           ...styles.drawer,
-          right: showDrawer ? 0 : "-400px", // Conditional right value
+          right: showDrawer ? 0 : "-400px",
         }}
       >
         <button style={styles.closeButton} onClick={closeDrawer}>
@@ -96,7 +81,7 @@ const Alternative = ({ productId, category }) => {
                 to={`/products/${product.category}/${product._id}`}
                 key={product._id}
                 style={{ textDecoration: "none", color: "inherit" }}
-                onClick={closeDrawer} // Close drawer when clicking an alternative
+                onClick={closeDrawer}
               >
                 <div style={styles.alternativeCard}>
                   <img
@@ -107,7 +92,6 @@ const Alternative = ({ productId, category }) => {
                   <h3 style={styles.productName}>{product.name}</h3>
                   <div style={styles.productDetails}>
                     <p style={styles.productPrice}>${product.price}</p>
-                    {/* EcoScore in circular progress button */}
                     <LoadingButton ecoScore={product.ecoScore} />
                   </div>
                 </div>
@@ -116,18 +100,12 @@ const Alternative = ({ productId, category }) => {
           )}
         </div>
       </div>
-
-      {/* Transparent black background overlay */}
       {showDrawer && <div style={styles.overlay} onClick={closeDrawer}></div>}
     </div>
   );
 };
-
-// EcoScore button with circular progress
 const LoadingButton = ({ ecoScore }) => {
   const [currentScore, setCurrentScore] = useState(0);
-
-  // Loading the score over time for smooth transition
   useEffect(() => {
     let currentScoreValue = 0;
     const interval = setInterval(() => {
@@ -196,40 +174,35 @@ const LoadingButton = ({ ecoScore }) => {
     </div>
   );
 };
-
-// Styles for the button, drawer, and alternatives section
 const styles = {
-  container: {
-    // padding: "20px",
-  },
   logoButton: {
     backgroundColor: "transparent",
     border: "none",
     cursor: "pointer",
-    width: "88px", // Width of the button
-    height: "88px", // Height of the button
-    borderRadius: "50%", // Make it circular
+    width: "88px",
+    height: "88px",
+    borderRadius: "50%",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center", // Center the logo
-    boxShadow: "0px 2px 15px rgba(0, 0, 0, 0.3)", // Optional shadow for button
+    justifyContent: "center",
+    boxShadow: "0px 2px 15px rgba(0, 0, 0, 0.3)",
   },
   logoImage: {
-    width: "88px", // Adjust the logo size inside the button
-    height: "88px", // Adjust the logo size inside the button
-    borderRadius: "50%", // Ensure the logo is round (if logo itself is square)
+    width: "88px",
+    height: "88px",
+    borderRadius: "50%",
   },
   drawer: {
     position: "fixed",
     top: 0,
-    right: "-500px", // Initially hidden off the screen
+    right: "-500px", 
     width: "400px",
     height: "100%",
-    backgroundColor: "#e7f5e1", // Light green background
-    boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)", // Drawer shadow
+    backgroundColor: "#e7f5e1",
+    boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)", 
     padding: "20px",
-    transition: "right 0.6s ease-in-out", // Slower, smooth slide-in transition
-    zIndex: 1000, // Ensures it's above other content
+    transition: "right 0.6s ease-in-out",
+    zIndex: 1000,
     overflowY: "auto",
   },
   closeButton: {
@@ -251,7 +224,7 @@ const styles = {
   },
   alternativeGrid: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", // Responsive grid layout
+    gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
     gap: "10px",
     marginLeft: "10px",
   },
@@ -263,14 +236,14 @@ const styles = {
     textAlign: "center",
     transition: "transform 0.3s ease",
     cursor: "pointer",
-    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)", // Card shadow for depth
+    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
   },
   alternativeImage: {
     width: "100%",
-    height: "200px", // Ensure the image is consistent height
+    height: "200px",
     objectFit: "cover",
     borderRadius: "10px",
     marginBottom: "15px",

@@ -5,6 +5,7 @@ const authenticateToken = require("../Middlewares/tokenAuthentication");
 
 router.get("/:category/:id", authenticateToken, async (req, res) => {
   const { category, id } = req.params;
+
   try {
     const product = await Product.findById(id);
     if (!product) {
@@ -20,7 +21,6 @@ router.get("/:category/:id", authenticateToken, async (req, res) => {
 
     res.json(alternatives);
   } catch (error) {
-    console.error("Error while fetching alternatives:", error); 
     res.status(500).json({ message: "Failed to fetch alternatives", error });
   }
 });
