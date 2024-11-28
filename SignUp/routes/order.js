@@ -7,13 +7,12 @@ const authenticateToken = require("../Middlewares/tokenAuthentication");
 router.post("/place-order", authenticateToken, async (req, res) => {
   try {
     const userId = req.user.id;
-    const { productId, quantity, price, fromCart } = req.body; // Including logic for 'fromCart'
+    const { productId, quantity, price, fromCart } = req.body;
 
     let orderItems = [];
     let totalPrice = 0;
 
     if (fromCart) {
-      // Handle placing order from cart
       const cartItems = await Cart.find({ userId });
 
       if (cartItems.length === 0) {
@@ -31,13 +30,10 @@ router.post("/place-order", authenticateToken, async (req, res) => {
         (total, item) => total + item.price * item.quantity,
         0
       );
-
-      // Clear the cart after placing the order
       await Cart.deleteMany({ userId }).catch((error) => {
         console.error("Error clearing cart:", error);
       });
     } else {
-      // Handle placing order for a single product (Buy Now)
       orderItems = [
         {
           productId,
@@ -49,7 +45,6 @@ router.post("/place-order", authenticateToken, async (req, res) => {
       totalPrice = price * quantity;
     }
 
-    // Create and save the order
     const order = new Order({
       userId,
       items: orderItems,
@@ -71,7 +66,7 @@ router.get("/:orderId", authenticateToken, async (req, res) => {
     const order = await Order.findById(req.params.orderId).populate(
       "items.productId",
       "name price image"
-    ); // Populate product details (name, price, image)
+    );
 
     if (!order) {
       return res.status(404).json({ message: "Order not found" });
