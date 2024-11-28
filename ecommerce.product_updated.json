@@ -596,7 +596,7 @@
     "energyEfficiency": "high",
     "biodegradability": 98,
     "durability": "4.5 years",
-    "ecoScore": 64.1,
+    "ecoScore": 66.1,
     "productType": "Travel"
   },
   {
@@ -636,7 +636,7 @@
     "energyEfficiency": "moderate",
     "biodegradability": 95,
     "durability": "2 years",
-    "ecoScore": 62.64,
+    "ecoScore": 64.14,
     "productType": "Handbag"
   },
   {
@@ -696,7 +696,7 @@
     "energyEfficiency": "moderate",
     "biodegradability": 95,
     "durability": "2.5 years",
-    "ecoScore": 56.72,
+    "ecoScore": 58.72,
     "productType": "Tote"
   },
   {
@@ -736,7 +736,7 @@
     "energyEfficiency": "high",
     "biodegradability": 95,
     "durability": "3 years",
-    "ecoScore": 71.06,
+    "ecoScore": 73.06,
     "productType": "Shirt"
   },
   {
@@ -776,7 +776,7 @@
     "energyEfficiency": "moderate",
     "biodegradability": 95,
     "durability": "3 years",
-    "ecoScore": 62.72,
+    "ecoScore": 63.72,
     "productType": "Shirt"
   },
   {
@@ -876,7 +876,7 @@
     "energyEfficiency": "moderate",
     "biodegradability": 75,
     "durability": "3 years",
-    "ecoScore": 66.72,
+    "ecoScore": 68.72,
     "productType": "Zipper"
   },
   {
@@ -896,7 +896,7 @@
     "energyEfficiency": "moderate",
     "biodegradability": 90,
     "durability": "5 years",
-    "ecoScore": 52.22,
+    "ecoScore": 54.22,
     "productType": "Zipper"
   },
   {
@@ -956,7 +956,7 @@
     "energyEfficiency": "moderate",
     "biodegradability": 100,
     "durability": "3 years",
-    "ecoScore": 53.64,
+    "ecoScore": 56.14,
     "productType": "Dress"
   }
 ]
