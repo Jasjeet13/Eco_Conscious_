@@ -3,17 +3,15 @@ const router = express.Router();
 const User = require("../models/user");
 
 router.get("/", async (req, res) => {
-  const userId = req.user.id; // Use the ID from the decoded token
+  const userId = req.user.id;
 
   try {
-    // Find the user by ID
     const user = await User.getUserProfileById(userId);
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Send the user data as JSON
     res.status(200).json({
       username: user.username,
       fullName: user.fullname,

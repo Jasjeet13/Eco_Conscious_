@@ -16,7 +16,7 @@ const cartRouter = require("./routes/cart");
 const orderRoutes = require("./routes/order");
 const orderhistoryRoutes = require("./routes/orderhistory");
 const bestProductRouter = require("./routes/bestProduct");
-
+const verifyRouter = require("./routes/verify");
 const errorHandler = require("./Middlewares/errorHandler");
 const searchRouter = require("./routes/search");
 const alternativeRouter = require("./routes/alternative");
@@ -62,6 +62,7 @@ app.use("/api/search", searchRouter);
 app.use("/api/alternatives", alternativeRouter); 
 app.use("/api/order-history",authenticateToken,orderhistoryRoutes);
 app.use("/api/bestproduct",authenticateToken,bestProductRouter);
+app.use('/verify', verifyRouter);
 
 // Error handling middleware
 app.use(errorHandler);
