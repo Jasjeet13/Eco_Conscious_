@@ -25,7 +25,7 @@ import Bestproduct from "./Components/Bestproduct";
 import LearnMore from "./Components/LearnMore";
 
 // API base URL from environment variable
-const API_BASE_URL = https://eco-conscious-z418.onrender.com; 
+const API_BASE_URL = "https://eco-conscious-z418.onrender.com"; 
 
 function App() {
   // Check if the user is authenticated by looking for the token in localStorage
