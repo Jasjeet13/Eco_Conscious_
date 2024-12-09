@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../public/logo.png";
+import logo from "../Public/logo.png";
 import { FaRegUser, FaRegHeart, FaSearch } from "react-icons/fa";
 import { FiShoppingBag } from "react-icons/fi";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
@@ -18,52 +18,50 @@ const Navbar = () => {
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
-      setShowSearch(width >= 1055); 
+      setShowSearch(width >= 1055);
       setIsMobile(width < 768);
     };
-    handleResize(); 
+    handleResize();
     window.addEventListener("resize", handleResize);
-  
+
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  
 
   const navigateToHome = () => navigate("/home");
   const navigateToCategory = (category) => navigate(`/products/${category}`);
 
-  const logout=()=>{
+  const logout = () => {
     localStorage.removeItem("token");
     navigate("/");
-  }
+  };
 
   const categoryMapping = {
     beauty: "beauty",
-  footwear: "footwear",
-  bags: "bags",
-  clothing: "clothing",
-};
-  
+    footwear: "footwear",
+    bags: "bags",
+    clothing: "clothing",
+  };
+
   const handleSearch = (e) => {
     e.preventDefault();
-    
+
     const normalizedSearchTerm = searchTerm.trim().toLowerCase();
-  
+
     // Check if the entered term matches a category
-    const matchedCategory = Object.keys(categoryMapping).find((key) => 
-      categoryMapping[key].toLowerCase() === normalizedSearchTerm
+    const matchedCategory = Object.keys(categoryMapping).find(
+      (key) => categoryMapping[key].toLowerCase() === normalizedSearchTerm
     );
-  
+
     if (matchedCategory) {
       navigateToCategory(categoryMapping[matchedCategory]);
     } else if (searchTerm.trim()) {
       navigate(`/search/${searchTerm}`); // Default search behavior
-      }
-};
-  
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+    }
+  };
 
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const styles = {
     navbar: {
@@ -97,7 +95,14 @@ const Navbar = () => {
       fontWeight: "500",
       color: "#3e4152",
     },
-    menuItem: { cursor: "pointer", backgroundColor: "transparent", border: "none", color: "black", fontSize: "14px", fontWeight: "600" },
+    menuItem: {
+      cursor: "pointer",
+      backgroundColor: "transparent",
+      border: "none",
+      color: "black",
+      fontSize: "14px",
+      fontWeight: "600",
+    },
     searchContainer: {
       display: "flex",
       alignItems: "center",
@@ -106,8 +111,20 @@ const Navbar = () => {
       marginRight: "70px",
       width: "500px",
     },
-    searchInput: { border: "none", backgroundColor: "transparent", outline: "none", width: "100%", fontSize: "14px", color: "#3e4152" },
-    iconsContainer: { display: "flex", alignItems: "center", gap: "40px", marginRight: "40px" },
+    searchInput: {
+      border: "none",
+      backgroundColor: "transparent",
+      outline: "none",
+      width: "100%",
+      fontSize: "14px",
+      color: "#3e4152",
+    },
+    iconsContainer: {
+      display: "flex",
+      alignItems: "center",
+      gap: "40px",
+      marginRight: "40px",
+    },
     iconWrapper: {
       display: "flex",
       flexDirection: "column",
@@ -172,16 +189,28 @@ const Navbar = () => {
           display: isMobile ? (isMenuOpen ? "block" : "none") : "flex",
         }}
       >
-        <button style={styles.menuItem} onClick={() => navigateToCategory("beauty")}>
+        <button
+          style={styles.menuItem}
+          onClick={() => navigateToCategory("beauty")}
+        >
           Beauty
         </button>
-        <button style={styles.menuItem} onClick={() => navigateToCategory("footwear")}>
+        <button
+          style={styles.menuItem}
+          onClick={() => navigateToCategory("footwear")}
+        >
           Footwear
         </button>
-        <button style={styles.menuItem} onClick={() => navigateToCategory("bags")}>
+        <button
+          style={styles.menuItem}
+          onClick={() => navigateToCategory("bags")}
+        >
           Bags
         </button>
-        <button style={styles.menuItem} onClick={() => navigateToCategory("clothing")}>
+        <button
+          style={styles.menuItem}
+          onClick={() => navigateToCategory("clothing")}
+        >
           Clothing
         </button>
       </div>
@@ -213,16 +242,28 @@ const Navbar = () => {
           {/* Dropdown Menu */}
           {isProfileMenuVisible && (
             <div style={styles.profileMenu}>
-              <div style={styles.profileMenuItem} onClick={() => navigate("/profile")}>
+              <div
+                style={styles.profileMenuItem}
+                onClick={() => navigate("/profile")}
+              >
                 Account
               </div>
-              <div style={styles.profileMenuItem} onClick={() => navigate("/wishlist")}>
+              <div
+                style={styles.profileMenuItem}
+                onClick={() => navigate("/wishlist")}
+              >
                 Wishlist
               </div>
-              <div style={styles.profileMenuItem} onClick={() => navigate("/order-history")}>
+              <div
+                style={styles.profileMenuItem}
+                onClick={() => navigate("/order-history")}
+              >
                 Order History
               </div>
-              <div style={styles.profileMenuItem} onClick={() => navigate("/edit")}>
+              <div
+                style={styles.profileMenuItem}
+                onClick={() => navigate("/edit")}
+              >
                 Edit Account
               </div>
               <div style={styles.profileMenuItem} onClick={logout}>
