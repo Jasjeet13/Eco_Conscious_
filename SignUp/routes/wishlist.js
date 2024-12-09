@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const WishlistModel = require('../models/Wishlist'); 
+const WishlistModel = require('../models/wishlist'); 
 const authenticateToken = require('../Middlewares/tokenAuthentication');
 
 router.get('/', authenticateToken, async (req, res) => {
