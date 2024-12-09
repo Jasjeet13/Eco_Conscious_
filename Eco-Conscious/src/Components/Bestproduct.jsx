@@ -2,6 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+const API_BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://eco-conscious.vercel.app"
+    : "http://localhost:3000";
+
 const BestProducts = () => {
   const [bestProducts, setBestProducts] = useState([]);
   const [currentScore, setCurrentScore] = useState({});
@@ -9,8 +14,10 @@ const BestProducts = () => {
 
   // Load persisted state from sessionStorage
   useEffect(() => {
-    const savedLoadedProducts = JSON.parse(sessionStorage.getItem("loadedProducts")) || {};
-    const savedCurrentScore = JSON.parse(sessionStorage.getItem("currentScore")) || {};
+    const savedLoadedProducts =
+      JSON.parse(sessionStorage.getItem("loadedProducts")) || {};
+    const savedCurrentScore =
+      JSON.parse(sessionStorage.getItem("currentScore")) || {};
     setLoadedProducts(savedLoadedProducts);
     setCurrentScore(savedCurrentScore);
   }, []);
@@ -19,7 +26,7 @@ const BestProducts = () => {
     const fetchBestProducts = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get("http://localhost:3000/api/bestproduct", {
+        const response = await axios.get("API_BASE_URL/api/bestproduct", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -96,7 +103,6 @@ const BestProducts = () => {
                   <p style={styles.price}>${product.price}</p>
                 </div>
                 <div style={styles.priceContainer}>
-                  
                   <LoadingButton
                     ecoScore={product.ecoScore}
                     currentScore={currentScore[product._id] || 0}
@@ -206,16 +212,16 @@ const styles = {
   },
   contentContainer: {
     padding: "0px 5px 5px 15px",
-    display:"flex",
+    display: "flex",
     backgroundColor: "#f2f2f2",
   },
-  
+
   name: {
     fontSize: "16px",
     color: "#333",
     // width:"150px",
   },
-  
+
   price: {
     marginBottom: "5px",
     // marginTop: "10px",
@@ -227,11 +233,11 @@ const styles = {
     color: "black",
   },
   priceContainer: {
-    marginLeft:"60px",
-    marginTop:"20px",
+    marginLeft: "60px",
+    marginTop: "20px",
   },
-  nameContainer:{
-    width:"150px",
+  nameContainer: {
+    width: "150px",
   },
   link: {
     textDecoration: "none",

@@ -24,8 +24,11 @@ import Alternative from "./Components/Alternative";
 import Bestproduct from "./Components/Bestproduct";
 import LearnMore from "./Components/LearnMore";
 
-// API base URL from environment variable
-const API_BASE_URL = "https://eco-conscious-z418.onrender.com"; 
+// Define the API base URL based on the environment
+const API_BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://eco-conscious.vercel.app" // Vercel URL for production
+    : "http://localhost:3000"; // Localhost URL for development
 
 function App() {
   // Check if the user is authenticated by looking for the token in localStorage

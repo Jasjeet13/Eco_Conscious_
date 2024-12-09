@@ -4,6 +4,11 @@ import axios from "axios";
 import "./Styles/congratulationsText.css";
 import { Link } from "react-router-dom";
 
+const API_BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://eco-conscious.vercel.app"
+    : "http://localhost:3000";
+
 const Alternative = ({ productId, category }) => {
   const [alternatives, setAlternatives] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -17,7 +22,7 @@ const Alternative = ({ productId, category }) => {
         const token = localStorage.getItem("token");
 
         const response = await axios.get(
-          `http://localhost:3000/api/alternatives/${category}/${productId}`,
+          `API_BASE_URL/api/alternatives/${category}/${productId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -195,11 +200,11 @@ const styles = {
   drawer: {
     position: "fixed",
     top: 0,
-    right: "-500px", 
+    right: "-500px",
     width: "400px",
     height: "100%",
     backgroundColor: "#e7f5e1",
-    boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)", 
+    boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.1)",
     padding: "20px",
     transition: "right 0.6s ease-in-out",
     zIndex: 1000,

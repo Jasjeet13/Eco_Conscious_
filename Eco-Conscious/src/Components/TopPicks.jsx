@@ -3,6 +3,11 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { height, width } from "@fortawesome/free-solid-svg-icons/fa0";
 
+const API_BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://eco-conscious.vercel.app"
+    : "http://localhost:3000";
+
 const TopPicks = () => {
   const [topPicks, setTopPicks] = useState([]);
   const [hoveredButton, setHoveredButton] = useState(null);
@@ -11,7 +16,7 @@ const TopPicks = () => {
     const fetchTopPicks = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get("http://localhost:3000/api/products", {
+        const response = await axios.get("API_BASE_URL/api/products", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -59,7 +64,11 @@ const TopPicks = () => {
     const cachedTimestamp = localStorage.getItem("topPicksTimestamp");
     const oneHour = 30 * 60 * 1000;
 
-    if (cachedPicks && cachedTimestamp && Date.now() - cachedTimestamp < oneHour) {
+    if (
+      cachedPicks &&
+      cachedTimestamp &&
+      Date.now() - cachedTimestamp < oneHour
+    ) {
       console.log("Using cached Top Picks...");
       setTopPicks(JSON.parse(cachedPicks));
     } else {
@@ -71,40 +80,37 @@ const TopPicks = () => {
   return (
     <div style={styles.outer_container}>
       <h1>Top Picks for You</h1>
-    <div style={styles.container}>
-      {topPicks.map((product) => (
-        <div
-          key={product._id}
-          style={styles.innerDiv}
-          onMouseEnter={(e) =>
-            (e.currentTarget.style.transform = "scale(1.05)")
-          }
-          onMouseLeave={(e) =>
-            (e.currentTarget.style.transform = "scale(1)")
-          }
-        >
-          <Link
-            to={`/products/${product.category}/${product._id}`}
-            style={styles.link}
+      <div style={styles.container}>
+        {topPicks.map((product) => (
+          <div
+            key={product._id}
+            style={styles.innerDiv}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.transform = "scale(1.05)")
+            }
+            onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
           >
-            <div style={styles.imageContainer}>
-              <img
-                src={product.image}
-                alt={product.name}
-                style={styles.image}
-              />
-            </div>
-            <div style={styles.contentContainer}>
-              <div style={styles.nameContainer}>
-                <h3 style={styles.name}>{product.name}</h3>
+            <Link
+              to={`/products/${product.category}/${product._id}`}
+              style={styles.link}
+            >
+              <div style={styles.imageContainer}>
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  style={styles.image}
+                />
               </div>
-              <div style={styles.priceContainer}>
-                <p style={styles.price}>${product.price}</p>
+              <div style={styles.contentContainer}>
+                <div style={styles.nameContainer}>
+                  <h3 style={styles.name}>{product.name}</h3>
+                </div>
+                <div style={styles.priceContainer}>
+                  <p style={styles.price}>${product.price}</p>
+                </div>
               </div>
-              
-            </div>
-          </Link>
-          {/* <button
+            </Link>
+            {/* <button
             style={{
               ...styles.viewMoreButton,
               backgroundColor:
@@ -115,9 +121,9 @@ const TopPicks = () => {
           >
             View More
           </button> */}
-        </div>
-      ))}
-    </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
@@ -126,9 +132,9 @@ const styles = {
   outer_container: {
     // backgroundColor :"#f2f2f2",
     // backgroundColor : "#f0eadd",
-    width :"100%",
+    width: "100%",
     paddingTop: "10px",
-    textAlign : "center"
+    textAlign: "center",
   },
   container: {
     display: "flex",
@@ -137,8 +143,7 @@ const styles = {
     width: "80%",
     justifyContent: "center",
     margin: "0 auto",
-    paddingBottom : "40px"
-    
+    paddingBottom: "40px",
   },
   innerDiv: {
     flex: "1 1 22%",
@@ -162,11 +167,11 @@ const styles = {
   },
   contentContainer: {
     padding: "15px",
-    backgroundColor :"#f2f2f2"
+    backgroundColor: "#f2f2f2",
   },
   nameContainer: {
     // marginBottom: "5px",
-    height : "15px",
+    height: "15px",
   },
   name: {
     fontSize: "16px",
@@ -175,7 +180,7 @@ const styles = {
   priceContainer: {
     marginBottom: "10px",
     // marginTop : "5px",
-    height : "20px",
+    height: "20px",
   },
   price: {
     fontSize: "16px",
