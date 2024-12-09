@@ -75,7 +75,7 @@ app.use('/verify', verifyRouter);
 // Error handling middleware
 app.use(errorHandler);
 
-// Start Server
-app.listen(port, () =>
-  console.log(`Server running at http://localhost:${port}`)
+// Update the port binding to use the dynamic environment port.
+app.listen(process.env.PORT || 3000, () =>
+  console.log(`Server running at http://localhost:${process.env.PORT || 3000}`)
 );
