@@ -90,7 +90,7 @@ const ProductList = () => {
 
     return filtered;
   };
-
+                                                                
   const sortProducts = (products) => {
     if (sortOption === "price_low_high") {
       return products.sort((a, b) => a.price - b.price);

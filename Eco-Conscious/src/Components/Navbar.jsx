@@ -15,14 +15,13 @@ const Navbar = () => {
 
   const token = localStorage.getItem("token");
 
-  // Handle responsive changes
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
-      setShowSearch(width >= 1055); // Show search bar only if width >= 1055
+      setShowSearch(width >= 1055); 
       setIsMobile(width < 768);
     };
-    handleResize(); // Initial check
+    handleResize(); 
     window.addEventListener("resize", handleResize);
   
     return () => {

@@ -15,7 +15,7 @@ const cartRouter = require("./routes/cart");
 const orderRoutes = require("./routes/order");
 const orderhistoryRoutes = require("./routes/orderhistory");
 const bestProductRouter = require("./routes/bestProduct");
-
+const verifyRouter = require("./routes/verify");
 const errorHandler = require("./Middlewares/errorHandler");
 const searchRouter = require("./routes/search");
 const alternativeRouter = require("./routes/alternative");
@@ -54,14 +54,14 @@ app.use("/api/profile", authenticateToken, profileRouter);
 app.use("/api/products", authenticateToken, productsRouter);
 app.use("/api/edit", authenticateToken, editRouter);
 app.use("/api/delete", authenticateToken, deleteRouter);
-app.use("/api/wishlist", authenticateToken, wishlistRouter);
-app.use("/api/cart", authenticateToken, cartRouter); 
-app.use("/api/order", authenticateToken, orderRoutes);
-app.use("/api/search", searchRouter);
-app.use("/api/alternatives", alternativeRouter);
-app.use("/api/order-history", authenticateToken, orderhistoryRoutes);
-app.use("/api/bestproduct", authenticateToken, bestProductRouter);
-
+app.use("/api/wishlist", authenticateToken, wishlistRouter); // Wishlist route
+app.use('/api/cart', authenticateToken, cartRouter); // Cart route
+app.use("/api/order", authenticateToken, orderRoutes); 
+app.use("/api/search", searchRouter); 
+app.use("/api/alternatives", alternativeRouter); 
+app.use("/api/order-history",authenticateToken,orderhistoryRoutes);
+app.use("/api/bestproduct",authenticateToken,bestProductRouter);
+app.use('/verify', verifyRouter);
 
 app.use(errorHandler);
 

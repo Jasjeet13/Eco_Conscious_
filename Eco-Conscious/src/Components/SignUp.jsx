@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 const SignUp = () => {
   const navigate = useNavigate();
   const [error, setError] = useState("");
+  const [isSignedUp, setIsSignedUp] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -24,7 +25,7 @@ const SignUp = () => {
         const responseData = await response.json();
         const id = responseData.id;
         console.log("Id received:", id);
-        navigate("/home");
+        setIsSignedUp(true);
       } else {
         const responseData = await response.json();
         setError(responseData.message || "Signup failed");
@@ -50,7 +51,6 @@ const SignUp = () => {
       textAlign: "center",
       width: "100%",
       maxWidth: "600px",
-      //borderRadius: "8px",
       backgroundColor: "#ffffff",
     },
     inputGroupContainer: {
@@ -85,7 +85,6 @@ const SignUp = () => {
       width: "100%",
       padding: "10px 0",
       fontSize: "16px",
-      
       borderRadius: "0",
       border: "none",
       backgroundColor: "transparent",
@@ -98,7 +97,6 @@ const SignUp = () => {
       border: "none",
       cursor: "pointer",
       fontSize: "18px",
-      //borderRadius: "8px",
       width: "100%",
       maxWidth: "200px",
       marginTop: "10px",
@@ -107,10 +105,29 @@ const SignUp = () => {
     heading: {
       fontSize: "24px",
       fontWeight: "580",
-      marginTop:"0px",
+      marginTop: "0px",
       marginBottom: "29px",
       textAlign: "center",
       color: "#333",
+    },
+    successBox: {
+      backgroundColor: "#e7f9e7",
+      padding: "20px",
+      border: "1px solid #7ac88e",
+      borderRadius: "8px",
+      color: "#4caf50",
+      marginBottom: "20px",
+    },
+    successButton: {
+      backgroundColor: "#007F4E",
+      color: "white",
+      padding: "15px",
+      border: "none",
+      cursor: "pointer",
+      fontSize: "18px",
+      width: "100%",
+      maxWidth: "200px",
+      marginTop: "10px",
     },
   };
 
@@ -119,135 +136,116 @@ const SignUp = () => {
       <div style={styles.loginBox}>
         <h2 style={styles.heading}>Sign Up</h2>
         {error && <p style={{ color: "red", textAlign: "center" }}>{error}</p>}
-        <form onSubmit={handleSubmit}>
-          <div style={styles.halfWidthInputGroupContainer}>
-            <div style={styles.halfWidthInputGroup}>
-              <label htmlFor="username" style={styles.label}>
-                USERNAME
+
+        {isSignedUp ? (
+          <div style={styles.successBox}>
+            <p>
+              A confirmation email has been sent to you. Please verify your email
+              address to complete the signup process.
+            </p>
+            <button
+              style={styles.successButton}
+              onClick={() => navigate("/")}
+            >
+              Go to Login
+            </button>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <div style={styles.halfWidthInputGroupContainer}>
+              <div style={styles.halfWidthInputGroup}>
+                <label htmlFor="username" style={styles.label}>
+                  USERNAME
+                </label>
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  required
+                  style={styles.input}
+                />
+              </div>
+              <div style={styles.halfWidthInputGroup}>
+                <label htmlFor="fullname" style={styles.label}>
+                  FULL NAME
+                </label>
+                <input
+                  type="text"
+                  id="fullname"
+                  name="fullname"
+                  required
+                  style={styles.input}
+                />
+              </div>
+            </div>
+            <div style={styles.fullWidthInputGroup}>
+              <label htmlFor="email" style={styles.label}>
+                EMAIL
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                style={styles.input}
+              />
+            </div>
+            <div style={styles.halfWidthInputGroupContainer}>
+              <div style={styles.halfWidthInputGroup}>
+                <label htmlFor="password" style={styles.label}>
+                  PASSWORD
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  required
+                  style={styles.input}
+                />
+              </div>
+              <div style={styles.halfWidthInputGroup}>
+                <label htmlFor="confirmPassword" style={styles.label}>
+                  CONFIRM PASSWORD
+                </label>
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  required
+                  style={styles.input}
+                />
+              </div>
+            </div>
+            <div style={styles.fullWidthInputGroup}>
+              <label htmlFor="address" style={styles.label}>
+                ADDRESS
               </label>
               <input
                 type="text"
-                id="username"
-                name="username"
+                id="address"
+                name="address"
                 required
                 style={styles.input}
               />
             </div>
-            <div style={styles.halfWidthInputGroup}>
-              <label htmlFor="fullname" style={styles.label}>
-                FULL NAME
+            <div style={styles.fullWidthInputGroup}>
+              <label htmlFor="phoneNumber" style={styles.label}>
+                PHONE NUMBER
               </label>
               <input
-                type="text"
-                id="fullname"
-                name="fullname"
+                type="tel"
+                id="phoneNumber"
+                name="phoneNumber"
                 required
                 style={styles.input}
               />
             </div>
-          </div>
-          <div style={styles.fullWidthInputGroup}>
-            <label htmlFor="email" style={styles.label}>
-              EMAIL
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              required
-              style={styles.input}
-            />
-          </div>
-          <div style={styles.halfWidthInputGroupContainer}>
-            <div style={styles.halfWidthInputGroup}>
-              <label htmlFor="password" style={styles.label}>
-                PASSWORD
-              </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                required
-                style={styles.input}
-              />
-            </div>
-            <div style={styles.halfWidthInputGroup}>
-              <label htmlFor="confirmPassword" style={styles.label}>
-                CONFIRM PASSWORD
-              </label>
-              <input
-                type="password"
-                id="confirmPassword"
-                name="confirmPassword"
-                required
-                style={styles.input}
-              />
-            </div>
-          </div>
-          <div style={styles.fullWidthInputGroup}>
-            <label htmlFor="address" style={styles.label}>
-              ADDRESS
-            </label>
-            <input
-              type="text"
-              id="address"
-              name="address"
-              required
-              style={styles.input}
-            />
-          </div>
-          <div style={styles.fullWidthInputGroup}>
-            <label htmlFor="phoneNumber" style={styles.label}>
-              PHONE NUMBER
-            </label>
-            <input
-              type="tel"
-              id="phoneNumber"
-              name="phoneNumber"
-              required
-              style={styles.input}
-            />
-          </div>
-          <button type="submit" style={styles.button}>
-            SIGN UP
-          </button>
-        </form>
+            <button type="submit" style={styles.button}>
+              SIGN UP
+            </button>
+          </form>
+        )}
       </div>
-      <style jsx>{`
-        @media (max-width: 768px) {
-          .halfWidthInputGroupContainer {
-            flex-direction: column;
-          }
-
-          .loginBox {
-            padding: 20px;
-          }
-
-          .heading {
-            font-size: 20px;
-          }
-
-          .label,
-          .input {
-            font-size: 16px;
-          }
-
-          .button {
-            width: 100%;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .heading {
-            font-size: 18px;
-          }
-
-          .label,
-          .input {
-            font-size: 14px;
-          }
-        }
-      `}</style>
     </div>
   );
 };

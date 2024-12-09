@@ -1,10 +1,11 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const Cart = require("../models/cart");
-const Order = require("../models/Order");
-const authenticateToken = require("../Middlewares/tokenAuthentication");
+const Cart = require('../models/cart');
+const Order = require('../models/Order');
+const authenticateToken = require('../Middlewares/tokenAuthentication');
 
-router.post("/place-order", authenticateToken, async (req, res) => {
+// Place order endpoint
+router.post('/place-order', authenticateToken, async (req, res) => {
   try {
     const userId = req.user.id;
     const cartItems = await Cart.find({ userId });
@@ -25,6 +26,7 @@ router.post("/place-order", authenticateToken, async (req, res) => {
       0
     );
 
+    // Create the order
     const order = new Order({
       userId,
       items: orderItems,
@@ -40,8 +42,8 @@ router.post("/place-order", authenticateToken, async (req, res) => {
 
     res.status(201).json({ message: "Order placed successfully!", order });
   } catch (error) {
-    console.error("Error placing order:", error);
-    res.status(500).json({ message: "Error placing order. Please try again." });
+    console.error('Error placing order:', error);
+    res.status(500).json({ message: 'Error placing order. Please try again.' });
   }
 });
 
@@ -97,3 +99,4 @@ router.post("/buy-now", authenticateToken, async (req, res) => {
 });
 
 module.exports = router;
+

@@ -10,13 +10,12 @@ const authenticateToken = (req, res, next) => {
     return res.status(401).json({ message: 'Access denied. Please log in again.' });
   }
 
-  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
     if (err) {
-      // Check if the error is due to token expiration
       if (err.name === 'TokenExpiredError') {
         return res.status(401).json({ message: 'Session expired. Please log in again.' });
       } else {
-        return res.status(403).json({ message: 'Invalid token' });
+        return res.status(403).json({ message: 'Invald token' });
       }
     }
 

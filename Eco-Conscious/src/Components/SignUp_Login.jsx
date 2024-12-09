@@ -2,14 +2,12 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate hook for React Router
 
 const SignUp_Login = () => {
-  const [error, setError] = useState(""); // State to handle error messages
-  const navigate = useNavigate(); // useNavigate hook to handle navigation after login
-
+  const [error, setError] = useState(""); 
+  const navigate = useNavigate(); 
+  
   useEffect(() => {
-    // Check if the user is already authenticated based on token
     const token = localStorage.getItem("token");
     if (token) {
-      // Attempt to verify the token by making a simple fetch request to a protected route
       fetch("http://localhost:3000/api/profile", {
         method: "GET",
         headers: {
@@ -18,7 +16,6 @@ const SignUp_Login = () => {
       })
         .then((response) => {
           if (response.status === 401) {
-            // If unauthorized, clear the token and show the login page
             localStorage.removeItem("token");
           } else if (response.ok) {
             navigate("/home");
@@ -53,12 +50,10 @@ const SignUp_Login = () => {
       const data = await response.json();
       console.log("Login successful:", data);
 
-      // Redirect the user after login by token or other required info
-      const token = data.token; // Make sure the token is part of the response
+      const token = data.token;
       if (token) {
-        // Set token in localStorage or sessionStorage
-        localStorage.setItem("token", token); // or use sessionStorage
-        navigate("/home"); // Navigate to home after successful login
+        localStorage.setItem('token', token); 
+        navigate("/home");                          
       }
     } catch (error) {
       console.error("Error during login:", error);
