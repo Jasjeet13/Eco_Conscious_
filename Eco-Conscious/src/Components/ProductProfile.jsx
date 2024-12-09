@@ -22,7 +22,7 @@ const ProductProfile = () => {
     const fetchProduct = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/products/${id}`,
+          `https://eco-conscious-z418.onrender.com/api/products/${id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -44,12 +44,15 @@ const ProductProfile = () => {
     };
     const checkWishlist = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/wishlist", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        });
+        const response = await fetch(
+          "https://eco-conscious-z418.onrender.com/api/wishlist",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
         const data = await response.json();
         if (response.ok) {
           const inWishlist = data.some((item) => item.productId === id);
@@ -87,20 +90,23 @@ const ProductProfile = () => {
       return;
     }
     try {
-      const response = await fetch("http://localhost:3000/api/wishlist/add", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          productId: product._id,
-          name: product.name,
-          price: product.price,
-          image: product.image,
-          description: product.description,
-        }),
-      });
+      const response = await fetch(
+        "https://eco-conscious-z418.onrender.com/api/wishlist/add",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            productId: product._id,
+            name: product.name,
+            price: product.price,
+            image: product.image,
+            description: product.description,
+          }),
+        }
+      );
       const data = await response.json();
       if (response.ok) {
         setIsInWishlist(true);
@@ -122,19 +128,22 @@ const ProductProfile = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/api/order/buy-now", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          productId: product._id,
-          quantity,
-          price: product.price,
-          image: product.image,
-        }),
-      });
+      const response = await fetch(
+        "https://eco-conscious-z418.onrender.com/api/order/buy-now",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            productId: product._id,
+            quantity,
+            price: product.price,
+            image: product.image,
+          }),
+        }
+      );
 
       const data = await response.json();
       if (response.ok) {
@@ -156,21 +165,24 @@ const ProductProfile = () => {
       return;
     }
     try {
-      const response = await fetch("http://localhost:3000/api/cart/add", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          productId: product._id,
-          name: product.name,
-          price: product.price,
-          image: product.image,
-          description: product.description,
-          quantity,
-        }),
-      });
+      const response = await fetch(
+        "https://eco-conscious-z418.onrender.com/api/cart/add",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            productId: product._id,
+            name: product.name,
+            price: product.price,
+            image: product.image,
+            description: product.description,
+            quantity,
+          }),
+        }
+      );
       const data = await response.json();
       if (response.ok) {
         alert(data.message);

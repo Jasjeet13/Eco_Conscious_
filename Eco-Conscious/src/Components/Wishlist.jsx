@@ -153,21 +153,24 @@ const Wishlist = () => {
       return;
     }
     try {
-      const response = await fetch("http://localhost:3000/api/cart/add", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          productId: item.productId,
-          name: item.name,
-          price: item.price,
-          image: item.image,
-          description: item.description,
-          quantity: 1, // Default quantity
-        }),
-      });
+      const response = await fetch(
+        "https://eco-conscious-z418.onrender.com/api/cart/add",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            productId: item.productId,
+            name: item.name,
+            price: item.price,
+            image: item.image,
+            description: item.description,
+            quantity: 1, // Default quantity
+          }),
+        }
+      );
       const data = await response.json();
       if (response.ok) {
         alert(data.message);

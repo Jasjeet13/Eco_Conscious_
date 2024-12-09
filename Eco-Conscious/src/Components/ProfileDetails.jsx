@@ -17,11 +17,14 @@ const ProfileDetails = () => {
       }
 
       try {
-        const response = await fetch("http://localhost:3000/api/profile", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await fetch(
+          "https://eco-conscious-z418.onrender.com/api/profile",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         if (response.ok) {
           const data = await response.json();
@@ -39,12 +42,15 @@ const ProfileDetails = () => {
 
   const handleDelete = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/delete", {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await fetch(
+        "https://eco-conscious-z418.onrender.com/api/delete",
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (response.ok) {
         console.log("Profile deleted successfully");

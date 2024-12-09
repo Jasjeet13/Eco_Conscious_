@@ -8,7 +8,7 @@ const SignUp_Login = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      fetch("http://localhost:3000/api/profile", {
+      fetch("https://eco-conscious-z418.onrender.com/api/profile", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -34,13 +34,16 @@ const SignUp_Login = () => {
     const password = event.target.password.value;
 
     try {
-      const response = await fetch("http://localhost:3000/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await fetch(
+        "https://eco-conscious-z418.onrender.com/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        }
+      );
 
       if (!response.ok) {
         const errorData = await response.json();

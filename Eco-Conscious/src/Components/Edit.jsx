@@ -15,13 +15,16 @@ const Edit = () => {
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/user", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await fetch(
+          "https://eco-conscious-z418.onrender.com/api/user",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         if (response.ok) {
           const data = await response.json();
           setUserDetails(data);
@@ -104,7 +107,6 @@ const Edit = () => {
       display: "flex",
       gap: "20px",
       marginBottom: "20px",
-      
     },
     inputGroup: {
       flex: "1",
@@ -151,7 +153,6 @@ const Edit = () => {
       <div style={styles.container}>
         <div style={styles.headingContainer}>
           <h2 style={styles.heading}>Edit Profile</h2>
-          
         </div>
         <form onSubmit={handleSubmit}>
           <div style={styles.inputGroupContainer}>
@@ -249,7 +250,8 @@ const Edit = () => {
             font-size: 20px;
           }
 
-          .label, .input {
+          .label,
+          .input {
             font-size: 16px;
           }
 
@@ -268,7 +270,8 @@ const Edit = () => {
             font-size: 18px;
           }
 
-          .label, .input {
+          .label,
+          .input {
             font-size: 14px;
           }
         }

@@ -32,7 +32,7 @@ const ProductList = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     axios
-      .get("http://localhost:3000/api/products", {
+      .get("https://eco-conscious-z418.onrender.com/api/products", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -139,10 +139,13 @@ const FeedbackForm = ({ orderId, onSubmit }) => {
     formData.append('photo', photo); // photo should be the File object
 
     try {
-      const response = await fetch('http://localhost:3000/api/feedback', {
-        method: 'POST',
-        body: formData,
-      });
+      const response = await fetch(
+        "https://eco-conscious-z418.onrender.com/api/feedback",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       if (!response.ok) {
         throw new Error('Failed to submit feedback');
@@ -189,13 +192,16 @@ const OrderHistory = () => {
   useEffect(() => {
     const fetchOrderHistory = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/order-history', {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-            'Content-Type': 'application/json',
-          },
-        });
+        const response = await fetch(
+          "https://eco-conscious-z418.onrender.com/api/order-history",
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
         if (!response.ok) {
           const errorData = await response.json();

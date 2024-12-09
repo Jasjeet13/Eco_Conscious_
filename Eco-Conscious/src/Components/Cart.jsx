@@ -23,13 +23,16 @@ const Cart = () => {
   useEffect(() => {
     const fetchCartItems = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/cart", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-            "Content-Type": "application/json",
-          },
-        });
+        const response = await fetch(
+          "https://eco-conscious-z418.onrender.com/signup",
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
         const data = await response.json();
         if (response.ok) {
           setCartItems(
@@ -60,14 +63,17 @@ const Cart = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/api/cart/update', {
-        method: "PATCH",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ productId, quantity: newQuantity }),
-      });
+      const response = await fetch(
+        "https://eco-conscious-z418.onrender.com/api/cart/update",
+        {
+          method: "PATCH",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ productId, quantity: newQuantity }),
+        }
+      );
 
       const data = await response.json();
       if (response.ok) {

@@ -38,11 +38,11 @@ const Slider = () => {
   ];
 
   useEffect(() => {
-      const interval = setInterval(() => {
-        setActiveIndex((prevIndex) => (prevIndex + 1) % slides.length);
-      },3000);
-      return () => clearInterval(interval);
-    }, [slides.length]);
+    const interval = setInterval(() => {
+      setActiveIndex((prevIndex) => (prevIndex + 1) % slides.length);
+    }, 2500);
+    return () => clearInterval(interval);
+  }, [slides.length]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -100,16 +100,10 @@ const Slider = () => {
           </button>
         </div>
       ))}
-      <button
-        onClick={goToPreviousSlide}
-        style={styles.controlPrev}
-      >
+      <button onClick={goToPreviousSlide} style={styles.controlPrev}>
         &#10094;
       </button>
-      <button
-        onClick={goToNextSlide}
-        style={styles.controlNext}
-      >
+      <button onClick={goToNextSlide} style={styles.controlNext}>
         &#10095;
       </button>
     </div>
@@ -143,8 +137,8 @@ const styles = {
     fontWeight: "600",
     cursor: "pointer",
     transition: "background-color 0.3s ease",
-    width : "350px",
-    height : "84px"
+    width: "350px",
+    height: "84px",
   },
   controlPrev: {
     position: "absolute",
