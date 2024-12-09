@@ -1,30 +1,40 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const WishlistModel = require('../models/Wishlist'); 
+<<<<<<< HEAD
+const WishlistModel = require("../models/wishlist");
+const authenticateToken = require("../Middlewares/tokenAuthentication");
+=======
+const WishlistModel = require('../models/wishlist'); 
 const authenticateToken = require('../Middlewares/tokenAuthentication');
+>>>>>>> 35eadd31c0897d069b5d9373d903db4cb8ba2648
 
-router.get('/', authenticateToken, async (req, res) => {
+router.get("/", authenticateToken, async (req, res) => {
   try {
-    console.log("Fetching wishlist for user ID:", req.user.id); 
-    
+    console.log("Fetching wishlist for user ID:", req.user.id);
+
     const wishlistItems = await WishlistModel.find({ userId: req.user.id });
-    console.log("Wishlist items fetched:", wishlistItems); 
-    res.json(wishlistItems); 
+    console.log("Wishlist items fetched:", wishlistItems);
+    res.json(wishlistItems);
   } catch (error) {
-    console.error('Error fetching wishlist items:', error); 
-    res.status(500).json({ message: 'Server error while fetching wishlist items' });
+    console.error("Error fetching wishlist items:", error);
+    res
+      .status(500)
+      .json({ message: "Server error while fetching wishlist items" });
   }
 });
 
 // Route to add an item to the wishlist
-router.post('/add', authenticateToken, async (req, res) => {
+router.post("/add", authenticateToken, async (req, res) => {
   const { productId, name, price, image, description } = req.body;
-  console.log('Request Body:', req.body);
+  console.log("Request Body:", req.body);
 
   try {
-    const existingItem = await WishlistModel.findOne({ userId: req.user.id, productId });
+    const existingItem = await WishlistModel.findOne({
+      userId: req.user.id,
+      productId,
+    });
     if (existingItem) {
-      return res.status(400).json({ message: 'Item already in wishlist' });
+      return res.status(400).json({ message: "Item already in wishlist" });
     }
 
     const newWishlistItem = new WishlistModel({
@@ -38,19 +48,23 @@ router.post('/add', authenticateToken, async (req, res) => {
 
     await newWishlistItem.save();
 
-    res.status(201).json({ message: 'Item added to wishlist', item: newWishlistItem });
+    res
+      .status(201)
+      .json({ message: "Item added to wishlist", item: newWishlistItem });
   } catch (error) {
-    console.error('Error adding item to wishlist:', error); 
-    res.status(500).json({ message: 'Server error while adding item to wishlist' });
+    console.error("Error adding item to wishlist:", error);
+    res
+      .status(500)
+      .json({ message: "Server error while adding item to wishlist" });
   }
 });
 
 // Route to remove an item from the wishlist
-router.delete('/remove/:productId', authenticateToken, async (req, res) => {
+router.delete("/remove/:productId", authenticateToken, async (req, res) => {
   const { productId } = req.params;
   const userId = req.user.id;
 
-  console.log('Removing item for userId:', userId, 'and productId:', productId);
+  console.log("Removing item for userId:", userId, "and productId:", productId);
 
   try {
     const deletedItem = await WishlistModel.findOneAndDelete({
@@ -59,12 +73,16 @@ router.delete('/remove/:productId', authenticateToken, async (req, res) => {
     });
 
     if (!deletedItem) {
-      return res.status(404).json({ message: 'Item not found in wishlist' });
+      return res.status(404).json({ message: "Item not found in wishlist" });
     }
-    res.status(200).json({ message: 'Item removed from wishlist', item: deletedItem });
+    res
+      .status(200)
+      .json({ message: "Item removed from wishlist", item: deletedItem });
   } catch (error) {
-    console.error('Error removing item from wishlist:', error);
-    res.status(500).json({ message: 'Server error while removing item from wishlist' });
+    console.error("Error removing item from wishlist:", error);
+    res
+      .status(500)
+      .json({ message: "Server error while removing item from wishlist" });
   }
 });
 
