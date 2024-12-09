@@ -6,11 +6,6 @@ const dotenv = require("dotenv");
 
 // Import Routes
 
-// Default Route for Root URL
-app.get("/", (req, res) => {
-  res.send("Welcome to the Eco-Conscious API");
-});
-
 const signupRouter = require("./routes/signup");
 const loginRouter = require("./routes/login");
 const profileRouter = require("./routes/profile");
@@ -57,6 +52,10 @@ app.use(bodyParser.json());
 app.use(express.static("public"));
 app.use("/uploads", express.static("uploads"));
 // Routes
+// Default Route for Root URL
+app.get("/", (req, res) => {
+  res.send("Welcome to the Eco-Conscious API");
+});
 app.use("/signup", signupRouter);
 app.use("/login", loginRouter);
 app.use("/api/profile", authenticateToken, profileRouter);
