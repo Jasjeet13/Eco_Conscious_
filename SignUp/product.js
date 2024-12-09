@@ -15,7 +15,7 @@ const productSchema = new mongoose.Schema({
   biodegradability: { type: Number, required: true },
   durability: { type: String, required: true },
   ecoScore: { type: Number, required: false },
-  productType : {type: String , required: true},
+  productType: { type: String, required: true },
 });
 
 const Product = mongoose.model("Product", productSchema);

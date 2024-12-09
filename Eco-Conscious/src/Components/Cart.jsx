@@ -158,7 +158,7 @@ const Cart = () => {
   }
 
   return (
-    <div style={{ padding: "90px", maxWidth: "100%" }}>
+    <div style={{ padding: "90px 90px 0px 90px", maxWidth: "100%" ,marginBottom:"50px"}}>
       {/* Heading */}
       <h3 style={styles.heading}>Your Cart Items</h3>
 
@@ -170,7 +170,8 @@ const Cart = () => {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            height: "80vh",
+            // height: "50vh",
+            marginTop:"100px",
             textAlign: "center",
           }}
         >
@@ -184,11 +185,12 @@ const Cart = () => {
               color: "#fff",
               border: "none",
               cursor: "pointer",
+              fontSize:"20px",
               borderRadius: "5px",
               marginTop: "20px",
             }}
           >
-            ADD ITEMS FROM WISHLIST
+            Explore Wishlist!
           </button>
         </div>
       ) : (
