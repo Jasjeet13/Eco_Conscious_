@@ -1,12 +1,7 @@
 const express = require("express");
 const router = express.Router();
-<<<<<<< HEAD
 const WishlistModel = require("../models/wishlist");
 const authenticateToken = require("../Middlewares/tokenAuthentication");
-=======
-const WishlistModel = require('../models/wishlist'); 
-const authenticateToken = require('../Middlewares/tokenAuthentication');
->>>>>>> 35eadd31c0897d069b5d9373d903db4cb8ba2648
 
 router.get("/", authenticateToken, async (req, res) => {
   try {
