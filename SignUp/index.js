@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const dotenv = require("dotenv");
 
+// Import Routes
 const signupRouter = require("./routes/signup");
 const loginRouter = require("./routes/login");
 const profileRouter = require("./routes/profile");
@@ -16,10 +17,12 @@ const orderRoutes = require("./routes/order");
 const orderhistoryRoutes = require("./routes/orderhistory");
 const bestProductRouter = require("./routes/bestProduct");
 const verifyRouter = require("./routes/verify");
+
 const errorHandler = require("./Middlewares/errorHandler");
 const searchRouter = require("./routes/search");
 const alternativeRouter = require("./routes/alternative");
 const authenticateToken = require("./Middlewares/tokenAuthentication");
+const feedbackRouter = require("./routes/feedback");
 
 dotenv.config();
 
@@ -60,6 +63,7 @@ app.use("/api/order-history", authenticateToken, orderhistoryRoutes);
 app.use("/api/bestproduct", authenticateToken, bestProductRouter);
 app.use("/verify", verifyRouter);
 
+// Error handling middleware
 app.use(errorHandler);
 
 app.listen(port, () =>
