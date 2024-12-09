@@ -5,6 +5,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 
 // Import Routes
+
 const signupRouter = require("./routes/signup");
 const loginRouter = require("./routes/login");
 const profileRouter = require("./routes/profile");
@@ -51,6 +52,10 @@ app.use(bodyParser.json());
 app.use(express.static("public"));
 app.use("/uploads", express.static("uploads"));
 // Routes
+// Default Route for Root URL
+app.get("/", (req, res) => {
+  res.send("Welcome to the Eco-Conscious API");
+});
 app.use("/signup", signupRouter);
 app.use("/login", loginRouter);
 app.use("/api/profile", authenticateToken, profileRouter);
@@ -70,7 +75,7 @@ app.use('/verify', verifyRouter);
 // Error handling middleware
 app.use(errorHandler);
 
-// Start Server
-app.listen(port, () =>
-  console.log(`Server running at http://localhost:${port}`)
+// Update the port binding to use the dynamic environment port.
+app.listen(process.env.PORT || 3000, () =>
+  console.log(`Server running at http://localhost:${process.env.PORT || 3000}`)
 );
