@@ -18,6 +18,8 @@ const productSchema = new mongoose.Schema({
   productType: { type: String, required: true },
 });
 
-const Product = mongoose.model("Product", productSchema);
+// Check if the model is already compiled to avoid overwriting
+const Product =
+  mongoose.models.Product || mongoose.model("Product", productSchema);
 
 module.exports = Product;

@@ -16,9 +16,9 @@ import Edit from "./Components/Edit";
 import Wishlist from "./Components/Wishlist";
 import Footer from "./Components/Footer";
 import Navbar from "./Components/Navbar";
-import Cart from './Components/Cart';
-import Order from './Components/Order';
-import OrderHistory from './Components/OrderHistory';
+import Cart from "./Components/Cart";
+import Order from "./Components/Order";
+import OrderHistory from "./Components/OrderHistory";
 import SearchResults from "./Components/SearchResults";
 import Alternative from "./Components/Alternative";
 import Bestproduct from "./Components/Bestproduct";
@@ -37,7 +37,9 @@ function App() {
   return (
     <>
       {/* Conditionally render Navbar */}
-      {location.pathname !== "/" && location.pathname !== "/signup" &&<Navbar />}
+      {location.pathname !== "/" && location.pathname !== "/signup" && (
+        <Navbar />
+      )}
 
       <Routes>
         <Route path="/" element={<SignUp_Login />} />
@@ -52,19 +54,33 @@ function App() {
         />
         <Route path="/products/:category" element={<ProductList />} />
         <Route path="/products/:category/:id" element={<ProductProfile />} />
-        <Route path="/edit" element={isAuthenticated ? <Edit /> : <Navigate to="/" />} />
-        <Route path="/wishlist" element={isAuthenticated ? <Wishlist />:<Navigate to="/" />} />
-        <Route path="/cart" element={isAuthenticated ? <Cart />:<Navigate to="/" />} />
+        <Route
+          path="/edit"
+          element={isAuthenticated ? <Edit /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/wishlist"
+          element={isAuthenticated ? <Wishlist /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/cart"
+          element={isAuthenticated ? <Cart /> : <Navigate to="/" />}
+        />
         <Route path="/bestproduct" element={<Bestproduct></Bestproduct>} />
         <Route path="/order/:orderId" element={<Order />} />
         <Route path="/search/:term" element={<SearchResults />} />
-        <Route path="/alternatives/:category/:id" element={<Alternative />} />        
-        <Route path="/order-history"  element={isAuthenticated ? <OrderHistory /> : <Navigate to="/" />}/>
-        <Route path="/learn-more"  element={<LearnMore />} />
+        <Route path="/alternatives/:category/:id" element={<Alternative />} />
+        <Route
+          path="/order-history"
+          element={isAuthenticated ? <OrderHistory /> : <Navigate to="/" />}
+        />
+        <Route path="/learn-more" element={<LearnMore />} />
       </Routes>
 
       {/* Conditionally render Footer */}
-      {location.pathname !== "/" && location.pathname !== "/signup" && <Footer />}
+      {location.pathname !== "/" && location.pathname !== "/signup" && (
+        <Footer />
+      )}
     </>
   );
 }

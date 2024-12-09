@@ -79,13 +79,16 @@ const Order = () => {
   useEffect(() => {
     const fetchOrder = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/api/order/${orderId}`, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-            "Content-Type": "application/json",
-          },
-        });
+        const response = await fetch(
+          `http://localhost:3000/api/order/${orderId}`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
         if (!response.ok) {
           throw new Error("Error fetching order data");
@@ -130,7 +133,9 @@ const Order = () => {
 
               {/* Right side - Product Details */}
               <div style={styles.productDetails}>
-                <p style={styles.productName}>{product.name || "Product Unavailable"}</p>
+                <p style={styles.productName}>
+                  {product.name || "Product Unavailable"}
+                </p>
                 <p style={styles.text}>
                   <strong>Quantity:</strong> {item.quantity || "N/A"}
                 </p>
@@ -138,10 +143,13 @@ const Order = () => {
                   <strong>Price:</strong> ${product.price || "N/A"}
                 </p>
                 <p style={styles.text}>
-                  <strong>Total: </strong>${product.price} * {item.quantity} = <strong> {" "} 
-                  {product.price
-                    ? `$${(product.price * item.quantity).toFixed(2)}`
-                    : "N/A"}</strong>
+                  <strong>Total: </strong>${product.price} * {item.quantity} ={" "}
+                  <strong>
+                    {" "}
+                    {product.price
+                      ? `$${(product.price * item.quantity).toFixed(2)}`
+                      : "N/A"}
+                  </strong>
                 </p>
               </div>
             </div>

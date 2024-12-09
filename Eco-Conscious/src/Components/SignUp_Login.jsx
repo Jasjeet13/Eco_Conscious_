@@ -13,7 +13,7 @@ const SignUp_Login = () => {
       fetch("http://localhost:3000/api/profile", {
         method: "GET",
         headers: {
-          "Authorization": `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       })
         .then((response) => {
@@ -57,10 +57,9 @@ const SignUp_Login = () => {
       const token = data.token; // Make sure the token is part of the response
       if (token) {
         // Set token in localStorage or sessionStorage
-        localStorage.setItem('token', token); // or use sessionStorage
+        localStorage.setItem("token", token); // or use sessionStorage
         navigate("/home"); // Navigate to home after successful login
       }
-
     } catch (error) {
       console.error("Error during login:", error);
       setError(error.message); // Display error message
@@ -136,7 +135,7 @@ const SignUp_Login = () => {
       fontSize: "14px",
       color: "black",
     },
-   
+
     button: {
       backgroundColor: "#007F4E",
       color: "white",
@@ -174,8 +173,6 @@ const SignUp_Login = () => {
       marginBottom: "10px",
     },
   };
-
-
 
   return (
     <div style={styles.container}>
