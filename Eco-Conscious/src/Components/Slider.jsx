@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Eco_Tote from "../public/Eco _Tote.png";
-import perfume from "../public/perfume.png";
-import shoe from "../public/shoe_image.png";
+const Eco_Tote = "/Eco _Tote.png";
+const perfume = "/perfume.png";
+const shoe = "/shoe_image.png";
 import { height, width } from "@fortawesome/free-solid-svg-icons/fa0";
 
 const Slider = () => {
