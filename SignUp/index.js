@@ -23,7 +23,6 @@ const searchRouter = require("./routes/search");
 const alternativeRouter = require("./routes/alternative");
 const authenticateToken = require("./Middlewares/tokenAuthentication");
 const feedbackRouter = require("./routes/feedback");
-const feedbackRouter = require("./routes/feedback");
 
 dotenv.config();
 
@@ -33,13 +32,13 @@ const port = process.env.PORT || 3000;
 // MongoDB Connection using URI from .env file
 mongoose
   .connect(process.env.MONGO_URL, {
-  .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
   .then(() => console.log("Connected to MongoDB"))
   .catch((error) => console.error("MongoDB Connection Error:", error.message));
 
+// Middleware
 app.use(
   cors({
     origin: "http://localhost:5173",
@@ -50,7 +49,8 @@ app.use(
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static("public"));
-
+app.use("/uploads", express.static("uploads"));
+// Routes
 app.use("/signup", signupRouter);
 app.use("/login", loginRouter);
 app.use("/api/profile", authenticateToken, profileRouter);
@@ -70,7 +70,7 @@ app.use('/verify', verifyRouter);
 // Error handling middleware
 app.use(errorHandler);
 
+// Start Server
 app.listen(port, () =>
   console.log(`Server running at http://localhost:${port}`)
 );
-
