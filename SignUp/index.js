@@ -5,6 +5,12 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 
 // Import Routes
+
+// Default Route for Root URL
+app.get("/", (req, res) => {
+  res.send("Welcome to the Eco-Conscious API");
+});
+
 const signupRouter = require("./routes/signup");
 const loginRouter = require("./routes/login");
 const profileRouter = require("./routes/profile");
