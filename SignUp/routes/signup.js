@@ -51,7 +51,7 @@ router.post('/', validateSignup, hashPassword, async (req, res) => {
     // Send the verification email
     const verificationUrl = `http://localhost:3000/verify?token=${verificationToken}`;
     await transporter.sendMail({
-      from: `"EcoConsious" <${process.env.EMAIL}>`,
+      from: `"EcoConscious" <${process.env.EMAIL}>`,
       to: email,
       subject: 'Verify your email',
       html:`<p>Hi ${fullname},</p>
