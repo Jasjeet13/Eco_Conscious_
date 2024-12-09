@@ -16,11 +16,14 @@ const TopPicks = () => {
     const fetchTopPicks = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get("API_BASE_URL/api/products", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get(
+          "https://eco-conscious-z418.onrender.com/api/products",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         const data = response.data;
 
