@@ -1,18 +1,32 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const Cart = require('../models/cart');
-const Order = require('../models/Order');
-const authenticateToken = require('../Middlewares/tokenAuthentication');
-const User = require("../models/user"); // Import the User model
-const nodemailer = require("nodemailer"); // Import Nodemailer
+const Cart = require("../models/cart");
+const Order = require("../models/Order");
+const authenticateToken = require("../Middlewares/tokenAuthentication");
+const User = require("../models/user");
+const nodemailer = require("nodemailer");
+const dotenv = require("dotenv");
+dotenv.config();
+
+// Nodemailer setup outside the routes for reusability
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL, // Sender's email from .env
+    pass: process.env.EMAIL_PASSWORD, // App-specific password from .env
+  },
+});
 
 // Place order endpoint
-router.post('/place-order', authenticateToken, async (req, res) => {
+router.post("/place-order", authenticateToken, async (req, res) => {
   try {
     const userId = req.user.id;
 
     // Fetch cart items for the user
-    const cartItems = await Cart.find({ userId }).populate('productId', 'name price image'); // Populate to get product details
+    const cartItems = await Cart.find({ userId }).populate(
+      "productId",
+      "name price image"
+    );
 
     if (cartItems.length === 0) {
       return res.status(400).json({ message: "Your cart is empty!" });
@@ -21,7 +35,7 @@ router.post('/place-order', authenticateToken, async (req, res) => {
     // Prepare order items
     const orderItems = cartItems.map((item) => ({
       productId: item.productId._id,
-      productName: item.productId.name, // Include product name
+      productName: item.productId.name,
       quantity: item.quantity,
       price: item.productId.price,
       image: item.productId.image,
@@ -43,29 +57,20 @@ router.post('/place-order', authenticateToken, async (req, res) => {
 
     await order.save();
 
-    // Clear the cart
+    // Clear the cart after order placement
     await Cart.deleteMany({ userId }).catch((error) => {
       console.error("Error clearing cart:", error);
     });
 
-    // Fetch user details
-    const user = await User.findById(userId); // Fetch user's email
+    // Fetch user details to get the email address
+    const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Email setup
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: "jasjeet13.saini@gmail.com", // Your email
-        pass: "isqa qbwy lrjc jfsr", // Your app-specific password
-      },
-    });
-
     // Email content
     const mailOptions = {
-      from: `"EcoConscious" <jasjeet13.saini@gmail.com>`, // Sender's email
+      from: `"EcoConscious" <${process.env.EMAIL}>`, // Sender's email
       to: user.email, // Recipient's email
       subject: "Order Confirmation",
       html: `
@@ -95,19 +100,18 @@ router.post('/place-order', authenticateToken, async (req, res) => {
 
     res.status(201).json({ message: "Order placed successfully!", order });
   } catch (error) {
-    console.error('Error placing order:', error);
-    res.status(500).json({ message: 'Error placing order. Please try again.' });
+    console.error("Error placing order:", error);
+    res.status(500).json({ message: "Error placing order. Please try again." });
   }
 });
 
-
-
+// Get order details by ID
 router.get("/:orderId", authenticateToken, async (req, res) => {
   try {
     const order = await Order.findById(req.params.orderId).populate(
       "items.productId",
       "name price image"
-    ); 
+    );
 
     if (!order) {
       return res.status(404).json({ message: "Order not found" });
@@ -120,6 +124,7 @@ router.get("/:orderId", authenticateToken, async (req, res) => {
   }
 });
 
+// Buy now endpoint
 router.post("/buy-now", authenticateToken, async (req, res) => {
   try {
     const userId = req.user.id;
@@ -130,7 +135,7 @@ router.post("/buy-now", authenticateToken, async (req, res) => {
         productId,
         quantity,
         price,
-        image, // Include the image from the request body
+        image,
       },
     ];
 
@@ -146,24 +151,15 @@ router.post("/buy-now", authenticateToken, async (req, res) => {
     await order.save();
 
     // Get user details (e.g., email) from the database
-    const user = await User.findById(userId); // Use the correct model name
+    const user = await User.findById(userId);
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Email setup
-    const transporter = nodemailer.createTransport({
-      service: "gmail", // Use the email service of your choice
-      auth: {
-        user: "jasjeet13.saini@gmail.com", // Your email
-        pass: "isqa qbwy lrjc jfsr", // Your email password or app-specific password
-      },
-    });
-
     // Email content
     const mailOptions = {
       from: `"EcoConscious" <${process.env.EMAIL}>`, // Sender's email
-      to: user.email, // Recipient's email (user's email)
+      to: user.email, // Recipient's email
       subject: "Order Confirmation",
       html: `
         <h3>Order Confirmation</h3>
