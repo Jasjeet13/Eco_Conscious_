@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Eco_Tote from "../assets/Eco_Tote.png";
 import perfume from "../assets/perfume.png";
 import shoe_image from "../assets/shoe_image.png";
-import { height, width } from "@fortawesome/free-solid-svg-icons/fa0";
 
 const Slider = () => {
   const navigate = useNavigate();
@@ -84,7 +83,7 @@ const Slider = () => {
           style={{
             ...styles.carouselItem,
             display: index === activeIndex ? "block" : "none",
-            backgroundImage: `url(${Eco_Tote})`,
+            backgroundImage: `url(${slide.imageUrl})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
