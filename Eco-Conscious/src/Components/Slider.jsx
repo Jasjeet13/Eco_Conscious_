@@ -8,7 +8,7 @@ const Slider = () => {
   const navigate = useNavigate();
 
   const navigateToCategory = (category) => {
-    navigate(/products/${category});
+    navigate(`/products/${category}`);
   };
 
   const [activeIndex, setActiveIndex] = useState(0);
