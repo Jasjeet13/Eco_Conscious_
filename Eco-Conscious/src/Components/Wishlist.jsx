@@ -193,7 +193,7 @@ const Wishlist = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/api/wishlist/remove/${productId}`,
+        `https://eco-conscious-z418.onrender.com/api/wishlist/remove/${productId}`,
         {
           method: "DELETE",
           headers: {
