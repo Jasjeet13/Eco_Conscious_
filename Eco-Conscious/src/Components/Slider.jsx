@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Eco_Tote from "../assets/Eco_Tote.png";
-import perfume from "../assets/perfume.png";
-import shoe from "../assets/shoe_image.png";
+const Eco_Tote = "/Eco _Tote.png";
+const perfume = "/perfume.png";
+const shoe = "/shoe_image.png";
 import { height, width } from "@fortawesome/free-solid-svg-icons/fa0";
 
 const Slider = () => {
@@ -16,7 +16,7 @@ const Slider = () => {
 
   const slides = [
     {
-      imageUrl: { Eco_Tote },
+      imageUrl: Eco_Tote,
       buttonStyle: { top: "68.5%", left: "58.5%", backgroundColor: "#8e9c77" },
       buttonText: "Explore !",
       textStyle: { color: "white", fontSize: "25px", fontWeight: "bold" },
