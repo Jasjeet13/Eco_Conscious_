@@ -8,7 +8,7 @@ const Slider = () => {
   const navigate = useNavigate();
 
   const navigateToCategory = (category) => {
-    navigate(`/products/${category}`);
+    navigate(`/products/${category}`); // Corrected
   };
 
   const [activeIndex, setActiveIndex] = useState(0);
@@ -83,7 +83,7 @@ const Slider = () => {
           style={{
             ...styles.carouselItem,
             display: index === activeIndex ? "block" : "none",
-            backgroundImage: `url(${slides.imageUrl})`,
+            backgroundImage: `url(${slide.imageUrl})`, // Corrected
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
