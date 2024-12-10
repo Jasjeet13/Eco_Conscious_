@@ -96,7 +96,7 @@ const Cart = () => {
   const handleRemoveItem = async (productId) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/cart/remove/${productId}`,
+        `https://eco-conscious-z418.onrender.com/api/cart/remove/${productId}`,
         {
           method: "DELETE",
           headers: {
@@ -120,7 +120,7 @@ const Cart = () => {
   const handleCheckout = async () => {
     try {
       const response = await fetch(
-        "http://localhost:3000/api/order/place-order",
+        "https://eco-conscious-z418.onrender.com/api/order/place-order",
         {
           method: "POST",
           headers: {
