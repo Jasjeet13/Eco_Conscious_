@@ -87,7 +87,7 @@ const styles = {
   emptyMessageText: {
     fontSize: "26px",
     color: "#555",
-    fontWeight:"bold",
+    fontWeight: "bold",
     marginBottom: "20px",
   },
   goHomeButton: {
@@ -196,7 +196,7 @@ const Wishlist = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/api/wishlist/remove/${productId}`,
+        `https://eco-conscious-z418.onrender.com/api/wishlist/remove/${productId}`,
         {
           method: "DELETE",
           headers: {
@@ -272,9 +272,8 @@ const Wishlist = () => {
         ))
       ) : (
         <div style={styles.emptyMessageContainer}>
-          <p style={styles.emptyMessageText}>
-            Your wishlist is empty.</p><p>Explore our collection and find something amazing!
-          </p>
+          <p style={styles.emptyMessageText}>Your wishlist is empty.</p>
+          <p>Explore our collection and find something amazing!</p>
           <button
             onClick={() => navigate("/")}
             style={{
@@ -284,7 +283,7 @@ const Wishlist = () => {
               border: "none",
               cursor: "pointer",
               borderRadius: "5px",
-              fontSize:"20px",
+              fontSize: "20px",
               marginTop: "20px",
             }}
           >

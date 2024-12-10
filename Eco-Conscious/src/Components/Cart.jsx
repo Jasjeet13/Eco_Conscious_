@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"; 
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
@@ -10,12 +10,12 @@ const Cart = () => {
   // Define heading styles
   const styles = {
     heading: {
-      fontSize: '32px',
-      textAlign: 'center',
-      marginTop: '5px',
-      marginBottom: '50px',
-      color: '#333',
-      width: '100%',
+      fontSize: "32px",
+      textAlign: "center",
+      marginTop: "5px",
+      marginBottom: "50px",
+      color: "#333",
+      width: "100%",
     },
   };
 
@@ -24,7 +24,7 @@ const Cart = () => {
     const fetchCartItems = async () => {
       try {
         const response = await fetch(
-          "https://eco-conscious-z418.onrender.com/signup",
+          "https://eco-conscious-z418.onrender.com/api/cart",
           {
             method: "GET",
             headers: {
@@ -96,7 +96,7 @@ const Cart = () => {
   const handleRemoveItem = async (productId) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/cart/remove/${productId}`,
+        `https://eco-conscious-z418.onrender.com/api/cart/remove/${productId}`,
         {
           method: "DELETE",
           headers: {
@@ -120,7 +120,7 @@ const Cart = () => {
   const handleCheckout = async () => {
     try {
       const response = await fetch(
-        "http://localhost:3000/api/order/place-order",
+        "https://eco-conscious-z418.onrender.com/api/order/place-order",
         {
           method: "POST",
           headers: {
@@ -164,7 +164,13 @@ const Cart = () => {
   }
 
   return (
-    <div style={{ padding: "90px 90px 0px 90px", maxWidth: "100%" ,marginBottom:"50px"}}>
+    <div
+      style={{
+        padding: "90px 90px 0px 90px",
+        maxWidth: "100%",
+        marginBottom: "50px",
+      }}
+    >
       {/* Heading */}
       <h3 style={styles.heading}>Your Cart Items</h3>
 
@@ -177,7 +183,7 @@ const Cart = () => {
             alignItems: "center",
             justifyContent: "center",
             // height: "50vh",
-            marginTop:"100px",
+            marginTop: "100px",
             textAlign: "center",
           }}
         >
@@ -191,7 +197,7 @@ const Cart = () => {
               color: "#fff",
               border: "none",
               cursor: "pointer",
-              fontSize:"20px",
+              fontSize: "20px",
               borderRadius: "5px",
               marginTop: "20px",
             }}
@@ -295,10 +301,13 @@ const Cart = () => {
               overflowY: "auto",
             }}
           >
-            <h3 style={{ fontSize: "24px", marginBottom: "30px" }}>Order Summary</h3>
+            <h3 style={{ fontSize: "24px", marginBottom: "30px" }}>
+              Order Summary
+            </h3>
             <div style={{ marginBottom: "10px" }}>
               <p style={{ fontSize: "18px", margin: "20px 0" }}>
-                <strong>Items in Cart:</strong> {cartItems.reduce((total, item) => total + item.quantity, 0)}
+                <strong>Items in Cart:</strong>{" "}
+                {cartItems.reduce((total, item) => total + item.quantity, 0)}
               </p>
               <p style={{ fontSize: "18px", margin: "5px 0" }}>
                 <strong>Total Price:</strong> ${getTotalPrice()}
