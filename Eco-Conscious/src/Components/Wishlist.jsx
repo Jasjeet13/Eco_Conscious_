@@ -119,13 +119,16 @@ const Wishlist = () => {
       }
 
       try {
-        const response = await fetch("http://localhost:3000/api/wishlist", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        });
+        const response = await fetch(
+          "https://eco-conscious-z418.onrender.com/api/wishlist",
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
         if (!response.ok) {
           setError("Failed to fetch wishlist data");
