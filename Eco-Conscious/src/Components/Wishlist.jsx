@@ -119,7 +119,7 @@ const Wishlist = () => {
       }
 
       try {
-        const response = await fetch("http://localhost:3000/api/wishlist", {
+        const response = await fetch("https://eco-conscious-z418.onrender.com/api/wishlist", {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
