@@ -179,4 +179,8 @@ const styles = {
     zIndex: 1000,
   },
 };
+<<<<<<< HEAD
 export default Slider;
+=======
+export default Slider;
+>>>>>>> 9a560284460afb16e75ff451a1462902e1ad26cd

@@ -26,6 +26,7 @@ const BestProducts = () => {
     const fetchBestProducts = async () => {
       try {
         const token = localStorage.getItem("token");
+<<<<<<< HEAD
         const response = await axios.get(
           "https://eco-conscious-z418.onrender.com/api/bestproduct",
           {
@@ -34,6 +35,13 @@ const BestProducts = () => {
             },
           }
         );
+=======
+        const response = await axios.get("https://eco-conscious-z418.onrender.com/api/bestproduct", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+>>>>>>> 9a560284460afb16e75ff451a1462902e1ad26cd
         setBestProducts(response.data);
       } catch (error) {
         console.error("Error fetching best products:", error);
