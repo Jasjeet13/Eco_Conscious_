@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Eco_Tote from "../assets/Eco_Tote.png";
-import perfume from "../assets/perfume.png";
-import shoe_image from "../assets/shoe_image.png";
+import tote from "../assets/tote.png";
+import per from "../assets/per.png";
+import shoe from "../assets/shoe.png";
 
 const Slider = () => {
   const navigate = useNavigate();
@@ -15,21 +15,21 @@ const Slider = () => {
 
   const slides = [
     {
-      imageUrl: Eco_Tote.png,
+      imageUrl: tote,
       buttonStyle: { top: "68.5%", left: "58.5%", backgroundColor: "#8e9c77" },
       buttonText: "Explore !",
       textStyle: { color: "white", fontSize: "25px", fontWeight: "bold" },
       category: "bags",
     },
     {
-      imageUrl: perfume,
+      imageUrl: per,
       buttonStyle: { top: "66%", left: "37%", backgroundColor: "white" },
       buttonText: "Find Out !",
       textStyle: { color: "black", fontSize: "25px" },
       category: "Beauty Products",
     },
     {
-      imageUrl: shoe_image,
+      imageUrl: shoe,
       buttonStyle: { bottom: "4.5%", left: "40.15%", backgroundColor: "black" },
       buttonText: "Shop Now !",
       category: "footwear",
