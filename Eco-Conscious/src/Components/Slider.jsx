@@ -16,7 +16,7 @@ const Slider = () => {
 
   const slides = [
     {
-      imageUrl: Eco_Tote,
+      imageUrl: { Eco_Tote },
       buttonStyle: { top: "68.5%", left: "58.5%", backgroundColor: "#8e9c77" },
       buttonText: "Explore !",
       textStyle: { color: "white", fontSize: "25px", fontWeight: "bold" },
