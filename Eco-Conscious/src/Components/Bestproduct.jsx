@@ -26,7 +26,7 @@ const BestProducts = () => {
     const fetchBestProducts = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get("API_BASE_URL/api/bestproduct", {
+        const response = await axios.get("https://eco-conscious-z418.onrender.com/api/bestproduct", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
