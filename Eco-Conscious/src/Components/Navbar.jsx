@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaRegUser, FaRegHeart, FaSearch } from "react-icons/fa";
-const logo = "/logo.png";
+import logo from "../assets/logo.png";
 import { FiShoppingBag } from "react-icons/fi";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 
@@ -28,7 +28,6 @@ const Navbar = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  
 
   const navigateToHome = () => navigate("/home");
   const navigateToCategory = (category) => navigate(`/products/${category}`);
@@ -179,7 +178,7 @@ const Navbar = () => {
     <nav style={styles.navbar}>
       {/* Logo and Eco-Conscious Text */}
       <div style={styles.logoContainer} onClick={navigateToHome}>
-        <img src="/logo.png" alt="Logo" style={styles.logo} />
+        <img src={logo} alt="Logo" style={styles.logo} />
         <span style={styles.heading}>Eco-Conscious</span>
       </div>
 
