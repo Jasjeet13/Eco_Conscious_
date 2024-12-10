@@ -15,21 +15,21 @@ const Slider = () => {
 
   const slides = [
     {
-      imageUrl: "/Eco_Tote.png",
+      imageUrl: Eco_Tote.png,
       buttonStyle: { top: "68.5%", left: "58.5%", backgroundColor: "#8e9c77" },
       buttonText: "Explore !",
       textStyle: { color: "white", fontSize: "25px", fontWeight: "bold" },
       category: "bags",
     },
     {
-      imageUrl: "/perfume.png",
+      imageUrl: perfume,
       buttonStyle: { top: "66%", left: "37%", backgroundColor: "white" },
       buttonText: "Find Out !",
       textStyle: { color: "black", fontSize: "25px" },
       category: "Beauty Products",
     },
     {
-      imageUrl: "/shoe_image.png",
+      imageUrl: shoe_image,
       buttonStyle: { bottom: "4.5%", left: "40.15%", backgroundColor: "black" },
       buttonText: "Shop Now !",
       category: "footwear",
