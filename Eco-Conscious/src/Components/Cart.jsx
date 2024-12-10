@@ -24,7 +24,7 @@ const Cart = () => {
     const fetchCartItems = async () => {
       try {
         const response = await fetch(
-          "https://eco-conscious-z418.onrender.com/signup",
+          "https://eco-conscious-z418.onrender.com/api/cart",
           {
             method: "GET",
             headers: {
