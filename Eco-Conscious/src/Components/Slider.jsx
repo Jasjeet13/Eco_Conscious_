@@ -84,7 +84,7 @@ const Slider = () => {
           style={{
             ...styles.carouselItem,
             display: index === activeIndex ? "block" : "none",
-            backgroundImage: `url(${slide.Eco_Tote})`,
+            backgroundImage: `url(${Eco_Tote})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
