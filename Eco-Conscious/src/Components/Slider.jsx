@@ -70,7 +70,7 @@ const Slider = () => {
           style={{
             ...styles.carouselItem,
             display: index === activeIndex ? "block" : "none",
-            backgroundImage: url(${slide.imageUrl}),
+            backgroundImage: url(${slides.imageUrl}),
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
