@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-const Eco_Tote = "/Eco _Tote.png";
-const perfume = "/perfume.png";
-const shoe = "/shoe_image.png";
+import Eco_Tote from "../assets/Eco_Tote.png";
+import perfume from "../assets/perfume.png";
+import shoe_image from "../assets/shoe_image.png";
 import { height, width } from "@fortawesome/free-solid-svg-icons/fa0";
 
 const Slider = () => {
@@ -30,7 +30,7 @@ const Slider = () => {
       category: "Beauty Products",
     },
     {
-      imageUrl: shoe,
+      imageUrl: shoe_image,
       buttonStyle: { bottom: "4.5%", left: "40.15%", backgroundColor: "black" },
       buttonText: "Shop Now !",
       category: "footwear",
@@ -84,7 +84,7 @@ const Slider = () => {
           style={{
             ...styles.carouselItem,
             display: index === activeIndex ? "block" : "none",
-            backgroundImage: `url(${slide.imageUrl})`,
+            backgroundImage: `url(${slide.Eco_Tote})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
