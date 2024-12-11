@@ -1,6 +1,6 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
-const User = require("../models/user"); // Adjust path based on your project structure
+const User = require("../models/user");
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -17,7 +17,6 @@ router.get("/", async (req, res) => {
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
 
-    // Check if token has expired
     if (decoded.exp < Date.now() / 1000) {
       return res.status(400).json({ message: "Token has expired" });
     }
