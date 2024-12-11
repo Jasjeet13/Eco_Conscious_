@@ -53,7 +53,7 @@ router.post("/", validateSignup, hashPassword, async (req, res) => {
     });
 
     // Use environment variable or hardcoded URL for production
-    const verificationUrl = `${process.env.BASE_URL}/verify?token=${verificationToken}`; // Use production URL here
+    const verificationUrl = `${process.env.FRONTEND_URL}/verify?token=${verificationToken}`; // Use production URL here
     await transporter.sendMail({
       from: `"EcoConscious" <${process.env.EMAIL}>`,
       to: email,
